@@ -66,6 +66,12 @@
   display: grid;
 }
 
+.empty-state {
+  border-top: 1px solid rgba(148, 163, 184, 0.12);
+  color: #94a3b8;
+  padding: 1rem;
+}
+
 .fixture-row {
   align-items: center;
   border: 0;
@@ -75,6 +81,10 @@
   box-shadow: none;
 }
 
+.fixture-row > * {
+  min-width: 0;
+}
+
 .fixture-row.upcoming {
   box-shadow: inset 3px 0 0 rgba(56, 189, 248, 0.82);
 }
@@ -82,7 +92,21 @@
 .fixture-row.completed {
   background: rgba(2, 6, 23, 0.44);
   box-shadow: inset 3px 0 0 rgba(100, 116, 139, 0.55);
-  color: #64748b;
+  color: #94a3b8;
+}
+
+.fixture-row.completed .result-pill {
+  background: rgba(100, 116, 139, 0.14);
+  color: #94a3b8;
+}
+
+.fixture-row.completed .flag {
+  filter: grayscale(0.65) brightness(0.8);
+}
+
+.fixture-row.completed .team-pick.winner,
+.fixture-row.completed .team-pick.draw {
+  opacity: 0.86;
 }
 
 .date-cell,
@@ -90,6 +114,16 @@
   display: grid;
   gap: 0.2rem;
   padding-left: var(--filter-text-inset);
+}
+
+.date-cell strong,
+.group-cell strong {
+  font-size: 0.9rem;
+}
+
+.date-cell span {
+  color: #94a3b8;
+  font-size: 0.82rem;
 }
 
 .group-cell {
@@ -170,18 +204,25 @@
 .ai-marker-button:hover,
 .ai-marker-button:focus-visible {
   background: rgba(56, 189, 248, 0.14);
-  outline: none;
+}
+
+.ai-marker-button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.28);
+  outline: 2px solid rgba(125, 211, 252, 0.9);
+  outline-offset: 0.15rem;
 }
 
 .prediction-panel {
   display: grid;
   gap: 0.65rem;
+  min-width: 0;
   margin-top: 0.75rem;
   border: 1px solid rgba(56, 189, 248, 0.2);
   border-radius: 0.9rem;
   background: rgba(2, 6, 23, 0.38);
   padding: 0.85rem;
   text-align: left;
+  overflow-wrap: anywhere;
 }
 
 .prediction-label {
@@ -214,6 +255,7 @@
 
 .prediction-probabilities span,
 .prediction-themes span {
+  min-width: 0;
   border: 1px solid rgba(148, 163, 184, 0.16);
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.58);
@@ -221,6 +263,12 @@
   font-size: 0.74rem;
   font-weight: 800;
   padding: 0.28rem 0.55rem;
+}
+
+@media (hover: hover) {
+  .fixture-row:hover {
+    background: rgba(34, 197, 94, 0.08);
+  }
 }
 
 @media (max-width: 760px) {
@@ -233,6 +281,7 @@
 
   .match-table-toolbar {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
     border: 1px solid rgba(148, 163, 184, 0.14);
     border-radius: 1rem;
     background: rgba(2, 6, 23, 0.28);
@@ -301,6 +350,10 @@
     font-size: 0.86rem;
   }
 
+  .prediction-panel {
+    padding: 0.75rem;
+  }
+
   .ai-marker {
     height: 1rem;
     padding-inline: 0.32rem;
@@ -309,6 +362,10 @@
 }
 
 @media (max-width: 430px) {
+  .fixture-row {
+    padding: 0.75rem;
+  }
+
   .scoreboard-line {
     grid-template-columns: minmax(0, 1fr) 3.4rem minmax(0, 1fr);
     gap: 0.3rem;
@@ -330,5 +387,10 @@
   .team-pick .flag {
     width: 1.25rem;
     height: 0.86rem;
+  }
+
+  .prediction-probabilities span,
+  .prediction-themes span {
+    font-size: 0.68rem;
   }
 }

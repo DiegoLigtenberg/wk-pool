@@ -27,6 +27,7 @@ export function HeroNav({ activeView, onChange }: HeroNavProps) {
               type="button"
               className={`top-nav-button${activeView === item.view ? " is-active" : ""}`}
               onClick={() => onChange(item.view)}
+              aria-pressed={activeView === item.view}
             >
               {item.label}
             </button>

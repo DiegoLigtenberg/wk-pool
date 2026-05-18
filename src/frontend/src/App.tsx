@@ -6,10 +6,12 @@ import { GroupsView } from "./components/groups/GroupsView";
 import { HeroNav } from "./components/layout/HeroNav";
 import { MatchesView } from "./components/matches/MatchesView";
 import { KnockoutView } from "./components/knockout/KnockoutView";
+import { isTournamentView } from "./lib/contract";
 import { allMatches } from "./lib/tournament";
 import type { AppView, TournamentView } from "./types";
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000";
+const API_TIMEOUT_MS = 10_000;
+const apiBaseUrl = resolveApiBaseUrl();
 
 export function App() {
   const [view, setView] = useState<AppView>("matches");
@@ -18,21 +20,34 @@ export function App() {
   const [selectedTeam, setSelectedTeam] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!apiBaseUrl) {
+      setError("VITE_API_BASE_URL ontbreekt. Zet deze build variable naar de publieke backend-URL.");
+      return;
+    }
+
     let active = true;
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), API_TIMEOUT_MS);
 
     async function loadTournament() {
       try {
-        const response = await fetch(`${apiBaseUrl}/api/tournament`);
+        const response = await fetch(`${apiBaseUrl}/api/tournament`, {
+          signal: controller.signal,
+        });
         if (!response.ok) {
           throw new Error(`Backend gaf status ${response.status}`);
         }
-        const data = (await response.json()) as TournamentView;
+        const data = await response.json();
+        if (!isTournamentView(data)) {
+          throw new Error("Backend gaf een onverwacht tournament-formaat terug.");
+        }
         if (active) {
           setTournament(data);
+          setError(null);
         }
       } catch (unknownError) {
         if (active) {
-          setError(String(unknownError));
+          setError(errorMessage(unknownError));
         }
       }
     }
@@ -40,6 +55,8 @@ export function App() {
     void loadTournament();
     return () => {
       active = false;
+      window.clearTimeout(timeoutId);
+      controller.abort();
     };
   }, []);
 
@@ -79,3 +96,27 @@ export function App() {
     </TeamInsightProvider>
   );
 }
+
+function resolveApiBaseUrl(): string | null {
+  const configuredApiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+  if (configuredApiBaseUrl) {
+    return normalizeApiBaseUrl(configuredApiBaseUrl);
+  }
+
+  return import.meta.env.DEV ? "http://127.0.0.1:8000" : null;
+}
+
+function normalizeApiBaseUrl(value: string): string {
+  return value.replace(/\/+$/, "");
+}
+
+function errorMessage(error: unknown): string {
+  if (error instanceof DOMException && error.name === "AbortError") {
+    return "Backend reageerde niet op tijd.";
+  }
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return String(error);
+}
+

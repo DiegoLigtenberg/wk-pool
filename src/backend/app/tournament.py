@@ -45,6 +45,8 @@ def build_tournament_view(path: Path = CSV_PATH) -> dict[str, object]:
     group_stage_matches = [match for match in matches if match["stage"] == "group"]
     completed_matches = [match for match in matches if match["status"] == "completed"]
     upcoming_matches = [match for match in matches if match["status"] == "upcoming"]
+    completed_by_kickoff = sorted(completed_matches, key=_match_kickoff)
+    upcoming_by_kickoff = sorted(upcoming_matches, key=_match_kickoff)
     prediction_summary = _prediction_summary(group_stage_matches)
 
     return {
@@ -58,9 +60,9 @@ def build_tournament_view(path: Path = CSV_PATH) -> dict[str, object]:
             "aiPending": prediction_summary["pending"],
             "aiAccuracy": prediction_summary["accuracy"],
         },
-        "nextMatch": upcoming_matches[0] if upcoming_matches else None,
-        "recentMatches": completed_matches[-6:],
-        "upcomingMatches": upcoming_matches[:8],
+        "nextMatch": upcoming_by_kickoff[0] if upcoming_by_kickoff else None,
+        "recentMatches": completed_by_kickoff[-6:],
+        "upcomingMatches": upcoming_by_kickoff[:8],
         "teamInsights": _team_insights(fixtures),
         "groups": _group_views(group_stage_matches),
         "knockoutMatches": [match for match in matches if match["stage"] == "knockout"],
@@ -81,6 +83,10 @@ def _fixture_from_row(row: dict[str, str]) -> Fixture:
         away_team=row["Away Team"],
         group=group,
     )
+
+
+def _match_kickoff(match: dict[str, object]) -> str:
+    return str(match["kickoffAt"])
 
 
 def _match_view(fixture: Fixture) -> dict[str, object]:

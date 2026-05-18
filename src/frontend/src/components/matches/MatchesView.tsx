@@ -39,16 +39,29 @@ export function MatchesView({ matches, summary }: MatchesViewProps) {
       <div className="match-table">
         <div className="match-table-toolbar">
           <div className="match-filter-cell match-filter-cell--date">
-            <span className="filter-label">Toon</span>
-            <CustomSelect id="status-filter" value={status} options={STATUS_FILTER_OPTIONS} onChange={(value) => setStatus(value as MatchStatusFilter)} />
+            <span className="filter-label" id="status-filter-label">Toon</span>
+            <CustomSelect
+              id="status-filter"
+              labelId="status-filter-label"
+              value={status}
+              options={STATUS_FILTER_OPTIONS}
+              onChange={(value) => setStatus(value as MatchStatusFilter)}
+            />
           </div>
           <div className="match-filter-cell match-filter-cell--match">
-            <span className="filter-label">Land</span>
-            <CustomSelect id="team-filter" value={team} options={teamOptions} onChange={setTeam} scroll centered />
+            <span className="filter-label" id="team-filter-label">Land</span>
+            <CustomSelect id="team-filter" labelId="team-filter-label" value={team} options={teamOptions} onChange={setTeam} scroll centered />
           </div>
           <div className="match-filter-cell match-filter-cell--group">
-            <span className="filter-label">Fase</span>
-            <CustomSelect id="phase-filter" value={phase} options={phaseOptions} onChange={(value) => setPhase(value as MatchPhaseFilter)} scroll />
+            <span className="filter-label" id="phase-filter-label">Fase</span>
+            <CustomSelect
+              id="phase-filter"
+              labelId="phase-filter-label"
+              value={phase}
+              options={phaseOptions}
+              onChange={(value) => setPhase(value as MatchPhaseFilter)}
+              scroll
+            />
           </div>
         </div>
         <div className="match-table-head">
@@ -73,6 +86,8 @@ function FixtureRow({ match }: { match: Match }) {
   const homeOutcome = teamOutcome(match, "home");
   const awayOutcome = teamOutcome(match, "away");
   const [showPrediction, setShowPrediction] = useState(false);
+  const predictionId = `prediction-${match.matchNumber}`;
+  const aiLabel = `Toon AI-uitleg voor ${displayTeamName(match.homeTeam)} tegen ${displayTeamName(match.awayTeam)}`;
 
   return (
     <article className={`fixture-row ${match.status}`}>
@@ -83,21 +98,31 @@ function FixtureRow({ match }: { match: Match }) {
       <div className="match-cell">
         <div className="scoreboard-line">
           <span className={`team-pick ${homeOutcome}`}>
-            {aiPick === "1" ? <AiBadge status={match.aiPrediction.status} onClick={() => setShowPrediction((current) => !current)} /> : <span className="ai-marker empty" />}
+            {aiPick === "1" ? (
+              <AiBadge status={match.aiPrediction.status} label={aiLabel} expanded={showPrediction} controls={predictionId} onClick={() => setShowPrediction((current) => !current)} />
+            ) : (
+              <span className="ai-marker empty" />
+            )}
             <TeamLabel team={match.homeTeam} compact maxLength={13} />
           </span>
           <span className="result-stack">
-            {aiPick === "3" ? <AiBadge status={match.aiPrediction.status} onClick={() => setShowPrediction((current) => !current)} /> : null}
+            {aiPick === "3" ? (
+              <AiBadge status={match.aiPrediction.status} label={aiLabel} expanded={showPrediction} controls={predictionId} onClick={() => setShowPrediction((current) => !current)} />
+            ) : null}
             <strong className={`result-pill${match.score ? "" : " result-upcoming"}`}>
               {match.score ? `${match.score.home} - ${match.score.away}` : "-"}
             </strong>
           </span>
           <span className={`team-pick ${awayOutcome}`}>
-            {aiPick === "2" ? <AiBadge status={match.aiPrediction.status} onClick={() => setShowPrediction((current) => !current)} /> : <span className="ai-marker empty" />}
+            {aiPick === "2" ? (
+              <AiBadge status={match.aiPrediction.status} label={aiLabel} expanded={showPrediction} controls={predictionId} onClick={() => setShowPrediction((current) => !current)} />
+            ) : (
+              <span className="ai-marker empty" />
+            )}
             <TeamLabel team={match.awayTeam} compact maxLength={13} />
           </span>
         </div>
-        {showPrediction ? <PredictionPanel match={match} /> : null}
+        {showPrediction ? <PredictionPanel id={predictionId} match={match} /> : null}
       </div>
       <div className="group-cell">
         <strong>{phaseLabel(match)}</strong>
@@ -106,18 +131,37 @@ function FixtureRow({ match }: { match: Match }) {
   );
 }
 
-function AiBadge({ status, onClick }: { status: Match["aiPrediction"]["status"]; onClick: () => void }) {
+function AiBadge({
+  status,
+  label,
+  expanded,
+  controls,
+  onClick,
+}: {
+  status: Match["aiPrediction"]["status"];
+  label: string;
+  expanded: boolean;
+  controls: string;
+  onClick: () => void;
+}) {
   return (
-    <button type="button" className={`ai-marker ai-marker-button ${status}`} onClick={onClick} aria-label="Toon AI-uitleg">
+    <button
+      type="button"
+      className={`ai-marker ai-marker-button ${status}`}
+      onClick={onClick}
+      aria-label={label}
+      aria-expanded={expanded}
+      aria-controls={expanded ? controls : undefined}
+    >
       AI
     </button>
   );
 }
 
-function PredictionPanel({ match }: { match: Match }) {
+function PredictionPanel({ id, match }: { id: string; match: Match }) {
   const prediction = match.aiPrediction;
   return (
-    <section className="prediction-panel">
+    <section className="prediction-panel" id={id}>
       <div>
         <span className="prediction-label">AI voorspelling</span>
         <strong>{predictionTitle(match)}</strong>

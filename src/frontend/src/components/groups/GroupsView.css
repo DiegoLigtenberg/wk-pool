@@ -6,6 +6,7 @@
 }
 
 .group-card {
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -19,6 +20,11 @@
 
 .group-header h2 {
   font-size: 1.7rem;
+}
+
+.group-subtitle {
+  margin: 0.45rem 0 0;
+  color: #94a3b8;
 }
 
 .standings {
@@ -40,6 +46,10 @@
   padding-inline: 0.75rem;
 }
 
+.standing-row > * {
+  min-width: 0;
+}
+
 .standing-row.leader {
   border-color: rgba(250, 204, 21, 0.25);
   background: rgba(250, 204, 21, 0.09);
@@ -50,6 +60,10 @@
   gap: 0.6rem;
   border-left: 3px solid transparent;
   padding-inline: 1.25rem;
+}
+
+.compact-match > * {
+  min-width: 0;
 }
 
 .compact-match.ai-correct {
@@ -96,6 +110,20 @@
   min-width: 0;
 }
 
+.team-name {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.35rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.team-name .team-label {
+  min-width: 0;
+}
+
 .team-slot {
   display: flex;
   width: 100%;
@@ -103,6 +131,20 @@
   align-items: center;
   gap: 0.35rem;
   overflow: hidden;
+}
+
+.team-slot--home {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.team-slot--home .team-label {
+  justify-content: flex-end;
+}
+
+.team-slot--away {
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .team-slot.winner {
@@ -121,7 +163,7 @@
   display: inline-flex;
   width: 100%;
   justify-content: center;
-  color: #64748b;
+  color: #94a3b8;
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -172,6 +214,12 @@
     font-size: 0.78rem;
   }
 
+  .team-name .flag,
+  .fixture-teams .flag {
+    width: 1.3rem;
+    height: 0.9rem;
+  }
+
   .fixture-vs {
     font-size: 0.68rem;
   }
@@ -191,6 +239,10 @@
     gap: 0.3rem;
     padding-inline: 0.45rem;
     font-size: 0.72rem;
+  }
+
+  .team-name {
+    gap: 0.25rem;
   }
 
   .compact-match {

@@ -60,7 +60,7 @@ export function KnockoutView({ knockoutMatches }: KnockoutViewProps) {
           colors={{
             background: "#0f172a",
             primary: "#7dd3fc",
-            secondary: "#64748b",
+            secondary: "#94a3b8",
             winner: "rgba(34, 197, 94, 0.18)",
           }}
           style={{

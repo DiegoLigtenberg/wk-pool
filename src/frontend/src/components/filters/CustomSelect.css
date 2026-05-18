@@ -34,8 +34,9 @@
 .custom-select.is-open .custom-select-trigger,
 .custom-select-trigger:focus-visible {
   border-color: rgba(56, 189, 248, 0.62);
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.14);
-  outline: none;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  outline: 2px solid rgba(125, 211, 252, 0.9);
+  outline-offset: 0.15rem;
 }
 
 .custom-select-value {
@@ -78,12 +79,17 @@
   padding: 0.35rem;
 }
 
+.custom-select--open-up .custom-select-menu {
+  top: auto;
+  bottom: calc(100% + 0.4rem);
+}
+
 .custom-select.is-open .custom-select-menu {
   display: grid;
 }
 
 .custom-select-menu--scroll {
-  max-height: 16rem;
+  max-height: min(16rem, 50dvh);
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
@@ -100,9 +106,25 @@
   font: inherit;
   padding: 0.55rem 0.75rem;
   text-align: left;
+  user-select: none;
   transition:
     background-color 120ms ease,
     color 120ms ease;
+}
+
+@media (max-width: 760px) {
+  .custom-select-trigger {
+    min-height: 2.75rem;
+  }
+
+  .custom-select-option {
+    min-height: 2.55rem;
+    padding-block: 0.65rem;
+  }
+
+  .custom-select-menu {
+    max-height: min(18rem, 58dvh);
+  }
 }
 
 .custom-select-option:hover,
@@ -110,7 +132,6 @@
 .custom-select-option.is-active {
   background: rgba(56, 189, 248, 0.12);
   color: #f8fafc;
-  outline: none;
 }
 
 .custom-select-option.is-selected {

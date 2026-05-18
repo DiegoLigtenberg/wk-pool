@@ -5,11 +5,14 @@
   display: grid;
   place-items: center;
   background: rgba(2, 6, 23, 0.72);
-  padding: 1rem;
+  padding: calc(1rem + env(safe-area-inset-top)) 1rem calc(1rem + env(safe-area-inset-bottom));
 }
 
 .team-insight-modal {
   width: min(42rem, 100%);
+  max-height: calc(100dvh - 2rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
   border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: 1.25rem;
   background:
@@ -17,6 +20,7 @@
     #0f172a;
   box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.42);
   padding: 1.25rem;
+  overflow-wrap: anywhere;
 }
 
 .team-insight-close {
@@ -28,6 +32,18 @@
   cursor: pointer;
   font: inherit;
   padding: 0.35rem 0.7rem;
+}
+
+.team-insight-close:hover,
+.team-insight-close:focus-visible {
+  border-color: rgba(56, 189, 248, 0.62);
+  color: #f8fafc;
+}
+
+.team-insight-close:focus-visible {
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  outline: 2px solid rgba(125, 211, 252, 0.9);
+  outline-offset: 0.15rem;
 }
 
 .team-insight-modal h2 {
@@ -57,6 +73,7 @@
 }
 
 .team-insight-grid section {
+  min-width: 0;
   border: 1px solid rgba(148, 163, 184, 0.14);
   border-radius: 0.9rem;
   background: rgba(2, 6, 23, 0.28);
@@ -79,6 +96,16 @@
 }
 
 @media (max-width: 700px) {
+  .team-insight-backdrop {
+    place-items: start center;
+    padding-inline: 0.75rem;
+  }
+
+  .team-insight-modal {
+    border-radius: 1rem;
+    padding: 1rem;
+  }
+
   .team-insight-grid {
     grid-template-columns: 1fr;
   }

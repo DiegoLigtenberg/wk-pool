@@ -17,7 +17,7 @@ export function TeamLabel({ team, compact = false, maxLength }: TeamLabelProps) 
   const content = (
     <>
       {code ? (
-        <img className="flag" src={`https://flagcdn.com/w40/${code}.png`} alt="" loading="lazy" />
+        <img className="flag" src={`https://flagcdn.com/w40/${code}.png`} alt="" loading="lazy" referrerPolicy="no-referrer" />
       ) : (
         <span className="flag flag-placeholder" />
       )}
@@ -27,7 +27,12 @@ export function TeamLabel({ team, compact = false, maxLength }: TeamLabelProps) 
 
   if (insight && open) {
     return (
-      <button type="button" className={`team-label team-label-button${compact ? " team-label--compact" : ""}`} onClick={open}>
+      <button
+        type="button"
+        className={`team-label team-label-button${compact ? " team-label--compact" : ""}`}
+        onClick={open}
+        aria-label={`Open teamvisie voor ${fullName}`}
+      >
         {content}
       </button>
     );

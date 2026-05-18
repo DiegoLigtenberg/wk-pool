@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
   gap: 1.25rem;
+  min-width: 0;
 }
 
 .winner-grid,
@@ -16,6 +17,7 @@
 
 .winner-card,
 .bonus-card {
+  min-width: 0;
   border: 1px solid rgba(148, 163, 184, 0.15);
   border-radius: 1rem;
   background: rgba(2, 6, 23, 0.32);
@@ -33,14 +35,20 @@
 .winner-card strong,
 .bonus-card strong {
   display: block;
+  min-width: 0;
   margin-top: 0.5rem;
   font-size: 1.25rem;
+}
+
+.winner-card .team-label {
+  width: 100%;
 }
 
 .bonus-card p {
   margin: 0.55rem 0 0;
   color: #94a3b8;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 760px) {

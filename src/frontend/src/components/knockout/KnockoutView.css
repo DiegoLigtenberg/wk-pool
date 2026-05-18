@@ -1,5 +1,6 @@
 .knockout-bracket-shell {
   overflow: visible;
+  max-width: 100%;
   border: 1px solid rgba(148, 163, 184, 0.14);
   border-radius: 1rem;
   background:
@@ -23,7 +24,7 @@
   overflow: visible !important;
 }
 
-.wk-bracket > div > h3 {
+.wk-bracket h3 {
   display: none !important;
 }
 
@@ -126,18 +127,23 @@
   font-weight: 800;
 }
 
+.third-place-team .team-label {
+  width: 100%;
+}
+
 .third-place-team + .third-place-team {
   border-top: 1px solid rgba(148, 163, 184, 0.2);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .knockout-bracket-shell {
     overflow-x: auto;
+    overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
   }
 
   .wk-bracket {
-    min-width: 42rem;
+    min-width: 40rem;
   }
 
   .third-place-card {

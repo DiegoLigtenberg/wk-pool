@@ -4,6 +4,15 @@
 bower_components
 node_modules
 
+# Environment
+.env
+.env.*
+!.env.example
+!**/.env.example
+
 # Generated files
 .psci
 output
+dist
+!src/frontend/dist/
+!src/frontend/dist/**
