@@ -9,7 +9,7 @@ This repo is set up for two Railway services:
 
 Railway reads `src/backend/railway.json` when the service root is `src/backend`.
 
-Nixpacks installs the app with `pip install .` (see `nixpacks.toml`), not the legacy Poetry 1.3 CLI, so PEP 621 `pyproject.toml` and the Poetry 2 lockfile stay compatible with local development.
+Nixpacks installs with `pip`/`setuptools` (`NIXPACKS_PYTHON_PACKAGE_MANAGER=setuptools` in `nixpacks.toml`), not the legacy Poetry 1.3 CLI that `poetry.lock` would otherwise select. Local development still uses Poetry 2.
 
 Set this backend variable:
 
@@ -31,4 +31,4 @@ Set this frontend build variable before building:
 VITE_API_BASE_URL=https://your-backend.up.railway.app
 ```
 
-The Vite preview server binds to `0.0.0.0` and uses Railway's `PORT`.
+Production serves the built `dist/` folder with `npm run start` (`serve`), not `vite preview`. Railway's healthcheck hits `/` on the **frontend** service only; a down backend still returns HTTP 200 and shows an in-app error. Set `VITE_API_BASE_URL` at **build** time so the UI can reach the backend after deploy.

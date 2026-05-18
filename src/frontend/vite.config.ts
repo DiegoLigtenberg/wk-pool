@@ -43,7 +43,8 @@ export default defineConfig({
     host: "0.0.0.0",
     port: previewPort,
     strictPort: true,
-    allowedHosts: previewAllowedHosts,
+    // Railway healthchecks use internal hostnames; a fixed allowlist returns 403 and fails deploy.
+    allowedHosts: process.env.PORT ? true : previewAllowedHosts,
     headers: securityHeaders,
   },
   test: {

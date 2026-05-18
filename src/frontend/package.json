@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "start": "serve dist -s --no-clipboard --listen tcp://0.0.0.0:${PORT:-4173}",
     "preview": "vite preview",
     "test": "vitest run"
   },
@@ -27,6 +28,7 @@
   "dependencies": {
     "react": "^19.2.6",
     "react-bracket-ui": "^1.2.0",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.6",
+    "serve": "^14.2.6"
   }
 }
