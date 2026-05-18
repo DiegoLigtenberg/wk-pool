@@ -131,7 +131,22 @@
 }
 
 @media (max-width: 700px) {
+  .knockout-bracket-shell {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .wk-bracket {
+    min-width: 42rem;
+  }
+
   .third-place-card {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 430px) {
+  .third-place-card {
+    padding: 0.85rem;
   }
 }

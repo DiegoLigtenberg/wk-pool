@@ -134,3 +134,71 @@
   gap: 0.25rem;
   white-space: nowrap;
 }
+
+@media (max-width: 760px) {
+  .groups-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .group-header {
+    padding: 1rem;
+  }
+
+  .group-header h2 {
+    font-size: 1.35rem;
+  }
+
+  .standings {
+    padding-inline: 0.75rem;
+  }
+
+  .standing-row {
+    grid-template-columns: minmax(0, 1fr) 2rem 3.7rem 2.25rem 3.1rem;
+    gap: 0.45rem;
+    padding-inline: 0.55rem;
+    font-size: 0.78rem;
+  }
+
+  .compact-match {
+    grid-template-columns: minmax(0, 1fr) 3.7rem;
+    gap: 0.5rem;
+    padding-inline: 0.85rem;
+  }
+
+  .fixture-teams {
+    grid-template-columns: minmax(0, 1fr) 2.2rem minmax(0, 1fr);
+    gap: 0.35rem;
+    font-size: 0.78rem;
+  }
+
+  .fixture-vs {
+    font-size: 0.68rem;
+  }
+
+  .compact-score {
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .standings {
+    padding-inline: 0.55rem;
+  }
+
+  .standing-row {
+    grid-template-columns: minmax(0, 1fr) 1.7rem 3.2rem 2rem 2.7rem;
+    gap: 0.3rem;
+    padding-inline: 0.45rem;
+    font-size: 0.72rem;
+  }
+
+  .compact-match {
+    grid-template-columns: 1fr;
+  }
+
+  .compact-score {
+    justify-content: flex-start;
+    padding-left: 2.55rem;
+  }
+}

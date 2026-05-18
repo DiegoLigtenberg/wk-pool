@@ -33,3 +33,28 @@
   background: rgba(56, 189, 248, 0.12);
   color: #7dd3fc;
 }
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: auto;
+    padding: 1.25rem 0 0.75rem;
+  }
+
+  .top-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+
+  .top-nav-button {
+    min-height: 2.6rem;
+    padding: 0.65rem 0.75rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .top-nav {
+    grid-template-columns: 1fr;
+  }
+}

@@ -153,3 +153,104 @@
   letter-spacing: 0;
   text-transform: none;
 }
+
+@media (max-width: 760px) {
+  .match-table {
+    gap: 0;
+    overflow: visible;
+    border: 0;
+    background: transparent;
+  }
+
+  .match-table-toolbar {
+    grid-template-columns: 1fr;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 1rem;
+    background: rgba(2, 6, 23, 0.28);
+    padding: 0.85rem;
+  }
+
+  .match-filter-cell--match {
+    justify-items: stretch;
+  }
+
+  .match-filter-cell--match .custom-select {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .match-table-head {
+    display: none;
+  }
+
+  #match-table-body {
+    gap: 0.75rem;
+    margin-top: 0.85rem;
+  }
+
+  .fixture-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "date phase"
+      "match match";
+    gap: 0.7rem;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 1rem;
+    background: rgba(2, 6, 23, 0.3);
+    padding: 0.85rem;
+  }
+
+  .date-cell {
+    grid-area: date;
+    padding-left: 0;
+  }
+
+  .match-cell {
+    grid-area: match;
+    min-width: 0;
+  }
+
+  .group-cell {
+    grid-area: phase;
+    justify-items: end;
+    padding-left: 0;
+    text-align: right;
+  }
+
+  .scoreboard-line {
+    grid-template-columns: minmax(0, 1fr) 4.4rem minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  .result-pill {
+    width: 4.4rem;
+    min-height: 2rem;
+    font-size: 0.82rem;
+  }
+
+  .team-pick {
+    font-size: 0.86rem;
+  }
+
+  .ai-marker {
+    height: 1rem;
+    padding-inline: 0.32rem;
+    font-size: 0.58rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .scoreboard-line {
+    grid-template-columns: minmax(0, 1fr) 3.8rem minmax(0, 1fr);
+    gap: 0.35rem;
+  }
+
+  .result-pill {
+    width: 3.8rem;
+    font-size: 0.78rem;
+  }
+
+  .team-pick {
+    font-size: 0.8rem;
+  }
+}
