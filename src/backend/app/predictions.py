@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from app.teams import display_team_name
+
 
 PICKS = ("1", "2", "3")
 
@@ -141,8 +143,9 @@ def predict_match(home_team: str, away_team: str, stage: str, round_name: str, g
 
 
 def _team_summary(team: str, profile: TeamProfile) -> str:
+    name = display_team_name(team)
     return (
-        f"{team} wordt gezien als {profile.tier.lower()}: {profile.style}. "
+        f"{name} wordt gezien als {profile.tier.lower()}: {profile.style}. "
         f"Belangrijk zijn vooral {', '.join(profile.strengths[:2])}. "
         f"Risico: {profile.risks[0]}."
     )
@@ -213,7 +216,7 @@ def _match_themes(
     stronger_profile = home if diff >= 0 else away
     weaker_profile = away if diff >= 0 else home
 
-    themes.append(f"{stronger}: {stronger_profile.strengths[0]}")
+    themes.append(f"{display_team_name(stronger)}: {stronger_profile.strengths[0]}")
     if abs(diff) <= 5:
         themes.append("kleine marges en kans op gelijkspel")
     if stronger_profile.rating - weaker_profile.rating >= 10:
@@ -236,17 +239,20 @@ def _match_explanation(
     stage: str,
     round_name: str,
 ) -> str:
+    home_name = display_team_name(home_team)
+    away_name = display_team_name(away_team)
+
     if pick == "1":
-        choice = home_team
+        choice = home_name
         profile = home
-        opponent = away_team
+        opponent = away_name
     elif pick == "2":
-        choice = away_team
+        choice = away_name
         profile = away
-        opponent = home_team
+        opponent = home_name
     else:
         return (
-            f"De AI ziet {home_team} tegen {away_team} als een wedstrijd met kleine marges. "
+            f"De AI ziet {home_name} tegen {away_name} als een wedstrijd met kleine marges. "
             f"Beide landen hebben genoeg pluspunten om fases te controleren, maar ook duidelijke risico's. "
             f"Daarom wegen vorm, eerste goal, standaardsituaties en groepssituatie hier zwaarder dan pure reputatie."
         )

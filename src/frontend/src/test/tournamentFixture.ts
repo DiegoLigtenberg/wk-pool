@@ -17,7 +17,7 @@ const southAfricaInsight: TeamInsight = {
   strengths: ["wedstrijdenergie", "counters"],
   risks: ["controle"],
   niche: ["kan profiteren als de tegenstander onder druk staat"],
-  summary: "South Africa kan via energie fases kantelen.",
+  summary: "Zuid-Afrika kan via energie fases kantelen.",
 };
 
 export const completedMatch: Match = {
