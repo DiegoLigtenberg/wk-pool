@@ -7,6 +7,8 @@ import { KnockoutView } from "./components/knockout/KnockoutView";
 import { allMatches } from "./lib/tournament";
 import type { AppView, TournamentView } from "./types";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000";
+
 export function App() {
   const [view, setView] = useState<AppView>("matches");
   const [tournament, setTournament] = useState<TournamentView | null>(null);
@@ -17,7 +19,7 @@ export function App() {
 
     async function loadTournament() {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/tournament");
+        const response = await fetch(`${apiBaseUrl}/api/tournament`);
         if (!response.ok) {
           throw new Error(`Backend gaf status ${response.status}`);
         }
