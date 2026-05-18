@@ -2,7 +2,7 @@ import type { Match, TeamInsight, TournamentView } from "../types";
 
 const mexicoInsight: TeamInsight = {
   team: "Mexico",
-  tier: "Vaste underdog",
+  tier: "Subtopper",
   style: "intens en thuisregio-gedreven",
   strengths: ["publieksenergie", "ervaring"],
   risks: ["druk op de ploeg"],
@@ -12,7 +12,7 @@ const mexicoInsight: TeamInsight = {
 
 const southAfricaInsight: TeamInsight = {
   team: "South Africa",
-  tier: "Underdog",
+  tier: "Kanshebber",
   style: "energiek en opportunistisch",
   strengths: ["wedstrijdenergie", "counters"],
   risks: ["controle"],

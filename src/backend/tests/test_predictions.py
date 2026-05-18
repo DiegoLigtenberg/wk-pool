@@ -10,13 +10,24 @@ def test_team_summary_uses_dutch_country_name() -> None:
     assert "outsider" not in insight["tier"].lower()
 
 
-def test_tier_labels_avoid_vague_outsider_term() -> None:
-    from app.predictions import TEAM_PROFILES
+def test_tier_ladder_labels() -> None:
+    from app.predictions import (
+        TEAM_PROFILES,
+        TIER_FAVORIET,
+        TIER_SUBTOPPER,
+        TIER_TOPFAVORIET,
+        TIER_UNDERDOG,
+        TIER_VERRASSINGS_PLOEG,
+    )
 
     tiers = {profile.tier for profile in TEAM_PROFILES.values()}
-    assert "Outsider" not in tiers
-    assert "Sterke outsider" not in tiers
-    assert "Betrouwbare outsider" not in tiers
+    assert tiers == {
+        TIER_TOPFAVORIET,
+        TIER_FAVORIET,
+        TIER_SUBTOPPER,
+        TIER_UNDERDOG,
+        TIER_VERRASSINGS_PLOEG,
+    }
 
 
 def test_match_explanation_uses_dutch_country_names() -> None:
