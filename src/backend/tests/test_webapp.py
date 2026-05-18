@@ -4,6 +4,7 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from http.client import HTTPConnection, HTTPResponse
 
+from app.predictions import TEAM_PROFILES, is_known_team
 from app.tournament import build_tournament_view, load_fixtures
 from app.webapp import (
     DEFAULT_HOST,
@@ -114,6 +115,37 @@ def test_load_fixtures_reads_world_cup_csv() -> None:
     assert fixtures[0].group == "A"
 
 
+GROUP_STAGE_ROUND_LABELS = frozenset({"1", "2", "3"})
+KNOCKOUT_ROUND_LABELS = frozenset(
+    {"Round of 32", "Round of 16", "Quarter Finals", "Semi Finals", "Finals"},
+)
+
+
+def test_fixture_csv_schema_and_round_labels() -> None:
+    fixtures = load_fixtures()
+    numbers = [fixture.match_number for fixture in fixtures]
+    assert numbers == list(range(1, len(fixtures) + 1))
+
+    for fixture in fixtures:
+        assert fixture.home_team.strip()
+        assert fixture.away_team.strip()
+        if fixture.group is not None:
+            assert fixture.group in set("ABCDEFGHIJKL")
+            assert fixture.round_number in GROUP_STAGE_ROUND_LABELS
+        else:
+            assert fixture.round_number in KNOCKOUT_ROUND_LABELS
+
+
+def test_fixture_csv_known_teams_have_explicit_profiles() -> None:
+    missing: list[str] = []
+    for fixture in load_fixtures():
+        for team in (fixture.home_team, fixture.away_team):
+            if is_known_team(team) and team not in TEAM_PROFILES:
+                missing.append(team)
+
+    assert sorted(set(missing)) == []
+
+
 def test_tournament_view_contains_pickem_preview() -> None:
     tournament = build_tournament_view()
     summary = tournament["summary"]
@@ -211,7 +243,7 @@ def is_match(value: object) -> bool:
         return False
 
     return (
-        is_int(value.get("matchNumber"))
+        is_number(value.get("matchNumber"))
         and isinstance(value.get("round"), str)
         and value.get("stage") in MATCH_STAGES
         and (isinstance(value.get("group"), str) or value.get("group") is None)
@@ -236,13 +268,13 @@ def is_ai_prediction(value: object) -> bool:
 
     return (
         value.get("pick") in PICKS
-        and is_int(value.get("confidence"))
+        and is_number(value.get("confidence"))
         and isinstance(value.get("explanation"), str)
         and value.get("status") in PREDICTION_STATUSES
         and is_string_list(value.get("themes"))
-        and (value.get("homeWinProbability") is None or is_int(value.get("homeWinProbability")))
-        and (value.get("drawProbability") is None or is_int(value.get("drawProbability")))
-        and (value.get("awayWinProbability") is None or is_int(value.get("awayWinProbability")))
+        and (value.get("homeWinProbability") is None or is_number(value.get("homeWinProbability")))
+        and (value.get("drawProbability") is None or is_number(value.get("drawProbability")))
+        and (value.get("awayWinProbability") is None or is_number(value.get("awayWinProbability")))
     )
 
 

@@ -37,7 +37,7 @@
 }
 
 .stat-chip--ai .stat-value {
-  color: #7dd3fc;
+  color: var(--accent-text);
 }
 
 .stat-accent {
@@ -72,14 +72,14 @@
 }
 
 .team-label-button:focus-visible span:last-child {
-  color: #7dd3fc;
+  color: var(--accent-text);
   text-decoration: underline;
   text-underline-offset: 0.18rem;
 }
 
 .team-label-button:focus-visible {
   border-radius: 0.35rem;
-  outline: 2px solid rgba(56, 189, 248, 0.55);
+  outline: 2px solid rgba(var(--accent-rgb), 0.55);
   outline-offset: 0.2rem;
 }
 
@@ -106,7 +106,7 @@
 
 @media (hover: hover) {
   .team-label-button:hover span:last-child {
-    color: #7dd3fc;
+    color: var(--accent-text);
     text-decoration: underline;
     text-underline-offset: 0.18rem;
   }

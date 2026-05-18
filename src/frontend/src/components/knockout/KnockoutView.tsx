@@ -11,6 +11,7 @@ type KnockoutViewProps = {
 };
 
 export function KnockoutView({ knockoutMatches }: KnockoutViewProps) {
+  // Round titles must match knockout rows in `Round Number` (CSV); backend tests lock the same labels.
   const round32 = round(knockoutMatches, "Round of 32");
   const round16 = round(knockoutMatches, "Round of 16");
   const quarter = round(knockoutMatches, "Quarter Finals");
@@ -59,7 +60,7 @@ export function KnockoutView({ knockoutMatches }: KnockoutViewProps) {
           gap={32}
           colors={{
             background: "#0f172a",
-            primary: "#7dd3fc",
+            primary: "#76a5eb",
             secondary: "#94a3b8",
             winner: "rgba(34, 197, 94, 0.18)",
           }}

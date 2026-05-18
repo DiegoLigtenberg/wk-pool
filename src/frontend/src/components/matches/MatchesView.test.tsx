@@ -21,6 +21,9 @@ describe("MatchesView", () => {
     await user.click(screen.getByRole("button", { name: "Toon AI-uitleg voor Mexico tegen Zuid-Afrika" }));
     expect(screen.getByText("Mexico wint · 58%")).toBeInTheDocument();
 
+    await user.click(screen.getByRole("button", { name: "Sluiten" }));
+    expect(screen.queryByText("Mexico wint · 58%")).not.toBeInTheDocument();
+
     await user.click(screen.getByRole("combobox", { name: "Fase Alle fases" }));
     await user.click(screen.getByRole("option", { name: "Knock-out" }));
 

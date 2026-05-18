@@ -13,7 +13,7 @@
 .group-header {
   border-bottom: 1px solid rgba(148, 163, 184, 0.13);
   background:
-    linear-gradient(135deg, rgba(56, 189, 248, 0.12), transparent),
+    linear-gradient(135deg, rgba(var(--accent-rgb), 0.07), transparent),
     rgba(15, 23, 42, 0.55);
   padding: 1.25rem;
 }
@@ -77,8 +77,8 @@
 }
 
 .compact-match.ai-pending {
-  border-left-color: rgba(56, 189, 248, 0.72);
-  background: rgba(56, 189, 248, 0.06);
+  border-left-color: rgba(var(--accent-rgb), 0.55);
+  background: rgba(var(--accent-rgb), 0.05);
 }
 
 .legend-dot {
@@ -99,7 +99,7 @@
 }
 
 .legend-dot--pending {
-  background: #38bdf8;
+  background: rgb(var(--accent-rgb));
 }
 
 .fixture-teams {

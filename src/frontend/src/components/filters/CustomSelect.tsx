@@ -210,6 +210,7 @@ export function CustomSelect({
         id={`${id}-listbox`}
         role="listbox"
         aria-labelledby={labelId}
+        aria-hidden={!open}
       >
         {options.map((option, index) => (
           <div

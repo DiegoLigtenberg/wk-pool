@@ -1,5 +1,6 @@
 import type { TournamentView } from "../types";
 
+/** Runtime shape check for `/api/tournament`; keep aligned with `tests/test_webapp.py` (`is_tournament_view`). */
 const PICKS = new Set(["1", "2", "3"]);
 const PREDICTION_STATUSES = new Set(["correct", "wrong", "pending"]);
 const MATCH_STATUSES = new Set(["completed", "upcoming"]);

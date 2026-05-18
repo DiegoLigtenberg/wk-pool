@@ -1,10 +1,24 @@
 :root {
   color-scheme: dark;
-  color: #f8fafc;
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  background: #07111f;
+  /*
+   * Design tokens — central place for palette tweaks (keep UX/feature CSS elsewhere in sync).
+   * Accent is a muted stadium-night blue, not neon cyan.
+   */
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --accent-rgb: 118, 165, 235;
+  --accent-label: rgb(154, 182, 224);
+  --accent-text: rgb(196, 218, 252);
+  --surface-root: #070b11;
+  --surface-root-mid: #0c121a;
+  --surface-root-end: #101922;
+  --surface-panel: rgba(18, 24, 34, 0.82);
+  --border-panel: rgba(148, 163, 184, 0.14);
+  --shadow-panel: 0 10px 36px rgba(0, 0, 0, 0.28);
+
+  color: #f1f5f9;
+  font-family: var(--font-sans);
+  background: var(--surface-root);
   --app-gutter: 1.5rem;
   --date-col: 10rem;
   --group-col: 10rem;
@@ -29,8 +43,13 @@ body {
   min-height: 100dvh;
   overflow-x: clip;
   background:
-    radial-gradient(circle at top left, rgba(56, 189, 248, 0.2), transparent 30rem),
-    linear-gradient(135deg, #07111f 0%, #0f172a 55%, #111827 100%);
+    radial-gradient(ellipse 120% 70% at 50% -28%, rgba(var(--accent-rgb), 0.055), transparent 52%),
+    linear-gradient(
+      165deg,
+      var(--surface-root) 0%,
+      var(--surface-root-mid) 48%,
+      var(--surface-root-end) 100%
+    );
 }
 
 a {
@@ -66,7 +85,7 @@ a {
 
 .eyebrow {
   margin: 0 0 1rem;
-  color: #38bdf8;
+  color: var(--accent-label);
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -76,9 +95,10 @@ a {
 h1 {
   margin: 0;
   max-width: 56rem;
-  font-size: clamp(3rem, 9vw, 7.5rem);
-  line-height: 1;
-  letter-spacing: -0.08em;
+  font-size: clamp(2.85rem, 8vw, 6.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+  font-weight: 750;
   text-wrap: balance;
 }
 
@@ -109,10 +129,10 @@ code {
 .panel,
 .group-card,
 .fixture-row {
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  border-radius: 1.25rem;
-  background: rgba(15, 23, 42, 0.76);
-  box-shadow: 0 1.5rem 5rem rgba(2, 6, 23, 0.25);
+  border: 1px solid var(--border-panel);
+  border-radius: 1.12rem;
+  background: var(--surface-panel);
+  box-shadow: var(--shadow-panel);
 }
 
 .panel {
@@ -145,7 +165,7 @@ code {
 
 .section-label {
   padding: 1rem 1.25rem 0.25rem;
-  color: #38bdf8;
+  color: var(--accent-label);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -162,11 +182,11 @@ code {
 .ai-dot {
   display: inline-flex;
   align-items: center;
-  border: 1px solid rgba(56, 189, 248, 0.45);
+  border: 1px solid rgba(var(--accent-rgb), 0.45);
   border-radius: 999px;
   margin-right: 0.35rem;
   padding: 0 0.35rem;
-  color: #7dd3fc;
+  color: var(--accent-text);
   font-size: 0.68rem;
   font-weight: 800;
 }
@@ -200,7 +220,7 @@ code {
 }
 
 .stat-chip--ai .stat-value {
-  color: #7dd3fc;
+  color: var(--accent-text);
 }
 
 .stat-accent {
@@ -295,14 +315,14 @@ code {
 }
 
 .custom-select-trigger:hover {
-  border-color: rgba(56, 189, 248, 0.45);
+  border-color: rgba(var(--accent-rgb), 0.45);
 }
 
 .custom-select.is-open .custom-select-trigger,
 .custom-select-trigger:focus-visible {
-  border-color: rgba(56, 189, 248, 0.62);
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-  outline: 2px solid rgba(125, 211, 252, 0.9);
+  border-color: rgba(var(--accent-rgb), 0.62);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.2);
+  outline: 2px solid rgba(var(--accent-rgb), 0.72);
   outline-offset: 0.15rem;
 }
 
@@ -329,7 +349,7 @@ code {
 
 .custom-select.is-open .custom-select-chevron {
   transform: rotate(180deg);
-  color: #7dd3fc;
+  color: var(--accent-text);
 }
 
 .custom-select-menu {
@@ -393,18 +413,18 @@ code {
 
 .custom-select-option:hover,
 .custom-select-option:focus-visible {
-  background: rgba(56, 189, 248, 0.12);
+  background: rgba(var(--accent-rgb), 0.12);
   color: #f8fafc;
 }
 
 .custom-select-option.is-active {
-  background: rgba(56, 189, 248, 0.12);
+  background: rgba(var(--accent-rgb), 0.12);
   color: #f8fafc;
 }
 
 .custom-select-option.is-selected {
-  background: rgba(56, 189, 248, 0.16);
-  color: #7dd3fc;
+  background: rgba(var(--accent-rgb), 0.16);
+  color: var(--accent-text);
   font-weight: 700;
 }
 
@@ -468,7 +488,7 @@ code {
 }
 
 .fixture-row.upcoming {
-  box-shadow: inset 3px 0 0 rgba(56, 189, 248, 0.82);
+  box-shadow: inset 3px 0 0 rgba(var(--accent-rgb), 0.82);
 }
 
 .fixture-row.completed {
@@ -570,15 +590,15 @@ code {
   min-height: 2.2rem;
   place-items: center;
   border-radius: 999px;
-  background: rgba(56, 189, 248, 0.12);
-  color: #7dd3fc;
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent-text);
   font-size: 0.9rem;
   line-height: 1.05;
   text-align: center;
 }
 
 .result-upcoming {
-  color: #7dd3fc;
+  color: var(--accent-text);
   font-size: 0.74rem;
   letter-spacing: 0;
   text-transform: none;
@@ -627,8 +647,8 @@ code {
 }
 
 .pick-pill.pending {
-  background: rgba(56, 189, 248, 0.16);
-  color: #7dd3fc;
+  background: rgba(var(--accent-rgb), 0.16);
+  color: var(--accent-text);
 }
 
 .groups-grid {
@@ -645,7 +665,7 @@ code {
 .group-header {
   border-bottom: 1px solid rgba(148, 163, 184, 0.13);
   background:
-    linear-gradient(135deg, rgba(56, 189, 248, 0.12), transparent),
+    linear-gradient(135deg, rgba(var(--accent-rgb), 0.12), transparent),
     rgba(15, 23, 42, 0.55);
   padding: 1.25rem;
 }
@@ -661,7 +681,7 @@ code {
 
 .section-label {
   padding: 1rem 1.25rem 0.25rem;
-  color: #38bdf8;
+  color: var(--accent-label);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -799,7 +819,7 @@ code {
 }
 
 .compact-match.pending {
-  background: rgba(56, 189, 248, 0.04);
+  background: rgba(var(--accent-rgb), 0.04);
 }
 
 .knockout-list {
@@ -851,7 +871,7 @@ code {
 .bracket-half h3,
 .bracket-final h3 {
   margin: 0;
-  color: #7dd3fc;
+  color: var(--accent-text);
   font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -991,32 +1011,32 @@ code {
 }
 
 .top-nav-button {
-  border: 1px solid rgba(56, 189, 248, 0.34);
+  border: 1px solid rgba(var(--accent-rgb), 0.28);
   border-radius: 999px;
   background: rgba(2, 6, 23, 0.32);
   padding: 0.7rem 0.95rem;
-  color: #e0f2fe;
+  color: rgba(241, 245, 249, 0.92);
   cursor: pointer;
   font: inherit;
   text-decoration: none;
 }
 
 .top-nav-button.is-active {
-  border-color: rgba(56, 189, 248, 0.7);
-  background: rgba(56, 189, 248, 0.12);
-  color: #7dd3fc;
+  border-color: rgba(var(--accent-rgb), 0.52);
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent-text);
 }
 
 .top-nav a {
-  border: 1px solid rgba(56, 189, 248, 0.34);
+  border: 1px solid rgba(var(--accent-rgb), 0.28);
   border-radius: 999px;
   padding: 0.7rem 0.95rem;
-  color: #e0f2fe;
+  color: rgba(241, 245, 249, 0.92);
   text-decoration: none;
 }
 
 .top-nav a:hover {
-  border-color: rgba(34, 197, 94, 0.72);
+  border-color: rgba(var(--accent-rgb), 0.48);
 }
 
 .crystal-layout {

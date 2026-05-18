@@ -86,7 +86,7 @@
 }
 
 .fixture-row.upcoming {
-  box-shadow: inset 3px 0 0 rgba(56, 189, 248, 0.82);
+  box-shadow: inset 3px 0 0 rgba(var(--accent-rgb), 0.82);
 }
 
 .fixture-row.completed {
@@ -238,15 +238,15 @@
   min-height: 2.2rem;
   place-items: center;
   border-radius: 999px;
-  background: rgba(56, 189, 248, 0.12);
-  color: #7dd3fc;
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent-text);
   font-size: 0.9rem;
   line-height: 1.05;
   text-align: center;
 }
 
 .result-upcoming {
-  color: #7dd3fc;
+  color: var(--accent-text);
   font-size: 0.9rem;
   letter-spacing: 0;
   text-transform: none;
@@ -288,8 +288,8 @@
 }
 
 .ai-marker.pending {
-  --ai-marker-border: rgba(56, 189, 248, 0.6);
-  --ai-marker-fg: #7dd3fc;
+  --ai-marker-border: rgba(var(--accent-rgb), 0.6);
+  --ai-marker-fg: var(--accent-text);
 }
 
 .ai-marker.ai-marker--draw-tip {
@@ -322,8 +322,8 @@
 }
 
 .ai-marker-button:focus-visible {
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.22);
-  outline: 2px solid rgba(125, 211, 252, 0.75);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.22);
+  outline: 2px solid rgba(var(--accent-rgb), 0.75);
   outline-offset: 0.12rem;
 }
 
@@ -332,17 +332,63 @@
   gap: 0.65rem;
   min-width: 0;
   margin-top: 0.75rem;
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
   border-radius: 0.9rem;
   background: rgba(2, 6, 23, 0.38);
   padding: 0.85rem;
+  padding-bottom: max(0.85rem, env(safe-area-inset-bottom));
   text-align: left;
   overflow-wrap: anywhere;
+  max-height: min(26rem, 72dvh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.45) rgba(2, 6, 23, 0.4);
+}
+
+.prediction-panel:focus-visible {
+  outline: 2px solid rgba(var(--accent-rgb), 0.65);
+  outline-offset: 0.15rem;
+}
+
+.prediction-panel-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.prediction-panel-header > div {
+  min-width: 0;
+}
+
+.prediction-panel-close {
+  flex-shrink: 0;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.72);
+  color: #e2e8f0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1;
+  min-height: 2.25rem;
+  padding: 0.42rem 0.72rem;
+}
+
+.prediction-panel-close:hover,
+.prediction-panel-close:focus-visible {
+  border-color: rgba(var(--accent-rgb), 0.55);
+  background: rgba(30, 41, 59, 0.92);
+  outline: 2px solid rgba(var(--accent-rgb), 0.75);
+  outline-offset: 0.12rem;
 }
 
 .prediction-label {
   display: block;
-  color: #7dd3fc;
+  color: var(--accent-text);
   font-size: 0.68rem;
   font-weight: 900;
   letter-spacing: 0.1em;
@@ -378,6 +424,30 @@
   font-size: 0.74rem;
   font-weight: 800;
   padding: 0.28rem 0.55rem;
+}
+
+@media (pointer: coarse) {
+  .scoreboard-line {
+    --ai-marker-font-size: 0.62rem;
+    --ai-marker-pad-y: 0.14rem;
+    --ai-marker-pad-x: 0.42rem;
+    --ai-marker-min-height: 1.05rem;
+    --ai-marker-min-width: 1.85rem;
+    --ai-marker-slot-height: 1.05rem;
+    --ai-marker-slot-width: 1.85rem;
+  }
+
+  .ai-marker-button {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.35rem 0.55rem;
+    box-sizing: border-box;
+  }
+
+  .ai-marker-slot {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
 }
 
 @media (hover: hover) {
@@ -470,6 +540,14 @@
     white-space: nowrap;
   }
 
+  .fixture-row--prediction-open .team-with-ai .team-label > span:last-child {
+    max-width: none;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    word-break: break-word;
+  }
+
   .team-with-ai--home .team-label > span:last-child {
     margin-left: auto;
   }
@@ -486,6 +564,12 @@
 
   .prediction-panel {
     padding: 0.75rem;
+    max-height: min(24rem, 68dvh);
+  }
+
+  .prediction-panel-close {
+    min-height: 2.5rem;
+    padding-inline: 0.85rem;
   }
 
   .result-stack {

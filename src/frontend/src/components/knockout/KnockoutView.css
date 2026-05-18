@@ -4,7 +4,7 @@
   border: 1px solid rgba(148, 163, 184, 0.14);
   border-radius: 1rem;
   background:
-    radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), transparent 28rem),
+    radial-gradient(circle at top left, rgba(var(--accent-rgb), 0.045), transparent 28rem),
     rgba(2, 6, 23, 0.3);
 }
 

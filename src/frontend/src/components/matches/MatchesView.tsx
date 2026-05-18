@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { RefObject } from "react";
 import { formatDateShort, formatTime, phaseLabel } from "../../lib/format";
 import { displayTeamName } from "../../lib/teams";
 import { phaseSelectOptions, STATUS_FILTER_OPTIONS, teamSelectOptions } from "../../lib/tournament";
@@ -108,11 +109,53 @@ function FixtureRow({ match }: { match: Match }) {
   const homeOutcome = teamOutcome(match, "home");
   const awayOutcome = teamOutcome(match, "away");
   const [showPrediction, setShowPrediction] = useState(false);
+  const predictionPanelRef = useRef<HTMLElement>(null);
+  const predictionCloseRef = useRef<HTMLButtonElement>(null);
+  const aiTriggerRef = useRef<HTMLButtonElement>(null);
   const predictionId = `prediction-${match.matchNumber}`;
-  const aiLabel = `Toon AI-uitleg voor ${displayTeamName(match.homeTeam)} tegen ${displayTeamName(match.awayTeam)}`;
+  const matchLabel = `${displayTeamName(match.homeTeam)} tegen ${displayTeamName(match.awayTeam)}`;
+  const aiLabel = showPrediction
+    ? `Sluit AI-uitleg voor ${matchLabel}`
+    : `Toon AI-uitleg voor ${matchLabel}`;
+
+  const closePrediction = useCallback(() => {
+    setShowPrediction(false);
+    queueMicrotask(() => aiTriggerRef.current?.focus());
+  }, []);
+
+  useEffect(() => {
+    if (!showPrediction) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closePrediction();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [showPrediction, closePrediction]);
+
+  useEffect(() => {
+    if (!showPrediction) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      predictionPanelRef.current?.scrollIntoView?.({ block: "nearest", behavior: "smooth" });
+      if (typeof window.matchMedia === "function" && window.matchMedia("(hover: hover)").matches) {
+        predictionCloseRef.current?.focus({ preventScroll: true });
+      }
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [showPrediction]);
 
   return (
-    <article className={`fixture-row ${match.status}`}>
+    <article className={`fixture-row ${match.status}${showPrediction ? " fixture-row--prediction-open" : ""}`}>
       <div className="date-cell">
         <strong>{formatDateShort(match.kickoffAt)}</strong>
         <span>{formatTime(match.kickoffAt)}</span>
@@ -123,6 +166,7 @@ function FixtureRow({ match }: { match: Match }) {
             <span className="team-with-ai team-with-ai--home">
               {aiPick === "1" ? (
                 <AiBadge
+                  ref={aiTriggerRef}
                   status={match.aiPrediction.status}
                   matchStatus={match.status}
                   label={aiLabel}
@@ -139,6 +183,7 @@ function FixtureRow({ match }: { match: Match }) {
           <span className="result-stack">
             {aiPick === "3" ? (
               <AiBadge
+                ref={aiTriggerRef}
                 status={match.aiPrediction.status}
                 matchStatus={match.status}
                 label={aiLabel}
@@ -156,6 +201,7 @@ function FixtureRow({ match }: { match: Match }) {
             <span className="team-with-ai team-with-ai--away">
               {aiPick === "2" ? (
                 <AiBadge
+                  ref={aiTriggerRef}
                   status={match.aiPrediction.status}
                   matchStatus={match.status}
                   label={aiLabel}
@@ -170,7 +216,15 @@ function FixtureRow({ match }: { match: Match }) {
             </span>
           </span>
         </div>
-        {showPrediction ? <PredictionPanel id={predictionId} match={match} /> : null}
+        {showPrediction ? (
+          <PredictionPanel
+            ref={predictionPanelRef}
+            closeButtonRef={predictionCloseRef}
+            id={predictionId}
+            match={match}
+            onClose={closePrediction}
+          />
+        ) : null}
       </div>
       <div className="group-cell">
         <strong>{phaseLabel(match)}</strong>
@@ -196,25 +250,24 @@ function aiMarkerTitle(status: Match["aiPrediction"]["status"], matchStatus: Mat
   return "AI-tip";
 }
 
-function AiBadge({
-  status,
-  matchStatus,
-  label,
-  expanded,
-  controls,
-  pickKind = "team",
-  onClick,
-}: {
-  status: Match["aiPrediction"]["status"];
-  matchStatus: Match["status"];
-  label: string;
-  expanded: boolean;
-  controls: string;
-  pickKind?: "team" | "draw";
-  onClick: () => void;
-}) {
+const AiBadge = forwardRef<
+  HTMLButtonElement,
+  {
+    status: Match["aiPrediction"]["status"];
+    matchStatus: Match["status"];
+    label: string;
+    expanded: boolean;
+    controls: string;
+    pickKind?: "team" | "draw";
+    onClick: () => void;
+  }
+>(function AiBadge(
+  { status, matchStatus, label, expanded, controls, pickKind = "team", onClick },
+  ref,
+) {
   return (
     <button
+      ref={ref}
       type="button"
       className={`ai-marker ai-marker-button ${pickKind === "draw" ? "ai-marker--draw-tip" : ""} ${status}`}
       title={aiMarkerTitle(status, matchStatus, pickKind)}
@@ -226,15 +279,35 @@ function AiBadge({
       AI
     </button>
   );
-}
+});
 
-function PredictionPanel({ id, match }: { id: string; match: Match }) {
+const PredictionPanel = forwardRef<
+  HTMLElement,
+  {
+    id: string;
+    match: Match;
+    onClose: () => void;
+    closeButtonRef: RefObject<HTMLButtonElement | null>;
+  }
+>(function PredictionPanel({ id, match, onClose, closeButtonRef }, ref) {
   const prediction = match.aiPrediction;
   return (
-    <section className="prediction-panel" id={id}>
-      <div>
-        <span className="prediction-label">AI voorspelling</span>
-        <strong>{predictionTitle(match)}</strong>
+    <section
+      ref={ref}
+      className="prediction-panel"
+      id={id}
+      role="region"
+      aria-labelledby={`${id}-title`}
+      tabIndex={-1}
+    >
+      <div className="prediction-panel-header">
+        <div>
+          <span className="prediction-label">AI voorspelling</span>
+          <strong id={`${id}-title`}>{predictionTitle(match)}</strong>
+        </div>
+        <button ref={closeButtonRef} type="button" className="prediction-panel-close" onClick={onClose}>
+          Sluiten
+        </button>
       </div>
       <div className="prediction-probabilities">
         <span>{displayTeamName(match.homeTeam)} {formatProbability(prediction.homeWinProbability)}</span>
@@ -249,7 +322,7 @@ function PredictionPanel({ id, match }: { id: string; match: Match }) {
       </div>
     </section>
   );
-}
+});
 
 function predictionTitle(match: Match): string {
   if (match.aiPrediction.pick === "1") {

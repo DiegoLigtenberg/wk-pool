@@ -53,6 +53,7 @@ export function TeamInsightModal({ insight, onClose }: TeamInsightModalProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="team-insight-title"
+        aria-describedby="team-insight-summary"
         tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
       >
@@ -63,7 +64,7 @@ export function TeamInsightModal({ insight, onClose }: TeamInsightModalProps) {
         <h2 id="team-insight-title">
           <TeamLabel team={insight.team} /> <span>{insight.tier}</span>
         </h2>
-        <p>{insight.summary}</p>
+        <p id="team-insight-summary">{insight.summary}</p>
         <div className="team-insight-grid">
           <InsightList title="Sterktes" items={insight.strengths} />
           <InsightList title="Risico's" items={insight.risks} />

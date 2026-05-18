@@ -34,11 +34,13 @@ const securityHeaders = {
   "X-Content-Type-Options": "nosniff",
 };
 
-export default defineConfig({
+export default defineConfig(({ command, mode }) => {
+  const isDevServer = command === "serve" && mode === "development";
+
+  return {
   plugins: [react()],
-  server: {
-    headers: securityHeaders,
-  },
+  // Strict CSP breaks Vite dev (React preamble, HMR inline styles/workers) → blank page.
+  server: isDevServer ? {} : { headers: securityHeaders },
   preview: {
     host: "0.0.0.0",
     port: previewPort,
@@ -52,6 +54,7 @@ export default defineConfig({
     globals: true,
     setupFiles: "./src/test/setup.ts",
   },
+};
 });
 
 function cspOrigin(value: string | undefined): string | undefined {

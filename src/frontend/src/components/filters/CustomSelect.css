@@ -28,14 +28,14 @@
 }
 
 .custom-select-trigger:hover {
-  border-color: rgba(56, 189, 248, 0.45);
+  border-color: rgba(var(--accent-rgb), 0.42);
 }
 
 .custom-select.is-open .custom-select-trigger,
 .custom-select-trigger:focus-visible {
-  border-color: rgba(56, 189, 248, 0.62);
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-  outline: 2px solid rgba(125, 211, 252, 0.9);
+  border-color: rgba(var(--accent-rgb), 0.52);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.16);
+  outline: 2px solid rgba(var(--accent-rgb), 0.72);
   outline-offset: 0.15rem;
 }
 
@@ -59,7 +59,7 @@
 
 .custom-select.is-open .custom-select-chevron {
   transform: rotate(180deg);
-  color: #7dd3fc;
+  color: var(--accent-text);
 }
 
 .custom-select-menu {
@@ -130,13 +130,13 @@
 .custom-select-option:hover,
 .custom-select-option:focus-visible,
 .custom-select-option.is-active {
-  background: rgba(56, 189, 248, 0.12);
+  background: rgba(var(--accent-rgb), 0.1);
   color: #f8fafc;
 }
 
 .custom-select-option.is-selected {
-  background: rgba(56, 189, 248, 0.16);
-  color: #7dd3fc;
+  background: rgba(var(--accent-rgb), 0.14);
+  color: var(--accent-text);
   font-weight: 700;
 }
 
