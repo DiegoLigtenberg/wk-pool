@@ -9,6 +9,8 @@ This repo is set up for two Railway services:
 
 Railway reads `src/backend/railway.json` when the service root is `src/backend`.
 
+Nixpacks installs the app with `pip install .` (see `nixpacks.toml`), not the legacy Poetry 1.3 CLI, so PEP 621 `pyproject.toml` and the Poetry 2 lockfile stay compatible with local development.
+
 Set this backend variable:
 
 ```text
@@ -20,6 +22,8 @@ Railway provides `PORT` automatically. The backend binds to `0.0.0.0` whenever `
 ## Frontend
 
 Railway reads `src/frontend/railway.json` when the service root is `src/frontend`.
+
+Nixpacks installs dependencies with `npm ci` and then runs `npm run build`. Do not chain another `npm ci` in `buildCommand` — that can fail with `EBUSY` on `node_modules/.cache`. The frontend requires **Node 20.19+** (configured via `.node-version` / `nixpacks.toml`).
 
 Set this frontend build variable before building:
 

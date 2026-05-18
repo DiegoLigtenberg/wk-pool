@@ -17,7 +17,15 @@ pytest = ">=8.0"
 mypy = "^2.0.0"
 
 [tool.poetry]
+name = "wk-pool-backend"
+version = "0.1.0"
+description = "Python backend for WK Pool"
+authors = ["DiegoLigtenberg <diegoligtenberg@gmail.com>"]
+readme = "README.md"
 packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.15"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

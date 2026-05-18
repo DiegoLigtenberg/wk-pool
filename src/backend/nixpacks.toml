@@ -1,0 +1,11 @@
+# Nixpacks defaults to Poetry 1.3.1 when poetry.lock exists; that version does not
+# read PEP 621 [project] metadata and fails on lock-version 2.1. Install the package
+# with pip instead (build-backend = poetry.core).
+[variables]
+NIXPACKS_PYTHON_VERSION = "3.12"
+
+[phases.install]
+cmds = ["pip install --no-cache-dir ."]
+
+[phases.build]
+cmds = []

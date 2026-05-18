@@ -98,28 +98,54 @@ function FixtureRow({ match }: { match: Match }) {
       <div className="match-cell">
         <div className="scoreboard-line">
           <span className={`team-pick ${homeOutcome}`}>
-            {aiPick === "1" ? (
-              <AiBadge status={match.aiPrediction.status} label={aiLabel} expanded={showPrediction} controls={predictionId} onClick={() => setShowPrediction((current) => !current)} />
-            ) : (
-              <span className="ai-marker empty" />
-            )}
-            <TeamLabel team={match.homeTeam} compact maxLength={13} />
+            <span className="team-with-ai team-with-ai--home">
+              {aiPick === "1" ? (
+                <AiBadge
+                  status={match.aiPrediction.status}
+                  matchStatus={match.status}
+                  label={aiLabel}
+                  expanded={showPrediction}
+                  controls={predictionId}
+                  onClick={() => setShowPrediction((current) => !current)}
+                />
+              ) : (
+                <AiMarkerSlot />
+              )}
+              <TeamLabel team={match.homeTeam} compact truncate={false} />
+            </span>
           </span>
           <span className="result-stack">
             {aiPick === "3" ? (
-              <AiBadge status={match.aiPrediction.status} label={aiLabel} expanded={showPrediction} controls={predictionId} onClick={() => setShowPrediction((current) => !current)} />
+              <AiBadge
+                status={match.aiPrediction.status}
+                matchStatus={match.status}
+                label={aiLabel}
+                expanded={showPrediction}
+                controls={predictionId}
+                pickKind="draw"
+                onClick={() => setShowPrediction((current) => !current)}
+              />
             ) : null}
             <strong className={`result-pill${match.score ? "" : " result-upcoming"}`}>
               {match.score ? `${match.score.home} - ${match.score.away}` : "-"}
             </strong>
           </span>
           <span className={`team-pick ${awayOutcome}`}>
-            {aiPick === "2" ? (
-              <AiBadge status={match.aiPrediction.status} label={aiLabel} expanded={showPrediction} controls={predictionId} onClick={() => setShowPrediction((current) => !current)} />
-            ) : (
-              <span className="ai-marker empty" />
-            )}
-            <TeamLabel team={match.awayTeam} compact maxLength={13} />
+            <span className="team-with-ai team-with-ai--away">
+              {aiPick === "2" ? (
+                <AiBadge
+                  status={match.aiPrediction.status}
+                  matchStatus={match.status}
+                  label={aiLabel}
+                  expanded={showPrediction}
+                  controls={predictionId}
+                  onClick={() => setShowPrediction((current) => !current)}
+                />
+              ) : (
+                <AiMarkerSlot />
+              )}
+              <TeamLabel team={match.awayTeam} compact truncate={false} />
+            </span>
           </span>
         </div>
         {showPrediction ? <PredictionPanel id={predictionId} match={match} /> : null}
@@ -131,23 +157,45 @@ function FixtureRow({ match }: { match: Match }) {
   );
 }
 
+function AiMarkerSlot() {
+  return <span className="ai-marker-slot" aria-hidden />;
+}
+
+function aiMarkerTitle(status: Match["aiPrediction"]["status"], matchStatus: Match["status"], pickKind?: "team" | "draw"): string {
+  if (matchStatus === "upcoming") {
+    return pickKind === "draw" ? "AI voorspelde gelijk — wedstrijd nog niet gespeeld" : "AI-tip nog niet af te rekenen";
+  }
+  if (status === "correct") {
+    return pickKind === "draw" ? "AI voorspelde gelijk juist" : "AI-tip: juist voorspeld";
+  }
+  if (status === "wrong") {
+    return pickKind === "draw" ? "AI voorspelde gelijk, maar niet juist" : "AI-tip: niet juist voorspeld";
+  }
+  return "AI-tip";
+}
+
 function AiBadge({
   status,
+  matchStatus,
   label,
   expanded,
   controls,
+  pickKind = "team",
   onClick,
 }: {
   status: Match["aiPrediction"]["status"];
+  matchStatus: Match["status"];
   label: string;
   expanded: boolean;
   controls: string;
+  pickKind?: "team" | "draw";
   onClick: () => void;
 }) {
   return (
     <button
       type="button"
-      className={`ai-marker ai-marker-button ${status}`}
+      className={`ai-marker ai-marker-button ${pickKind === "draw" ? "ai-marker--draw-tip" : ""} ${status}`}
+      title={aiMarkerTitle(status, matchStatus, pickKind)}
       onClick={onClick}
       aria-label={label}
       aria-expanded={expanded}

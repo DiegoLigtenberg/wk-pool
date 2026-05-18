@@ -6,7 +6,7 @@ from pathlib import Path
 from app.predictions import is_known_team, predict_match, team_insight
 
 
-CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "fifa-world-cup-2026-UTC.csv"
+CSV_PATH = Path(__file__).resolve().parent / "data" / "fifa-world-cup-2026-UTC.csv"
 FINISHED_MATCH_COUNT = 36
 FAKE_SCORES = (
     (2, 0),

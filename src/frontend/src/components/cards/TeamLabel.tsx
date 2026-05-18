@@ -6,11 +6,14 @@ type TeamLabelProps = {
   team: string;
   compact?: boolean;
   maxLength?: number;
+  /** When false, show the full name even in compact mode. */
+  truncate?: boolean;
 };
 
-export function TeamLabel({ team, compact = false, maxLength }: TeamLabelProps) {
+export function TeamLabel({ team, compact = false, maxLength, truncate }: TeamLabelProps) {
   const fullName = displayTeamName(team);
-  const labelLimit = maxLength ?? (compact ? 12 : undefined);
+  const labelLimit =
+    truncate === false ? undefined : maxLength ?? (compact ? 12 : undefined);
   const label = labelLimit ? truncateLabel(fullName, labelLimit) : fullName;
   const code = countryCodeForTeam(team);
   const { insight, open } = useTeamInsight(team);

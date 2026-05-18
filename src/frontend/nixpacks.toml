@@ -1,0 +1,9 @@
+# Railway/Nixpacks: Node 18 is too old for Vite 7 / Vitest 4.
+[variables]
+NIXPACKS_NODE_VERSION = "22"
+
+[phases.install]
+cmds = ["npm ci"]
+
+[phases.build]
+cmds = ["npm run build"]
