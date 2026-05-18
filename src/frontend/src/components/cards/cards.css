@@ -1,0 +1,73 @@
+.panel-stats {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
+}
+
+.stat-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.42);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.76rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.stat-value {
+  color: #f8fafc;
+  font-weight: 800;
+}
+
+.stat-divider {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.stat-label {
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.stat-chip--ai .stat-value {
+  color: #7dd3fc;
+}
+
+.stat-accent {
+  color: #86efac;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.team-label {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.5rem;
+  vertical-align: middle;
+}
+
+.team-label span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flag {
+  width: 1.45rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  border-radius: 0.15rem;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(248, 250, 252, 0.18);
+}
+
+.flag-placeholder {
+  display: inline-block;
+  background: rgba(148, 163, 184, 0.35);
+}

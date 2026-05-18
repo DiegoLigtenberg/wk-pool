@@ -1,0 +1,28 @@
+[project]
+name = "wk-pool-backend"
+version = "0.1.0"
+description = "Python backend for WK Pool"
+authors = [
+    {name = "DiegoLigtenberg", email = "diegoligtenberg@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = []
+
+[project.scripts]
+wk-pool-backend = "app.webapp:main"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8.0"
+mypy = "^2.0.0"
+
+[tool.poetry]
+packages = [{include = "app"}]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

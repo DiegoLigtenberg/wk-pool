@@ -1,0 +1,44 @@
+.crystal-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
+  gap: 1.25rem;
+}
+
+.winner-grid,
+.bonus-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.winner-grid {
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+
+.winner-card,
+.bonus-card {
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 1rem;
+  background: rgba(2, 6, 23, 0.32);
+  padding: 1rem;
+}
+
+.winner-card span,
+.bonus-card span {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.winner-card strong,
+.bonus-card strong {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.bonus-card p {
+  margin: 0.55rem 0 0;
+  color: #94a3b8;
+  line-height: 1.45;
+}

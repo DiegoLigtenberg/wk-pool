@@ -1,0 +1,35 @@
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 30rem);
+  gap: 1.5rem;
+  align-items: stretch;
+  min-height: 26rem;
+  padding: 2rem 0;
+}
+
+.top-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.top-nav-button {
+  border: 1px solid rgba(56, 189, 248, 0.34);
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.32);
+  padding: 0.7rem 0.95rem;
+  color: #e0f2fe;
+  cursor: pointer;
+  font: inherit;
+  text-decoration: none;
+}
+
+.top-nav-button:hover {
+  border-color: rgba(34, 197, 94, 0.72);
+}
+
+.top-nav-button.is-active {
+  border-color: rgba(56, 189, 248, 0.7);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+}
