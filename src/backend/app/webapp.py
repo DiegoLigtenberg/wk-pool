@@ -93,7 +93,10 @@ def default_host() -> str:
     if configured_host:
         return configured_host
 
-    return DEPLOY_HOST if os.environ.get("PORT") else DEFAULT_HOST
+    if os.environ.get("PORT") or os.environ.get("RAILWAY_ENVIRONMENT"):
+        return DEPLOY_HOST
+
+    return DEFAULT_HOST
 
 
 def default_port() -> int:
@@ -111,7 +114,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     server = create_server(args.host, args.port)
-    print(f"Serving WK Pool backend at http://{args.host}:{args.port}")
+    print(f"Serving WK Pool backend at http://{args.host}:{args.port}", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

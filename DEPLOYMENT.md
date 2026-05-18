@@ -17,7 +17,7 @@ Set this backend variable:
 WK_POOL_ALLOWED_ORIGINS=https://your-frontend.up.railway.app
 ```
 
-Railway provides `PORT` automatically. The backend binds to `0.0.0.0` whenever `PORT` is present and exposes `/health` for health checks.
+Railway provides `PORT` automatically. The backend binds to `0.0.0.0` whenever `PORT` (or `RAILWAY_ENVIRONMENT`) is present and exposes `/health` for health checks. The start command must use the venv binary: `/opt/venv/bin/wk-pool-backend --host 0.0.0.0` (see `railway.json`), because a custom Nixpacks build does not put `wk-pool-backend` on the default `PATH`.
 
 ## Frontend
 

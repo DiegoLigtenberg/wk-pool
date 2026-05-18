@@ -11,3 +11,6 @@ cmds = [
   "/opt/venv/bin/pip install --upgrade pip build setuptools",
   "/opt/venv/bin/pip install --no-cache-dir .",
 ]
+
+[start]
+cmd = "/opt/venv/bin/wk-pool-backend --host 0.0.0.0"

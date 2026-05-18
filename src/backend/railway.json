@@ -4,7 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "wk-pool-backend",
+    "startCommand": "/opt/venv/bin/wk-pool-backend --host 0.0.0.0",
     "healthcheckPath": "/health",
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",
