@@ -24,8 +24,15 @@ describe("MatchesView", () => {
     await user.click(screen.getByRole("combobox", { name: "Fase Alle fases" }));
     await user.click(screen.getByRole("option", { name: "Knock-out" }));
 
-    expect(rows(container)).toHaveLength(0);
-    expect(screen.getByText("Geen wedstrijden gevonden voor deze filters.")).toBeInTheDocument();
+    expect(rows(container)).toHaveLength(1);
+    expect(screen.getByRole("combobox", { name: "Toon Alle wedstrijden" })).toBeInTheDocument();
+
+    await user.click(screen.getByRole("combobox", { name: "Land Alle landen" }));
+    await user.click(screen.getByRole("option", { name: "Mexico" }));
+
+    expect(rows(container)).toHaveLength(1);
+    expect(screen.getByRole("combobox", { name: "Fase Alle fases" })).toBeInTheDocument();
+    expect(screen.getByText("2 - 0")).toBeInTheDocument();
   });
 });
 

@@ -5,6 +5,14 @@ from app.teams import display_team_name
 
 PICKS = ("1", "2", "3")
 
+# Nederlandse poule-termen (geen vage "outsider").
+TIER_FAVORIET = "Favoriet"
+TIER_KANDIDAAT = "Kandidaat"
+TIER_STERKE_UNDERDOG = "Sterke underdog"
+TIER_VASTE_UNDERDOG = "Vaste underdog"
+TIER_UNDERDOG = "Underdog"
+TIER_KLEINE_UNDERDOG = "Kleine underdog"
+
 
 @dataclass(frozen=True)
 class TeamProfile:
@@ -18,7 +26,7 @@ class TeamProfile:
 
 DEFAULT_PROFILE = TeamProfile(
     rating=62,
-    tier="Outsider",
+    tier=TIER_UNDERDOG,
     style="compact spelen, momenten kiezen en leunen op wedstrijdenergie",
     strengths=("organisatie", "fysieke duels", "standaardsituaties"),
     risks=("minder individuele topkwaliteit", "kan moeite hebben als het zelf het spel moet maken"),
@@ -35,46 +43,46 @@ TEAM_PROFILES: dict[str, TeamProfile] = {
     "Portugal": TeamProfile(87, "Kandidaat", "technisch sterk en flexibel tussen controle en counters", ("creatieve middenvelders", "diepte in de selectie", "ervaring"), ("kan afhankelijk worden van momenten", "defensieve restverdediging"), ("mix van jonge energie en ervaren leiderschap",)),
     "Germany": TeamProfile(86, "Kandidaat", "gestructureerd, fysiek en gevaarlijk in momentumfases", ("wedstrijdritme", "druk zetten", "toernooi-DNA"), ("recente wisselvalligheid", "ruimte in omschakeling"), ("Duitse teams kunnen in toernooien vaak boven vorm uitstijgen",)),
     "Netherlands": TeamProfile(85, "Kandidaat", "compact, tactisch en sterk in omschakeling", ("defensieve kwaliteit", "luchtduels", "coachbare structuur"), ("creativiteit tegen lage blokken", "efficiëntie voor goal"), ("veel spelers zijn gewend aan tactisch strakke clubsystemen",)),
-    "Belgium": TeamProfile(82, "Sterke outsider", "technisch, ervaren en gevaarlijk tussen de linies", ("aanvallende kwaliteit", "ervaring", "passing"), ("generatiewissel", "snelheid achterin"), ("oude automatismen en nieuwe rollen moeten samenvallen",)),
-    "Croatia": TeamProfile(82, "Sterke outsider", "ervaren, geduldig en extreem comfortabel in spannende wedstrijden", ("middenveldcontrole", "toernooi-rust", "mentale hardheid"), ("leeftijd en intensiteit", "minder pure snelheid"), ("kan wedstrijden lang in leven houden en laat beslissingen laat vallen",)),
-    "Uruguay": TeamProfile(82, "Sterke outsider", "agressief, direct en competitief", ("fysieke intensiteit", "aanvallende power", "duelkracht"), ("discipline", "ruimte bij hoge druk"), ("Zuid-Amerikaanse wedstrijdhardheid maakt ze lastig in knock-outachtige duels",)),
-    "Morocco": TeamProfile(81, "Sterke outsider", "compact, volwassen en gevaarlijk vanuit transitie", ("organisatie", "mentale energie", "counters"), ("kan moeite hebben met favorietenrol", "kansenvolume"), ("WK 2022 liet zien dat dit team comfortabel is als underdog",)),
-    "Colombia": TeamProfile(80, "Sterke outsider", "technisch, fel en aanvallend creatief", ("vormgolven", "creativiteit", "fysieke intensiteit"), ("wedstrijdcontrole", "emotionele momenten"), ("kan vanuit sfeer en momentum snel boven zichzelf uitstijgen",)),
-    "Switzerland": TeamProfile(79, "Betrouwbare outsider", "gedisciplineerd, volwassen en moeilijk kapot te spelen", ("organisatie", "ervaring", "compactheid"), ("minder explosieve aanval", "moeite met openbreken"), ("vaak sterker dan de namen op papier suggereren",)),
-    "USA": TeamProfile(78, "Betrouwbare outsider", "atletisch, direct en energiek", ("intensiteit", "thuisregio", "loopvermogen"), ("eindpass", "controle onder druk"), ("WK in eigen regio kan extra energie en ritme geven",)),
-    "Mexico": TeamProfile(77, "Betrouwbare outsider", "emotioneel geladen, intens en thuisregio-gedreven", ("publieksenergie", "ervaring", "duelkracht"), ("druk op de ploeg", "creativiteit tegen lage blokken"), ("openingswedstrijd en Mexicaanse omstandigheden kunnen veel invloed hebben",)),
-    "Japan": TeamProfile(77, "Betrouwbare outsider", "snel, technisch en tactisch volwassen", ("pressing", "teamdiscipline", "tempo"), ("fysieke duels", "afmaken van kansen"), ("sterke collectieve automatismen compenseren soms sterverschil",)),
-    "Senegal": TeamProfile(77, "Betrouwbare outsider", "fysiek sterk en gevaarlijk in omschakeling", ("atletiek", "duelkracht", "directe dreiging"), ("creatieve controle", "consistentie"), ("kan favorieten ongemakkelijk maken met tempo en duels",)),
-    "Türkiye": TeamProfile(76, "Outsider", "emotioneel, technisch en grillig", ("creativiteit", "afstandsschoten", "wedstrijdenergie"), ("stabiliteit", "defensieve ruimtes"), ("momentum speelt bij Turkije vaak opvallend zwaar mee",)),
-    "Austria": TeamProfile(76, "Outsider", "intens, georganiseerd en pressend", ("collectief drukzetten", "discipline", "fitheid"), ("individuele topkwaliteit", "kansen creëren tegen lage blokken"), ("coachcontinuïteit en systeemvastheid zijn belangrijke pluspunten",)),
-    "Sweden": TeamProfile(75, "Outsider", "fysiek, direct en sterk in organisatie", ("luchtduels", "discipline", "standaardsituaties"), ("tempo in balbezit", "creativiteit"), ("kan wedstrijden vertragen en tegenstanders uit ritme halen",)),
-    "Norway": TeamProfile(75, "Outsider", "topzwaar met veel dreiging in de voorhoede", ("elite-afwerking", "fysiek voorin", "direct spel"), ("balans in de ploeg", "toernooi-ervaring"), ("als de aanvoer naar de spitsen klopt, stijgt de win-kans snel",)),
-    "Ecuador": TeamProfile(74, "Outsider", "fysiek, energiek en lastig in duels", ("intensiteit", "jonge kern", "transities"), ("ervaring in late fases", "controle"), ("hoog tempo en atletiek kunnen technisch sterkere teams verstoren",)),
-    "Côte d'Ivoire": TeamProfile(74, "Outsider", "krachtig, direct en gevaarlijk in open wedstrijden", ("fysiek", "aanvallende power", "duels"), ("organisatie", "consistentie"), ("Afrikaanse toernooi-energie en fysieke profielen maken ze gevaarlijk",)),
-    "Paraguay": TeamProfile(72, "Outsider", "hard, compact en wedstrijdslim", ("duels", "verdedigende organisatie", "standaardsituaties"), ("aanvallende variatie", "balbezit onder druk"), ("kan favorieten frustreren door tempo en ruimtes klein te maken",)),
-    "Canada": TeamProfile(72, "Outsider", "snel, atletisch en direct", ("snelheid", "thuisregio", "omschakeling"), ("ervaring", "defensieve stabiliteit"), ("Noord-Amerikaanse omstandigheden kunnen in hun voordeel werken",)),
-    "Australia": TeamProfile(71, "Outsider", "fysiek, compact en mentaal taai", ("discipline", "duelkracht", "teamgeest"), ("creativiteit", "kansenvolume"), ("vaak beter in toernooiwedstrijden dan in losse ratings",)),
-    "Scotland": TeamProfile(71, "Outsider", "intens, fysiek en collectief", ("teamspirit", "duels", "standaardsituaties"), ("aanvallende verfijning", "diepte in selectie"), ("kan via chaos en energie wedstrijden openbreken",)),
-    "Czechia": TeamProfile(71, "Outsider", "gedisciplineerd, fysiek en direct", ("organisatie", "duels", "standaardsituaties"), ("creativiteit", "tempo achterin"), ("comfortabel in wedstrijden waarin details beslissen",)),
-    "Ghana": TeamProfile(70, "Outsider", "fysiek, explosief en onvoorspelbaar", ("atletiek", "transitie", "individuele momenten"), ("controle", "defensieve samenhang"), ("kan via tempo en duelkracht snel momentum pakken",)),
-    "Algeria": TeamProfile(70, "Outsider", "technisch en emotioneel geladen", ("creativiteit", "ervaring", "wedstrijdenergie"), ("consistentie", "ruimte achter druk"), ("Noord-Afrikaanse flair maakt ze gevaarlijk in losse wedstrijden",)),
-    "Egypt": TeamProfile(70, "Outsider", "ervaren en compact met individuele dreiging", ("ervaring", "discipline", "aanvallende sterkwaliteit"), ("tempo", "diepte in selectie"), ("kan lang in wedstrijden blijven en wachten op één moment",)),
-    "Korea Republic": TeamProfile(70, "Outsider", "snel, gedisciplineerd en hard werkend", ("loopvermogen", "organisatie", "transities"), ("fysieke mismatch", "creativiteit centraal"), ("collectieve discipline maakt het verschil tegen gelijkwaardige teams",)),
-    "IR Iran": TeamProfile(69, "Outsider", "compact, fysiek en countergericht", ("organisatie", "duels", "directe counters"), ("balbezit", "creativiteit"), ("kan wedstrijden gesloten houden en de underdogrol goed spelen",)),
-    "Tunisia": TeamProfile(68, "Outsider", "compact, fel en defensief gedisciplineerd", ("organisatie", "duels", "teamdiscipline"), ("scorend vermogen", "risico nemen"), ("kan favorieten lang frustreren als het eerste doelpunt uitblijft",)),
-    "Saudi Arabia": TeamProfile(68, "Outsider", "energiek, technisch en agressief in drukmomenten", ("intensiteit", "brutale momenten", "teamenergie"), ("consistentie", "ruimte achterin"), ("kan in één wedstrijd veel gevaarlijker zijn dan de rating suggereert",)),
-    "Qatar": TeamProfile(66, "Outsider", "compact en gewend aan toernooivoetbal in korte periodes", ("organisatie", "ervaring samen", "discipline"), ("tempo", "individuele topkwaliteit"), ("veel spelers hebben vaak in vergelijkbare nationale structuur gespeeld",)),
-    "South Africa": TeamProfile(66, "Outsider", "energiek, fysiek en opportunistisch", ("wedstrijdenergie", "duels", "counters"), ("controle", "efficiëntie"), ("kan profiteren als de tegenstander onder openingsdruk staat",)),
-    "Uzbekistan": TeamProfile(65, "Underdog", "gestructureerd, hardwerkend en compact", ("discipline", "organisatie", "teamcohesie"), ("ervaring op dit podium", "aanvallende topkwaliteit"), ("eerste WK-context kan extra energie geven, maar ook nervositeit",)),
-    "Congo DR": TeamProfile(65, "Underdog", "fysiek sterk en gevaarlijk in losse fases", ("atletiek", "duels", "directheid"), ("organisatie", "balvaste controle"), ("kan met fysieke mismatch wedstrijden kantelen",)),
-    "Bosnia and Herzegovina": TeamProfile(65, "Underdog", "technisch in fases en afhankelijk van sleutelspelers", ("ervaring", "passing", "momentenkwaliteit"), ("tempo", "diepte in selectie"), ("als de ervaren kern controle vindt, wordt het een lastige matchup",)),
-    "Iraq": TeamProfile(64, "Underdog", "compact, fel en emotioneel sterk", ("teamenergie", "duels", "organisatie"), ("kansen creëren", "ervaring tegen elite"), ("kan vanuit underdogpositie lang overleven in wedstrijden",)),
-    "New Zealand": TeamProfile(62, "Underdog", "fysiek, simpel en collectief", ("luchtduels", "discipline", "teamspirit"), ("technische controle", "tempo tegen toplanden"), ("standaardsituaties zijn relatief belangrijk voor hun kans",)),
-    "Jordan": TeamProfile(62, "Underdog", "compact, reactief en energiek", ("organisatie", "counters", "teamdiscipline"), ("balbezit onder druk", "selectiediepte"), ("kan verrassen als het lang 0-0 blijft",)),
-    "Panama": TeamProfile(61, "Underdog", "fysiek en direct", ("duels", "energie", "standaardsituaties"), ("controle", "creatieve kwaliteit"), ("regionale omstandigheden kunnen helpen tegen niet-Amerikaanse landen",)),
-    "Haiti": TeamProfile(60, "Underdog", "direct, atletisch en emotioneel", ("snelheid", "fysiek", "verrassingswaarde"), ("organisatie", "toernooi-ervaring"), ("chaotische wedstrijden vergroten hun upset-kans",)),
-    "Cabo Verde": TeamProfile(60, "Underdog", "compact en trots, met focus op omschakeling", ("teamspirit", "organisatie", "transitie"), ("selectiediepte", "ervaring"), ("kleine landen kunnen juist gevaarlijk zijn als niemand ze comfortabel vindt",)),
-    "Curaçao": TeamProfile(59, "Underdog", "technisch in momenten en afhankelijk van discipline", ("verrassingswaarde", "individuele momenten", "compactheid"), ("diepte", "ervaring tegen toplanden"), ("Nederlandse voetbalinvloeden kunnen tactisch helpen",)),
+    "Belgium": TeamProfile(82, TIER_STERKE_UNDERDOG, "technisch, ervaren en gevaarlijk tussen de linies", ("aanvallende kwaliteit", "ervaring", "passing"), ("generatiewissel", "snelheid achterin"), ("oude automatismen en nieuwe rollen moeten samenvallen",)),
+    "Croatia": TeamProfile(82, TIER_STERKE_UNDERDOG, "ervaren, geduldig en extreem comfortabel in spannende wedstrijden", ("middenveldcontrole", "toernooi-rust", "mentale hardheid"), ("leeftijd en intensiteit", "minder pure snelheid"), ("kan wedstrijden lang in leven houden en laat beslissingen laat vallen",)),
+    "Uruguay": TeamProfile(82, TIER_STERKE_UNDERDOG, "agressief, direct en competitief", ("fysieke intensiteit", "aanvallende power", "duelkracht"), ("discipline", "ruimte bij hoge druk"), ("Zuid-Amerikaanse wedstrijdhardheid maakt ze lastig in knock-outachtige duels",)),
+    "Morocco": TeamProfile(81, TIER_STERKE_UNDERDOG, "compact, volwassen en gevaarlijk vanuit transitie", ("organisatie", "mentale energie", "counters"), ("kan moeite hebben met favorietenrol", "kansenvolume"), ("WK 2022 liet zien dat dit team comfortabel is als underdog",)),
+    "Colombia": TeamProfile(80, TIER_STERKE_UNDERDOG, "technisch, fel en aanvallend creatief", ("vormgolven", "creativiteit", "fysieke intensiteit"), ("wedstrijdcontrole", "emotionele momenten"), ("kan vanuit sfeer en momentum snel boven zichzelf uitstijgen",)),
+    "Switzerland": TeamProfile(79, TIER_VASTE_UNDERDOG, "gedisciplineerd, volwassen en moeilijk kapot te spelen", ("organisatie", "ervaring", "compactheid"), ("minder explosieve aanval", "moeite met openbreken"), ("vaak sterker dan de namen op papier suggereren",)),
+    "USA": TeamProfile(78, TIER_VASTE_UNDERDOG, "atletisch, direct en energiek", ("intensiteit", "thuisregio", "loopvermogen"), ("eindpass", "controle onder druk"), ("WK in eigen regio kan extra energie en ritme geven",)),
+    "Mexico": TeamProfile(77, TIER_VASTE_UNDERDOG, "emotioneel geladen, intens en thuisregio-gedreven", ("publieksenergie", "ervaring", "duelkracht"), ("druk op de ploeg", "creativiteit tegen lage blokken"), ("openingswedstrijd en Mexicaanse omstandigheden kunnen veel invloed hebben",)),
+    "Japan": TeamProfile(77, TIER_VASTE_UNDERDOG, "snel, technisch en tactisch volwassen", ("pressing", "teamdiscipline", "tempo"), ("fysieke duels", "afmaken van kansen"), ("sterke collectieve automatismen compenseren soms sterverschil",)),
+    "Senegal": TeamProfile(77, TIER_VASTE_UNDERDOG, "fysiek sterk en gevaarlijk in omschakeling", ("atletiek", "duelkracht", "directe dreiging"), ("creatieve controle", "consistentie"), ("kan favorieten ongemakkelijk maken met tempo en duels",)),
+    "Türkiye": TeamProfile(76, TIER_UNDERDOG, "emotioneel, technisch en grillig", ("creativiteit", "afstandsschoten", "wedstrijdenergie"), ("stabiliteit", "defensieve ruimtes"), ("momentum speelt bij Turkije vaak opvallend zwaar mee",)),
+    "Austria": TeamProfile(76, TIER_UNDERDOG, "intens, georganiseerd en pressend", ("collectief drukzetten", "discipline", "fitheid"), ("individuele topkwaliteit", "kansen creëren tegen lage blokken"), ("coachcontinuïteit en systeemvastheid zijn belangrijke pluspunten",)),
+    "Sweden": TeamProfile(75, TIER_UNDERDOG, "fysiek, direct en sterk in organisatie", ("luchtduels", "discipline", "standaardsituaties"), ("tempo in balbezit", "creativiteit"), ("kan wedstrijden vertragen en tegenstanders uit ritme halen",)),
+    "Norway": TeamProfile(75, TIER_UNDERDOG, "topzwaar met veel dreiging in de voorhoede", ("elite-afwerking", "fysiek voorin", "direct spel"), ("balans in de ploeg", "toernooi-ervaring"), ("als de aanvoer naar de spitsen klopt, stijgt de win-kans snel",)),
+    "Ecuador": TeamProfile(74, TIER_UNDERDOG, "fysiek, energiek en lastig in duels", ("intensiteit", "jonge kern", "transities"), ("ervaring in late fases", "controle"), ("hoog tempo en atletiek kunnen technisch sterkere teams verstoren",)),
+    "Côte d'Ivoire": TeamProfile(74, TIER_UNDERDOG, "krachtig, direct en gevaarlijk in open wedstrijden", ("fysiek", "aanvallende power", "duels"), ("organisatie", "consistentie"), ("Afrikaanse toernooi-energie en fysieke profielen maken ze gevaarlijk",)),
+    "Paraguay": TeamProfile(72, TIER_UNDERDOG, "hard, compact en wedstrijdslim", ("duels", "verdedigende organisatie", "standaardsituaties"), ("aanvallende variatie", "balbezit onder druk"), ("kan favorieten frustreren door tempo en ruimtes klein te maken",)),
+    "Canada": TeamProfile(72, TIER_UNDERDOG, "snel, atletisch en direct", ("snelheid", "thuisregio", "omschakeling"), ("ervaring", "defensieve stabiliteit"), ("Noord-Amerikaanse omstandigheden kunnen in hun voordeel werken",)),
+    "Australia": TeamProfile(71, TIER_UNDERDOG, "fysiek, compact en mentaal taai", ("discipline", "duelkracht", "teamgeest"), ("creativiteit", "kansenvolume"), ("vaak beter in toernooiwedstrijden dan in losse ratings",)),
+    "Scotland": TeamProfile(71, TIER_UNDERDOG, "intens, fysiek en collectief", ("teamspirit", "duels", "standaardsituaties"), ("aanvallende verfijning", "diepte in selectie"), ("kan via chaos en energie wedstrijden openbreken",)),
+    "Czechia": TeamProfile(71, TIER_UNDERDOG, "gedisciplineerd, fysiek en direct", ("organisatie", "duels", "standaardsituaties"), ("creativiteit", "tempo achterin"), ("comfortabel in wedstrijden waarin details beslissen",)),
+    "Ghana": TeamProfile(70, TIER_UNDERDOG, "fysiek, explosief en onvoorspelbaar", ("atletiek", "transitie", "individuele momenten"), ("controle", "defensieve samenhang"), ("kan via tempo en duelkracht snel momentum pakken",)),
+    "Algeria": TeamProfile(70, TIER_UNDERDOG, "technisch en emotioneel geladen", ("creativiteit", "ervaring", "wedstrijdenergie"), ("consistentie", "ruimte achter druk"), ("Noord-Afrikaanse flair maakt ze gevaarlijk in losse wedstrijden",)),
+    "Egypt": TeamProfile(70, TIER_UNDERDOG, "ervaren en compact met individuele dreiging", ("ervaring", "discipline", "aanvallende sterkwaliteit"), ("tempo", "diepte in selectie"), ("kan lang in wedstrijden blijven en wachten op één moment",)),
+    "Korea Republic": TeamProfile(70, TIER_UNDERDOG, "snel, gedisciplineerd en hard werkend", ("loopvermogen", "organisatie", "transities"), ("fysieke mismatch", "creativiteit centraal"), ("collectieve discipline maakt het verschil tegen gelijkwaardige teams",)),
+    "IR Iran": TeamProfile(69, TIER_UNDERDOG, "compact, fysiek en countergericht", ("organisatie", "duels", "directe counters"), ("balbezit", "creativiteit"), ("kan wedstrijden gesloten houden en de underdogrol goed spelen",)),
+    "Tunisia": TeamProfile(68, TIER_UNDERDOG, "compact, fel en defensief gedisciplineerd", ("organisatie", "duels", "teamdiscipline"), ("scorend vermogen", "risico nemen"), ("kan favorieten lang frustreren als het eerste doelpunt uitblijft",)),
+    "Saudi Arabia": TeamProfile(68, TIER_UNDERDOG, "energiek, technisch en agressief in drukmomenten", ("intensiteit", "brutale momenten", "teamenergie"), ("consistentie", "ruimte achterin"), ("kan in één wedstrijd veel gevaarlijker zijn dan de rating suggereert",)),
+    "Qatar": TeamProfile(66, TIER_UNDERDOG, "compact en gewend aan toernooivoetbal in korte periodes", ("organisatie", "ervaring samen", "discipline"), ("tempo", "individuele topkwaliteit"), ("veel spelers hebben vaak in vergelijkbare nationale structuur gespeeld",)),
+    "South Africa": TeamProfile(66, TIER_UNDERDOG, "energiek, fysiek en opportunistisch", ("wedstrijdenergie", "duels", "counters"), ("controle", "efficiëntie"), ("kan profiteren als de tegenstander onder openingsdruk staat",)),
+    "Uzbekistan": TeamProfile(65, TIER_KLEINE_UNDERDOG, "gestructureerd, hardwerkend en compact", ("discipline", "organisatie", "teamcohesie"), ("ervaring op dit podium", "aanvallende topkwaliteit"), ("eerste WK-context kan extra energie geven, maar ook nervositeit",)),
+    "Congo DR": TeamProfile(65, TIER_KLEINE_UNDERDOG, "fysiek sterk en gevaarlijk in losse fases", ("atletiek", "duels", "directheid"), ("organisatie", "balvaste controle"), ("kan met fysieke mismatch wedstrijden kantelen",)),
+    "Bosnia and Herzegovina": TeamProfile(65, TIER_KLEINE_UNDERDOG, "technisch in fases en afhankelijk van sleutelspelers", ("ervaring", "passing", "momentenkwaliteit"), ("tempo", "diepte in selectie"), ("als de ervaren kern controle vindt, wordt het een lastige matchup",)),
+    "Iraq": TeamProfile(64, TIER_KLEINE_UNDERDOG, "compact, fel en emotioneel sterk", ("teamenergie", "duels", "organisatie"), ("kansen creëren", "ervaring tegen elite"), ("kan vanuit underdogpositie lang overleven in wedstrijden",)),
+    "New Zealand": TeamProfile(62, TIER_KLEINE_UNDERDOG, "fysiek, simpel en collectief", ("luchtduels", "discipline", "teamspirit"), ("technische controle", "tempo tegen toplanden"), ("standaardsituaties zijn relatief belangrijk voor hun kans",)),
+    "Jordan": TeamProfile(62, TIER_KLEINE_UNDERDOG, "compact, reactief en energiek", ("organisatie", "counters", "teamdiscipline"), ("balbezit onder druk", "selectiediepte"), ("kan verrassen als het lang 0-0 blijft",)),
+    "Panama": TeamProfile(61, TIER_KLEINE_UNDERDOG, "fysiek en direct", ("duels", "energie", "standaardsituaties"), ("controle", "creatieve kwaliteit"), ("regionale omstandigheden kunnen helpen tegen niet-Amerikaanse landen",)),
+    "Haiti": TeamProfile(60, TIER_KLEINE_UNDERDOG, "direct, atletisch en emotioneel", ("snelheid", "fysiek", "verrassingswaarde"), ("organisatie", "toernooi-ervaring"), ("chaotische wedstrijden vergroten hun upset-kans",)),
+    "Cabo Verde": TeamProfile(60, TIER_KLEINE_UNDERDOG, "compact en trots, met focus op omschakeling", ("teamspirit", "organisatie", "transitie"), ("selectiediepte", "ervaring"), ("kleine landen kunnen juist gevaarlijk zijn als niemand ze comfortabel vindt",)),
+    "Curaçao": TeamProfile(59, TIER_KLEINE_UNDERDOG, "technisch in momenten en afhankelijk van discipline", ("verrassingswaarde", "individuele momenten", "compactheid"), ("diepte", "ervaring tegen toplanden"), ("Nederlandse voetbalinvloeden kunnen tactisch helpen",)),
 }
 
 
@@ -166,7 +174,7 @@ def _context_bonus(home_team: str, away_team: str, stage: str, round_name: str, 
 
     if stage == "knockout":
         for team, side in ((home_team, "home"), (away_team, "away")):
-            if profile_for(team).tier in {"Favoriet", "Kandidaat", "Sterke outsider"}:
+            if profile_for(team).tier in {TIER_FAVORIET, TIER_KANDIDAAT, TIER_STERKE_UNDERDOG}:
                 if side == "home":
                     home_bonus += 2
                 else:

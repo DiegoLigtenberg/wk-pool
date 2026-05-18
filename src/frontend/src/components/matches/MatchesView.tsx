@@ -13,12 +13,34 @@ type MatchesViewProps = {
   summary: TournamentView["summary"];
 };
 
+const DEFAULT_STATUS: MatchStatusFilter = "all";
+const DEFAULT_TEAM = "";
+const DEFAULT_PHASE: MatchPhaseFilter = "all";
+
 export function MatchesView({ matches, summary }: MatchesViewProps) {
-  const [status, setStatus] = useState<MatchStatusFilter>("all");
-  const [team, setTeam] = useState("");
-  const [phase, setPhase] = useState<MatchPhaseFilter>("all");
+  const [status, setStatus] = useState<MatchStatusFilter>(DEFAULT_STATUS);
+  const [team, setTeam] = useState(DEFAULT_TEAM);
+  const [phase, setPhase] = useState<MatchPhaseFilter>(DEFAULT_PHASE);
   const teamOptions = useMemo(() => teamSelectOptions(matches), [matches]);
   const phaseOptions = useMemo(() => phaseSelectOptions(matches), [matches]);
+
+  const setStatusFilter = (value: MatchStatusFilter) => {
+    setStatus(value);
+    setTeam(DEFAULT_TEAM);
+    setPhase(DEFAULT_PHASE);
+  };
+
+  const setTeamFilter = (value: string) => {
+    setTeam(value);
+    setStatus(DEFAULT_STATUS);
+    setPhase(DEFAULT_PHASE);
+  };
+
+  const setPhaseFilter = (value: MatchPhaseFilter) => {
+    setPhase(value);
+    setStatus(DEFAULT_STATUS);
+    setTeam(DEFAULT_TEAM);
+  };
 
   const filteredMatches = matches.filter((match) => {
     const matchesStatus = status === "all" || match.status === status;
@@ -45,12 +67,12 @@ export function MatchesView({ matches, summary }: MatchesViewProps) {
               labelId="status-filter-label"
               value={status}
               options={STATUS_FILTER_OPTIONS}
-              onChange={(value) => setStatus(value as MatchStatusFilter)}
+              onChange={(value) => setStatusFilter(value as MatchStatusFilter)}
             />
           </div>
           <div className="match-filter-cell match-filter-cell--match">
             <span className="filter-label" id="team-filter-label">Land</span>
-            <CustomSelect id="team-filter" labelId="team-filter-label" value={team} options={teamOptions} onChange={setTeam} scroll centered />
+            <CustomSelect id="team-filter" labelId="team-filter-label" value={team} options={teamOptions} onChange={setTeamFilter} scroll centered />
           </div>
           <div className="match-filter-cell match-filter-cell--group">
             <span className="filter-label" id="phase-filter-label">Fase</span>
@@ -59,7 +81,7 @@ export function MatchesView({ matches, summary }: MatchesViewProps) {
               labelId="phase-filter-label"
               value={phase}
               options={phaseOptions}
-              onChange={(value) => setPhase(value as MatchPhaseFilter)}
+              onChange={(value) => setPhaseFilter(value as MatchPhaseFilter)}
               scroll
             />
           </div>
