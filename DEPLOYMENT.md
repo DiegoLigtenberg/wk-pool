@@ -9,7 +9,7 @@ This repo is set up for two Railway services:
 
 Railway reads `src/backend/railway.json` when the service root is `src/backend`.
 
-Nixpacks installs with `pip`/`setuptools` (`NIXPACKS_PYTHON_PACKAGE_MANAGER=setuptools` in `nixpacks.toml`), not the legacy Poetry 1.3 CLI that `poetry.lock` would otherwise select. Local development still uses Poetry 2.
+Nixpacks skips the early `pyproject.toml`-only install (`NIXPACKS_PYTHON_PACKAGE_MANAGER=skip`) and runs `pip install .` in the build phase after the full repo is copied (see `nixpacks.toml`). Local development still uses Poetry 2.
 
 Set this backend variable:
 

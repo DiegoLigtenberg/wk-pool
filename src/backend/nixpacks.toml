@@ -1,8 +1,11 @@
-# poetry.lock triggers Poetry 1.3 by default, which breaks this PEP 621 project.
-# Use pip/setuptools install into Nixpacks' /opt/venv instead.
+# poetry.lock would select Poetry 1.3 (incompatible). Skip the early pyproject-only
+# install layer (it fails without README.md and app/). Install after the full copy.
 [variables]
 NIXPACKS_PYTHON_VERSION = "3.12"
-NIXPACKS_PYTHON_PACKAGE_MANAGER = "setuptools"
+NIXPACKS_PYTHON_PACKAGE_MANAGER = "skip"
 
 [phases.build]
-cmds = []
+cmds = [
+  "/opt/venv/bin/pip install --upgrade build setuptools",
+  "/opt/venv/bin/pip install --no-cache-dir .",
+]
