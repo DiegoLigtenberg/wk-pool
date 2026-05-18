@@ -3,10 +3,11 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
+from app.predictions import is_known_team, predict_match, team_insight
+
 
 CSV_PATH = Path(__file__).resolve().parents[1] / "data" / "fifa-world-cup-2026-UTC.csv"
 FINISHED_MATCH_COUNT = 36
-PICKS = ("1", "2", "3")
 FAKE_SCORES = (
     (2, 0),
     (1, 1),
@@ -60,6 +61,7 @@ def build_tournament_view(path: Path = CSV_PATH) -> dict[str, object]:
         "nextMatch": upcoming_matches[0] if upcoming_matches else None,
         "recentMatches": completed_matches[-6:],
         "upcomingMatches": upcoming_matches[:8],
+        "teamInsights": _team_insights(fixtures),
         "groups": _group_views(group_stage_matches),
         "knockoutMatches": [match for match in matches if match["stage"] == "knockout"],
     }
@@ -86,7 +88,14 @@ def _match_view(fixture: Fixture) -> dict[str, object]:
     is_completed = is_group_match and fixture.match_number <= FINISHED_MATCH_COUNT
     score = _fake_score(fixture) if is_completed else None
     actual_pick = _actual_pick(score) if score else None
-    ai_pick = _ai_pick(fixture)
+    ai_prediction = predict_match(
+        fixture.home_team,
+        fixture.away_team,
+        "group" if is_group_match else "knockout",
+        fixture.round_number,
+        fixture.group,
+    )
+    ai_pick = str(ai_prediction["pick"])
     prediction_status = _prediction_status(ai_pick, actual_pick)
 
     return {
@@ -102,12 +111,22 @@ def _match_view(fixture: Fixture) -> dict[str, object]:
         "score": _score_view(score),
         "actualPick": actual_pick,
         "aiPrediction": {
-            "pick": ai_pick,
-            "confidence": _confidence(fixture),
-            "explanation": _explanation(fixture, ai_pick),
+            **ai_prediction,
             "status": prediction_status,
         },
     }
+
+
+def _team_insights(fixtures: list[Fixture]) -> dict[str, object]:
+    teams = sorted(
+        {
+            team
+            for fixture in fixtures
+            for team in (fixture.home_team, fixture.away_team)
+            if is_known_team(team)
+        }
+    )
+    return {team: insight for team in teams if (insight := team_insight(team))}
 
 
 def _group_views(matches: list[dict[str, object]]) -> list[dict[str, object]]:
@@ -203,14 +222,6 @@ def _actual_pick(score: tuple[int, int]) -> str:
     return "3"
 
 
-def _ai_pick(fixture: Fixture) -> str:
-    return PICKS[(fixture.match_number + len(fixture.home_team)) % len(PICKS)]
-
-
-def _confidence(fixture: Fixture) -> int:
-    return 54 + ((fixture.match_number * 7) % 37)
-
-
 def _prediction_status(ai_pick: str, actual_pick: str | None) -> str:
     if actual_pick is None:
         return "pending"
@@ -238,16 +249,3 @@ def _prediction_summary(matches: list[dict[str, object]]) -> dict[str, int | flo
     accuracy = round((correct / decided) * 100, 1) if decided else 0
     return {"correct": correct, "wrong": wrong, "pending": pending, "accuracy": accuracy}
 
-
-def _explanation(fixture: Fixture, ai_pick: str) -> str:
-    if ai_pick == "1":
-        choice = "het thuisland"
-        reason = "meer verwachte controle en een licht voordeel in deze wedstrijd"
-    elif ai_pick == "2":
-        choice = "het uitland"
-        reason = "meer dreiging in de omschakeling en een hogere kans op een verrassing"
-    else:
-        choice = "een gelijkspel"
-        reason = "weinig verschil tussen beide landen in de voorspelling"
-
-    return f"De AI kiest voor {choice}, door {reason}."

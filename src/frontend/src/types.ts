@@ -10,6 +10,20 @@ export type AiPrediction = {
   confidence: number;
   explanation: string;
   status: PredictionStatus;
+  themes: string[];
+  homeWinProbability: number | null;
+  drawProbability: number | null;
+  awayWinProbability: number | null;
+};
+
+export type TeamInsight = {
+  team: string;
+  tier: string;
+  style: string;
+  strengths: string[];
+  risks: string[];
+  niche: string[];
+  summary: string;
 };
 
 export type Match = {
@@ -57,6 +71,7 @@ export type TournamentView = {
   nextMatch: Match | null;
   recentMatches: Match[];
   upcomingMatches: Match[];
+  teamInsights: Record<string, TeamInsight>;
   groups: Group[];
   knockoutMatches: Match[];
 };

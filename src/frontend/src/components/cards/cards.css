@@ -46,14 +46,40 @@
 
 .team-label {
   display: inline-flex;
+  max-width: 100%;
   min-width: 0;
   align-items: center;
   gap: 0.5rem;
   vertical-align: middle;
 }
 
+.team-label-button {
+  max-width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-align: inherit;
+}
+
+.team-label-button:hover span:last-child,
+.team-label-button:focus-visible span:last-child {
+  color: #7dd3fc;
+  text-decoration: underline;
+  text-underline-offset: 0.18rem;
+}
+
+.team-label-button:focus-visible {
+  border-radius: 0.35rem;
+  outline: 2px solid rgba(56, 189, 248, 0.55);
+  outline-offset: 0.2rem;
+}
+
 .team-label span {
   overflow: hidden;
+  min-width: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

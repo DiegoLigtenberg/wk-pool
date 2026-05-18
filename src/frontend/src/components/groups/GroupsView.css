@@ -167,8 +167,8 @@
   }
 
   .fixture-teams {
-    grid-template-columns: minmax(0, 1fr) 2.2rem minmax(0, 1fr);
-    gap: 0.35rem;
+    grid-template-columns: minmax(0, 1fr) 2.8rem minmax(0, 1fr);
+    gap: 0.3rem;
     font-size: 0.78rem;
   }
 
@@ -195,10 +195,25 @@
 
   .compact-match {
     grid-template-columns: 1fr;
+    gap: 0.3rem;
   }
 
   .compact-score {
-    justify-content: flex-start;
-    padding-left: 2.55rem;
+    justify-content: center;
+    padding-left: 0;
+  }
+
+  .fixture-teams {
+    grid-template-columns: minmax(0, 1fr) 2.55rem minmax(0, 1fr);
+    font-size: 0.74rem;
+  }
+
+  .fixture-teams .team-label {
+    gap: 0.3rem;
+  }
+
+  .fixture-teams .flag {
+    width: 1.25rem;
+    height: 0.86rem;
   }
 }

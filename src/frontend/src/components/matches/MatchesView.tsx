@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { formatDateShort, formatTime, phaseLabel } from "../../lib/format";
+import { displayTeamName } from "../../lib/teams";
 import { phaseSelectOptions, STATUS_FILTER_OPTIONS, teamSelectOptions } from "../../lib/tournament";
 import type { Match, MatchPhaseFilter, MatchStatusFilter, TournamentView } from "../../types";
 import { TeamLabel } from "../cards/TeamLabel";
@@ -71,6 +72,7 @@ function FixtureRow({ match }: { match: Match }) {
   const aiPick = match.aiPrediction.pick;
   const homeOutcome = teamOutcome(match, "home");
   const awayOutcome = teamOutcome(match, "away");
+  const [showPrediction, setShowPrediction] = useState(false);
 
   return (
     <article className={`fixture-row ${match.status}`}>
@@ -81,20 +83,21 @@ function FixtureRow({ match }: { match: Match }) {
       <div className="match-cell">
         <div className="scoreboard-line">
           <span className={`team-pick ${homeOutcome}`}>
-            {aiPick === "1" ? <AiBadge status={match.aiPrediction.status} /> : <span className="ai-marker empty" />}
-            <TeamLabel team={match.homeTeam} />
+            {aiPick === "1" ? <AiBadge status={match.aiPrediction.status} onClick={() => setShowPrediction((current) => !current)} /> : <span className="ai-marker empty" />}
+            <TeamLabel team={match.homeTeam} compact maxLength={13} />
           </span>
           <span className="result-stack">
-            {aiPick === "3" ? <AiBadge status={match.aiPrediction.status} /> : null}
+            {aiPick === "3" ? <AiBadge status={match.aiPrediction.status} onClick={() => setShowPrediction((current) => !current)} /> : null}
             <strong className={`result-pill${match.score ? "" : " result-upcoming"}`}>
               {match.score ? `${match.score.home} - ${match.score.away}` : "-"}
             </strong>
           </span>
           <span className={`team-pick ${awayOutcome}`}>
-            {aiPick === "2" ? <AiBadge status={match.aiPrediction.status} /> : <span className="ai-marker empty" />}
-            <TeamLabel team={match.awayTeam} />
+            {aiPick === "2" ? <AiBadge status={match.aiPrediction.status} onClick={() => setShowPrediction((current) => !current)} /> : <span className="ai-marker empty" />}
+            <TeamLabel team={match.awayTeam} compact maxLength={13} />
           </span>
         </div>
+        {showPrediction ? <PredictionPanel match={match} /> : null}
       </div>
       <div className="group-cell">
         <strong>{phaseLabel(match)}</strong>
@@ -103,8 +106,52 @@ function FixtureRow({ match }: { match: Match }) {
   );
 }
 
-function AiBadge({ status }: { status: Match["aiPrediction"]["status"] }) {
-  return <span className={`ai-marker ${status}`}>AI</span>;
+function AiBadge({ status, onClick }: { status: Match["aiPrediction"]["status"]; onClick: () => void }) {
+  return (
+    <button type="button" className={`ai-marker ai-marker-button ${status}`} onClick={onClick} aria-label="Toon AI-uitleg">
+      AI
+    </button>
+  );
+}
+
+function PredictionPanel({ match }: { match: Match }) {
+  const prediction = match.aiPrediction;
+  return (
+    <section className="prediction-panel">
+      <div>
+        <span className="prediction-label">AI voorspelling</span>
+        <strong>{predictionTitle(match)}</strong>
+      </div>
+      <div className="prediction-probabilities">
+        <span>{displayTeamName(match.homeTeam)} {formatProbability(prediction.homeWinProbability)}</span>
+        {prediction.drawProbability !== null ? <span>Gelijk {formatProbability(prediction.drawProbability)}</span> : null}
+        <span>{displayTeamName(match.awayTeam)} {formatProbability(prediction.awayWinProbability)}</span>
+      </div>
+      <p>{prediction.explanation}</p>
+      <div className="prediction-themes">
+        {prediction.themes.map((theme) => (
+          <span key={theme}>{theme}</span>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function predictionTitle(match: Match): string {
+  if (match.aiPrediction.pick === "1") {
+    return `${displayTeamName(match.homeTeam)} wint · ${match.aiPrediction.confidence}%`;
+  }
+  if (match.aiPrediction.pick === "2") {
+    return `${displayTeamName(match.awayTeam)} wint · ${match.aiPrediction.confidence}%`;
+  }
+  if (match.aiPrediction.confidence === 0) {
+    return "Wacht op bekende landen";
+  }
+  return `Gelijkspel · ${match.aiPrediction.confidence}%`;
+}
+
+function formatProbability(value: number | null): string {
+  return value === null ? "-" : `${value}%`;
 }
 
 function teamOutcome(match: Match, side: "home" | "away"): "winner" | "loser" | "draw" | "" {

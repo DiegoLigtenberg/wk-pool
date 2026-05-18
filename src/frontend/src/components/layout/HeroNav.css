@@ -36,8 +36,13 @@
 
 @media (max-width: 760px) {
   .hero {
+    grid-template-columns: minmax(0, 1fr);
     min-height: auto;
-    padding: 1.25rem 0 0.75rem;
+    padding: 1rem 0 0.75rem;
+  }
+
+  .hero .lede {
+    max-width: 22rem;
   }
 
   .top-nav {
@@ -55,6 +60,13 @@
 
 @media (max-width: 420px) {
   .top-nav {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .top-nav-button {
+    min-height: 2.45rem;
+    padding-inline: 0.55rem;
+    font-size: 0.92rem;
   }
 }

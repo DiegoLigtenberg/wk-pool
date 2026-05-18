@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
+import { TeamInsightModal } from "./components/cards/TeamInsightModal";
+import { TeamInsightProvider } from "./components/cards/TeamInsightContext";
 import { CrystalBallView } from "./components/crystal/CrystalBallView";
 import { GroupsView } from "./components/groups/GroupsView";
 import { HeroNav } from "./components/layout/HeroNav";
@@ -13,6 +15,7 @@ export function App() {
   const [view, setView] = useState<AppView>("matches");
   const [tournament, setTournament] = useState<TournamentView | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [selectedTeam, setSelectedTeam] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -64,12 +67,15 @@ export function App() {
   }
 
   return (
-    <main className="app-shell">
-      <HeroNav activeView={view} onChange={setView} />
-      {view === "matches" ? <MatchesView matches={matches} summary={tournament.summary} /> : null}
-      {view === "groups" ? <GroupsView tournament={tournament} /> : null}
-      {view === "knockout" ? <KnockoutView knockoutMatches={tournament.knockoutMatches} /> : null}
-      {view === "crystal" ? <CrystalBallView groups={tournament.groups} /> : null}
-    </main>
+    <TeamInsightProvider insights={tournament.teamInsights} openTeam={setSelectedTeam}>
+      <main className="app-shell">
+        <HeroNav activeView={view} onChange={setView} />
+        {view === "matches" ? <MatchesView matches={matches} summary={tournament.summary} /> : null}
+        {view === "groups" ? <GroupsView tournament={tournament} /> : null}
+        {view === "knockout" ? <KnockoutView knockoutMatches={tournament.knockoutMatches} /> : null}
+        {view === "crystal" ? <CrystalBallView groups={tournament.groups} /> : null}
+      </main>
+      <TeamInsightModal insight={selectedTeam ? tournament.teamInsights[selectedTeam] ?? null : null} onClose={() => setSelectedTeam(null)} />
+    </TeamInsightProvider>
   );
 }

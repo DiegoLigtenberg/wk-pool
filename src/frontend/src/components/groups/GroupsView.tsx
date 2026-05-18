@@ -76,11 +76,11 @@ function CompactMatch({ match }: { match: Match }) {
     <div className={`compact-match ai-${match.aiPrediction.status}`} title={`AI: ${aiStatusLabel(match.aiPrediction.status)}`}>
       <div className="fixture-teams">
         <span className={`team-slot team-slot--home ${homeOutcome}`}>
-          <TeamLabel team={match.homeTeam} compact />
+          <TeamLabel team={match.homeTeam} compact maxLength={11} />
         </span>
         <span className="fixture-vs">tegen</span>
         <span className={`team-slot team-slot--away ${awayOutcome}`}>
-          <TeamLabel team={match.awayTeam} compact />
+          <TeamLabel team={match.awayTeam} compact maxLength={11} />
         </span>
       </div>
       <strong className="compact-score">{match.score ? renderScore(match) : "-"}</strong>
