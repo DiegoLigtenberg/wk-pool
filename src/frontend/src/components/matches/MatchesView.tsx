@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { formatDateShort, formatTime, phaseLabel } from "../../lib/format";
-import { PHASE_FILTER_OPTIONS, STATUS_FILTER_OPTIONS, teamSelectOptions } from "../../lib/tournament";
+import { phaseSelectOptions, STATUS_FILTER_OPTIONS, teamSelectOptions } from "../../lib/tournament";
 import type { Match, MatchPhaseFilter, MatchStatusFilter, TournamentView } from "../../types";
 import { TeamLabel } from "../cards/TeamLabel";
 import { StatsChips } from "../cards/StatsChips";
@@ -17,11 +17,12 @@ export function MatchesView({ matches, summary }: MatchesViewProps) {
   const [team, setTeam] = useState("");
   const [phase, setPhase] = useState<MatchPhaseFilter>("all");
   const teamOptions = useMemo(() => teamSelectOptions(matches), [matches]);
+  const phaseOptions = useMemo(() => phaseSelectOptions(matches), [matches]);
 
   const filteredMatches = matches.filter((match) => {
     const matchesStatus = status === "all" || match.status === status;
     const matchesTeam = !team || match.homeTeam === team || match.awayTeam === team;
-    const matchesPhase = phase === "all" || match.stage === phase;
+    const matchesPhase = phase === "all" || match.stage === phase || phase === `group:${match.group ?? ""}`;
     return matchesStatus && matchesTeam && matchesPhase;
   });
 
@@ -46,7 +47,7 @@ export function MatchesView({ matches, summary }: MatchesViewProps) {
           </div>
           <div className="match-filter-cell match-filter-cell--group">
             <span className="filter-label">Fase</span>
-            <CustomSelect id="phase-filter" value={phase} options={PHASE_FILTER_OPTIONS} onChange={(value) => setPhase(value as MatchPhaseFilter)} />
+            <CustomSelect id="phase-filter" value={phase} options={phaseOptions} onChange={(value) => setPhase(value as MatchPhaseFilter)} scroll />
           </div>
         </div>
         <div className="match-table-head">

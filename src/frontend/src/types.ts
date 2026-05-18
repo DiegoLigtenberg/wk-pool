@@ -63,7 +63,7 @@ export type TournamentView = {
 
 export type AppView = "matches" | "groups" | "knockout" | "crystal";
 export type MatchStatusFilter = "all" | "completed" | "upcoming";
-export type MatchPhaseFilter = "all" | "group" | "knockout";
+export type MatchPhaseFilter = "all" | "knockout" | `group:${string}`;
 
 export type SelectOption = {
   value: string;
