@@ -1,7 +1,7 @@
 :root {
   color-scheme: dark;
   /*
-   * Design tokens — central place for palette tweaks (keep UX/feature CSS elsewhere in sync).
+   * Design tokens ,  central place for palette tweaks (keep UX/feature CSS elsewhere in sync).
    * Accent is a muted stadium-night blue, not neon cyan.
    */
   --font-sans:

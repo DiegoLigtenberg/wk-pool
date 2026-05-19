@@ -40,7 +40,14 @@ export default defineConfig(({ command, mode }) => {
   return {
   plugins: [react()],
   // Strict CSP breaks Vite dev (React preamble, HMR inline styles/workers) → blank page.
-  server: isDevServer ? {} : { headers: securityHeaders },
+  server: isDevServer
+    ? {
+        proxy: {
+          "/api": "http://127.0.0.1:8000",
+          "/health": "http://127.0.0.1:8000",
+        },
+      }
+    : { headers: securityHeaders },
   preview: {
     host: "0.0.0.0",
     port: previewPort,

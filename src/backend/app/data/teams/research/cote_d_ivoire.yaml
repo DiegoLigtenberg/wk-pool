@@ -1,0 +1,139 @@
+team_id: Ivoorkust
+slug: cote_d_ivoire
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Emerse Faé (AFCON 2024); Pepe, Amad Diallo, Adingra,
+  Ndicka, Kessié. Groep E vs Ecuador 14 juni, Duitsland, Curaçao.
+phase_preferences:
+- Sterk Pepe/Diallo flanken.
+- Zwakker Nagelsmann/Wirtz.
+transition_orientation_summary: Faé AFCON transitions Adingra/Pepe.
+psychology_intro: AFCON-titel verhoogt verwachting.
+psychology_vectors:
+- Duitsland test.
+- Pepe clubvorm.
+matchup_counters_us:
+- Duitsland zet intens pressing neer; dat verstoort de opbouw van Ivoorkust.
+- Moisés Caicedo is Ecuadors spil op het middenveld (Chelsea); lastig duel in het
+  centrum voor Ivoorkust.
+matchup_we_counter:
+- Curaçao.
+- Counter-ruimte Diallo.
+dead_ball_swings_matches: Ndicka/Kessié corners.
+experience_cohesion_notes:
+- Faé sinds AFCON 2024; squad mei 2026.
+heat_altitude_acclimatization_notes: West-Afrika vs hitte.
+intercontinental_travel_profile: CAF → VS.
+power_score: 74
+tier: Underdog
+macro_style: krachtig, direct en gevaarlijk in open wedstrijden
+strengths:
+- fysiek
+- aanvallende power
+- duels
+risks:
+- organisatie
+- consistentie
+confederation: CAF
+cohost_status: false
+group_stage: &id001
+  group: E
+  opponents_nl:
+  - Curaçao
+  - Duitsland
+  - Ecuador
+  opponents_fifa:
+  - Curaçao
+  - Ecuador
+  - Germany
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-14T23:00
+    is_home: true
+    opponent_fifa: Ecuador
+    opponent_nl: Ecuador
+    stadium: Philadelphia Stadium
+  - match_number: 2
+    kickoff: 2026-06-20T20:00
+    is_home: false
+    opponent_fifa: Germany
+    opponent_nl: Duitsland
+    stadium: Toronto Stadium
+  - match_number: 3
+    kickoff: 2026-06-25T20:00
+    is_home: false
+    opponent_fifa: Curaçao
+    opponent_nl: Curaçao
+    stadium: Philadelphia Stadium
+  fixture_hooks:
+  - 'Groep E: tegen Curaçao, Duitsland, Ecuador.'
+  - 'Groepswedstrijd 1 (14 Jun): thuis vs Ecuador @ Philadelphia Stadium'
+  - 'Groepswedstrijd 2 (20 Jun): uit vs Duitsland @ Toronto Stadium'
+  - 'Groepswedstrijd 3 (25 Jun): uit vs Curaçao @ Philadelphia Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Ecuador en Duitsland: Philadelphia Stadium → Toronto
+    Stadium (6 dag(en) ertussen). Tussen wedstrijd Duitsland en Curaçao: Toronto Stadium
+    → Philadelphia Stadium (5 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Philadelphia Stadium (Philadelphia,
+    warm vochtig); Toronto Stadium (Toronto, gematigd zomer). Cross-border poule (USA,
+    Canada) ,  extra vlucht/tijdzone tussen groepswedstrijden. Impact: Philadelphia
+    (warm vochtig) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Curaçao:
+    - id: matchup_edge
+      delta: 1
+      reason: Curaçao.
+    Ecuador:
+    - id: matchup_risk
+      delta: -1
+      reason: Moisés Caicedo is Ecuadors spil op het middenveld (club Chelsea); lastig
+        duel in het centrum voor Ivoorkust.
+    Germany:
+    - id: psychology
+      delta: -1
+      reason: Duitsland test.
+    - id: matchup_risk
+      delta: -1
+      reason: Duitsland zet intens pressing neer; dat verstoort de opbouw van Ivoorkust.

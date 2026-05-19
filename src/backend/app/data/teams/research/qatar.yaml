@@ -1,0 +1,148 @@
+team_id: Qatar
+slug: qatar
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Julen Lopetegui; Almoez Ali, Akram Afif, Mendes. Groep
+  B vs Zwitserland 13 juni, Canada, Bosnië.
+phase_preferences:
+- Sterk Lopetegui organisatie (ex-Spanje/Wolves).
+- Zwakwer Marsch/Davies pressing.
+transition_orientation_summary: Compact; Afif/Almoez counters.
+psychology_intro: 2022 gastheer-ervaring; Lopetegui verrassende keuze.
+psychology_vectors:
+- Canada/Bosnië sequentie.
+- Hitte voorbereiding.
+matchup_counters_us:
+- Canada Marsch.
+- Zwitserland Yakin compact.
+matchup_we_counter:
+- Bosnië.
+- Foul-heavy.
+dead_ball_swings_matches: Almoez hoogtes.
+experience_cohesion_notes:
+- Lopetegui; veel Al-Sadd/Al-Duhail.
+heat_altitude_acclimatization_notes: Woestijn vs VS hitte.
+intercontinental_travel_profile: AFC → VS.
+distinctive_spark_notes: Bondscoach Julen Lopetegui; Spaans balbezitspel in compact
+  team.
+power_score: 66
+tier: Underdog
+macro_style: compact en gewend aan toernooivoetbal in korte periodes
+strengths:
+- organisatie
+- ervaring samen
+- discipline
+risks:
+- tempo
+- individuele topkwaliteit
+confederation: AFC
+cohost_status: false
+group_stage: &id001
+  group: B
+  opponents_nl:
+  - Bosnië-Herzegovina
+  - Canada
+  - Zwitserland
+  opponents_fifa:
+  - Bosnia and Herzegovina
+  - Canada
+  - Switzerland
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-13T19:00
+    is_home: true
+    opponent_fifa: Switzerland
+    opponent_nl: Zwitserland
+    stadium: San Francisco Bay Area Stadium
+  - match_number: 2
+    kickoff: 2026-06-18T22:00
+    is_home: false
+    opponent_fifa: Canada
+    opponent_nl: Canada
+    stadium: BC Place Vancouver
+  - match_number: 3
+    kickoff: 2026-06-24T19:00
+    is_home: false
+    opponent_fifa: Bosnia and Herzegovina
+    opponent_nl: Bosnië-Herzegovina
+    stadium: Seattle Stadium
+  fixture_hooks:
+  - 'Groep B: tegen Bosnië-Herzegovina, Canada, Zwitserland.'
+  - 'Groepswedstrijd 1 (13 Jun): thuis vs Zwitserland @ San Francisco Bay Area Stadium'
+  - 'Groepswedstrijd 2 (18 Jun): uit vs Canada @ BC Place Vancouver'
+  - 'Groepswedstrijd 3 (24 Jun): uit vs Bosnië-Herzegovina @ Seattle Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Zwitserland en Canada: San Francisco Bay Area Stadium
+    → BC Place Vancouver (5 dag(en) ertussen). Tussen wedstrijd Canada en Bosnië-Herzegovina:
+    BC Place Vancouver → Seattle Stadium (6 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: San Francisco Bay Area Stadium
+    (San Francisco, mild kust); BC Place Vancouver (Vancouver, koeler kust); Seattle
+    Stadium (Seattle, koel mild). Cross-border poule (USA, Canada) ,  extra vlucht/tijdzone
+    tussen groepswedstrijden. Impact: San Francisco is koeler ,  kan hitte-gewende
+    tegenstanders neutraliseren; Vancouver is koeler ,  kan hitte-gewende tegenstanders
+    neutraliseren; Seattle is koeler ,  kan hitte-gewende tegenstanders neutraliseren.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: distinctive_spark
+    delta: -1
+    reason: Bondscoach Julen Lopetegui zet bij Qatar in op Spaans balbezitspel in
+      een zeer compacte ploeg.
+  versus:
+    Bosnia and Herzegovina:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Bosnië-Herzegovina
+    Canada:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Canada
+    - id: away_fixture
+      delta: -1
+      reason: Uit tegen co-host Canada (BC Place Vancouver)
+    Switzerland:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Zwitserland
+    - id: matchup_risk
+      delta: -1
+      reason: Zwitserland Yakin compact.

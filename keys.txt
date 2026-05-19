@@ -1,0 +1,1 @@
+['scoreSummary', 'verdict', 'tags', 'diff', 'home', 'away', 'winnerSide']

@@ -1,0 +1,144 @@
+team_id: Frankrijk
+slug: france
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Deschamps; Mbappé (Real), Dembélé, Olise, Thuram, Saliba,
+  Koundé. Squad mei 2026 bekend; groep I vs Senegal 16 juni.
+phase_preferences:
+- Sterk Mbappé/Olise transitions, Tchouameni/Kanté mid.
+- Zwakwer low-blocks, chemistry-geruchten.
+transition_orientation_summary: Extreem verticaal; halve ruimtes Mbappé/Dembélé.
+psychology_intro: Permanent favoriet; Deschamps sinds 2012.
+psychology_vectors:
+- Sterren-minutes vs harmonie.
+- Senegal opener AFCON-rematch.
+matchup_counters_us:
+- Senegal Mane counters.
+- Norway Haaland direct.
+matchup_we_counter:
+- Iraq compact.
+- Teams die pressing niet afmaken.
+dead_ball_swings_matches: Saliba/Koundé hoogtes; Mbappé frees.
+experience_cohesion_notes:
+- Diepe selectie; geen Giroud maar Mateta.
+intercontinental_travel_profile: UEFA → VS.
+club_concentration_notes: PSG/Ligue1 + verspreide elite ,  minder één-competitie sync
+  dan Engeland.
+power_score: 92
+tier: Topfavoriet
+macro_style: explosief, atletisch en diep in elke linie
+strengths:
+- selectiebreedte
+- transitiegevaar
+- knock-out ervaring
+risks:
+- kan soms slordig worden bij veel balbezit
+- verwachtingsdruk
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: I
+  opponents_nl:
+  - Irak
+  - Noorwegen
+  - Senegal
+  opponents_fifa:
+  - Iraq
+  - Norway
+  - Senegal
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-16T19:00
+    is_home: true
+    opponent_fifa: Senegal
+    opponent_nl: Senegal
+    stadium: New York/New Jersey Stadium
+    narrative: Groep I-opener vs Senegal
+  - match_number: 2
+    kickoff: 2026-06-22T21:00
+    is_home: true
+    opponent_fifa: Iraq
+    opponent_nl: Irak
+    stadium: Philadelphia Stadium
+  - match_number: 3
+    kickoff: 2026-06-26T19:00
+    is_home: false
+    opponent_fifa: Norway
+    opponent_nl: Noorwegen
+    stadium: Boston Stadium
+  fixture_hooks:
+  - 'Groep I: tegen Irak, Noorwegen, Senegal.'
+  - 'Groepswedstrijd 1 (16 Jun): thuis vs Senegal @ New York/New Jersey Stadium ,
+    Groep I-opener vs Senegal'
+  - 'Groepswedstrijd 2 (22 Jun): thuis vs Irak @ Philadelphia Stadium'
+  - 'Groepswedstrijd 3 (26 Jun): uit vs Noorwegen @ Boston Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Senegal en Irak: New York/New Jersey Stadium → Philadelphia
+    Stadium (6 dag(en) ertussen). Tussen wedstrijd Irak en Noorwegen: Philadelphia
+    Stadium → Boston Stadium (4 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: New York/New Jersey Stadium (New
+    York, vochtig zomer); Philadelphia Stadium (Philadelphia, warm vochtig); Boston
+    Stadium (Boston, vochtig zomer). Alleen USA-venues in de poule ,  beperkte binnenlandse
+    reis. Impact: Philadelphia (warm vochtig) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Iraq:
+    - id: matchup_edge
+      delta: 1
+      reason: Iraq brengt met compact extra dreiging mee; lastig voor Frankrijk in
+        dit duel tegen Irak.
+    Norway:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Noorwegen
+    - id: matchup_risk
+      delta: -1
+      reason: Norway Haaland direct.
+    Senegal:
+    - id: matchup_risk
+      delta: -1
+      reason: Senegal Mane counters.
+    - id: fixture_story
+      delta: -1
+      reason: Groep I-opener vs Senegal

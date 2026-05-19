@@ -1,0 +1,134 @@
+team_id: Japan
+slug: japan
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Hajime Moriyasu; Suzuki (Parma GK), Endo (Liverpool),
+  Kubo (Sociedad), Doan, Tanaka (Leeds). Squad mei 2026; groep F vs NL 14 juni.
+phase_preferences:
+- Sterk Moriyasu gegenpressing (WK 2022 model).
+- Zwakwer NL hoogtes + Gakpo snelheid.
+transition_orientation_summary: Gewonnen bal → snelle combinaties Doan/Kubo.
+psychology_intro: WK 2022 shock-DNA; intern hoge standaard.
+psychology_vectors:
+- Nederland mist Xavi Simons in de opener; Japan kan daardoor meer ruimte krijgen.
+- Fysiek vs Gyökeres/Isak later.
+matchup_counters_us:
+- NL Dumfries/Gakpo.
+- Zweden hoogtes.
+matchup_we_counter:
+- Teams lang bouwen.
+- Loopvermogen tweede ballen.
+dead_ball_swings_matches: Doan/Kubo frees; verdedigend corners vs NL.
+experience_cohesion_notes:
+- Moriyasu lang; Europa-clubs groeiend.
+intercontinental_travel_profile: AFC/Europa → VS.
+power_score: 77
+tier: Subtopper
+macro_style: snel, technisch en tactisch volwassen
+strengths:
+- pressing
+- teamdiscipline
+- tempo
+risks:
+- fysieke duels
+- afmaken van kansen
+confederation: AFC
+cohost_status: false
+group_stage: &id001
+  group: F
+  opponents_nl:
+  - Nederland
+  - Tunesië
+  - Zweden
+  opponents_fifa:
+  - Netherlands
+  - Sweden
+  - Tunisia
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-14T20:00
+    is_home: false
+    opponent_fifa: Netherlands
+    opponent_nl: Nederland
+    stadium: Dallas Stadium
+  - match_number: 2
+    kickoff: 2026-06-21T04:00
+    is_home: false
+    opponent_fifa: Tunisia
+    opponent_nl: Tunesië
+    stadium: Monterrey Stadium
+  - match_number: 3
+    kickoff: 2026-06-25T23:00
+    is_home: true
+    opponent_fifa: Sweden
+    opponent_nl: Zweden
+    stadium: Dallas Stadium
+  fixture_hooks:
+  - 'Groep F: tegen Nederland, Tunesië, Zweden.'
+  - 'Groepswedstrijd 1 (14 Jun): uit vs Nederland @ Dallas Stadium'
+  - 'Groepswedstrijd 2 (21 Jun): uit vs Tunesië @ Monterrey Stadium'
+  - 'Groepswedstrijd 3 (25 Jun): thuis vs Zweden @ Dallas Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4, 7 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Nederland en Tunesië: Dallas Stadium → Monterrey Stadium
+    (7 dag(en) ertussen). Tussen wedstrijd Tunesië en Zweden: Monterrey Stadium →
+    Dallas Stadium (4 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Dallas Stadium (Dallas, heet
+    droog); Monterrey Stadium (Monterrey, ≈540m). Cross-border poule (USA, Mexico)
+    ,  extra vlucht/tijdzone tussen groepswedstrijden. Impact: Dallas (heet droog)
+    vraagt hitte-management; Monterrey (heet droog) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Netherlands:
+    - id: style_matchup
+      delta: 1
+      reason: Eigen press kan compact blok Nederland onder druk zetten
+    - id: fixture_story
+      delta: 0
+      reason: Japan zet hoog druk aan; Nederland begint vaak compact
+    Sweden:
+    - id: matchup_risk
+      delta: -1
+      reason: Zweden leunt in dit duel op hoogtes; dat vraagt een gericht plan van
+        Japan.
+    Tunisia: []

@@ -1,6 +1,8 @@
 import argparse
 import json
 import os
+import traceback
+from functools import lru_cache
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse
 
@@ -29,6 +31,12 @@ def health_payload() -> dict[str, str]:
     return {"status": "ok", "service": "wk-pool-backend"}
 
 
+@lru_cache(maxsize=1)
+def cached_tournament_view() -> dict[str, object]:
+    """Cache tournament JSON ,  eerste call ~0.5s, daarna instant."""
+    return build_tournament_view()
+
+
 def allowed_cors_origins() -> tuple[str, ...]:
     configured_origins = os.environ.get(ALLOWED_ORIGINS_ENV)
     if configured_origins is None:
@@ -46,7 +54,11 @@ class WkPoolRequestHandler(BaseHTTPRequestHandler):
             return
 
         if path == "/api/tournament":
-            self._send_json(build_tournament_view())
+            try:
+                self._send_json(cached_tournament_view())
+            except Exception:
+                traceback.print_exc()
+                self._send_json({"error": "Failed to build tournament view"}, status=500)
             return
 
         self._send_json({"error": "Not found"}, status=404)

@@ -5,6 +5,7 @@ from contextlib import contextmanager
 from http.client import HTTPConnection, HTTPResponse
 
 from app.predictions import TEAM_PROFILES, is_known_team
+from app.teams import TEAM_NAMES_NL
 from app.tournament import build_tournament_view, load_fixtures
 from app.webapp import (
     DEFAULT_HOST,
@@ -173,6 +174,21 @@ def test_tournament_preview_matches_are_chronological() -> None:
     assert [match["matchNumber"] for match in tournament["recentMatches"]] == [29, 31, 35, 33, 34, 36]
 
 
+def test_tournament_view_uses_dutch_team_names() -> None:
+    tournament = build_tournament_view()
+    nl = TEAM_NAMES_NL["Netherlands"]
+    all_matches = (
+        tournament["recentMatches"]
+        + tournament["upcomingMatches"]
+        + [m for g in tournament["groups"] for m in g["matches"]]
+    )
+    match = next(
+        m for m in all_matches if m["homeTeam"] == nl or m["awayTeam"] == nl
+    )
+    assert "Netherlands" not in (match["homeTeam"], match["awayTeam"])
+    assert nl in tournament["teamInsights"]
+
+
 def test_tournament_view_matches_frontend_contract() -> None:
     tournament = build_tournament_view()
 
@@ -266,15 +282,45 @@ def is_ai_prediction(value: object) -> bool:
     if not isinstance(value, dict):
         return False
 
-    return (
+    base = (
         value.get("pick") in PICKS
         and is_number(value.get("confidence"))
         and isinstance(value.get("explanation"), str)
         and value.get("status") in PREDICTION_STATUSES
-        and is_string_list(value.get("themes"))
         and (value.get("homeWinProbability") is None or is_number(value.get("homeWinProbability")))
         and (value.get("drawProbability") is None or is_number(value.get("drawProbability")))
         and (value.get("awayWinProbability") is None or is_number(value.get("awayWinProbability")))
+    )
+    if not base:
+        return False
+    if value.get("confidence", 0) > 0:
+        return is_prediction_insight(value.get("insight"))
+    return value.get("insight") is None
+
+
+def is_prediction_insight(value: object) -> bool:
+    if not isinstance(value, dict):
+        return False
+    steps = value.get("steps")
+    steps_ok = steps is None or (
+        isinstance(steps, list)
+        and all(
+            isinstance(step, dict)
+            and isinstance(step.get("title"), str)
+            and isinstance(step.get("body"), str)
+            for step in steps
+        )
+    )
+    narrative_ok = value.get("narrative") is None or isinstance(value.get("narrative"), str)
+    return (
+        isinstance(value.get("scoreSummary"), str)
+        and isinstance(value.get("verdict"), str)
+        and narrative_ok
+        and steps_ok
+        and isinstance(value.get("tags"), list)
+        and is_number(value.get("diff"))
+        and isinstance(value.get("home"), dict)
+        and isinstance(value.get("away"), dict)
     )
 
 
@@ -282,14 +328,21 @@ def is_team_insight(value: object) -> bool:
     if not isinstance(value, dict):
         return False
 
+    niche_ok = value.get("niche") is None or is_string_list(value.get("niche"))
+    opponents_ok = value.get("opponents") is None or is_string_list(value.get("opponents"))
     return (
         isinstance(value.get("team"), str)
         and isinstance(value.get("tier"), str)
         and isinstance(value.get("style"), str)
         and is_string_list(value.get("strengths"))
         and is_string_list(value.get("risks"))
-        and is_string_list(value.get("niche"))
         and isinstance(value.get("summary"), str)
+        and niche_ok
+        and opponents_ok
+        and (value.get("powerScore") is None or is_number(value.get("powerScore")))
+        and (value.get("group") is None or isinstance(value.get("group"), str))
+        and (value.get("groupContext") is None or is_string_list(value.get("groupContext")))
+        and (value.get("distinctiveSpark") is None or isinstance(value.get("distinctiveSpark"), str))
     )
 
 

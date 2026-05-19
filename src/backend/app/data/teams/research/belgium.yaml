@@ -1,0 +1,147 @@
+team_id: België
+slug: belgium
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Rudi Garcia; Courtois, De Bruyne (Napoli), Doku, Lukaku,
+  Onana. Groep G vs Egypte, Iran, Nieuw-Zeeland.
+phase_preferences:
+- 'Sterk: De Bruyne/Doku tussen linies vs mid-blocks.'
+- Zwakker vs Salah-Egypte counters.
+transition_orientation_summary: 'Garcia 4-2-3-1: switches naar Doku, Lukaku target.'
+psychology_intro: Laatste grote toernooi De Bruyne (38); lagere hype dan 2018.
+psychology_vectors:
+- Courtois/Lammens keeperdebat.
+- De Bruyne minutenmanagement.
+matchup_counters_us:
+- Salah/Marmoush Egypte.
+- Iran Ghalenoei-blok.
+matchup_we_counter:
+- NZ Wood hoogtes.
+- Teams zonder dekking vs Doku.
+dead_ball_swings_matches: Lukaku/De Bruyne corners.
+experience_cohesion_notes:
+- Garcia eerste WK Rode Duivels.
+- Generatiewissel.
+intercontinental_travel_profile: UEFA → VS.
+selection_drama_notes: Courtois vs Sanchez,  bondscoach moet keeperhiërarchie helder
+  maken.
+power_score: 82
+tier: Subtopper
+macro_style: technisch, ervaren en gevaarlijk tussen de linies
+strengths:
+- aanvallende kwaliteit
+- ervaring
+- passing
+risks:
+- generatiewissel
+- snelheid achterin
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: G
+  opponents_nl:
+  - Egypte
+  - Iran
+  - Nieuw-Zeeland
+  opponents_fifa:
+  - Egypt
+  - IR Iran
+  - New Zealand
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-15T19:00
+    is_home: true
+    opponent_fifa: Egypt
+    opponent_nl: Egypte
+    stadium: Seattle Stadium
+  - match_number: 2
+    kickoff: 2026-06-21T19:00
+    is_home: true
+    opponent_fifa: IR Iran
+    opponent_nl: Iran
+    stadium: Los Angeles Stadium
+  - match_number: 3
+    kickoff: 2026-06-27T03:00
+    is_home: false
+    opponent_fifa: New Zealand
+    opponent_nl: Nieuw-Zeeland
+    stadium: BC Place Vancouver
+  fixture_hooks:
+  - 'Groep G: tegen Egypte, Iran, Nieuw-Zeeland.'
+  - 'Groepswedstrijd 1 (15 Jun): thuis vs Egypte @ Seattle Stadium'
+  - 'Groepswedstrijd 2 (21 Jun): thuis vs Iran @ Los Angeles Stadium'
+  - 'Groepswedstrijd 3 (27 Jun): uit vs Nieuw-Zeeland @ BC Place Vancouver'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 6-6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Egypte en Iran: Seattle Stadium → Los Angeles Stadium
+    (6 dag(en) ertussen). Tussen wedstrijd Iran en Nieuw-Zeeland: Los Angeles Stadium
+    → BC Place Vancouver (6 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Seattle Stadium (Seattle, koel
+    mild); Los Angeles Stadium (Los Angeles, warm droog); BC Place Vancouver (Vancouver,
+    koeler kust). Cross-border poule (USA, Canada),  extra vlucht/tijdzone tussen
+    groepswedstrijden. Impact: Seattle is koeler,  kan hitte-gewende tegenstanders
+    neutraliseren; Vancouver is koeler,  kan hitte-gewende tegenstanders neutraliseren.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: selection_drama
+    delta: -1
+    reason: 'In dit duel speelt mee: Courtois tegen Sanchez, bondscoach moet keeperhiërarchie
+      helder maken; dat vraagt extra aandacht van België.'
+  versus:
+    Egypt:
+    - id: tactical_weakness
+      delta: -1
+      reason: 'In dit duel speelt mee: Zwakker tegen Salah-Egypte counters; dat vraagt
+        extra aandacht van België.'
+    - id: opponent_profile_strong
+      delta: -1
+      reason: 'In dit duel speelt mee: Sterk Salah/Marmoush transitions tegen Garcia-België;
+        dat vraagt extra aandacht van België.'
+    IR Iran:
+    - id: matchup_risk
+      delta: -1
+      reason: Iran leunt in dit duel op Ghalenoei-blok; dat vraagt een gericht plan
+        van België.
+    New Zealand:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Nieuw-Zeeland

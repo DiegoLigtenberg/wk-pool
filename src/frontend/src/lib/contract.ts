@@ -7,23 +7,93 @@ const MATCH_STATUSES = new Set(["completed", "upcoming"]);
 const MATCH_STAGES = new Set(["group", "knockout"]);
 
 export function isTournamentView(value: unknown): value is TournamentView {
+  return getTournamentValidationErrors(value).length === 0;
+}
+
+/** Human-readable paths for dev error UI; keep in sync with validators below. */
+export function getTournamentValidationErrors(value: unknown, limit = 8): string[] {
+  const errors: string[] = [];
+  const push = (path: string, ok: boolean) => {
+    if (!ok && errors.length < limit) {
+      errors.push(path);
+    }
+  };
+
   if (!isRecord(value)) {
-    return false;
+    return ["root: expected object"];
   }
 
-  return (
-    isSummary(value.summary) &&
-    (value.nextMatch === null || isMatch(value.nextMatch)) &&
-    Array.isArray(value.recentMatches) &&
-    value.recentMatches.every(isMatch) &&
-    Array.isArray(value.upcomingMatches) &&
-    value.upcomingMatches.every(isMatch) &&
-    isTeamInsights(value.teamInsights) &&
-    Array.isArray(value.groups) &&
-    value.groups.every(isGroup) &&
-    Array.isArray(value.knockoutMatches) &&
-    value.knockoutMatches.every(isMatch)
-  );
+  push("summary", isSummary(value.summary));
+
+  if (value.nextMatch !== null) {
+    push("nextMatch", isMatch(value.nextMatch));
+  }
+
+  if (!Array.isArray(value.recentMatches)) {
+    push("recentMatches", false);
+  } else {
+    for (const match of value.recentMatches) {
+      if (!isMatch(match) && isRecord(match)) {
+        push(`recentMatches[${match.matchNumber}]`, false);
+        break;
+      }
+    }
+  }
+
+  if (!Array.isArray(value.upcomingMatches)) {
+    push("upcomingMatches", false);
+  } else {
+    for (const match of value.upcomingMatches) {
+      if (!isMatch(match) && isRecord(match)) {
+        push(`upcomingMatches[${match.matchNumber}]`, false);
+        break;
+      }
+    }
+  }
+
+  if (!isTeamInsights(value.teamInsights)) {
+    push("teamInsights", false);
+  }
+
+  if (!Array.isArray(value.groups)) {
+    push("groups", false);
+  } else {
+    for (const group of value.groups) {
+      if (!isGroup(group) && isRecord(group)) {
+        push(`groups[${group.name ?? "?"}]`, false);
+        break;
+      }
+    }
+  }
+
+  if (!Array.isArray(value.knockoutMatches)) {
+    push("knockoutMatches", false);
+  } else {
+    for (const match of value.knockoutMatches) {
+      if (!isMatch(match) && isRecord(match)) {
+        push(`knockoutMatches[${match.matchNumber}]`, false);
+        break;
+      }
+    }
+  }
+
+  return errors;
+}
+
+export function describeUnexpectedTournamentPayload(value: unknown, apiUrl: string): string {
+  if (isRecord(value) && value.status === "ok" && value.service === "wk-pool-backend") {
+    return `Antwoord lijkt op /health, niet op toernooidata. API-basis: ${apiUrl}`;
+  }
+  if (isRecord(value) && typeof value.error === "string") {
+    return `Backend: ${value.error} (${apiUrl})`;
+  }
+
+  const fieldErrors = getTournamentValidationErrors(value);
+  if (fieldErrors.length > 0) {
+    return `Ongeldige velden: ${fieldErrors.join(", ")} (${apiUrl})`;
+  }
+
+  return `Onbekend formaat (${apiUrl})`;
 }
 
 function isSummary(value: unknown): boolean {
@@ -52,8 +122,13 @@ function isTeamInsight(value: unknown): boolean {
     typeof value.style === "string" &&
     isStringArray(value.strengths) &&
     isStringArray(value.risks) &&
-    isStringArray(value.niche) &&
-    typeof value.summary === "string"
+    typeof value.summary === "string" &&
+    (value.niche == null || isStringArray(value.niche)) &&
+    (value.opponents == null || isStringArray(value.opponents)) &&
+    (value.group === undefined || typeof value.group === "string") &&
+    (value.powerScore === undefined || isNumber(value.powerScore)) &&
+    (value.groupContext == null || isStringArray(value.groupContext)) &&
+    (value.distinctiveSpark == null || typeof value.distinctiveSpark === "string")
   );
 }
 
@@ -108,10 +183,64 @@ function isAiPrediction(value: unknown): boolean {
     isNumber(value.confidence) &&
     typeof value.explanation === "string" &&
     PREDICTION_STATUSES.has(value.status as string) &&
-    isStringArray(value.themes) &&
+    (value.confidence === 0 ? value.insight == null : isPredictionInsight(value.insight)) &&
     (value.homeWinProbability === null || isNumber(value.homeWinProbability)) &&
     (value.drawProbability === null || isNumber(value.drawProbability)) &&
     (value.awayWinProbability === null || isNumber(value.awayWinProbability))
+  );
+}
+
+function isPredictionInsight(value: unknown): boolean {
+  if (!isRecord(value)) {
+    return false;
+  }
+  const narrativeOk = value.narrative == null || typeof value.narrative === "string";
+  const stepsOk =
+    value.steps == null || (Array.isArray(value.steps) && value.steps.every(isPredictionStep));
+  return (
+    typeof value.scoreSummary === "string" &&
+    typeof value.verdict === "string" &&
+    narrativeOk &&
+    stepsOk &&
+    isStringArray(value.tags) &&
+    isNumber(value.diff) &&
+    isPredictionScoreSide(value.home) &&
+    isPredictionScoreSide(value.away)
+  );
+}
+
+function isPredictionStep(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    typeof value.title === "string" &&
+    typeof value.body === "string"
+  );
+}
+
+function isPredictionScoreSide(value: unknown): boolean {
+  if (!isRecord(value)) {
+    return false;
+  }
+  return (
+    typeof value.team === "string" &&
+    isNumber(value.powerScore) &&
+    isNumber(value.contextDelta) &&
+    isNumber(value.effectiveScore) &&
+    Array.isArray(value.factors) &&
+    value.factors.every(isPredictionFactor)
+  );
+}
+
+function isPredictionFactor(value: unknown): boolean {
+  if (!isRecord(value)) {
+    return false;
+  }
+  return (
+    typeof value.id === "string" &&
+    isNumber(value.delta) &&
+    typeof value.label === "string" &&
+    typeof value.reason === "string" &&
+    (value.scope === "match" || value.scope === "team")
   );
 }
 

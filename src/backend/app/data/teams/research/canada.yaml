@@ -1,0 +1,154 @@
+team_id: Canada
+slug: canada
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Jesse Marsch co-host; Davies (Bayern), David (39 goals
+  record), Buchanan, Eustáquio, Johnston, Bombito. ~22 automatic picks; opener vs
+  Bosnië 12 juni.
+phase_preferences:
+- 'Sterk: Marsch pressing, Davies/David verticaliteit.'
+- Zwakker vs Džeko-set-pieces en compact Bosnië.
+transition_orientation_summary: Hoogste CONCACAF pressing; Davies/David transitions.
+psychology_intro: Co-host; Davies hamstring-maart maar fit; Marsch ‘stacked’ squad.
+psychology_vectors:
+- David scoring drought druk.
+- Vancouver/Toronto publiek.
+matchup_counters_us:
+- Press-resistent Qatar.
+- Bosnië Džeko hoogtes.
+matchup_we_counter:
+- Bosnië/Qatar hoog zonder dekking.
+- Fysiek duel-voordeel.
+dead_ball_swings_matches: David/Davies corners; Džeko verdedigen cruciaal.
+experience_cohesion_notes:
+- Marsch sinds 2024; squad 29 mei.
+heat_altitude_acclimatization_notes: Toronto vs Vancouver klimaat.
+intercontinental_travel_profile: Co-host; cross-border USA/Mexico.
+crowd_home_bias_notes: Co-host; Toronto/Vancouver hubs,  minder diaspora dan USA/Mexico
+  maar thuislogistiek.
+selection_drama_notes: 'Keeper: St. Clair vs Crépeau,  selectiedruk vlak voor definitieve
+  23.'
+power_score: 72
+tier: Underdog
+macro_style: snel, atletisch en direct
+strengths:
+- snelheid
+- thuisregio
+- omschakeling
+risks:
+- ervaring
+- defensieve stabiliteit
+confederation: CONCACAF
+cohost_status: true
+group_stage: &id001
+  group: B
+  opponents_nl:
+  - Bosnië-Herzegovina
+  - Qatar
+  - Zwitserland
+  opponents_fifa:
+  - Bosnia and Herzegovina
+  - Qatar
+  - Switzerland
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-12T19:00
+    is_home: true
+    opponent_fifa: Bosnia and Herzegovina
+    opponent_nl: Bosnië-Herzegovina
+    stadium: Toronto Stadium
+    narrative: Co-host opener vs Bosnië
+  - match_number: 2
+    kickoff: 2026-06-18T22:00
+    is_home: true
+    opponent_fifa: Qatar
+    opponent_nl: Qatar
+    stadium: BC Place Vancouver
+  - match_number: 3
+    kickoff: 2026-06-24T19:00
+    is_home: false
+    opponent_fifa: Switzerland
+    opponent_nl: Zwitserland
+    stadium: BC Place Vancouver
+  fixture_hooks:
+  - 'Groep B: tegen Bosnië-Herzegovina, Qatar, Zwitserland.'
+  - 'Groepswedstrijd 1 (12 Jun): thuis vs Bosnië-Herzegovina @ Toronto Stadium,  Co-host
+    opener vs Bosnië'
+  - 'Groepswedstrijd 2 (18 Jun): thuis vs Qatar @ BC Place Vancouver'
+  - 'Groepswedstrijd 3 (24 Jun): uit vs Zwitserland @ BC Place Vancouver'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 6-6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Bosnië-Herzegovina en Qatar: Toronto Stadium → BC Place
+    Vancouver (6 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Toronto Stadium (Toronto, gematigd
+    zomer); BC Place Vancouver (Vancouver, koeler kust). Alleen Canada-venues in de
+    poule,  beperkte binnenlandse reis. Impact: Vancouver is koeler,  kan hitte-gewende
+    tegenstanders neutraliseren.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: cohost_crowd
+    delta: 1
+    reason: Co-host; Toronto/Vancouver hubs, minder gemeenschap in het buitenland
+      dan Verenigde Staten/Mexico maar thuislogistiek.
+  - id: selection_drama
+    delta: -1
+    reason: 'In dit duel speelt mee: Keeper: St. Clair tegen Crépeau, selectiedruk
+      vlak voor definitieve 23; dat vraagt extra aandacht van Canada.'
+  versus:
+    Bosnia and Herzegovina:
+    - id: home_fixture
+      delta: 1
+      reason: Thuis in Toronto Stadium (co-host)
+    - id: fixture_story
+      delta: -1
+      reason: Co-host opener vs Bosnië
+    Qatar:
+    - id: home_fixture
+      delta: 1
+      reason: Thuis in BC Place Vancouver (co-host)
+    - id: matchup_risk
+      delta: -1
+      reason: bestand tegen hoge druk Qatar.
+    Switzerland:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Zwitserland

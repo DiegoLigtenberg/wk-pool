@@ -1,0 +1,143 @@
+team_id: Irak
+slug: iraq
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Graham Arnold; Groep I vs Noorwegen 16 juni, Frankrijk,
+  Senegal. Arnold AFC-ervaring (ex-Australië).
+phase_preferences:
+- Sterk compact Arnold-blok.
+- Zwakwer vs Haaland/Mbappé.
+transition_orientation_summary: Counters na duel-winst; matig verticaal vs elite.
+psychology_intro: Arnold underdog; groep des doods met Frankrijk.
+psychology_vectors:
+- Haaland opener.
+- Senegal heeft meer kwaliteit op de bank; Irak moet 90 minuten op intensiteit.
+matchup_counters_us:
+- Frankrijk Mbappé.
+- Norway Haaland.
+matchup_we_counter:
+- Low-scoring grind.
+- Corner-heavy.
+dead_ball_swings_matches: Compact → veel corners beide kanten.
+experience_cohesion_notes:
+- Arnold; Midden-Oosten competitie.
+intercontinental_travel_profile: AFC → VS.
+distinctive_spark_notes: 'Groep I: Frankrijk, Norway/Haaland, Senegal ,  zwaarste
+  poule op papier.'
+power_score: 64
+tier: Verrassingsploeg
+macro_style: compact, fel en emotioneel sterk
+strengths:
+- teamenergie
+- duels
+- organisatie
+risks:
+- kansen creëren
+- ervaring tegen elite
+confederation: AFC
+cohost_status: false
+group_stage: &id001
+  group: I
+  opponents_nl:
+  - Frankrijk
+  - Noorwegen
+  - Senegal
+  opponents_fifa:
+  - France
+  - Norway
+  - Senegal
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-16T22:00
+    is_home: true
+    opponent_fifa: Norway
+    opponent_nl: Noorwegen
+    stadium: Boston Stadium
+  - match_number: 2
+    kickoff: 2026-06-22T21:00
+    is_home: false
+    opponent_fifa: France
+    opponent_nl: Frankrijk
+    stadium: Philadelphia Stadium
+  - match_number: 3
+    kickoff: 2026-06-26T19:00
+    is_home: false
+    opponent_fifa: Senegal
+    opponent_nl: Senegal
+    stadium: Toronto Stadium
+  fixture_hooks:
+  - 'Groep I: tegen Frankrijk, Noorwegen, Senegal.'
+  - 'Groepswedstrijd 1 (16 Jun): thuis vs Noorwegen @ Boston Stadium'
+  - 'Groepswedstrijd 2 (22 Jun): uit vs Frankrijk @ Philadelphia Stadium'
+  - 'Groepswedstrijd 3 (26 Jun): uit vs Senegal @ Toronto Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Noorwegen en Frankrijk: Boston Stadium → Philadelphia
+    Stadium (6 dag(en) ertussen). Tussen wedstrijd Frankrijk en Senegal: Philadelphia
+    Stadium → Toronto Stadium (4 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Boston Stadium (Boston, vochtig
+    zomer); Philadelphia Stadium (Philadelphia, warm vochtig); Toronto Stadium (Toronto,
+    gematigd zomer). Cross-border poule (USA, Canada) ,  extra vlucht/tijdzone tussen
+    groepswedstrijden. Impact: Philadelphia (warm vochtig) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: distinctive_spark
+    delta: -1
+    reason: 'Groep I: Frankrijk, Noorwegen/Haaland, Senegal , zwaarste poule op papier.'
+  versus:
+    France:
+    - id: matchup_risk
+      delta: -1
+      reason: Frankrijk leunt op Mbappé als belangrijkste aanvalsbedreiging; extra
+        aandachtspunt voor Irak.
+    Norway:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Noorwegen
+    - id: matchup_risk
+      delta: -1
+      reason: Noorwegen leunt op Haaland als belangrijkste aanvalsbedreiging; extra
+        aandachtspunt voor Irak.
+    Senegal:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Senegal

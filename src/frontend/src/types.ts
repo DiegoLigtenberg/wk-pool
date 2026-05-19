@@ -5,12 +5,46 @@ export type MatchScore = {
   away: number;
 };
 
+export type PredictionFactor = {
+  id: string;
+  delta: number;
+  label: string;
+  reason: string;
+  scope: "match" | "team";
+};
+
+export type PredictionScoreSide = {
+  team: string;
+  powerScore: number;
+  contextDelta: number;
+  effectiveScore: number;
+  factors: PredictionFactor[];
+};
+
+export type PredictionStep = {
+  title: string;
+  body: string;
+};
+
+export type PredictionInsight = {
+  scoreSummary: string;
+  verdict: string;
+  /** Nieuwere backend; ontbreekt bij verouderde server tot herstart. */
+  narrative?: string;
+  steps?: PredictionStep[];
+  tags: string[];
+  diff: number;
+  winnerSide?: "home" | "away";
+  home: PredictionScoreSide;
+  away: PredictionScoreSide;
+};
+
 export type AiPrediction = {
   pick: "1" | "2" | "3";
   confidence: number;
   explanation: string;
   status: PredictionStatus;
-  themes: string[];
+  insight?: PredictionInsight;
   homeWinProbability: number | null;
   drawProbability: number | null;
   awayWinProbability: number | null;
@@ -20,9 +54,14 @@ export type TeamInsight = {
   team: string;
   tier: string;
   style: string;
+  powerScore?: number;
   strengths: string[];
   risks: string[];
-  niche: string[];
+  group?: string;
+  opponents?: string[];
+  groupContext?: string[];
+  distinctiveSpark?: string | null;
+  niche?: string[];
   summary: string;
 };
 

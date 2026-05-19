@@ -1,0 +1,117 @@
+# Volledig landdossier ,  kopieer naar {slug}.yaml
+# Zie research/README.md § Tournament context
+
+team_id: Nederland
+slug: team_slug
+context_as_of: "2026-05-19"
+sources:
+  - Football365
+analyzed:
+  - coach_tactics
+  - group_context
+
+# --- Pool-anker (sync vult vanuit TEAM_PROFILES) ---
+power_score: 70
+tier: Underdog
+macro_style: ""
+strengths: []
+risks: []
+confederation: UEFA
+cohost_status: false
+
+# --- Research (handmatig) ---
+interpretive_ceiling_vs_floor: ""
+phase_preferences:
+  - "Sterk wanneer …"
+  - "Zwakker wanneer …"
+transition_orientation_summary: ""
+psychology_intro: ""
+psychology_vectors:
+  - ""
+  - ""
+matchup_counters_us: []
+matchup_we_counter: []
+dead_ball_swings_matches: ""
+experience_cohesion_notes: []
+
+# optioneel: distinctive_spark_notes, star_dependency: high|medium, squad_load_notes, …
+
+# Gegenereerd met build_context_scoring_yaml.py (max 2 persistent, 2 per tegenstander)
+context_scoring:
+  persistent: []
+  versus: {}
+
+# =============================================================================
+# TOURNAMENT CONTEXT ,  generiek voor groep + knock-out (schema_version: 1)
+# =============================================================================
+tournament_context:
+  schema_version: 1
+
+  phases:
+    # --- GROEPSFASE ---
+    group:
+      # upcoming | in_progress | completed | eliminated
+      status: upcoming
+
+      # Geplande wedstrijden ,  OVERSCHREVEN door sync_research_yaml (CSV)
+      fixture_plan:
+        group: A
+        opponents_nl: [Mexico, Zuid-Afrika]
+        opponents_fifa: [Mexico, South Africa]
+        fixtures: []
+        fixture_hooks: []
+        schedule_rest_notes: null
+        venue_dispersion_notes: ""
+
+      # Gespeelde wedstrijden ,  HANDMATIG tijdens tornooi (sync raakt dit niet aan)
+      played_matches: []
+      # - match_number: 1
+      #   opponent_fifa: South Africa
+      #   opponent_nl: Zuid-Afrika
+      #   result: W          # W | D | L
+      #   score_for: 2
+      #   score_against: 0
+      #   stage_round: group
+      #   notes: "Sterke tweede helft na rust"
+
+      # Stand na laatste gespeelde groepswedstrijd (snapshot)
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+
+      # Momentum ,  HANDMATIG (sync raakt dit niet aan)
+      momentum:
+        label: null          # rising | stable | falling | null
+        notes: null
+
+      phase_notes: null
+
+    # --- KNOCK-OUT (later invullen wanneer bracket vaststaat) ---
+    knockout:
+      status: not_applicable   # not_applicable | upcoming | active | eliminated
+      fixture_plan: null       # later: bracket_path, fixtures[], bracket_notes
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+
+  # Onderlinge historie vs specifieke tegenstanders ,  HANDMATIG research
+  head_to_head: []
+  # - opponent_fifa: Brazil
+  #   opponent_nl: Brazilië
+  #   scope: world_cup       # all_time | world_cup | recent
+  #   wins: 0
+  #   draws: 1
+  #   losses: 2
+  #   last_meeting: "WK 2022 halve finale 2-2 (pen 3-4)"
+  #   notes: "Neymar-trauma 2014; rematch groep/ko"
+
+# Legacy (sync schrijft ook root group_stage = fixture_plan); mag blijven staan.
+# group_stage: { ... zelfde als tournament_context.phases.group.fixture_plan ... }

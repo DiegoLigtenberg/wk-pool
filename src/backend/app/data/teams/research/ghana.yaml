@@ -1,0 +1,142 @@
+team_id: Ghana
+slug: ghana
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Carlos Queiroz (return); Kudus (West Ham), Partey,
+  Salisu. Groep L vs Panama 17 juni, England, Croatia.
+phase_preferences:
+- Sterk Kudus 1v1, atletisch mid.
+- Zwakwer vs Tuchel/Modrić control.
+transition_orientation_summary: 'Queiroz pragmatisme: compact, Kudus counters.'
+psychology_intro: Queiroz derde Ghana-stint; Black Stars inconsistent.
+psychology_vectors:
+- England opener groep L.
+- Kudus discipline/kaarten.
+matchup_counters_us:
+- England Tuchel.
+- Croatia ervaring.
+matchup_we_counter:
+- Panama.
+- Chaotische duels.
+dead_ball_swings_matches: Partey/Salisu hoogtes.
+experience_cohesion_notes:
+- Queiroz ervaring; Europa-kern.
+heat_altitude_acclimatization_notes: West-Afrika vs hitte.
+intercontinental_travel_profile: CAF → VS.
+power_score: 70
+tier: Underdog
+macro_style: fysiek, explosief en onvoorspelbaar
+strengths:
+- atletiek
+- transitie
+- individuele momenten
+risks:
+- controle
+- defensieve samenhang
+confederation: CAF
+cohost_status: false
+group_stage: &id001
+  group: L
+  opponents_nl:
+  - Engeland
+  - Kroatië
+  - Panama
+  opponents_fifa:
+  - Croatia
+  - England
+  - Panama
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-17T23:00
+    is_home: true
+    opponent_fifa: Panama
+    opponent_nl: Panama
+    stadium: Toronto Stadium
+  - match_number: 2
+    kickoff: 2026-06-23T20:00
+    is_home: false
+    opponent_fifa: England
+    opponent_nl: Engeland
+    stadium: Boston Stadium
+  - match_number: 3
+    kickoff: 2026-06-27T21:00
+    is_home: false
+    opponent_fifa: Croatia
+    opponent_nl: Kroatië
+    stadium: Philadelphia Stadium
+  fixture_hooks:
+  - 'Groep L: tegen Engeland, Kroatië, Panama.'
+  - 'Groepswedstrijd 1 (17 Jun): thuis vs Panama @ Toronto Stadium'
+  - 'Groepswedstrijd 2 (23 Jun): uit vs Engeland @ Boston Stadium'
+  - 'Groepswedstrijd 3 (27 Jun): uit vs Kroatië @ Philadelphia Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Panama en Engeland: Toronto Stadium → Boston Stadium
+    (6 dag(en) ertussen). Tussen wedstrijd Engeland en Kroatië: Boston Stadium → Philadelphia
+    Stadium (4 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Toronto Stadium (Toronto, gematigd
+    zomer); Boston Stadium (Boston, vochtig zomer); Philadelphia Stadium (Philadelphia,
+    warm vochtig). Cross-border poule (Canada, USA) ,  extra vlucht/tijdzone tussen
+    groepswedstrijden. Impact: Philadelphia (warm vochtig) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Croatia:
+    - id: matchup_risk
+      delta: -1
+      reason: Croatia brengt met ervaring extra dreiging mee; lastig voor Ghana in
+        dit duel tegen Kroatië.
+    England:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Engeland
+    - id: matchup_risk
+      delta: -1
+      reason: Engeland heeft met coach Tuchel een duidelijk tactisch plan; lastig
+        voor Ghana om dat te ontwrichten.
+    Panama:
+    - id: matchup_edge
+      delta: 1
+      reason: Panama.
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Panama tegen ons aanvalsspel

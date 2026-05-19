@@ -1,0 +1,153 @@
+team_id: Mexico
+slug: mexico
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Javier Aguirre (3e stint); Jiménez (Fulham), Santi
+  Giménez (Milan), Álvarez (Fenerbahçe), Lozano-types. Co-host opener 11 juni vs Zuid-Afrika.
+phase_preferences:
+- Sterk mid-block + transitions Aguirre.
+- Zwakwer dominant possession vs elites.
+transition_orientation_summary: Aguirre transitions > tik-tak; Giménez diepte.
+psychology_intro: Co-host El Tri druk; Azteca-hoogte factor.
+psychology_vectors:
+- Zuid-Afrika opener moet winnen.
+- Jiménez fitheid narratief.
+matchup_counters_us:
+- Possession elites.
+- Clinische counters.
+matchup_we_counter:
+- Zuid-Afrika Broos.
+- High press zonder dekking.
+dead_ball_swings_matches: Jiménez/Giménez hoogtes; Azteca-erfgois.
+experience_cohesion_notes:
+- Aguirre; Liga MX/Europa mix; 55 provisional.
+heat_altitude_acclimatization_notes: Co-host; Mexico-Stad hoogte.
+intercontinental_travel_profile: Co-host; VS/Canada trips.
+distinctive_spark_notes: Co-host opener op ≈2240m (Mexico City) ,  hoogte + publiek
+  uniek vs rest van deelnemers.
+crowd_home_bias_notes: 'Co-host: Mexico City opener ≈2240m met massaal thuispubliek.'
+star_dependency: medium
+power_score: 77
+tier: Subtopper
+macro_style: emotioneel geladen, intens en thuisregio-gedreven
+strengths:
+- publieksenergie
+- ervaring
+- duelkracht
+risks:
+- druk op de ploeg
+- creativiteit tegen lage blokken
+confederation: CONCACAF
+cohost_status: true
+group_stage: &id001
+  group: A
+  opponents_nl:
+  - Tsjechië
+  - Zuid-Afrika
+  - Zuid-Korea
+  opponents_fifa:
+  - Czechia
+  - Korea Republic
+  - South Africa
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-11T19:00
+    is_home: true
+    opponent_fifa: South Africa
+    opponent_nl: Zuid-Afrika
+    stadium: Mexico City Stadium
+    narrative: Co-host opener (Mexico City)
+  - match_number: 2
+    kickoff: 2026-06-19T01:00
+    is_home: true
+    opponent_fifa: Korea Republic
+    opponent_nl: Zuid-Korea
+    stadium: Guadalajara Stadium
+  - match_number: 3
+    kickoff: 2026-06-25T01:00
+    is_home: false
+    opponent_fifa: Czechia
+    opponent_nl: Tsjechië
+    stadium: Mexico City Stadium
+  fixture_hooks:
+  - 'Groep A: tegen Tsjechië, Zuid-Afrika, Zuid-Korea.'
+  - 'Groepswedstrijd 1 (11 Jun): thuis vs Zuid-Afrika @ Mexico City Stadium ,  Co-host
+    opener (Mexico City)'
+  - 'Groepswedstrijd 2 (19 Jun): thuis vs Zuid-Korea @ Guadalajara Stadium'
+  - 'Groepswedstrijd 3 (25 Jun): uit vs Tsjechië @ Mexico City Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 6, 8 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Zuid-Afrika en Zuid-Korea: Mexico City Stadium → Guadalajara
+    Stadium (8 dag(en) ertussen). Tussen wedstrijd Zuid-Korea en Tsjechië: Guadalajara
+    Stadium → Mexico City Stadium (6 dag(en) ertussen). 2 vroege/late kickoff-slots
+    (UTC-nacht) in groep ,  recovery relevant.'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Mexico City Stadium (Mexico City,
+    ≈2240m); Guadalajara Stadium (Guadalajara, ≈1560m). Alleen Mexico-venues in de
+    poule ,  beperkte binnenlandse reis. Impact: Mexico City (≈2240m) kan sprintherstel
+    en balhang beïnvloeden; Guadalajara (≈1560m) kan sprintherstel en balhang beïnvloeden;
+    2 late kickoffs in groep ,  rustritme en recovery extra relevant.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: cohost_crowd
+    delta: 1
+    reason: Mexico speelt als co-host thuis in Mexico City (circa 2240 meter); massaal
+      publiek en vertrouwde hoogte werken in hun voordeel.
+  versus:
+    Czechia:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Tsjechië
+    Korea Republic:
+    - id: home_fixture
+      delta: 1
+      reason: Thuis in Guadalajara Stadium (co-host)
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Zuid-Korea tegen ons aanvalsspel
+    South Africa:
+    - id: opener_context
+      delta: 0
+      reason: Co-host opener op ≈2240m (Mexico City) ,  hoogte + publiek uniek vs
+        rest van deelnemers.
+    - id: home_fixture
+      delta: 1
+      reason: Thuis in Mexico City Stadium (co-host)

@@ -1,5 +1,5 @@
 import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { RefObject } from "react";
+import { PredictionPanel } from "./PredictionPanel";
 import { formatDateShort, formatTime, phaseLabel } from "../../lib/format";
 import { displayTeamName } from "../../lib/teams";
 import { phaseSelectOptions, STATUS_FILTER_OPTIONS, teamSelectOptions } from "../../lib/tournament";
@@ -239,7 +239,7 @@ function AiMarkerSlot() {
 
 function aiMarkerTitle(status: Match["aiPrediction"]["status"], matchStatus: Match["status"], pickKind?: "team" | "draw"): string {
   if (matchStatus === "upcoming") {
-    return pickKind === "draw" ? "AI voorspelde gelijk — wedstrijd nog niet gespeeld" : "AI-tip nog niet af te rekenen";
+    return pickKind === "draw" ? "AI voorspelde gelijk; wedstrijd nog niet gespeeld" : "AI-tip nog niet af te rekenen";
   }
   if (status === "correct") {
     return pickKind === "draw" ? "AI voorspelde gelijk juist" : "AI-tip: juist voorspeld";
@@ -280,66 +280,6 @@ const AiBadge = forwardRef<
     </button>
   );
 });
-
-const PredictionPanel = forwardRef<
-  HTMLElement,
-  {
-    id: string;
-    match: Match;
-    onClose: () => void;
-    closeButtonRef: RefObject<HTMLButtonElement | null>;
-  }
->(function PredictionPanel({ id, match, onClose, closeButtonRef }, ref) {
-  const prediction = match.aiPrediction;
-  return (
-    <section
-      ref={ref}
-      className="prediction-panel"
-      id={id}
-      role="region"
-      aria-labelledby={`${id}-title`}
-      tabIndex={-1}
-    >
-      <div className="prediction-panel-header">
-        <div>
-          <span className="prediction-label">AI voorspelling</span>
-          <strong id={`${id}-title`}>{predictionTitle(match)}</strong>
-        </div>
-        <button ref={closeButtonRef} type="button" className="prediction-panel-close" onClick={onClose}>
-          Sluiten
-        </button>
-      </div>
-      <div className="prediction-probabilities">
-        <span>{displayTeamName(match.homeTeam)} {formatProbability(prediction.homeWinProbability)}</span>
-        {prediction.drawProbability !== null ? <span>Gelijk {formatProbability(prediction.drawProbability)}</span> : null}
-        <span>{displayTeamName(match.awayTeam)} {formatProbability(prediction.awayWinProbability)}</span>
-      </div>
-      <p>{prediction.explanation}</p>
-      <div className="prediction-themes">
-        {prediction.themes.map((theme) => (
-          <span key={theme}>{theme}</span>
-        ))}
-      </div>
-    </section>
-  );
-});
-
-function predictionTitle(match: Match): string {
-  if (match.aiPrediction.pick === "1") {
-    return `${displayTeamName(match.homeTeam)} wint · ${match.aiPrediction.confidence}%`;
-  }
-  if (match.aiPrediction.pick === "2") {
-    return `${displayTeamName(match.awayTeam)} wint · ${match.aiPrediction.confidence}%`;
-  }
-  if (match.aiPrediction.confidence === 0) {
-    return "Wacht op bekende landen";
-  }
-  return `Gelijkspel · ${match.aiPrediction.confidence}%`;
-}
-
-function formatProbability(value: number | null): string {
-  return value === null ? "-" : `${value}%`;
-}
 
 function teamOutcome(match: Match, side: "home" | "away"): "winner" | "loser" | "draw" | "" {
   if (!match.score) {

@@ -6,7 +6,9 @@ authors = [
     {name = "DiegoLigtenberg", email = "diegoligtenberg@gmail.com"}
 ]
 requires-python = ">=3.12,<3.15"
-dependencies = []
+dependencies = [
+    "pyyaml>=6.0",
+]
 
 [project.scripts]
 wk-pool-backend = "app.webapp:main"
@@ -24,6 +26,7 @@ packages = [{include = "app"}]
 
 [tool.poetry.dependencies]
 python = ">=3.12,<3.15"
+pyyaml = ">=6.0"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

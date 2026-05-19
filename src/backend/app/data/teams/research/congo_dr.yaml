@@ -1,0 +1,147 @@
+team_id: Congo
+slug: congo_dr
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Sébastien Desabre; Mbemba (Lille), Haller (Utrecht),
+  Bongonda. Groep K vs Portugal 17 juni.
+phase_preferences:
+- Sterk open spel Haller/Mbemba.
+- Zwakker vs Martinez possession.
+transition_orientation_summary: Direct naar Haller; CAF-transition profiel.
+psychology_intro: Derde WK; upset vs Portugal narratief.
+psychology_vectors:
+- Haller fitheid.
+- Uzbekistan puntenkans na Portugal.
+matchup_counters_us:
+- Portugal 3-2-5.
+- Colombia Díaz flanken.
+matchup_we_counter:
+- Uzbekistan debut.
+- Hoog druk zonder dekking.
+dead_ball_swings_matches: Haller/Mbemba corners.
+experience_cohesion_notes:
+- Desabre CAF-tenure; squad 18 mei.
+heat_altitude_acclimatization_notes: Centraal-Afrika vs hitte.
+intercontinental_travel_profile: CAF → Noord-Amerika.
+distinctive_spark_notes: Haller terug na lang blessure/ziektepad,  spit-fitheid bepaalt
+  of DR Congo kan scoren vs Portugal.
+power_score: 65
+tier: Verrassingsploeg
+macro_style: fysiek sterk en gevaarlijk in losse fases
+strengths:
+- atletiek
+- duels
+- directheid
+risks:
+- organisatie
+- balvaste controle
+confederation: CAF
+cohost_status: false
+group_stage: &id001
+  group: K
+  opponents_nl:
+  - Colombia
+  - Oezbekistan
+  - Portugal
+  opponents_fifa:
+  - Colombia
+  - Portugal
+  - Uzbekistan
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-17T17:00
+    is_home: false
+    opponent_fifa: Portugal
+    opponent_nl: Portugal
+    stadium: Houston Stadium
+  - match_number: 2
+    kickoff: 2026-06-24T02:00
+    is_home: false
+    opponent_fifa: Colombia
+    opponent_nl: Colombia
+    stadium: Guadalajara Stadium
+  - match_number: 3
+    kickoff: 2026-06-27T23:30
+    is_home: true
+    opponent_fifa: Uzbekistan
+    opponent_nl: Oezbekistan
+    stadium: Atlanta Stadium
+  fixture_hooks:
+  - 'Groep K: tegen Colombia, Oezbekistan, Portugal.'
+  - 'Groepswedstrijd 1 (17 Jun): uit vs Portugal @ Houston Stadium'
+  - 'Groepswedstrijd 2 (24 Jun): uit vs Colombia @ Guadalajara Stadium'
+  - 'Groepswedstrijd 3 (27 Jun): thuis vs Oezbekistan @ Atlanta Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 3-7 dag(en); kortste window
+    ≤3 dagen. Tussen wedstrijd Portugal en Colombia: Houston Stadium → Guadalajara
+    Stadium (7 dag(en) ertussen). Tussen wedstrijd Colombia en Oezbekistan: Guadalajara
+    Stadium → Atlanta Stadium (3 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Houston Stadium (Houston, heet
+    vochtig); Guadalajara Stadium (Guadalajara, ≈1560m); Atlanta Stadium (Atlanta,
+    heet vochtig). Cross-border poule (USA, Mexico),  extra vlucht/tijdzone tussen
+    groepswedstrijden. Impact: Houston (heet vochtig) vraagt hitte-management; Guadalajara
+    (≈1560m) kan sprintherstel en balhang beïnvloeden; Atlanta (heet vochtig) vraagt
+    hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: distinctive_spark
+    delta: -1
+    reason: 'In dit duel speelt mee: Haller terug na lang blessure/ziektepad, blessureherstel
+      bepaalt of DR Congo kan scoren tegen Portugal; dat vraagt extra aandacht van
+      Congo.'
+  versus:
+    Colombia:
+    - id: matchup_risk
+      delta: -1
+      reason: Colombia Díaz flanken.
+    Portugal:
+    - id: matchup_risk
+      delta: -1
+      reason: Portugal 3-2-5.
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Portugal tegen ons aanvalsspel
+    Uzbekistan:
+    - id: matchup_edge
+      delta: 1
+      reason: Uzbekistan brengt met debut extra dreiging mee; lastig voor Congo in
+        dit duel tegen Oezbekistan.

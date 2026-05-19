@@ -1,0 +1,148 @@
+team_id: Noorwegen
+slug: norway
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Ståle Solbakken; Erling Haaland, Ødegaard, Sørloth.
+  Groep I vs Irak 16 juni, Frankrijk, Senegal. Eerste WK sinds 1998.
+phase_preferences:
+- Sterk Haaland target + Ødegaard supply.
+- Zwakwer vs Deschamps/Kanté compact.
+transition_orientation_summary: Direct Haaland; Solbakken verticaliteit.
+psychology_intro: Haaland eindelijk WK; nationale euphorie.
+psychology_vectors:
+- Frankrijk/Senegal dubbel.
+- Ødegaard fit vs Arsenal-belasting.
+matchup_counters_us:
+- Frankrijk Saliba vs Haaland.
+- Senegal Koulibaly.
+matchup_we_counter:
+- Irak Arnold-blok.
+- High-line teams.
+dead_ball_swings_matches: Haaland/Sørloth hoogtes.
+experience_cohesion_notes:
+- Solbakken; PL/Bundesliga-kern.
+intercontinental_travel_profile: Europa → VS.
+distinctive_spark_notes: Haaland eindelijk WK; Noorwegen eerste keer sinds 1998.
+star_dependency: high
+club_concentration_notes: Haaland-anker; rest van XI minder elite-clublaag ,  star-gap
+  in build-up.
+power_score: 75
+tier: Underdog
+macro_style: topzwaar met veel dreiging in de voorhoede
+strengths:
+- elite-afwerking
+- fysiek voorin
+- direct spel
+risks:
+- balans in de ploeg
+- toernooi-ervaring
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: I
+  opponents_nl:
+  - Frankrijk
+  - Irak
+  - Senegal
+  opponents_fifa:
+  - France
+  - Iraq
+  - Senegal
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-16T22:00
+    is_home: false
+    opponent_fifa: Iraq
+    opponent_nl: Irak
+    stadium: Boston Stadium
+  - match_number: 2
+    kickoff: 2026-06-23T00:00
+    is_home: true
+    opponent_fifa: Senegal
+    opponent_nl: Senegal
+    stadium: New York/New Jersey Stadium
+  - match_number: 3
+    kickoff: 2026-06-26T19:00
+    is_home: true
+    opponent_fifa: France
+    opponent_nl: Frankrijk
+    stadium: Boston Stadium
+  fixture_hooks:
+  - 'Groep I: tegen Frankrijk, Irak, Senegal.'
+  - 'Groepswedstrijd 1 (16 Jun): uit vs Irak @ Boston Stadium'
+  - 'Groepswedstrijd 2 (23 Jun): thuis vs Senegal @ New York/New Jersey Stadium'
+  - 'Groepswedstrijd 3 (26 Jun): thuis vs Frankrijk @ Boston Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 3, 7 dag(en); kortste window
+    ≤3 dagen. Tussen wedstrijd Irak en Senegal: Boston Stadium → New York/New Jersey
+    Stadium (7 dag(en) ertussen). Tussen wedstrijd Senegal en Frankrijk: New York/New
+    Jersey Stadium → Boston Stadium (3 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Boston Stadium (Boston, vochtig
+    zomer); New York/New Jersey Stadium (New York, vochtig zomer). Alleen USA-venues
+    in de poule ,  beperkte binnenlandse reis.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: distinctive_spark
+    delta: -1
+    reason: Met Erling Haaland speelt Noorwegen eindelijk weer op een WK (sinds 1998).
+  - id: star_dependency
+    delta: -1
+    reason: 'Sterafhankelijkheid: weinig marge als de ster uit de wedstrijd is.'
+  versus:
+    France:
+    - id: matchup_risk
+      delta: -1
+      reason: 'In dit duel speelt mee: Frankrijk Saliba tegen Haaland; dat vraagt
+        extra aandacht van Noorwegen.'
+    Iraq:
+    - id: matchup_edge
+      delta: 1
+      reason: Irak leunt in dit duel op Arnold-blok; dat vraagt een gericht plan van
+        Noorwegen.
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Irak tegen ons aanvalsspel
+    Senegal:
+    - id: matchup_risk
+      delta: -1
+      reason: Senegal leunt in dit duel op Koulibaly; dat vraagt een gericht plan
+        van Noorwegen.

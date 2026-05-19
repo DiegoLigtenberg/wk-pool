@@ -1,0 +1,146 @@
+team_id: Zweden
+slug: sweden
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Graham Potter; Gyökeres (Arsenal), Isak (Liverpool),
+  Elanga, Lindelöf. Squad mei 2026; groep F vs Tunesië 14 juni.
+phase_preferences:
+- Sterk Isak/Gyökeres duo + Potter systemen.
+- Zwakwer NL/Japan pressing.
+transition_orientation_summary: Potter modern 4-3-3; Isak diepte.
+psychology_intro: Potter verrassende bondscoach; sterke spits-paar.
+psychology_vectors:
+- NL/Japan dubbel zwaar.
+- Bergvall (Spurs) jong talent.
+matchup_counters_us:
+- Japan Moriyasu.
+- NL Gakpo.
+matchup_we_counter:
+- Tunesië Lamouchi.
+- Chaotic fouls.
+dead_ball_swings_matches: Gyökeres/Isak hoogtes.
+experience_cohesion_notes:
+- Potter; Premier League zwaartepunt.
+intercontinental_travel_profile: Europa → VS.
+distinctive_spark_notes: Graham Potter (Engelsman) onverwacht bondscoach; Isak + Gyökeres
+  eerste WK samen.
+power_score: 75
+tier: Underdog
+macro_style: fysiek, direct en sterk in organisatie
+strengths:
+- luchtduels
+- discipline
+- standaardsituaties
+risks:
+- tempo in balbezit
+- creativiteit
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: F
+  opponents_nl:
+  - Japan
+  - Nederland
+  - Tunesië
+  opponents_fifa:
+  - Japan
+  - Netherlands
+  - Tunisia
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-15T02:00
+    is_home: true
+    opponent_fifa: Tunisia
+    opponent_nl: Tunesië
+    stadium: Monterrey Stadium
+  - match_number: 2
+    kickoff: 2026-06-20T17:00
+    is_home: false
+    opponent_fifa: Netherlands
+    opponent_nl: Nederland
+    stadium: Houston Stadium
+  - match_number: 3
+    kickoff: 2026-06-25T23:00
+    is_home: false
+    opponent_fifa: Japan
+    opponent_nl: Japan
+    stadium: Dallas Stadium
+  fixture_hooks:
+  - 'Groep F: tegen Japan, Nederland, Tunesië.'
+  - 'Groepswedstrijd 1 (15 Jun): thuis vs Tunesië @ Monterrey Stadium'
+  - 'Groepswedstrijd 2 (20 Jun): uit vs Nederland @ Houston Stadium'
+  - 'Groepswedstrijd 3 (25 Jun): uit vs Japan @ Dallas Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 5 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Tunesië en Nederland: Monterrey Stadium → Houston Stadium
+    (5 dag(en) ertussen). Tussen wedstrijd Nederland en Japan: Houston Stadium → Dallas
+    Stadium (5 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Monterrey Stadium (Monterrey,
+    ≈540m); Houston Stadium (Houston, heet vochtig); Dallas Stadium (Dallas, heet
+    droog). Cross-border poule (Mexico, USA) ,  extra vlucht/tijdzone tussen groepswedstrijden.
+    Impact: Monterrey (heet droog) vraagt hitte-management; Houston (heet vochtig)
+    vraagt hitte-management; Dallas (heet droog) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: distinctive_spark
+    delta: -1
+    reason: Graham Potter is de onverwachte Engelse bondscoach van Zweden.
+  versus:
+    Japan:
+    - id: style_matchup
+      delta: 1
+      reason: Lucht/standaardprofiel t.o.v. Japan
+    - id: tactical_weakness
+      delta: -1
+      reason: Zweden heeft in dit duel moeite met het profiel van Japan.
+    Netherlands:
+    - id: style_matchup
+      delta: 1
+      reason: Eigen press kan compact blok Nederland onder druk zetten
+    Tunisia:
+    - id: style_matchup
+      delta: 1
+      reason: Eigen press kan compact blok Tunesië onder druk zetten
+    - id: matchup_edge
+      delta: 1
+      reason: Tunesië leunt in dit duel op Lamouchi; dat vraagt een gericht plan van
+        Zweden.

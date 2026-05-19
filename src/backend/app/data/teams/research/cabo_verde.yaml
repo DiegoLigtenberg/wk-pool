@@ -1,0 +1,144 @@
+team_id: Kaapverdië
+slug: cabo_verde
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Bubista; Ryan Mendes, Garry Rodrigues, Logan Costa
+  (Villarreal). Groep H vs Spanje (15 juni), Uruguay, Saudi-Arabië.
+phase_preferences:
+- Sterk vs Saudi-Arabië compact+counter.
+- Zwak vs Yamal/Williams Spanje en Bielsa-press.
+transition_orientation_summary: Geduld, diagonale Mendes,  survival vs Spanje.
+psychology_intro: Tweede WK; punt vs Spanje = nationaal feest.
+psychology_vectors:
+- Vozinha vs Spanje schoten.
+- 60-min concentratie vs elite.
+matchup_counters_us:
+- Spanje Yamal isolaties.
+- Uruguay turnovers.
+matchup_we_counter:
+- Saudi Donis-tier.
+- Sloppy standaard-verdediging.
+dead_ball_swings_matches: Mendes frees; Costa/Stopira corners.
+experience_cohesion_notes:
+- Bubista sinds 2020; squad mei 2026 gepubliceerd.
+heat_altitude_acclimatization_notes: Atlantisch vs VS zomerhitte.
+intercontinental_travel_profile: CAF → Noord-Amerika.
+distinctive_spark_notes: Eilandnatie opent vs Euro-kampioen Spanje (Atlanta),  historisch
+  punt = nationaal feest.
+power_score: 60
+tier: Verrassingsploeg
+macro_style: compact en trots, met focus op omschakeling
+strengths:
+- teamspirit
+- organisatie
+- transitie
+risks:
+- selectiediepte
+- ervaring
+confederation: CAF
+cohost_status: false
+group_stage: &id001
+  group: H
+  opponents_nl:
+  - Saoedi-Arabië
+  - Spanje
+  - Uruguay
+  opponents_fifa:
+  - Saudi Arabia
+  - Spain
+  - Uruguay
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-15T16:00
+    is_home: false
+    opponent_fifa: Spain
+    opponent_nl: Spanje
+    stadium: Atlanta Stadium
+  - match_number: 2
+    kickoff: 2026-06-21T22:00
+    is_home: false
+    opponent_fifa: Uruguay
+    opponent_nl: Uruguay
+    stadium: Miami Stadium
+  - match_number: 3
+    kickoff: 2026-06-27T00:00
+    is_home: true
+    opponent_fifa: Saudi Arabia
+    opponent_nl: Saoedi-Arabië
+    stadium: Houston Stadium
+  fixture_hooks:
+  - 'Groep H: tegen Saoedi-Arabië, Spanje, Uruguay.'
+  - 'Groepswedstrijd 1 (15 Jun): uit vs Spanje @ Atlanta Stadium'
+  - 'Groepswedstrijd 2 (21 Jun): uit vs Uruguay @ Miami Stadium'
+  - 'Groepswedstrijd 3 (27 Jun): thuis vs Saoedi-Arabië @ Houston Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 6-6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Spanje en Uruguay: Atlanta Stadium → Miami Stadium
+    (6 dag(en) ertussen). Tussen wedstrijd Uruguay en Saoedi-Arabië: Miami Stadium
+    → Houston Stadium (6 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Atlanta Stadium (Atlanta, heet
+    vochtig); Miami Stadium (Miami, heet vochtig); Houston Stadium (Houston, heet
+    vochtig). Alleen USA-venues in de poule,  beperkte binnenlandse reis. Impact:
+    Atlanta (heet vochtig) vraagt hitte-management; Miami (heet vochtig) vraagt hitte-management;
+    Houston (heet vochtig) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: distinctive_spark
+    delta: -1
+    reason: 'In dit duel speelt mee: Eilandnatie opent tegen Euro-kampioen Spanje
+      (in Atlanta), historisch punt = nationaal feest; dat vraagt extra aandacht van
+      Kaapverdië.'
+  versus:
+    Saudi Arabia: []
+    Spain:
+    - id: tactical_weakness
+      delta: -1
+      reason: Marcelo Bielsa zet als bondscoach van Kaapverdië in op extreem hoge
+        druk en pressing.
+    - id: matchup_risk
+      delta: -1
+      reason: Spanje Yamal isolaties.
+    Uruguay:
+    - id: matchup_risk
+      delta: -1
+      reason: Uruguay leunt in dit duel op turnovers; dat vraagt een gericht plan
+        van Kaapverdië.

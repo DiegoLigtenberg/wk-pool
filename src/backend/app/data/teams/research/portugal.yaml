@@ -1,0 +1,139 @@
+team_id: Portugal
+slug: portugal
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Roberto Martinez; Ronaldo (Al-Nassr), Leão, B. Fernandes,
+  Dias, Cancelo. Squad 19 mei; groep K vs DR Congo 17 juni.
+phase_preferences:
+- Sterk Martinez 3-2-5 possession + mid-press counters.
+- Zwakwer low-block zonder doorbraak.
+transition_orientation_summary: Possession overload + Leão vertical na omzet.
+psychology_intro: Ronaldo 41; laatste WK; sterren-debat blijft.
+psychology_vectors:
+- Martinez ‘slordige eindfase’ publiek erkend.
+- Colombia/Díaz later in groep.
+matchup_counters_us:
+- Colombia Díaz.
+- DR Congo Haller.
+matchup_we_counter:
+- Uzbekistan.
+- High-line.
+dead_ball_swings_matches: Ronaldo/Rúben Dias routines.
+experience_cohesion_notes:
+- Martinez sinds 2023; positionspel-intensief.
+intercontinental_travel_profile: Europa → VS.
+power_score: 87
+tier: Favoriet
+macro_style: technisch sterk en flexibel tussen controle en counters
+strengths:
+- creatieve middenvelders
+- diepte in de selectie
+- ervaring
+risks:
+- kan afhankelijk worden van momenten
+- defensieve restverdediging
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: K
+  opponents_nl:
+  - Colombia
+  - Congo
+  - Oezbekistan
+  opponents_fifa:
+  - Colombia
+  - Congo DR
+  - Uzbekistan
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-17T17:00
+    is_home: true
+    opponent_fifa: Congo DR
+    opponent_nl: Congo
+    stadium: Houston Stadium
+  - match_number: 2
+    kickoff: 2026-06-23T17:00
+    is_home: true
+    opponent_fifa: Uzbekistan
+    opponent_nl: Oezbekistan
+    stadium: Houston Stadium
+  - match_number: 3
+    kickoff: 2026-06-27T23:30
+    is_home: false
+    opponent_fifa: Colombia
+    opponent_nl: Colombia
+    stadium: Miami Stadium
+  fixture_hooks:
+  - 'Groep K: tegen Colombia, Congo, Oezbekistan.'
+  - 'Groepswedstrijd 1 (17 Jun): thuis vs Congo @ Houston Stadium'
+  - 'Groepswedstrijd 2 (23 Jun): thuis vs Oezbekistan @ Houston Stadium'
+  - 'Groepswedstrijd 3 (27 Jun): uit vs Colombia @ Miami Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Oezbekistan en Colombia: Houston Stadium → Miami Stadium
+    (4 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Houston Stadium (Houston, heet
+    vochtig); Miami Stadium (Miami, heet vochtig). Alleen USA-venues in de poule ,
+    beperkte binnenlandse reis. Impact: Houston (heet vochtig) vraagt hitte-management;
+    Miami (heet vochtig) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Colombia:
+    - id: matchup_risk
+      delta: -1
+      reason: Colombia leunt in dit duel op Díaz; dat vraagt een gericht plan van
+        Portugal.
+    Congo DR:
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Congo tegen ons aanvalsspel
+    - id: matchup_risk
+      delta: -1
+      reason: DR Congo Haller.
+    Uzbekistan:
+    - id: matchup_edge
+      delta: 1
+      reason: Uzbekistan.
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Oezbekistan

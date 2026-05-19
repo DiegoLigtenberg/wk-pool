@@ -1,0 +1,142 @@
+team_id: Turkije
+slug: turkiye
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Vincenzo Montella; Çalhanoğlu, Güler, Yıldız, Kerem
+  Aktürkoğlu. Groep D vs Australië 13 juni.
+phase_preferences:
+- Sterk Montella 4-2-3-1 momentum + Güler creatie.
+- Zwakwer sustained pressure vs Popovic-blok.
+transition_orientation_summary: Direct Güler/Yıldız; Montella Italian structure.
+psychology_intro: Montella sinds 2023; EURO 2024 kwartfinale energie.
+psychology_vectors:
+- Australië opener.
+- Defensieve ruimtes vs elite.
+matchup_counters_us:
+- Possession koel.
+- Elite transitions.
+matchup_we_counter:
+- Australië.
+- Pressing niet afgemaakt.
+dead_ball_swings_matches: Çalhanoğlu frees.
+experience_cohesion_notes:
+- Montella; Serie A/Bundesliga mix.
+intercontinental_travel_profile: Europa → VS.
+discipline_risk_notes: Emotioneel publiek + agressief duelspel ,  disciplinaire grens
+  snel bereikt.
+power_score: 76
+tier: Underdog
+macro_style: emotioneel, technisch en grillig
+strengths:
+- creativiteit
+- afstandsschoten
+- wedstrijdenergie
+risks:
+- stabiliteit
+- defensieve ruimtes
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: D
+  opponents_nl:
+  - Australië
+  - Paraguay
+  - Verenigde Staten
+  opponents_fifa:
+  - Australia
+  - Paraguay
+  - USA
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-14T04:00
+    is_home: false
+    opponent_fifa: Australia
+    opponent_nl: Australië
+    stadium: BC Place Vancouver
+  - match_number: 2
+    kickoff: 2026-06-20T04:00
+    is_home: true
+    opponent_fifa: Paraguay
+    opponent_nl: Paraguay
+    stadium: San Francisco Bay Area Stadium
+  - match_number: 3
+    kickoff: 2026-06-26T02:00
+    is_home: true
+    opponent_fifa: USA
+    opponent_nl: Verenigde Staten
+    stadium: Los Angeles Stadium
+  fixture_hooks:
+  - 'Groep D: tegen Australië, Paraguay, Verenigde Staten.'
+  - 'Groepswedstrijd 1 (14 Jun): uit vs Australië @ BC Place Vancouver'
+  - 'Groepswedstrijd 2 (20 Jun): thuis vs Paraguay @ San Francisco Bay Area Stadium'
+  - 'Groepswedstrijd 3 (26 Jun): thuis vs Verenigde Staten @ Los Angeles Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 6, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Australië en Paraguay: BC Place Vancouver → San Francisco
+    Bay Area Stadium (6 dag(en) ertussen). Tussen wedstrijd Paraguay en Verenigde
+    Staten: San Francisco Bay Area Stadium → Los Angeles Stadium (6 dag(en) ertussen).
+    3 vroege/late kickoff-slots (UTC-nacht) in groep ,  recovery relevant.'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: BC Place Vancouver (Vancouver,
+    koeler kust); San Francisco Bay Area Stadium (San Francisco, mild kust); Los Angeles
+    Stadium (Los Angeles, warm droog). Cross-border poule (Canada, USA) ,  extra vlucht/tijdzone
+    tussen groepswedstrijden. Impact: Vancouver is koeler ,  kan hitte-gewende tegenstanders
+    neutraliseren; San Francisco is koeler ,  kan hitte-gewende tegenstanders neutraliseren;
+    3 late kickoffs in groep ,  rustritme en recovery extra relevant.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Australia:
+    - id: opponent_profile_weak
+      delta: 1
+      reason: 'In dit duel speelt mee: Zwakker tegen Montella-Türkiye tempo en creatie-gap;
+        dat vraagt extra aandacht van Turkije.'
+    - id: style_matchup
+      delta: 1
+      reason: Eigen press kan compact blok Australië onder druk zetten
+    Paraguay:
+    - id: style_matchup
+      delta: 1
+      reason: Eigen press kan compact blok Paraguay onder druk zetten
+    USA:
+    - id: style_matchup
+      delta: 1
+      reason: Eigen press kan compact blok Verenigde Staten onder druk zetten

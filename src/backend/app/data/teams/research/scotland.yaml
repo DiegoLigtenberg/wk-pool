@@ -1,0 +1,138 @@
+team_id: Schotland
+slug: scotland
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Steve Clarke; McTominay (Napoli), Robertson (Liverpool),
+  McGinn, Adams. Opener 13 juni vs Haiti; squad 19 mei 2026.
+phase_preferences:
+- Sterk Clarke compact + McTominay late runs.
+- Zwakwer 90 min vs elite.
+transition_orientation_summary: Clarke pragmatisme; McTominay/Adams target.
+psychology_intro: Tartan Army; Haiti opener winnable.
+psychology_vectors:
+- Squad announcement 19 mei vandaag.
+- Diepte bank kwetsbaar.
+matchup_counters_us:
+- Brazil later.
+- Technische possession.
+matchup_we_counter:
+- Haiti Isidor.
+- Chaotic fouls.
+dead_ball_swings_matches: McTominay hoogtes.
+experience_cohesion_notes:
+- Clarke continuity; PL/Championship mix.
+intercontinental_travel_profile: Europa → VS.
+power_score: 71
+tier: Underdog
+macro_style: intens, fysiek en collectief
+strengths:
+- teamspirit
+- duels
+- standaardsituaties
+risks:
+- aanvallende verfijning
+- diepte in selectie
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: C
+  opponents_nl:
+  - Brazilië
+  - Haïti
+  - Marokko
+  opponents_fifa:
+  - Brazil
+  - Haiti
+  - Morocco
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-14T01:00
+    is_home: false
+    opponent_fifa: Haiti
+    opponent_nl: Haïti
+    stadium: Boston Stadium
+  - match_number: 2
+    kickoff: 2026-06-19T22:00
+    is_home: true
+    opponent_fifa: Morocco
+    opponent_nl: Marokko
+    stadium: Boston Stadium
+  - match_number: 3
+    kickoff: 2026-06-24T22:00
+    is_home: true
+    opponent_fifa: Brazil
+    opponent_nl: Brazilië
+    stadium: Miami Stadium
+  fixture_hooks:
+  - 'Groep C: tegen Brazilië, Haïti, Marokko.'
+  - 'Groepswedstrijd 1 (14 Jun): uit vs Haïti @ Boston Stadium'
+  - 'Groepswedstrijd 2 (19 Jun): thuis vs Marokko @ Boston Stadium'
+  - 'Groepswedstrijd 3 (24 Jun): thuis vs Brazilië @ Miami Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 5 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Marokko en Brazilië: Boston Stadium → Miami Stadium
+    (5 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Boston Stadium (Boston, vochtig
+    zomer); Miami Stadium (Miami, heet vochtig). Alleen USA-venues in de poule ,  beperkte
+    binnenlandse reis. Impact: Miami (heet vochtig) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Brazil:
+    - id: style_matchup
+      delta: 1
+      reason: Lucht/standaardprofiel t.o.v. Brazilië
+    - id: matchup_risk
+      delta: -1
+      reason: Brazilië leunt in dit duel op later; dat vraagt een gericht plan van
+        Schotland.
+    Haiti:
+    - id: matchup_edge
+      delta: 1
+      reason: Haïti leunt in dit duel op Isidor; dat vraagt een gericht plan van Schotland.
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Haïti tegen ons aanvalsspel
+    Morocco:
+    - id: style_matchup
+      delta: 1
+      reason: Lucht/standaardprofiel t.o.v. Marokko

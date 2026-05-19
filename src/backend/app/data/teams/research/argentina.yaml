@@ -1,0 +1,159 @@
+team_id: Argentinië
+slug: argentina
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Scaloni; titelverdediger. Messi (39, Inter Miami, laatste
+  WK), Lautaro, Álvarez, Enzo, Mac Allister, Romero. Provisional >50 spelers mei 2026.
+phase_preferences:
+- 'Sterk: De Paul-Enzo-Mac Allister pressing en Lautaro-afwerking.'
+- Kwetsbaar als centrum dicht (Algerije/Oostenrijk) en Messi geïsoleerd.
+transition_orientation_summary: 'Qatar-DNA: gegenpressing, Mac Allister combinaties
+  naar Lautaro.'
+psychology_intro: Back-to-back jagen sinds Brazilië 1962; Messi-narratief domineert.
+psychology_vectors:
+- Jongeren Mastantuono/Echeverri integreren.
+- Tegenslag vs Algerië mediastorm.
+matchup_counters_us:
+- Ultra-lage blokken rond Messi.
+- Rangnick third-man onder pressing.
+matchup_we_counter:
+- Algerije/Jordanië die dekking missen.
+- Penalty-situaties met Emiliano Martínez.
+dead_ball_swings_matches: Messi/Otamendi bij standaards.
+experience_cohesion_notes:
+- Scaloni sinds 2018.
+- Qatar-kern plus Real/Inter-cluster.
+intercontinental_travel_profile: CONMEBOL → Noord-Amerika.
+distinctive_spark_notes: Messi (39) laatste WK als titelverdediger,  poging eerste
+  back-to-back sinds Brazilië 1962.
+crowd_home_bias_notes: Grote Argentijnse gemeenschap in de VS (New York, Los Angeles,
+  Miami); in die steden voelt het vaak alsof er een thuispubliek is.
+star_dependency: high
+power_score: 91
+tier: Topfavoriet
+macro_style: ervaren, pragmatisch en sterk in beslissende fases
+strengths:
+- wereldklasse in de as
+- toernooi-ervaring
+- wedstrijdcontrole
+risks:
+- leunt soms op kleine marges
+- tempo kan zakken tegen energieke tegenstanders
+confederation: CONMEBOL
+cohost_status: false
+group_stage: &id001
+  group: J
+  opponents_nl:
+  - Algerije
+  - Jordanië
+  - Oostenrijk
+  opponents_fifa:
+  - Algeria
+  - Austria
+  - Jordan
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-17T01:00
+    is_home: true
+    opponent_fifa: Algeria
+    opponent_nl: Algerije
+    stadium: Kansas City Stadium
+    narrative: Groeps-opener titelverdediger vs Algerije
+  - match_number: 2
+    kickoff: 2026-06-22T17:00
+    is_home: true
+    opponent_fifa: Austria
+    opponent_nl: Oostenrijk
+    stadium: Dallas Stadium
+  - match_number: 3
+    kickoff: 2026-06-28T02:00
+    is_home: false
+    opponent_fifa: Jordan
+    opponent_nl: Jordanië
+    stadium: Dallas Stadium
+  fixture_hooks:
+  - 'Groep J: tegen Algerije, Jordanië, Oostenrijk.'
+  - 'Groepswedstrijd 1 (17 Jun): thuis vs Algerije @ Kansas City Stadium,  Groeps-opener
+    titelverdediger vs Algerije'
+  - 'Groepswedstrijd 2 (22 Jun): thuis vs Oostenrijk @ Dallas Stadium'
+  - 'Groepswedstrijd 3 (28 Jun): uit vs Jordanië @ Dallas Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5-6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Algerije en Oostenrijk: Kansas City Stadium → Dallas
+    Stadium (5 dag(en) ertussen). 2 vroege/late kickoff-slots (UTC-nacht) in groep,  recovery
+    relevant.'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Kansas City Stadium (Kansas City,
+    warm continentaal); Dallas Stadium (Dallas, heet droog). Alleen USA-venues in
+    de poule,  beperkte binnenlandse reis. Impact: Dallas (heet droog) vraagt hitte-management;
+    2 late kickoffs in groep,  rustritme en recovery extra relevant.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: crowd_bias
+    delta: 1
+    reason: 'In dit duel speelt mee: Grote Argentijnse gemeenschap in de tegen (New
+      York, Los Angeles, Miami); in die steden voelt het vaak alsof er een thuispubliek
+      is; dat vraagt extra aandacht van Argentinië.'
+  - id: distinctive_spark
+    delta: -1
+    reason: Lionel Messi (39 jaar) is waarschijnlijk voor het laatst op een WK bij
+      Argentinië als titelverdediger.
+  versus:
+    Algeria:
+    - id: opponent_profile_weak
+      delta: 1
+      reason: Zwakker als Argentinië bal rustig circuleert zonder Algerije uit positie
+        te lokken.
+    - id: tactical_weakness
+      delta: -1
+      reason: Kwetsbaar als centrum dicht (Algerije/Oostenrijk) en Messi geïsoleerd.
+    Austria:
+    - id: opponent_profile_weak
+      delta: 1
+      reason: 'In dit duel speelt mee: Zwakker tegen Argentinië balrust en Messi;
+        dat vraagt extra aandacht van Argentinië.'
+    - id: tactical_weakness
+      delta: -1
+      reason: Kwetsbaar als centrum dicht (Algerije/Oostenrijk) en Messi geïsoleerd.
+    Jordan:
+    - id: matchup_edge
+      delta: 1
+      reason: Algerije/Jordanië die dekking missen.

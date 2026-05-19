@@ -1,0 +1,154 @@
+team_id: Engeland
+slug: england
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: 'Thomas Tuchel (okt 2024); Kane, Saka, Rice, Anderson
+  (Forest #6), Pickford. 4-2-3-1 → 3-2-5 inbalans. Squad 22 mei; groep L vs Croatia
+  17 juni.'
+phase_preferences:
+- Sterk inverted FBs, Rice/Anderson, Kane tussen linies.
+- Zwakwer ultra-compact; Japan-vriendschappelijk 1-0 zonder Kane.
+transition_orientation_summary: Tuchel vertical prik na 3-2-5 overloads; Saka/Foden
+  flanken.
+psychology_intro: ‘Football’s coming home’; Tuchel politieke selecties (TAA vs O’Reilly).
+psychology_vectors:
+- Kane concern na Japan.
+- 35-man bloated squad togetherness-risico.
+matchup_counters_us:
+- Croatia Modrić tempo control.
+- Ghana compact.
+matchup_we_counter:
+- Panama/Haiti-tier pressing.
+- Corner-dominantie vs smaller teams.
+dead_ball_swings_matches: Kane/Saka corners; structureel voordeel.
+experience_cohesion_notes:
+- Tuchel reset automatismen; PL-homogeniteit.
+intercontinental_travel_profile: UEFA → VS co-host venues.
+distinctive_spark_notes: 'Tuchel: eerste Duitse bondscoach Engeland; 4-2-3-1 morpht
+  naar 3-2-5 in balbezit.'
+club_concentration_notes: Vrijwel volledige PL-kern ,  hoge automatismen, beperkte
+  club-mix.
+power_score: 88
+tier: Topfavoriet
+macro_style: hoog individueel niveau met veel scorend vermogen
+strengths:
+- aanvalskwaliteit
+- squad depth
+- standaardsituaties
+risks:
+- toernooidruk
+- balans tussen voorzichtigheid en initiatief
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: L
+  opponents_nl:
+  - Ghana
+  - Kroatië
+  - Panama
+  opponents_fifa:
+  - Croatia
+  - Ghana
+  - Panama
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-17T20:00
+    is_home: true
+    opponent_fifa: Croatia
+    opponent_nl: Kroatië
+    stadium: Dallas Stadium
+    narrative: 'Groep L: Engeland, Kroatië'
+  - match_number: 2
+    kickoff: 2026-06-23T20:00
+    is_home: true
+    opponent_fifa: Ghana
+    opponent_nl: Ghana
+    stadium: Boston Stadium
+  - match_number: 3
+    kickoff: 2026-06-27T21:00
+    is_home: false
+    opponent_fifa: Panama
+    opponent_nl: Panama
+    stadium: New York/New Jersey Stadium
+  fixture_hooks:
+  - 'Groep L: tegen Ghana, Kroatië, Panama.'
+  - 'Groepswedstrijd 1 (17 Jun): thuis vs Kroatië @ Dallas Stadium ,  Groep L: Engeland,
+    Kroatië'
+  - 'Groepswedstrijd 2 (23 Jun): thuis vs Ghana @ Boston Stadium'
+  - 'Groepswedstrijd 3 (27 Jun): uit vs Panama @ New York/New Jersey Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Kroatië en Ghana: Dallas Stadium → Boston Stadium (6
+    dag(en) ertussen). Tussen wedstrijd Ghana en Panama: Boston Stadium → New York/New
+    Jersey Stadium (4 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Dallas Stadium (Dallas, heet
+    droog); Boston Stadium (Boston, vochtig zomer); New York/New Jersey Stadium (New
+    York, vochtig zomer). Alleen USA-venues in de poule ,  beperkte binnenlandse reis.
+    Impact: Dallas (heet droog) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: distinctive_spark
+    delta: -1
+    reason: Thomas Tuchel is de eerste Duitse bondscoach van Engeland.
+  versus:
+    Croatia:
+    - id: style_matchup
+      delta: 1
+      reason: Lucht/standaardprofiel t.o.v. Kroatië
+    - id: matchup_risk
+      delta: -1
+      reason: Luka Modrić (40 jaar) is nog steeds geselecteerd; zeldzaam op dit niveau.
+    Ghana:
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Ghana tegen ons aanvalsspel
+    - id: matchup_risk
+      delta: -1
+      reason: Ghana leunt in dit duel op compact; dat vraagt een gericht plan van
+        Engeland.
+    Panama:
+    - id: matchup_edge
+      delta: 1
+      reason: Panama/Haiti-tier pressing.
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Panama tegen ons aanvalsspel

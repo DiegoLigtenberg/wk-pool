@@ -1,0 +1,150 @@
+team_id: Nieuw-Zeeland
+slug: new_zealand
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Darren Bazeley; Chris Wood (Forest, kapitein), Bindon
+  (Forest), Cacace. Groep G vs Iran 15 juni.
+phase_preferences:
+- Sterk Wood target + compact OFC-discipline.
+- Zwakwer De Bruyne/Doku.
+transition_orientation_summary: Direct Wood; survival football.
+psychology_intro: OFC underdog; Wood enige PL-star.
+psychology_vectors:
+- Iran/België sequentie.
+- Bankdiepte fragiel.
+matchup_counters_us:
+- België.
+- Egypte.
+matchup_we_counter:
+- Iran Ghalenoei.
+- Rommelige fouls.
+dead_ball_swings_matches: Wood hoogtes = primaire route.
+experience_cohesion_notes:
+- Wood-lead; Auckland FC cluster.
+intercontinental_travel_profile: Oceanië → VS ,  zwaarste reis.
+distinctive_spark_notes: Wood enige PL-anker; OFC → LA route = max intercontinentale
+  belasting.
+crowd_home_bias_notes: Wood (PL) trekt Engelse supporters in VS; OFC-deelnemer zonder
+  eigen diaspora-massa.
+power_score: 62
+tier: Verrassingsploeg
+macro_style: fysiek, simpel en collectief
+strengths:
+- luchtduels
+- discipline
+- teamspirit
+risks:
+- technische controle
+- tempo tegen toplanden
+confederation: OFC
+cohost_status: false
+group_stage: &id001
+  group: G
+  opponents_nl:
+  - België
+  - Egypte
+  - Iran
+  opponents_fifa:
+  - Belgium
+  - Egypt
+  - IR Iran
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-16T01:00
+    is_home: false
+    opponent_fifa: IR Iran
+    opponent_nl: Iran
+    stadium: Los Angeles Stadium
+  - match_number: 2
+    kickoff: 2026-06-22T01:00
+    is_home: true
+    opponent_fifa: Egypt
+    opponent_nl: Egypte
+    stadium: BC Place Vancouver
+  - match_number: 3
+    kickoff: 2026-06-27T03:00
+    is_home: true
+    opponent_fifa: Belgium
+    opponent_nl: België
+    stadium: BC Place Vancouver
+  fixture_hooks:
+  - 'Groep G: tegen België, Egypte, Iran.'
+  - 'Groepswedstrijd 1 (16 Jun): uit vs Iran @ Los Angeles Stadium'
+  - 'Groepswedstrijd 2 (22 Jun): thuis vs Egypte @ BC Place Vancouver'
+  - 'Groepswedstrijd 3 (27 Jun): thuis vs België @ BC Place Vancouver'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Iran en Egypte: Los Angeles Stadium → BC Place Vancouver
+    (6 dag(en) ertussen). 3 vroege/late kickoff-slots (UTC-nacht) in groep ,  recovery
+    relevant.'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Los Angeles Stadium (Los Angeles,
+    warm droog); BC Place Vancouver (Vancouver, koeler kust). Cross-border poule (USA,
+    Canada) ,  extra vlucht/tijdzone tussen groepswedstrijden. Impact: Vancouver is
+    koeler ,  kan hitte-gewende tegenstanders neutraliseren; 3 late kickoffs in groep
+    ,  rustritme en recovery extra relevant.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: distinctive_spark
+    delta: -2
+    reason: Wood enige speler uit de Premier League; OFC → LA route = max intercontinentale
+      belasting.
+  - id: crowd_bias
+    delta: 1
+    reason: Wood (club PL) trekt Engelse supporters in VS; OFC-deelnemer zonder eigen
+      gemeenschap in het buitenland-massa.
+  versus:
+    Belgium:
+    - id: style_matchup
+      delta: 1
+      reason: Lucht/standaardprofiel t.o.v. België
+    - id: matchup_risk
+      delta: -1
+      reason: België.
+    Egypt:
+    - id: matchup_risk
+      delta: -1
+      reason: Egypte.
+    IR Iran:
+    - id: matchup_edge
+      delta: 1
+      reason: Iran leunt in dit duel op Ghalenoei; dat vraagt een gericht plan van
+        Nieuw-Zeeland.

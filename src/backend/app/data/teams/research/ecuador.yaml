@@ -1,0 +1,135 @@
+team_id: Ecuador
+slug: ecuador
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Sebastián Beccacece; Moisés Caicedo (Chelsea), Enner
+  Valencia (Pachuca, ‘transcendental’ per coach), Plata. Groep E vs Ivory Coast 14
+  juni, Duitsland, Curaçao.
+phase_preferences:
+- Sterk Caicedo duel + Valencia target (7 goals/12).
+- Zwakwer afwerking (‘contundentes’-kritiek Beccacece).
+transition_orientation_summary: Athletisch CONMEBOL pressing; Caicedo triggers.
+psychology_intro: Valencia laatste WK; 20 spelers ‘definitief’ per maart.
+psychology_vectors:
+- Caicedo schorsing kwalificatie mogelijk omgekeerd.
+- Beccacece 6 plekken open tot mei.
+matchup_counters_us:
+- Duitsland Nagelsmann.
+- Ivory Coast Pepe snelheid.
+matchup_we_counter:
+- Curaçao.
+- High-line teams.
+dead_ball_swings_matches: Valencia hoogtes; Caicedo fouls → corners.
+experience_cohesion_notes:
+- Beccacece sinds 2024; Caicedo ankert.
+intercontinental_travel_profile: CONMEBOL → VS.
+power_score: 74
+tier: Underdog
+macro_style: fysiek, energiek en lastig in duels
+strengths:
+- intensiteit
+- jonge kern
+- transities
+risks:
+- ervaring in late fases
+- controle
+confederation: CONMEBOL
+cohost_status: false
+group_stage: &id001
+  group: E
+  opponents_nl:
+  - Curaçao
+  - Duitsland
+  - Ivoorkust
+  opponents_fifa:
+  - Curaçao
+  - Côte d'Ivoire
+  - Germany
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-14T23:00
+    is_home: false
+    opponent_fifa: Côte d'Ivoire
+    opponent_nl: Ivoorkust
+    stadium: Philadelphia Stadium
+  - match_number: 2
+    kickoff: 2026-06-21T00:00
+    is_home: true
+    opponent_fifa: Curaçao
+    opponent_nl: Curaçao
+    stadium: Kansas City Stadium
+  - match_number: 3
+    kickoff: 2026-06-25T20:00
+    is_home: true
+    opponent_fifa: Germany
+    opponent_nl: Duitsland
+    stadium: New York/New Jersey Stadium
+  fixture_hooks:
+  - 'Groep E: tegen Curaçao, Duitsland, Ivoorkust.'
+  - 'Groepswedstrijd 1 (14 Jun): uit vs Ivoorkust @ Philadelphia Stadium'
+  - 'Groepswedstrijd 2 (21 Jun): thuis vs Curaçao @ Kansas City Stadium'
+  - 'Groepswedstrijd 3 (25 Jun): thuis vs Duitsland @ New York/New Jersey Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4, 7 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Ivoorkust en Curaçao: Philadelphia Stadium → Kansas
+    City Stadium (7 dag(en) ertussen). Tussen wedstrijd Curaçao en Duitsland: Kansas
+    City Stadium → New York/New Jersey Stadium (4 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Philadelphia Stadium (Philadelphia,
+    warm vochtig); Kansas City Stadium (Kansas City, warm continentaal); New York/New
+    Jersey Stadium (New York, vochtig zomer). Alleen USA-venues in de poule ,  beperkte
+    binnenlandse reis. Impact: Philadelphia (warm vochtig) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Curaçao:
+    - id: matchup_edge
+      delta: 1
+      reason: Curaçao.
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Curaçao
+    Côte d'Ivoire: []
+    Germany:
+    - id: matchup_risk
+      delta: -1
+      reason: Duitsland heeft met coach Nagelsmann een duidelijk tactisch plan; lastig
+        voor Ecuador om dat te ontwrichten.

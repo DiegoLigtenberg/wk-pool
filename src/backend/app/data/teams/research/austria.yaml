@@ -1,0 +1,144 @@
+team_id: Oostenrijk
+slug: austria
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Ralf Rangnick; Sabitzer, Laimer, Baumgartner, Alaba,
+  Arnautovic (38). Groep J vs Argentinië/Algerije/Jordanië.
+phase_preferences:
+- 'Sterk: gegenpressing-triggers, verticale Baumgartner.'
+- Zwakker vs Argentinië balrust en Messi.
+transition_orientation_summary: 'Rangnick: verticality binnen 5 seconden na balwinst.'
+psychology_intro: Dark horse na Euro 2024-KF; Alaba-fit cruciaal.
+psychology_vectors:
+- Punten vs Jordanië vóór Argentinië.
+- Rangnick intense coaching jongeren.
+matchup_counters_us:
+- Messi/Mac Allister onder pressing.
+- Algerije Ait-Nouri counters.
+matchup_we_counter:
+- Jordanië underdog.
+- Teams die lang aan tikken.
+dead_ball_swings_matches: Alaba/Arnautovic standaards.
+experience_cohesion_notes:
+- Rangnick sinds 2022; Leipzig/Bundesliga-kern.
+intercontinental_travel_profile: Europa → VS/Mexico.
+power_score: 76
+tier: Underdog
+macro_style: intens, georganiseerd en pressend
+strengths:
+- collectief drukzetten
+- discipline
+- fitheid
+risks:
+- individuele topkwaliteit
+- kansen creëren tegen lage blokken
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: J
+  opponents_nl:
+  - Algerije
+  - Argentinië
+  - Jordanië
+  opponents_fifa:
+  - Algeria
+  - Argentina
+  - Jordan
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-17T04:00
+    is_home: true
+    opponent_fifa: Jordan
+    opponent_nl: Jordanië
+    stadium: San Francisco Bay Area Stadium
+  - match_number: 2
+    kickoff: 2026-06-22T17:00
+    is_home: false
+    opponent_fifa: Argentina
+    opponent_nl: Argentinië
+    stadium: Dallas Stadium
+  - match_number: 3
+    kickoff: 2026-06-28T02:00
+    is_home: false
+    opponent_fifa: Algeria
+    opponent_nl: Algerije
+    stadium: Kansas City Stadium
+  fixture_hooks:
+  - 'Groep J: tegen Algerije, Argentinië, Jordanië.'
+  - 'Groepswedstrijd 1 (17 Jun): thuis vs Jordanië @ San Francisco Bay Area Stadium'
+  - 'Groepswedstrijd 2 (22 Jun): uit vs Argentinië @ Dallas Stadium'
+  - 'Groepswedstrijd 3 (28 Jun): uit vs Algerije @ Kansas City Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5-6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Jordanië en Argentinië: San Francisco Bay Area Stadium
+    → Dallas Stadium (5 dag(en) ertussen). Tussen wedstrijd Argentinië en Algerije:
+    Dallas Stadium → Kansas City Stadium (6 dag(en) ertussen). 2 vroege/late kickoff-slots
+    (UTC-nacht) in groep,  recovery relevant.'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: San Francisco Bay Area Stadium
+    (San Francisco, mild kust); Dallas Stadium (Dallas, heet droog); Kansas City Stadium
+    (Kansas City, warm continentaal). Alleen USA-venues in de poule,  beperkte binnenlandse
+    reis. Impact: San Francisco is koeler,  kan hitte-gewende tegenstanders neutraliseren;
+    Dallas (heet droog) vraagt hitte-management; 2 late kickoffs in groep,  rustritme
+    en recovery extra relevant.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Algeria:
+    - id: style_matchup
+      delta: 1
+      reason: Eigen press kan compact blok Algerije onder druk zetten
+    - id: matchup_risk
+      delta: -1
+      reason: Algerije Ait-Nouri counters.
+    Argentina:
+    - id: opponent_profile_weak
+      delta: 1
+      reason: Kwetsbaar als centrum dicht (Algerije/Oostenrijk) en Messi geïsoleerd.
+    - id: tactical_weakness
+      delta: -1
+      reason: 'In dit duel speelt mee: Zwakker tegen Argentinië balrust en Messi;
+        dat vraagt extra aandacht van Oostenrijk.'
+    Jordan:
+    - id: matchup_edge
+      delta: 1
+      reason: Jordanië leunt in dit duel op underdog; dat vraagt een gericht plan
+        van Oostenrijk.

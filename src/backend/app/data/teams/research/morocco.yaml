@@ -1,0 +1,156 @@
+team_id: Marokko
+slug: morocco
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Mohamed Ouahbi (maart 2026, post-Regragui); Hakimi,
+  Brahim Diaz, Bounou, Mazraoui. Opener 13 juni vs Brazilië ,  rematch 2022.
+phase_preferences:
+- Sterk compact spel in de lijn van Regragui, plus counters via Hakimi.
+- Kwetsbaar Ouahbi integratie + Vinícius.
+transition_orientation_summary: Counters via Hakimi/Diaz; mid-block discipline.
+psychology_intro: 2022 semi-verwachting; coachwissel vlak voor WK plot-twist.
+psychology_vectors:
+- Brazilië opener direct.
+- Ouahbi U20-WK winst vs senioren druk.
+matchup_counters_us:
+- Ancelotti Vinícius.
+- Spanie breedte.
+matchup_we_counter:
+- Haiti.
+- Possession zonder dekking.
+dead_ball_swings_matches: Ziyech/Diaz frees; defensieve corners vs Brazil.
+experience_cohesion_notes:
+- Veel Europa; Ouahbi vormend.
+heat_altitude_acclimatization_notes: Noord-Afrika vs hitte.
+intercontinental_travel_profile: CAF → VS.
+distinctive_spark_notes: Mohamed Ouahbi volgde Walid Regragui op in maart 2026, ongeveer
+  twaalf weken voor het WK. De staf moet het succesvolle plan uit 2022 (compact spelen,
+  snelle counters) opnieuw vormgeven met weinig voorbereidingstijd.
+crowd_home_bias_notes: Marokko is geen co-host, maar door de grote Marokkaanse gemeenschap
+  in New York en Los Angeles voelt het in die steden vaak alsof er een thuispubliek
+  is.
+star_dependency: medium
+power_score: 81
+tier: Subtopper
+macro_style: compact, volwassen en gevaarlijk vanuit transitie
+strengths:
+- organisatie
+- mentale energie
+- counters
+risks:
+- kan moeite hebben met favorietenrol
+- kansenvolume
+confederation: CAF
+cohost_status: false
+group_stage: &id001
+  group: C
+  opponents_nl:
+  - Brazilië
+  - Haïti
+  - Schotland
+  opponents_fifa:
+  - Brazil
+  - Haiti
+  - Scotland
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-13T22:00
+    is_home: false
+    opponent_fifa: Brazil
+    opponent_nl: Brazilië
+    stadium: New York/New Jersey Stadium
+    narrative: Rematch WK 2022 halve finale
+  - match_number: 2
+    kickoff: 2026-06-19T22:00
+    is_home: false
+    opponent_fifa: Scotland
+    opponent_nl: Schotland
+    stadium: Boston Stadium
+  - match_number: 3
+    kickoff: 2026-06-24T22:00
+    is_home: true
+    opponent_fifa: Haiti
+    opponent_nl: Haïti
+    stadium: Atlanta Stadium
+  fixture_hooks:
+  - 'Groep C: tegen Brazilië, Haïti, Schotland.'
+  - 'Groepswedstrijd 1 (13 Jun): uit vs Brazilië @ New York/New Jersey Stadium ,  Rematch
+    WK 2022 halve finale'
+  - 'Groepswedstrijd 2 (19 Jun): uit vs Schotland @ Boston Stadium'
+  - 'Groepswedstrijd 3 (24 Jun): thuis vs Haïti @ Atlanta Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Brazilië en Schotland: New York/New Jersey Stadium
+    → Boston Stadium (6 dag(en) ertussen). Tussen wedstrijd Schotland en Haïti: Boston
+    Stadium → Atlanta Stadium (5 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: New York/New Jersey Stadium (New
+    York, vochtig zomer); Boston Stadium (Boston, vochtig zomer); Atlanta Stadium
+    (Atlanta, heet vochtig). Alleen USA-venues in de poule ,  beperkte binnenlandse
+    reis. Impact: Atlanta (heet vochtig) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: crowd_bias
+    delta: 1
+    reason: Marokko is geen co-host, maar door de grote Marokkaanse gemeenschap in
+      New York en Los Angeles voelt het in die steden vaak alsof er een thuispubliek
+      is.
+  - id: distinctive_spark
+    delta: -1
+    reason: Mohamed Ouahbi volgde Walid Regragui op in maart 2026, ongeveer twaalf
+      weken voor het WK. De staf moet het succesvolle plan uit 2022 (compact spelen,
+      snelle cou.
+  versus:
+    Brazil:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Brazilië
+    - id: fixture_story
+      delta: -1
+      reason: Rematch WK 2022 halve finale
+    Haiti:
+    - id: matchup_edge
+      delta: 1
+      reason: Haiti.
+    Scotland:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Schotland

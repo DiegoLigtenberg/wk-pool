@@ -1,0 +1,140 @@
+team_id: Zwitserland
+slug: switzerland
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Murat Yakin; Akanji, Xhaka, Vargas, Embolo. Squad 20
+  mei; groep B vs Qatar 13 juni.
+phase_preferences:
+- Sterk Yakin compact centrum + Xhaka tempo.
+- Zwakwer Marsch/Davies flanken.
+transition_orientation_summary: Back-drie varianten; midden-lane focus.
+psychology_intro: Yakin stabiliteit; beter dan reputatie.
+psychology_vectors:
+- Qatar opener.
+- Embolo fitheid.
+matchup_counters_us:
+- Canada Davies.
+- Bosnië Džeko.
+matchup_we_counter:
+- Qatar onder Lopetegui speelt compact; we profiteren als zij het ritme bepalen.
+- Possession zonder doorbraak bij Qatar.
+dead_ball_swings_matches: Akanji/Xhaka hoogtes.
+experience_cohesion_notes:
+- Yakin; top-5 league kern.
+intercontinental_travel_profile: Europa → VS.
+power_score: 79
+tier: Subtopper
+macro_style: gedisciplineerd, volwassen en moeilijk kapot te spelen
+strengths:
+- organisatie
+- ervaring
+- compactheid
+risks:
+- minder explosieve aanval
+- moeite met openbreken
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: B
+  opponents_nl:
+  - Bosnië-Herzegovina
+  - Canada
+  - Qatar
+  opponents_fifa:
+  - Bosnia and Herzegovina
+  - Canada
+  - Qatar
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-13T19:00
+    is_home: false
+    opponent_fifa: Qatar
+    opponent_nl: Qatar
+    stadium: San Francisco Bay Area Stadium
+  - match_number: 2
+    kickoff: 2026-06-18T19:00
+    is_home: true
+    opponent_fifa: Bosnia and Herzegovina
+    opponent_nl: Bosnië-Herzegovina
+    stadium: Los Angeles Stadium
+  - match_number: 3
+    kickoff: 2026-06-24T19:00
+    is_home: true
+    opponent_fifa: Canada
+    opponent_nl: Canada
+    stadium: BC Place Vancouver
+  fixture_hooks:
+  - 'Groep B: tegen Bosnië-Herzegovina, Canada, Qatar.'
+  - 'Groepswedstrijd 1 (13 Jun): uit vs Qatar @ San Francisco Bay Area Stadium'
+  - 'Groepswedstrijd 2 (18 Jun): thuis vs Bosnië-Herzegovina @ Los Angeles Stadium'
+  - 'Groepswedstrijd 3 (24 Jun): thuis vs Canada @ BC Place Vancouver'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Qatar en Bosnië-Herzegovina: San Francisco Bay Area
+    Stadium → Los Angeles Stadium (5 dag(en) ertussen). Tussen wedstrijd Bosnië-Herzegovina
+    en Canada: Los Angeles Stadium → BC Place Vancouver (6 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: San Francisco Bay Area Stadium
+    (San Francisco, mild kust); Los Angeles Stadium (Los Angeles, warm droog); BC
+    Place Vancouver (Vancouver, koeler kust). Cross-border poule (USA, Canada) ,  extra
+    vlucht/tijdzone tussen groepswedstrijden. Impact: San Francisco is koeler ,  kan
+    hitte-gewende tegenstanders neutraliseren; Vancouver is koeler ,  kan hitte-gewende
+    tegenstanders neutraliseren.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Bosnia and Herzegovina:
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Bosnië-Herzegovina tegen ons aanvalsspel
+    Canada:
+    - id: matchup_risk
+      delta: -1
+      reason: Canada leunt in dit duel op Davies; dat vraagt een gericht plan van
+        Zwitserland.
+    Qatar:
+    - id: matchup_edge
+      delta: 1
+      reason: Bondscoach Julen Lopetegui zet bij Zwitserland in op Spaans balbezitspel
+        in een zeer compacte ploeg.
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Qatar tegen ons aanvalsspel

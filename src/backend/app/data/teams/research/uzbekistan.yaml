@@ -1,0 +1,139 @@
+team_id: Oezbekistan
+slug: uzbekistan
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Fabio Cannavaro; debut WK. Khusanov (Man City), Shomurodov,
+  Fayzullaev. Groep K vs Colombia 17 juni.
+phase_preferences:
+- Sterk Cannavaro defensieve discipline + Khusanov.
+- Zwakwer Díaz/James mismatch.
+transition_orientation_summary: Compact AFC-blok; counters Shomurodov.
+psychology_intro: Historisch debut; Cannavaro legend-status.
+psychology_vectors:
+- Colombia opener intimidatie.
+- Nervositeit 48-team stage.
+matchup_counters_us:
+- Colombia Díaz.
+- Portugal possession.
+matchup_we_counter:
+- Low-scoring grind.
+- Corner-heavy.
+dead_ball_swings_matches: Compact → set-pieces groot.
+experience_cohesion_notes:
+- Cannavaro; Khusanov enige elite-verdediger.
+- Centraal-Azië groei maar weinig WK-routine.
+intercontinental_travel_profile: AFC → VS.
+distinctive_spark_notes: Historisch eerste WK; Cannavaro coach; Khusanov (City) enige
+  elite-referentie in selectie.
+power_score: 65
+tier: Verrassingsploeg
+macro_style: gestructureerd, hardwerkend en compact
+strengths:
+- discipline
+- organisatie
+- teamcohesie
+risks:
+- ervaring op dit podium
+- aanvallende topkwaliteit
+confederation: AFC
+cohost_status: false
+group_stage: &id001
+  group: K
+  opponents_nl:
+  - Colombia
+  - Congo
+  - Portugal
+  opponents_fifa:
+  - Colombia
+  - Congo DR
+  - Portugal
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-18T02:00
+    is_home: true
+    opponent_fifa: Colombia
+    opponent_nl: Colombia
+    stadium: Mexico City Stadium
+  - match_number: 2
+    kickoff: 2026-06-23T17:00
+    is_home: false
+    opponent_fifa: Portugal
+    opponent_nl: Portugal
+    stadium: Houston Stadium
+  - match_number: 3
+    kickoff: 2026-06-27T23:30
+    is_home: false
+    opponent_fifa: Congo DR
+    opponent_nl: Congo
+    stadium: Atlanta Stadium
+  fixture_hooks:
+  - 'Groep K: tegen Colombia, Congo, Portugal.'
+  - 'Groepswedstrijd 1 (18 Jun): thuis vs Colombia @ Mexico City Stadium'
+  - 'Groepswedstrijd 2 (23 Jun): uit vs Portugal @ Houston Stadium'
+  - 'Groepswedstrijd 3 (27 Jun): uit vs Congo @ Atlanta Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4, 5 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Colombia en Portugal: Mexico City Stadium → Houston
+    Stadium (5 dag(en) ertussen). Tussen wedstrijd Portugal en Congo: Houston Stadium
+    → Atlanta Stadium (4 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Mexico City Stadium (Mexico City,
+    ≈2240m); Houston Stadium (Houston, heet vochtig); Atlanta Stadium (Atlanta, heet
+    vochtig). Cross-border poule (Mexico, USA) ,  extra vlucht/tijdzone tussen groepswedstrijden.
+    Impact: Mexico City (≈2240m) kan sprintherstel en balhang beïnvloeden; Houston
+    (heet vochtig) vraagt hitte-management; Atlanta (heet vochtig) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: distinctive_spark
+    delta: -1
+    reason: Fabio Cannavaro is bondscoach bij het eerste WK van Oezbekistan.
+  versus:
+    Colombia:
+    - id: matchup_risk
+      delta: -1
+      reason: Colombia leunt in dit duel op Díaz; dat vraagt een gericht plan van
+        Oezbekistan.
+    Congo DR: []
+    Portugal:
+    - id: matchup_risk
+      delta: -1
+      reason: Portugal leunt in dit duel op balbezit; dat vraagt een gericht plan
+        van Oezbekistan.

@@ -1,0 +1,157 @@
+team_id: Brazilië
+slug: brazil
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Carlo Ancelotti; Alisson, Marquinhos, Vinícius, Raphinha,
+  Casemiro, Neymar (100%-fit-regel). Opener 13 juni vs Marokko.
+phase_preferences:
+- 'Sterk: Vinícius/Raphinha overloads, Casemiro stabiliteit.'
+- Kwetsbaar vs Hakimi counters, Neymar-fit.
+transition_orientation_summary: Ancelotti controlled transitions; mid-block tot vertical
+  targeting.
+psychology_intro: 6 jaar zonder titel; Neymar-selectie splitst fanbase.
+psychology_vectors:
+- Marokko 2022-rematch opening.
+- 'Ancelotti: geen sentiment bij fitness.'
+matchup_counters_us:
+- Marokko Ouahbi blok + Hakimi.
+- Bielsa third-man egress.
+matchup_we_counter:
+- Haiti/Scotland hoog zonder dekking.
+- Vermoeide verdedigingen.
+dead_ball_swings_matches: Marquinhos/Casemiro corners; Neymar frees.
+experience_cohesion_notes:
+- Ancelotti sinds 2025; 40+ provisional.
+- Definitief 18 mei.
+intercontinental_travel_profile: CONMEBOL → Noord-Amerika.
+distinctive_spark_notes: 'Ancelotti: eerste niet-Braziliaanse bondscoach sinds 1965;
+  100%-fit-regel Neymar/Vini; NY-opener = 2022-semi-rematch vs Marokko.'
+selection_drama_notes: Neymar 100%-fit-regel + Ancelotti-selectiecriteria,  niet automatisch
+  basis.
+star_dependency: high
+power_score: 90
+tier: Topfavoriet
+macro_style: technisch dominant met veel aanvallende variatie
+strengths:
+- creativiteit
+- 1-tegen-1 kwaliteit
+- aanvallende diepte
+risks:
+- balans bij counters
+- druk rond grote toernooien
+confederation: CONMEBOL
+cohost_status: false
+group_stage: &id001
+  group: C
+  opponents_nl:
+  - Haïti
+  - Marokko
+  - Schotland
+  opponents_fifa:
+  - Haiti
+  - Morocco
+  - Scotland
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-13T22:00
+    is_home: true
+    opponent_fifa: Morocco
+    opponent_nl: Marokko
+    stadium: New York/New Jersey Stadium
+    narrative: Rematch WK 2022 halve finale
+  - match_number: 2
+    kickoff: 2026-06-20T01:00
+    is_home: true
+    opponent_fifa: Haiti
+    opponent_nl: Haïti
+    stadium: Philadelphia Stadium
+  - match_number: 3
+    kickoff: 2026-06-24T22:00
+    is_home: false
+    opponent_fifa: Scotland
+    opponent_nl: Schotland
+    stadium: Miami Stadium
+  fixture_hooks:
+  - 'Groep C: tegen Haïti, Marokko, Schotland.'
+  - 'Groepswedstrijd 1 (13 Jun): thuis vs Marokko @ New York/New Jersey Stadium, Rematch
+    WK 2022 halve finale'
+  - 'Groepswedstrijd 2 (20 Jun): thuis vs Haïti @ Philadelphia Stadium'
+  - 'Groepswedstrijd 3 (24 Jun): uit vs Schotland @ Miami Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4-7 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Marokko en Haïti: New York/New Jersey Stadium → Philadelphia
+    Stadium (7 dag(en) ertussen). Tussen wedstrijd Haïti en Schotland: Philadelphia
+    Stadium → Miami Stadium (4 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: New York/New Jersey Stadium (New
+    York, vochtig zomer); Philadelphia Stadium (Philadelphia, warm vochtig); Miami
+    Stadium (Miami, heet vochtig). Alleen USA-venues in de poule,  beperkte binnenlandse
+    reis. Impact: Philadelphia (warm vochtig) vraagt hitte-management; Miami (heet
+    vochtig) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: star_dependency
+    delta: -1
+    reason: 'Sterafhankelijkheid: weinig marge als de ster uit de wedstrijd is.'
+  - id: selection_drama
+    delta: -1
+    reason: Carlo Ancelotti is de eerste niet-Braziliaanse bondscoach van Brazilië
+      sinds 1965.
+  versus:
+    Haiti:
+    - id: matchup_edge
+      delta: 1
+      reason: Haiti/Scotland hoog zonder dekking.
+    Morocco:
+    - id: opener_context
+      delta: 0
+      reason: 'Ancelotti: eerste niet-Braziliëiaanse bondscoach sinds 1965; 100%-fit-regel
+        Neymar/Vini; NY-opener = 2022-semi-rematch vs Marokko.'
+    - id: matchup_risk
+      delta: -1
+      reason: Marokko Ouahbi blok + Hakimi.
+    Scotland:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Schotland
+    - id: matchup_edge
+      delta: 1
+      reason: Haiti/Scotland hoog zonder dekking.

@@ -1,0 +1,151 @@
+team_id: Verenigde Staten
+slug: usa
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Mauricio Pochettino; Pulisic (Milan), McKennie (Juve),
+  Reyna (Gladbach), Musah, Turner. Squad 26 mei; opener vs Paraguay 12 juni co-host.
+phase_preferences:
+- Sterk Pochettino pressing + Pulisic links.
+- Zwakwer Alfaro compact Paraguay.
+transition_orientation_summary: Pochettino vertical na omzet; EPL-heavy kern.
+psychology_intro: Co-host win-expectation; Reyna comeback narrative.
+psychology_vectors:
+- Paraguay opener must-win.
+- Pulisic goal drought club.
+matchup_counters_us:
+- Alfaro Paraguay grind.
+- Press-resistant teams.
+matchup_we_counter:
+- Paraguay high risk.
+- Athletic second balls.
+dead_ball_swings_matches: McKennie/Pulisic hoogtes.
+experience_cohesion_notes:
+- Pochettino sinds 2024; March 27-man niet final.
+heat_altitude_acclimatization_notes: Co-host klima spread.
+intercontinental_travel_profile: Co-host VS; Mexico/Canada trips.
+crowd_home_bias_notes: Co-host met thuiswedstrijden in meerdere hubs; publiek voordeel
+  vs CONCACAF-rivals.
+power_score: 78
+tier: Subtopper
+macro_style: atletisch, direct en energiek
+strengths:
+- intensiteit
+- thuisregio
+- loopvermogen
+risks:
+- eindpass
+- controle onder druk
+confederation: CONCACAF
+cohost_status: true
+group_stage: &id001
+  group: D
+  opponents_nl:
+  - Australië
+  - Paraguay
+  - Turkije
+  opponents_fifa:
+  - Australia
+  - Paraguay
+  - Türkiye
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-13T01:00
+    is_home: true
+    opponent_fifa: Paraguay
+    opponent_nl: Paraguay
+    stadium: Los Angeles Stadium
+    narrative: Co-host opener vs Paraguay
+  - match_number: 2
+    kickoff: 2026-06-19T19:00
+    is_home: true
+    opponent_fifa: Australia
+    opponent_nl: Australië
+    stadium: Seattle Stadium
+  - match_number: 3
+    kickoff: 2026-06-26T02:00
+    is_home: false
+    opponent_fifa: Türkiye
+    opponent_nl: Turkije
+    stadium: Los Angeles Stadium
+  fixture_hooks:
+  - 'Groep D: tegen Australië, Paraguay, Turkije.'
+  - 'Groepswedstrijd 1 (13 Jun): thuis vs Paraguay @ Los Angeles Stadium ,  Co-host
+    opener vs Paraguay'
+  - 'Groepswedstrijd 2 (19 Jun): thuis vs Australië @ Seattle Stadium'
+  - 'Groepswedstrijd 3 (26 Jun): uit vs Turkije @ Los Angeles Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 6, 7 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Paraguay en Australië: Los Angeles Stadium → Seattle
+    Stadium (6 dag(en) ertussen). Tussen wedstrijd Australië en Turkije: Seattle Stadium
+    → Los Angeles Stadium (7 dag(en) ertussen). 2 vroege/late kickoff-slots (UTC-nacht)
+    in groep ,  recovery relevant.'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Los Angeles Stadium (Los Angeles,
+    warm droog); Seattle Stadium (Seattle, koel mild). Alleen USA-venues in de poule
+    ,  beperkte binnenlandse reis. Impact: Seattle is koeler ,  kan hitte-gewende
+    tegenstanders neutraliseren; 2 late kickoffs in groep ,  rustritme en recovery
+    extra relevant.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: cohost_crowd
+    delta: 1
+    reason: 'In dit duel speelt mee: Co-host met thuiswedstrijden in meerdere hubs;
+      publiek voordeel tegen CONCACAF-rivals; dat vraagt extra aandacht van Verenigde
+      Staten.'
+  versus:
+    Australia:
+    - id: style_matchup
+      delta: 1
+      reason: Eigen press kan compact blok Australië onder druk zetten
+    - id: home_fixture
+      delta: 1
+      reason: Thuis in Seattle Stadium (co-host)
+    Paraguay:
+    - id: style_matchup
+      delta: 1
+      reason: Eigen press kan compact blok Paraguay onder druk zetten
+    - id: tactical_weakness
+      delta: -1
+      reason: Verenigde Staten heeft in dit duel moeite met het profiel van Paraguay.
+    Türkiye:
+    - id: style_matchup
+      delta: 1
+      reason: Eigen press kan compact blok Turkije onder druk zetten

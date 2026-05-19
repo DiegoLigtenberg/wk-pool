@@ -1,0 +1,143 @@
+team_id: Paraguay
+slug: paraguay
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Gustavo Alfaro; Gustavo Gómez (Palmeiras), Almirón
+  (Atlanta), Diego Gómez (Brighton). Opener 12 juni vs co-host USA.
+phase_preferences:
+- Sterk Alfaro compact CONMEBOL-grind.
+- Zwakwer Pochettino pressing.
+transition_orientation_summary: Destroy-and-grind; Almirón counters.
+psychology_intro: Alfaro ervaring; USA opener in co-host stadium.
+psychology_vectors:
+- USA publiek tegen.
+- Discipline vs Pulisic.
+matchup_counters_us:
+- USA Pochettino athletic mid.
+- Australia tempo.
+matchup_we_counter:
+- Frustrated favorites.
+- Set-piece heavy.
+dead_ball_swings_matches: Gómez/Almirón frees; compact → corners.
+experience_cohesion_notes:
+- Alfaro; 55 provisional mei.
+intercontinental_travel_profile: CONMEBOL → VS.
+power_score: 72
+tier: Underdog
+macro_style: hard, compact en wedstrijdslim
+strengths:
+- duels
+- verdedigende organisatie
+- standaardsituaties
+risks:
+- aanvallende variatie
+- balbezit onder druk
+confederation: CONMEBOL
+cohost_status: false
+group_stage: &id001
+  group: D
+  opponents_nl:
+  - Australië
+  - Turkije
+  - Verenigde Staten
+  opponents_fifa:
+  - Australia
+  - Türkiye
+  - USA
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-13T01:00
+    is_home: false
+    opponent_fifa: USA
+    opponent_nl: Verenigde Staten
+    stadium: Los Angeles Stadium
+    narrative: Uit tegen co-host Verenigde Staten
+  - match_number: 2
+    kickoff: 2026-06-20T04:00
+    is_home: false
+    opponent_fifa: Türkiye
+    opponent_nl: Turkije
+    stadium: San Francisco Bay Area Stadium
+  - match_number: 3
+    kickoff: 2026-06-26T02:00
+    is_home: true
+    opponent_fifa: Australia
+    opponent_nl: Australië
+    stadium: San Francisco Bay Area Stadium
+  fixture_hooks:
+  - 'Groep D: tegen Australië, Turkije, Verenigde Staten.'
+  - 'Groepswedstrijd 1 (13 Jun): uit vs Verenigde Staten @ Los Angeles Stadium ,  Uit
+    tegen co-host Verenigde Staten'
+  - 'Groepswedstrijd 2 (20 Jun): uit vs Turkije @ San Francisco Bay Area Stadium'
+  - 'Groepswedstrijd 3 (26 Jun): thuis vs Australië @ San Francisco Bay Area Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 6, 7 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Verenigde Staten en Turkije: Los Angeles Stadium →
+    San Francisco Bay Area Stadium (7 dag(en) ertussen). 3 vroege/late kickoff-slots
+    (UTC-nacht) in groep ,  recovery relevant.'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Los Angeles Stadium (Los Angeles,
+    warm droog); San Francisco Bay Area Stadium (San Francisco, mild kust). Alleen
+    USA-venues in de poule ,  beperkte binnenlandse reis. Impact: San Francisco is
+    koeler ,  kan hitte-gewende tegenstanders neutraliseren; 3 late kickoffs in groep
+    ,  rustritme en recovery extra relevant.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Australia:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Australië
+    - id: matchup_risk
+      delta: -1
+      reason: Australia brengt met tempo extra dreiging mee; lastig voor Paraguay
+        in dit duel tegen Australië.
+    Türkiye:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Turkije
+    USA:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Verenigde Staten
+    - id: away_fixture
+      delta: -1
+      reason: Uit tegen co-host Verenigde Staten (Los Angeles Stadium)

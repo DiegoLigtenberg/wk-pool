@@ -1,6 +1,18 @@
+import math
+import re
 from dataclasses import dataclass
 
-from app.teams import display_team_name
+from app.data.teams.context_score import match_context_breakdown
+from app.data.teams.team_bundle import TeamBundle
+from app.data.teams.team_loader import get_team_bundle
+from app.display_text import humanize_research_line, humanize_team_spark
+from app.prediction_narrative import build_prediction_insight
+from app.teams import display_team_name, fifa_team_key
+
+_FIXTURE_HOOK_RE = re.compile(
+    r"^Groepswedstrijd\s+(\d+)\s*\([^)]*\):\s*(thuis|uit)\s+vs\s+(.+?)\s*@\s*(.+)$",
+    re.IGNORECASE,
+)
 
 
 PICKS = ("1", "2", "3")
@@ -33,6 +45,8 @@ DEFAULT_PROFILE = TeamProfile(
 )
 
 
+# Alleen nog gebruikt door `sync_research_yaml` om ratings in YAML te zetten.
+# Runtime voorspelling leest `teams/{slug}.yaml` via `get_team_bundle`.
 TEAM_PROFILES: dict[str, TeamProfile] = {
     "Argentina": TeamProfile(91, TIER_TOPFAVORIET, "ervaren, pragmatisch en sterk in beslissende fases", ("wereldklasse in de as", "toernooi-ervaring", "wedstrijdcontrole"), ("leunt soms op kleine marges", "tempo kan zakken tegen energieke tegenstanders"), ("veel spelers kennen elkaars rollen uit meerdere eindtoernooien",)),
     "France": TeamProfile(92, TIER_TOPFAVORIET, "explosief, atletisch en diep in elke linie", ("selectiebreedte", "transitiegevaar", "knock-out ervaring"), ("kan soms slordig worden bij veel balbezit", "verwachtingsdruk"), ("veel profielen die een wedstrijd individueel kunnen kantelen",)),
@@ -86,27 +100,80 @@ TEAM_PROFILES: dict[str, TeamProfile] = {
 
 
 def is_known_team(team: str) -> bool:
-    return team != "To be announced" and not team[:1].isdigit()
+    if team == "To be announced" or team[:1].isdigit():
+        return False
+    try:
+        get_team_bundle(team)
+        return True
+    except KeyError:
+        return False
 
 
 def profile_for(team: str) -> TeamProfile:
-    return TEAM_PROFILES.get(team, DEFAULT_PROFILE)
+    try:
+        bundle = get_team_bundle(team)
+    except KeyError:
+        return DEFAULT_PROFILE
+    return TeamProfile(
+        rating=bundle.power_score,
+        tier=bundle.tier,
+        style=bundle.macro_style,
+        strengths=bundle.strengths,
+        risks=bundle.risks,
+        niche=(),
+    )
 
 
 def team_insight(team: str) -> dict[str, object] | None:
     if not is_known_team(team):
         return None
 
+    bundle = get_team_bundle(team)
     profile = profile_for(team)
     return {
-        "team": team,
-        "tier": profile.tier,
-        "style": profile.style,
-        "strengths": list(profile.strengths),
-        "risks": list(profile.risks),
-        "niche": list(profile.niche),
+        "team": bundle.team_name_nl,
+        "tier": bundle.tier,
+        "style": bundle.macro_style,
+        "powerScore": bundle.power_score,
+        "strengths": list(bundle.strengths),
+        "risks": list(bundle.risks),
+        "group": bundle.group_stage.group,
+        "opponents": list(bundle.group_stage.opponents_nl),
+        "distinctiveSpark": humanize_team_spark(bundle.distinctive_spark_notes, bundle.team_name_nl)
+        if bundle.distinctive_spark_notes
+        else None,
+        "groupContext": _group_context_lines(bundle),
         "summary": _team_summary(team, profile),
     }
+
+
+def _group_context_lines(bundle: TeamBundle) -> list[str]:
+    lines: list[str] = []
+    group_label = f"groep {bundle.group_stage.group.lower()}:"
+
+    for hook in bundle.group_stage.fixture_hooks:
+        text = hook.strip().strip("'\"")
+        if not text or text.lower().startswith(group_label):
+            continue
+        lines.append(_humanize_fixture_hook(text, bundle.team_name_nl))
+
+    if not lines:
+        for fx in bundle.group_stage.fixtures:
+            side = "thuis" if fx.is_home else "uit"
+            lines.append(f"Wedstrijd {fx.match_number}: {side} tegen {fx.opponent_nl}")
+
+    return lines[:4]
+
+
+def _humanize_fixture_hook(hook: str, team_nl: str) -> str:
+    match = _FIXTURE_HOOK_RE.match(hook.strip())
+    if match:
+        number, side, opponent, stadium = match.groups()
+        return (
+            f"Wedstrijd {number}: {side.lower()} tegen {opponent.strip()} "
+            f"({stadium.strip()})"
+        )
+    return humanize_research_line(hook, team_nl=team_nl)
 
 
 def predict_match(home_team: str, away_team: str, stage: str, round_name: str, group: str | None) -> dict[str, object]:
@@ -115,32 +182,35 @@ def predict_match(home_team: str, away_team: str, stage: str, round_name: str, g
             "pick": "3",
             "confidence": 0,
             "explanation": "De AI wacht met inhoudelijke voorspelling tot beide landen bekend zijn.",
-            "themes": ["Teams nog onbekend"],
             "homeWinProbability": None,
             "drawProbability": None,
             "awayWinProbability": None,
         }
 
-    home = profile_for(home_team)
-    away = profile_for(away_team)
-    context = _context_bonus(home_team, away_team, stage, round_name, group)
-    diff = (home.rating + context["home"]) - (away.rating + context["away"])
+    home_key = fifa_team_key(home_team)
+    away_key = fifa_team_key(away_team)
+    breakdown = match_context_breakdown(home_key, away_key)
+    diff = int(breakdown["diff"])
     can_draw = stage == "group"
 
-    if can_draw and abs(diff) <= 4:
-        pick = "3"
-    else:
-        pick = "1" if diff >= 0 else "2"
-
     probabilities = _probabilities(diff, can_draw)
+    pick = _pick_from_probabilities(probabilities, can_draw)
     confidence = _confidence_from_probabilities(pick, probabilities)
-    themes = _match_themes(home_team, away_team, home, away, context["themes"], diff, stage)
+    insight = build_prediction_insight(
+        home_team=home_key,
+        away_team=away_key,
+        pick=pick,
+        breakdown=breakdown,
+        diff=int(breakdown["diff"]),
+        stage=stage,
+        round_name=round_name,
+    )
 
     return {
         "pick": pick,
         "confidence": confidence,
-        "explanation": _match_explanation(home_team, away_team, home, away, pick, themes, stage, round_name),
-        "themes": themes[:5],
+        "explanation": str(insight["verdict"]),
+        "insight": insight,
         "homeWinProbability": probabilities["home"],
         "drawProbability": probabilities["draw"] if can_draw else None,
         "awayWinProbability": probabilities["away"],
@@ -149,54 +219,65 @@ def predict_match(home_team: str, away_team: str, stage: str, round_name: str, g
 
 def _team_summary(team: str, profile: TeamProfile) -> str:
     name = display_team_name(team)
-    return (
-        f"{name} wordt gezien als {profile.tier.lower()}: {profile.style}. "
-        f"Belangrijk zijn vooral {', '.join(profile.strengths[:2])}. "
-        f"Risico: {profile.risks[0]}."
-    )
+    text = f"{name} wordt gezien als {profile.tier.lower()}."
+    if profile.risks:
+        text += f" Belangrijkste risico: {profile.risks[0]}."
+    return text
 
 
-def _context_bonus(home_team: str, away_team: str, stage: str, round_name: str, group: str | None) -> dict[str, object]:
-    home_bonus = 0
-    away_bonus = 0
-    themes: list[str] = []
+def _sigmoid(x: float) -> float:
+    return 1.0 / (1.0 + math.exp(-x))
 
-    host_region = {"Mexico", "USA", "Canada"}
-    if home_team in host_region:
-        home_bonus += 3
-        themes.append("thuisregio en publiek")
-    if away_team in host_region:
-        away_bonus += 3
-        themes.append("thuisregio en publiek")
 
-    if stage == "knockout":
-        for team, side in ((home_team, "home"), (away_team, "away")):
-            if profile_for(team).tier in {TIER_TOPFAVORIET, TIER_FAVORIET, TIER_SUBTOPPER}:
-                if side == "home":
-                    home_bonus += 2
-                else:
-                    away_bonus += 2
-        themes.append("knock-out ervaring")
-    elif group:
-        themes.append(f"groepscontext Poule {group}")
+# Groep: diff=0 → ~36% thuis; diff=8 → ~58% thuis (marginaal, incl. gelijk).
+_GROUP_HOME_LOGIT_K = 0.112
+_GROUP_HOME_LOGIT_B = math.log(0.36 / 0.64)
 
-    if round_name == "1":
-        themes.append("openingswedstrijd en nervositeit")
-
-    return {"home": home_bonus, "away": away_bonus, "themes": themes}
+# Knock-out: steilere curve, geen gelijk.
+_KNOCKOUT_HOME_LOGIT_K = 0.155
 
 
 def _probabilities(diff: int, can_draw: bool) -> dict[str, int]:
     if can_draw:
-        draw = max(18, min(31, 28 - abs(diff)))
-        home = round((100 - draw) * (0.5 + max(-28, min(28, diff)) / 80))
-        home = max(15, min(75, home))
-        away = 100 - draw - home
-        return {"home": home, "draw": draw, "away": away}
+        return _group_probabilities(diff)
+    return _knockout_probabilities(diff)
 
-    home = round(50 + max(-35, min(35, diff)) * 1.15)
-    home = max(18, min(82, home))
+
+def _group_probabilities(diff: int) -> dict[str, int]:
+    draw_pct = int(round(max(16, min(32, 29 - 1.1 * abs(diff)))))
+    p_draw = draw_pct / 100.0
+    p_home = _sigmoid(diff * _GROUP_HOME_LOGIT_K + _GROUP_HOME_LOGIT_B)
+    p_away = max(0.08, 1.0 - p_home - p_draw)
+    p_home = max(0.08, 1.0 - p_away - p_draw)
+    total = p_home + p_draw + p_away
+    home = int(round(100 * p_home / total))
+    draw = int(round(100 * p_draw / total))
+    away = 100 - home - draw
+
+    # Gelijkwaardige duels: gelijk strikt hoogste kans (pick = gelijk).
+    if abs(diff) <= 2 and draw <= max(home, away):
+        draw = max(home, away) + 1
+        away = max(8, 100 - home - draw)
+        if home + draw + away != 100:
+            away = 100 - home - draw
+
+    return {"home": home, "draw": draw, "away": away}
+
+
+def _knockout_probabilities(diff: int) -> dict[str, int]:
+    p_home = _sigmoid(diff * _KNOCKOUT_HOME_LOGIT_K)
+    home = int(round(100 * p_home))
+    home = max(15, min(88, home))
     return {"home": home, "draw": 0, "away": 100 - home}
+
+
+def _pick_from_probabilities(probabilities: dict[str, int], can_draw: bool) -> str:
+    home = int(probabilities["home"])
+    away = int(probabilities["away"])
+    draw = int(probabilities.get("draw") or 0)
+    if can_draw and draw >= home and draw >= away:
+        return "3"
+    return "1" if home >= away else "2"
 
 
 def _confidence_from_probabilities(pick: str, probabilities: dict[str, int]) -> int:
@@ -205,66 +286,3 @@ def _confidence_from_probabilities(pick: str, probabilities: dict[str, int]) -> 
     if pick == "2":
         return probabilities["away"]
     return probabilities["draw"]
-
-
-def _match_themes(
-    home_team: str,
-    away_team: str,
-    home: TeamProfile,
-    away: TeamProfile,
-    context_themes: list[str],
-    diff: int,
-    stage: str,
-) -> list[str]:
-    themes = list(context_themes)
-    stronger = home_team if diff >= 0 else away_team
-    stronger_profile = home if diff >= 0 else away
-    weaker_profile = away if diff >= 0 else home
-
-    themes.append(f"{display_team_name(stronger)}: {stronger_profile.strengths[0]}")
-    if abs(diff) <= 5:
-        themes.append("kleine marges en kans op gelijkspel")
-    if stronger_profile.rating - weaker_profile.rating >= 10:
-        themes.append("duidelijk verschil in selectiebreedte")
-    if "standaardsituaties" in (*home.strengths, *away.strengths):
-        themes.append("standaardsituaties kunnen zwaar wegen")
-    if stage == "group":
-        themes.append("puntverlies is minder fataal dan in knock-out")
-
-    return themes
-
-
-def _match_explanation(
-    home_team: str,
-    away_team: str,
-    home: TeamProfile,
-    away: TeamProfile,
-    pick: str,
-    themes: list[str],
-    stage: str,
-    round_name: str,
-) -> str:
-    home_name = display_team_name(home_team)
-    away_name = display_team_name(away_team)
-
-    if pick == "1":
-        choice = home_name
-        profile = home
-        opponent = away_name
-    elif pick == "2":
-        choice = away_name
-        profile = away
-        opponent = home_name
-    else:
-        return (
-            f"De AI ziet {home_name} tegen {away_name} als een wedstrijd met kleine marges. "
-            f"Beide landen hebben genoeg pluspunten om fases te controleren, maar ook duidelijke risico's. "
-            f"Daarom wegen vorm, eerste goal, standaardsituaties en groepssituatie hier zwaarder dan pure reputatie."
-        )
-
-    phase = "knock-outwedstrijd" if stage == "knockout" else f"groepswedstrijd ronde {round_name}"
-    return (
-        f"De AI kiest {choice} in deze {phase}. De doorslag zit vooral in {profile.strengths[0]}, "
-        f"{profile.strengths[1]} en de matchup tegen {opponent}. Tegelijk blijft dit geen harde odd: "
-        f"factoren als {themes[0].lower()}, wedstrijdtempo, eerste goal en bankdiepte kunnen de voorspelling kantelen."
-    )

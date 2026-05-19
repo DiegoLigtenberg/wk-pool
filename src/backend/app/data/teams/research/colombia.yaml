@@ -1,0 +1,153 @@
+team_id: Colombia
+slug: colombia
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Néstor Lorenzo; Luis Díaz (Bayern), James (Minnesota,
+  fitness-zorgen), Muñoz/Lerma (Palace), Cucho Hernández. Groep K vs Uzbekistan 17
+  juni.
+phase_preferences:
+- 'Sterk: Díaz 1v1, James/Carrascal creatie.'
+- 'Zwakker: spits-inconsistentie, James fysiek.'
+transition_orientation_summary: Díaz vertical runs + James diagonals na omzet.
+psychology_intro: James laatste WK-verhaal; Díaz nationale icon.
+psychology_vectors:
+- James personal trainer maar clubminuten beperkt.
+- Díaz isolatie risico.
+matchup_counters_us:
+- Portugal Martinez mid-block.
+- DR Congo atletiek.
+matchup_we_counter:
+- Uzbekistan debut-nerves.
+- Hoog druk zonder dekking.
+dead_ball_swings_matches: James frees; Mina hoogtes.
+experience_cohesion_notes:
+- Lorenzo sinds 2022; 55 provisional, definitief 1 juni.
+intercontinental_travel_profile: CONMEBOL → VS.
+distinctive_spark_notes: James (Minnesota) geselecteerd ondanks minuten/arm-fit, Lorenzo
+  vertrouwt op persoonlijke trainer.
+discipline_risk_notes: Fysiek duelspel en Zuid-Amerikaanse intensiteit,  kaarten bij
+  achterstand.
+squad_load_notes: James Rodriguez minuten/arm-fit,  persoonlijke trainer vs wedstrijdrust.
+power_score: 80
+tier: Subtopper
+macro_style: technisch, fel en aanvallend creatief
+strengths:
+- vormgolven
+- creativiteit
+- fysieke intensiteit
+risks:
+- wedstrijdcontrole
+- emotionele momenten
+confederation: CONMEBOL
+cohost_status: false
+group_stage: &id001
+  group: K
+  opponents_nl:
+  - Congo
+  - Oezbekistan
+  - Portugal
+  opponents_fifa:
+  - Congo DR
+  - Portugal
+  - Uzbekistan
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-18T02:00
+    is_home: false
+    opponent_fifa: Uzbekistan
+    opponent_nl: Oezbekistan
+    stadium: Mexico City Stadium
+  - match_number: 2
+    kickoff: 2026-06-24T02:00
+    is_home: true
+    opponent_fifa: Congo DR
+    opponent_nl: Congo
+    stadium: Guadalajara Stadium
+  - match_number: 3
+    kickoff: 2026-06-27T23:30
+    is_home: true
+    opponent_fifa: Portugal
+    opponent_nl: Portugal
+    stadium: Miami Stadium
+  fixture_hooks:
+  - 'Groep K: tegen Congo, Oezbekistan, Portugal.'
+  - 'Groepswedstrijd 1 (18 Jun): uit vs Oezbekistan @ Mexico City Stadium'
+  - 'Groepswedstrijd 2 (24 Jun): thuis vs Congo @ Guadalajara Stadium'
+  - 'Groepswedstrijd 3 (27 Jun): thuis vs Portugal @ Miami Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 3-6 dag(en); kortste window
+    ≤3 dagen. Tussen wedstrijd Oezbekistan en Congo: Mexico City Stadium → Guadalajara
+    Stadium (6 dag(en) ertussen). Tussen wedstrijd Congo en Portugal: Guadalajara
+    Stadium → Miami Stadium (3 dag(en) ertussen). 2 vroege/late kickoff-slots (UTC-nacht)
+    in groep,  recovery relevant.'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Mexico City Stadium (Mexico City,
+    ≈2240m); Guadalajara Stadium (Guadalajara, ≈1560m); Miami Stadium (Miami, heet
+    vochtig). Cross-border poule (Mexico, USA),  extra vlucht/tijdzone tussen groepswedstrijden.
+    Impact: Mexico City (≈2240m) kan sprintherstel en balhang beïnvloeden; Guadalajara
+    (≈1560m) kan sprintherstel en balhang beïnvloeden; Miami (heet vochtig) vraagt
+    hitte-management; 2 late kickoffs in groep,  rustritme en recovery extra relevant.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: squad_load
+    delta: -2
+    reason: 'In dit duel speelt mee: James Rodriguez minuten/schouderblessure, persoonlijke
+      trainer tegen wedstrijdrust; dat vraagt extra aandacht van Colombia.'
+  versus:
+    Congo DR:
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Congo tegen ons aanvalsspel
+    - id: matchup_risk
+      delta: -1
+      reason: DR Congo atletiek.
+    Portugal:
+    - id: matchup_risk
+      delta: -1
+      reason: Portugal Martinez mid-block.
+    Uzbekistan:
+    - id: matchup_edge
+      delta: 1
+      reason: Uzbekistan brengt met debut-nerves extra dreiging mee; lastig voor Colombia
+        in dit duel tegen Oezbekistan.
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Oezbekistan tegen ons aanvalsspel

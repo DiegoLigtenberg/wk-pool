@@ -1,0 +1,145 @@
+team_id: Senegal
+slug: senegal
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Pape Thiaw (post-Cissé); Mané, Mendy, Koulibaly (fitness?),
+  Ndiaye. Groep I vs Frankrijk 16 juni. 55 provisional, squad 21 mei.
+phase_preferences:
+- Sterk Mané/Balde flanken + Mendy uittrap.
+- Zwakwer Mbappé/Deschamps.
+transition_orientation_summary: Thiaw flex blok; Mané counters.
+psychology_intro: AFCON-achtige verwachting; Frankrijk opener.
+psychology_vectors:
+- Koulibaly fitheid.
+- Thiaw eerste WK als coach.
+matchup_counters_us:
+- Frankrijk Mbappé.
+- Norway Haaland.
+matchup_we_counter:
+- Irak.
+- Pressing niet afgemaakt.
+dead_ball_swings_matches: Koulibaly/Mané routines.
+experience_cohesion_notes:
+- Thiaw; Malang Sarr surprise call-up.
+heat_altitude_acclimatization_notes: West-Afrika.
+intercontinental_travel_profile: CAF → VS.
+distinctive_spark_notes: Pape Thiaw verving Cissé kort voor tornooi ,  Frankrijk-opener
+  NY direct na coachwissel.
+club_concentration_notes: Veel CAF-spelers in Ligue 1 ,  vertrouwde automatismen in
+  Franse competitie.
+power_score: 77
+tier: Subtopper
+macro_style: fysiek sterk en gevaarlijk in omschakeling
+strengths:
+- atletiek
+- duelkracht
+- directe dreiging
+risks:
+- creatieve controle
+- consistentie
+confederation: CAF
+cohost_status: false
+group_stage: &id001
+  group: I
+  opponents_nl:
+  - Frankrijk
+  - Irak
+  - Noorwegen
+  opponents_fifa:
+  - France
+  - Iraq
+  - Norway
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-16T19:00
+    is_home: false
+    opponent_fifa: France
+    opponent_nl: Frankrijk
+    stadium: New York/New Jersey Stadium
+  - match_number: 2
+    kickoff: 2026-06-23T00:00
+    is_home: false
+    opponent_fifa: Norway
+    opponent_nl: Noorwegen
+    stadium: New York/New Jersey Stadium
+  - match_number: 3
+    kickoff: 2026-06-26T19:00
+    is_home: true
+    opponent_fifa: Iraq
+    opponent_nl: Irak
+    stadium: Toronto Stadium
+  fixture_hooks:
+  - 'Groep I: tegen Frankrijk, Irak, Noorwegen.'
+  - 'Groepswedstrijd 1 (16 Jun): uit vs Frankrijk @ New York/New Jersey Stadium'
+  - 'Groepswedstrijd 2 (23 Jun): uit vs Noorwegen @ New York/New Jersey Stadium'
+  - 'Groepswedstrijd 3 (26 Jun): thuis vs Irak @ Toronto Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 3, 7 dag(en); kortste window
+    ≤3 dagen. Tussen wedstrijd Noorwegen en Irak: New York/New Jersey Stadium → Toronto
+    Stadium (3 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: New York/New Jersey Stadium (New
+    York, vochtig zomer); Toronto Stadium (Toronto, gematigd zomer). Cross-border
+    poule (USA, Canada) ,  extra vlucht/tijdzone tussen groepswedstrijden.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    France:
+    - id: opener_context
+      delta: 0
+      reason: Pape Thiaw verving Cissé kort voor tornooi ,  Frankrijk-opener NY direct
+        na coachwissel.
+    - id: matchup_risk
+      delta: -1
+      reason: Frankrijk leunt op Mbappé als belangrijkste aanvalsbedreiging; extra
+        aandachtspunt voor Senegal.
+    Iraq:
+    - id: matchup_edge
+      delta: 1
+      reason: Irak.
+    Norway:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Noorwegen
+    - id: matchup_risk
+      delta: -1
+      reason: Noorwegen leunt op Haaland als belangrijkste aanvalsbedreiging; extra
+        aandachtspunt voor Senegal.

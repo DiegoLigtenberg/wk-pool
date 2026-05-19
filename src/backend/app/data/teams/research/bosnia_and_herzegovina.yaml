@@ -1,0 +1,143 @@
+team_id: Bosnië-Herzegovina
+slug: bosnia_and_herzegovina
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Sergej Barbarez; Džeko (39, Schalke), Demirović (Stuttgart),
+  Kolašinac, Bajraktarević (PSV). Opener 12 juni vs co-host Canada.
+phase_preferences:
+- 'Sterk: Džeko tussen linies, compact 4-4-2.'
+- Zwakker vs Marsch/Davies pressing.
+transition_orientation_summary: Lange ballen Džeko, Bajraktarević counters,  survival
+  vs Canada.
+psychology_intro: Tweede WK; Džeko laatste grootschalige toernooi.
+psychology_vectors:
+- Canada opener in Vancouver.
+- Džeko minuten beperkt op 39.
+matchup_counters_us:
+- Marsch gegenpressing Davies.
+- Qatar/Switzerland geduld.
+matchup_we_counter:
+- Canada nervositeit co-host.
+- Corner-heavy wedstrijden.
+dead_ball_swings_matches: Džeko vrije trappen = goal-route.
+experience_cohesion_notes:
+- Barbarez sinds 2024; 26-man mei 2026 bekend.
+intercontinental_travel_profile: Europa; Canada-opener minimaliseert jetlag.
+power_score: 65
+tier: Verrassingsploeg
+macro_style: technisch in fases en afhankelijk van sleutelspelers
+strengths:
+- ervaring
+- passing
+- momentenkwaliteit
+risks:
+- tempo
+- diepte in selectie
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: B
+  opponents_nl:
+  - Canada
+  - Qatar
+  - Zwitserland
+  opponents_fifa:
+  - Canada
+  - Qatar
+  - Switzerland
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-12T19:00
+    is_home: false
+    opponent_fifa: Canada
+    opponent_nl: Canada
+    stadium: Toronto Stadium
+  - match_number: 2
+    kickoff: 2026-06-18T19:00
+    is_home: false
+    opponent_fifa: Switzerland
+    opponent_nl: Zwitserland
+    stadium: Los Angeles Stadium
+  - match_number: 3
+    kickoff: 2026-06-24T19:00
+    is_home: true
+    opponent_fifa: Qatar
+    opponent_nl: Qatar
+    stadium: Seattle Stadium
+  fixture_hooks:
+  - 'Groep B: tegen Canada, Qatar, Zwitserland.'
+  - 'Groepswedstrijd 1 (12 Jun): uit vs Canada @ Toronto Stadium'
+  - 'Groepswedstrijd 2 (18 Jun): uit vs Zwitserland @ Los Angeles Stadium'
+  - 'Groepswedstrijd 3 (24 Jun): thuis vs Qatar @ Seattle Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 6-6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Canada en Zwitserland: Toronto Stadium → Los Angeles
+    Stadium (6 dag(en) ertussen). Tussen wedstrijd Zwitserland en Qatar: Los Angeles
+    Stadium → Seattle Stadium (6 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Toronto Stadium (Toronto, gematigd
+    zomer); Los Angeles Stadium (Los Angeles, warm droog); Seattle Stadium (Seattle,
+    koel mild). Cross-border poule (Canada, USA),  extra vlucht/tijdzone tussen groepswedstrijden.
+    Impact: Seattle is koeler,  kan hitte-gewende tegenstanders neutraliseren.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Canada:
+    - id: matchup_edge
+      delta: 1
+      reason: Canada nervositeit co-host.
+    - id: away_fixture
+      delta: -1
+      reason: Uit tegen co-host Canada (Toronto Stadium)
+    Qatar:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Qatar
+    - id: matchup_risk
+      delta: -1
+      reason: Qatar/Switzerland geduld.
+    Switzerland:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Zwitserland
+    - id: matchup_risk
+      delta: -1
+      reason: Qatar/Switzerland geduld.

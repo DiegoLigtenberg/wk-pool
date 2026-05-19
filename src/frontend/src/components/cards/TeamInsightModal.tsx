@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import type { TeamInsight } from "../../types";
 import { TeamLabel } from "./TeamLabel";
+import { TierBadge } from "./TierBadge";
 import "./TeamInsightModal.css";
 
 type TeamInsightModalProps = {
@@ -62,13 +63,49 @@ export function TeamInsightModal({ insight, onClose }: TeamInsightModalProps) {
         </button>
         <p className="eyebrow">Teamvisie</p>
         <h2 id="team-insight-title">
-          <TeamLabel team={insight.team} /> <span>{insight.tier}</span>
+          <TeamLabel team={insight.team} /> <TierBadge tier={insight.tier} />
         </h2>
         <p id="team-insight-summary">{insight.summary}</p>
+        {insight.style ? (
+          <p className="team-insight-style">
+            <span className="team-insight-style__label">Speelstijl</span>
+            {insight.style}
+          </p>
+        ) : null}
+        {insight.group && insight.opponents?.length ? (
+          <p className="team-insight-meta">
+            Groep {insight.group}: {insight.opponents.join(", ")}
+          </p>
+        ) : null}
+        {insight.groupContext?.length ? (
+          <section className="team-insight-group-context" aria-label="Groepsprogramma">
+            <h3 className="team-insight-group-context__title">Groepsprogramma</h3>
+            <ul>
+              {insight.groupContext.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+        {insight.powerScore != null ? (
+          <p className="team-insight-score">
+            <span className="team-insight-score__label">Basisscore</span>
+            <span className="team-insight-score__value">{insight.powerScore}</span>
+            <span className="team-insight-score__hint">
+              Vaste teamsterkte in het model; per wedstrijd komt daar duelcontext bij (dueltotaal).
+            </span>
+          </p>
+        ) : null}
+        {insight.distinctiveSpark ? (
+          <section className="team-insight-spark-block" aria-label="Opvallend bij dit team">
+            <h3 className="team-insight-spark__title">Opvallend bij dit team</h3>
+            <p className="team-insight-spark">{insight.distinctiveSpark}</p>
+          </section>
+        ) : null}
         <div className="team-insight-grid">
           <InsightList title="Sterktes" items={insight.strengths} />
           <InsightList title="Risico's" items={insight.risks} />
-          <InsightList title="Niche signalen" items={insight.niche} />
+          {insight.niche?.length ? <InsightList title="Niche signalen" items={insight.niche} /> : null}
         </div>
       </article>
     </div>

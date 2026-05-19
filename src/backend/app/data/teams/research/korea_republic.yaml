@@ -1,0 +1,149 @@
+team_id: Zuid-Korea
+slug: korea_republic
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Hong Myung-bo (nieuw); Son (LAFC, 4e WK), Kim Min-jae
+  (Bayern), Lee Kang-in (PSG), Hwang Hee-chan. Opener 11 juni vs Tsjechië.
+phase_preferences:
+- Sterk Son/Lee Kang-in, Kim Min-jae leiderschap.
+- Zwakwer Schick/Soucek fysiek.
+transition_orientation_summary: Fighting football; Son verticaliteit na omzet.
+psychology_intro: Hong Myung-bo legend; Son laatste WK-cyclus?
+psychology_vectors:
+- Tsjechië opener must-win.
+- Lee Kang-in creatie vs compact.
+matchup_counters_us:
+- Schick target.
+- Moisés Caicedo is Ecuadors spil op het middenveld (Chelsea); lastig duel in het
+  centrum.
+matchup_we_counter:
+- Tsjechië underdog.
+- Pressing niet afgemaakt.
+dead_ball_swings_matches: Kim Min-jae hoogtes; Son frees.
+experience_cohesion_notes:
+- Hong sinds 2025; veel Europa.
+intercontinental_travel_profile: AFC → VS.
+distinctive_spark_notes: Son Heung-min vierde WK onder nieuwe coach Hong Myung-bo
+  (legend).
+star_dependency: medium
+power_score: 70
+tier: Underdog
+macro_style: snel, gedisciplineerd en hard werkend
+strengths:
+- loopvermogen
+- organisatie
+- transities
+risks:
+- fysieke mismatch
+- creativiteit centraal
+confederation: AFC
+cohost_status: false
+group_stage: &id001
+  group: A
+  opponents_nl:
+  - Mexico
+  - Tsjechië
+  - Zuid-Afrika
+  opponents_fifa:
+  - Czechia
+  - Mexico
+  - South Africa
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-12T02:00
+    is_home: true
+    opponent_fifa: Czechia
+    opponent_nl: Tsjechië
+    stadium: Guadalajara Stadium
+  - match_number: 2
+    kickoff: 2026-06-19T01:00
+    is_home: false
+    opponent_fifa: Mexico
+    opponent_nl: Mexico
+    stadium: Guadalajara Stadium
+  - match_number: 3
+    kickoff: 2026-06-25T01:00
+    is_home: false
+    opponent_fifa: South Africa
+    opponent_nl: Zuid-Afrika
+    stadium: Monterrey Stadium
+  fixture_hooks:
+  - 'Groep A: tegen Mexico, Tsjechië, Zuid-Afrika.'
+  - 'Groepswedstrijd 1 (12 Jun): thuis vs Tsjechië @ Guadalajara Stadium'
+  - 'Groepswedstrijd 2 (19 Jun): uit vs Mexico @ Guadalajara Stadium'
+  - 'Groepswedstrijd 3 (25 Jun): uit vs Zuid-Afrika @ Monterrey Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 6, 7 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Mexico en Zuid-Afrika: Guadalajara Stadium → Monterrey
+    Stadium (6 dag(en) ertussen). 3 vroege/late kickoff-slots (UTC-nacht) in groep
+    ,  recovery relevant.'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Guadalajara Stadium (Guadalajara,
+    ≈1560m); Monterrey Stadium (Monterrey, ≈540m). Alleen Mexico-venues in de poule
+    ,  beperkte binnenlandse reis. Impact: Guadalajara (≈1560m) kan sprintherstel
+    en balhang beïnvloeden; Monterrey (heet droog) vraagt hitte-management; 3 late
+    kickoffs in groep ,  rustritme en recovery extra relevant.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: distinctive_spark
+    delta: -1
+    reason: Son Heung-min speelt zijn vierde WK; nieuwe bondscoach is Hong Myung-bo
+      (legende van het Koreaanse voetbal).
+  versus:
+    Czechia:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Tsjechië
+    - id: matchup_edge
+      delta: 1
+      reason: Tsjechië leunt in dit duel op underdog; dat vraagt een gericht plan
+        van Zuid-Korea.
+    Mexico:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Mexico
+    - id: away_fixture
+      delta: -1
+      reason: Uit tegen co-host Mexico (Guadalajara Stadium)
+    South Africa:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Zuid-Afrika

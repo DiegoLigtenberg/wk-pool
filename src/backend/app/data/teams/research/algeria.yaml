@@ -1,0 +1,146 @@
+team_id: Algerije
+slug: algeria
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Eerste WK sinds 2014 onder Vladimir Petković; groep
+  J met Argentinië, Oostenrijk, Jordanië. Plafond via Mahrez (Al-Ahli), Gouiri (Marseille),
+  Ait-Nouri (Man City); vloer vs Messi-Argentinië,  AFCON 2025 kwartfinale.
+phase_preferences:
+- Sterk als Mahrez/Gouiri tussen linies ruimte vinden en Bensebaini/Mandi structuur
+  houden.
+- Zwakker als Argentinië bal rustig circuleert zonder Algerije uit positie te lokken.
+transition_orientation_summary: 'Petković: compact mid-block, verticale uitbraken
+  via Gouiri,  counters na gewonnen duel.'
+psychology_intro: 12 jaar wachten; openingswedstrijd 16 juni vs titelverdediger Argentinië.
+psychology_vectors:
+- Punt vs Jordanië/Oostenrijk cruciaal na Argentinië.
+- Mahrez’ laatste grote WK-narratief.
+matchup_counters_us:
+- Scaloni pressing-triggers en Messi-zones.
+- Rangnick Laimer/Sabitzer die Mahrez isoleren.
+matchup_we_counter:
+- Jordanië compact blok.
+- Teams die hoog drukken zonder dekking.
+dead_ball_swings_matches: Mahrez vrije trappen/corners als veldspel stokt.
+experience_cohesion_notes:
+- Petković sinds 2024; Mandi recordinternational.
+- Mix Europa/Midden-Oosten.
+heat_altitude_acclimatization_notes: Noord-Afrika helpt in warmere VS/Mexico-steden.
+star_dependency: high
+power_score: 70
+tier: Underdog
+macro_style: technisch en emotioneel geladen
+strengths:
+- creativiteit
+- ervaring
+- wedstrijdenergie
+risks:
+- consistentie
+- ruimte achter druk
+confederation: CAF
+cohost_status: false
+group_stage: &id001
+  group: J
+  opponents_nl:
+  - Argentinië
+  - Jordanië
+  - Oostenrijk
+  opponents_fifa:
+  - Argentina
+  - Austria
+  - Jordan
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-17T01:00
+    is_home: false
+    opponent_fifa: Argentina
+    opponent_nl: Argentinië
+    stadium: Kansas City Stadium
+    narrative: Meteen tegen titelverdediger Argentinië
+  - match_number: 2
+    kickoff: 2026-06-23T03:00
+    is_home: false
+    opponent_fifa: Jordan
+    opponent_nl: Jordanië
+    stadium: San Francisco Bay Area Stadium
+  - match_number: 3
+    kickoff: 2026-06-28T02:00
+    is_home: true
+    opponent_fifa: Austria
+    opponent_nl: Oostenrijk
+    stadium: Kansas City Stadium
+  fixture_hooks:
+  - 'Groep J: tegen Argentinië, Jordanië, Oostenrijk.'
+  - 'Groepswedstrijd 1 (17 Jun): uit vs Argentinië @ Kansas City Stadium,  Meteen
+    tegen titelverdediger Argentinië'
+  - 'Groepswedstrijd 2 (23 Jun): uit vs Jordanië @ San Francisco Bay Area Stadium'
+  - 'Groepswedstrijd 3 (28 Jun): thuis vs Oostenrijk @ Kansas City Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5-6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Argentinië en Jordanië: Kansas City Stadium → San Francisco
+    Bay Area Stadium (6 dag(en) ertussen). Tussen wedstrijd Jordanië en Oostenrijk:
+    San Francisco Bay Area Stadium → Kansas City Stadium (5 dag(en) ertussen). 3 vroege/late
+    kickoff-slots (UTC-nacht) in groep,  recovery relevant.'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Kansas City Stadium (Kansas City,
+    warm continentaal); San Francisco Bay Area Stadium (San Francisco, mild kust).
+    Alleen USA-venues in de poule,  beperkte binnenlandse reis. Impact: San Francisco
+    is koeler,  kan hitte-gewende tegenstanders neutraliseren; 3 late kickoffs in
+    groep,  rustritme en recovery extra relevant.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: star_dependency
+    delta: -1
+    reason: 'Sterafhankelijkheid: weinig marge als de ster uit de wedstrijd is.'
+  versus:
+    Argentina:
+    - id: opponent_profile_weak
+      delta: 1
+      reason: Kwetsbaar als centrum dicht (Algerije/Oostenrijk) en Messi geïsoleerd.
+    - id: tactical_weakness
+      delta: -1
+      reason: Zwakker als Argentinië bal rustig circuleert zonder Algerije uit positie
+        te lokken.
+    Austria: []
+    Jordan:
+    - id: matchup_edge
+      delta: 1
+      reason: Jordanië compact blok.

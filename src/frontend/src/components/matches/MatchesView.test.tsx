@@ -19,10 +19,10 @@ describe("MatchesView", () => {
     expect(screen.getByText("2 - 0")).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: "Toon AI-uitleg voor Mexico tegen Zuid-Afrika" }));
-    expect(screen.getByText("Mexico wint · 58%")).toBeInTheDocument();
+    expect(screen.getByText("De AI voorspelt dat Mexico wint.")).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: "Sluiten" }));
-    expect(screen.queryByText("Mexico wint · 58%")).not.toBeInTheDocument();
+    expect(screen.queryByText("De AI voorspelt dat Mexico wint.")).not.toBeInTheDocument();
 
     await user.click(screen.getByRole("combobox", { name: "Fase Alle fases" }));
     await user.click(screen.getByRole("option", { name: "Knock-out" }));

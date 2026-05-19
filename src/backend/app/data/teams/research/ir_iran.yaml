@@ -1,0 +1,146 @@
+team_id: Iran
+slug: ir_iran
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Amir Ghalenoei; Taremi, Azmoun, Moharrami. Groep G
+  vs Nieuw-Zeeland 15 juni, België, Egypte. Squad 1 juni.
+phase_preferences:
+- Sterk compact blok frustratie.
+- Zwakwer De Bruyne/Doku tussen linies.
+transition_orientation_summary: Counter na compactie; Azmoun/Taremi targets.
+psychology_intro: Ghalenoei pragmatisch; extern underdog vs België.
+psychology_vectors:
+- België opener-seed in groep.
+- Scheids/foul dynamiek.
+matchup_counters_us:
+- België Doku.
+- Egypte Salah.
+matchup_we_counter:
+- Nieuw-Zeeland Wood.
+- Low-scoring fouls.
+dead_ball_swings_matches: Taremi hoogtes; defensieve corners discipline.
+experience_cohesion_notes:
+- Ghalenoei; Persepolis/Europa mix.
+heat_altitude_acclimatization_notes: Regionale hitte vs België.
+intercontinental_travel_profile: AFC → VS.
+power_score: 69
+tier: Underdog
+macro_style: compact, fysiek en countergericht
+strengths:
+- organisatie
+- duels
+- directe counters
+risks:
+- balbezit
+- creativiteit
+confederation: AFC
+cohost_status: false
+group_stage: &id001
+  group: G
+  opponents_nl:
+  - België
+  - Egypte
+  - Nieuw-Zeeland
+  opponents_fifa:
+  - Belgium
+  - Egypt
+  - New Zealand
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-16T01:00
+    is_home: true
+    opponent_fifa: New Zealand
+    opponent_nl: Nieuw-Zeeland
+    stadium: Los Angeles Stadium
+  - match_number: 2
+    kickoff: 2026-06-21T19:00
+    is_home: false
+    opponent_fifa: Belgium
+    opponent_nl: België
+    stadium: Los Angeles Stadium
+  - match_number: 3
+    kickoff: 2026-06-27T03:00
+    is_home: false
+    opponent_fifa: Egypt
+    opponent_nl: Egypte
+    stadium: Seattle Stadium
+  fixture_hooks:
+  - 'Groep G: tegen België, Egypte, Nieuw-Zeeland.'
+  - 'Groepswedstrijd 1 (16 Jun): thuis vs Nieuw-Zeeland @ Los Angeles Stadium'
+  - 'Groepswedstrijd 2 (21 Jun): uit vs België @ Los Angeles Stadium'
+  - 'Groepswedstrijd 3 (27 Jun): uit vs Egypte @ Seattle Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd België en Egypte: Los Angeles Stadium → Seattle Stadium
+    (6 dag(en) ertussen). 2 vroege/late kickoff-slots (UTC-nacht) in groep ,  recovery
+    relevant.'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Los Angeles Stadium (Los Angeles,
+    warm droog); Seattle Stadium (Seattle, koel mild). Alleen USA-venues in de poule
+    ,  beperkte binnenlandse reis. Impact: Seattle is koeler ,  kan hitte-gewende
+    tegenstanders neutraliseren; 2 late kickoffs in groep ,  rustritme en recovery
+    extra relevant.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Belgium:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact België
+    - id: matchup_risk
+      delta: -1
+      reason: België leunt in dit duel op Doku; dat vraagt een gericht plan van Iran.
+    Egypt:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Egypte
+    - id: matchup_risk
+      delta: -1
+      reason: Egypte leunt op Salah als belangrijkste aanvalsbedreiging; extra aandachtspunt
+        voor Iran.
+    New Zealand:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Nieuw-Zeeland
+    - id: matchup_edge
+      delta: 1
+      reason: Nieuw-Zeeland leunt in dit duel op Wood; dat vraagt een gericht plan
+        van Iran.

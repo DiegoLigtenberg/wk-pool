@@ -1,0 +1,145 @@
+team_id: Kroatië
+slug: croatia
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Dalić; Modrić (40, Milan), Gvardiol, Kovačić, Perišić.
+  Groep L vs England 17 juni.
+phase_preferences:
+- Sterk Modrić tempo, Gvardiol overlap.
+- Zwakker Tuchel 3-2-5 pressing.
+transition_orientation_summary: Gefaseerd Dalić; Pašalić/Sucic vertical prik.
+psychology_intro: Modrić 40; England rematch.
+psychology_vectors:
+- Modrić minutenmanagement.
+- Opening vs England emotioneel.
+matchup_counters_us:
+- England Saka/Rice.
+- Ghana Kudus counters.
+matchup_we_counter:
+- Panama.
+- Low-tempo deadlock.
+dead_ball_swings_matches: Gvardiol/Modrić frees.
+experience_cohesion_notes:
+- Dalić sinds 2017; squad mei 2026.
+intercontinental_travel_profile: UEFA → VS.
+distinctive_spark_notes: Modrić (40) in selectie ,  uitzonderlijk op middenveld-topniveau.
+squad_load_notes: Modrić (40) ,  minutenmanagement en recovery centraal.
+power_score: 82
+tier: Subtopper
+macro_style: ervaren, geduldig en extreem comfortabel in spannende wedstrijden
+strengths:
+- middenveldcontrole
+- toernooi-rust
+- mentale hardheid
+risks:
+- leeftijd en intensiteit
+- minder pure snelheid
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: L
+  opponents_nl:
+  - Engeland
+  - Ghana
+  - Panama
+  opponents_fifa:
+  - England
+  - Ghana
+  - Panama
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-17T20:00
+    is_home: false
+    opponent_fifa: England
+    opponent_nl: Engeland
+    stadium: Dallas Stadium
+  - match_number: 2
+    kickoff: 2026-06-23T23:00
+    is_home: false
+    opponent_fifa: Panama
+    opponent_nl: Panama
+    stadium: Toronto Stadium
+  - match_number: 3
+    kickoff: 2026-06-27T21:00
+    is_home: true
+    opponent_fifa: Ghana
+    opponent_nl: Ghana
+    stadium: Philadelphia Stadium
+  fixture_hooks:
+  - 'Groep L: tegen Engeland, Ghana, Panama.'
+  - 'Groepswedstrijd 1 (17 Jun): uit vs Engeland @ Dallas Stadium'
+  - 'Groepswedstrijd 2 (23 Jun): uit vs Panama @ Toronto Stadium'
+  - 'Groepswedstrijd 3 (27 Jun): thuis vs Ghana @ Philadelphia Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Engeland en Panama: Dallas Stadium → Toronto Stadium
+    (6 dag(en) ertussen). Tussen wedstrijd Panama en Ghana: Toronto Stadium → Philadelphia
+    Stadium (4 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Dallas Stadium (Dallas, heet
+    droog); Toronto Stadium (Toronto, gematigd zomer); Philadelphia Stadium (Philadelphia,
+    warm vochtig). Cross-border poule (USA, Canada) ,  extra vlucht/tijdzone tussen
+    groepswedstrijden. Impact: Dallas (heet droog) vraagt hitte-management; Philadelphia
+    (warm vochtig) vraagt hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: squad_load
+    delta: -2
+    reason: Luka Modrić (40 jaar) is nog steeds geselecteerd; zeldzaam op dit niveau.
+  versus:
+    England:
+    - id: style_matchup
+      delta: 1
+      reason: Eigen press kan compact blok Engeland onder druk zetten
+    - id: matchup_risk
+      delta: -1
+      reason: England Saka/Rice.
+    Ghana:
+    - id: matchup_risk
+      delta: -1
+      reason: Ghana Kudus counters.
+    Panama:
+    - id: matchup_edge
+      delta: 1
+      reason: Panama.
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Panama tegen ons aanvalsspel

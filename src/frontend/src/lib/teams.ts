@@ -51,6 +51,11 @@ const TEAM_NAMES_NL: Record<string, string> = {
   "Côte d'Ivoire": "Ivoorkust",
 };
 
+/** FIFA/CSV-sleutel uit Engelse of Nederlandse teamnaam (API levert NL). */
+const NL_TO_FIFA: Record<string, string> = Object.fromEntries(
+  Object.entries(TEAM_NAMES_NL).map(([fifa, nl]) => [nl, fifa]),
+);
+
 const TEAM_FLAG_CODES: Record<string, string> = {
   Algeria: "dz",
   Argentina: "ar",
@@ -102,19 +107,27 @@ const TEAM_FLAG_CODES: Record<string, string> = {
   "Côte d'Ivoire": "ci",
 };
 
+export function fifaTeamKey(team: string): string {
+  if (team in TEAM_NAMES_NL) {
+    return team;
+  }
+  return NL_TO_FIFA[team] ?? team;
+}
+
 export function teamNameNl(team: string): string {
-  return TEAM_NAMES_NL[team] ?? team;
+  return TEAM_NAMES_NL[fifaTeamKey(team)] ?? team;
 }
 
 export function countryCodeForTeam(team: string): string | null {
-  return TEAM_FLAG_CODES[team] ?? null;
+  return TEAM_FLAG_CODES[fifaTeamKey(team)] ?? null;
 }
 
 export function isRealTeamName(team: string): boolean {
   return (
     team !== "To be announced" &&
     !/^([123])([A-L])$/.test(team) &&
-    !/^3([A-L]{2,})$/.test(team)
+    !/^3([A-L]{2,})$/.test(team) &&
+    (team in TEAM_NAMES_NL || team in NL_TO_FIFA)
   );
 }
 

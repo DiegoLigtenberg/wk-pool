@@ -34,8 +34,8 @@ describe("App", () => {
 
     render(<App />);
 
-    expect(await screen.findByRole("heading", { name: "Backend draait niet." })).toBeInTheDocument();
-    expect(screen.getByText("Backend gaf een onverwacht tournament-formaat terug.")).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Backend-data komt niet overeen." })).toBeInTheDocument();
+    expect(screen.getByText(/Ongeldige velden:/)).toBeInTheDocument();
   });
 });
 

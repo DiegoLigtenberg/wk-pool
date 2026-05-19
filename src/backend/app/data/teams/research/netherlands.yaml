@@ -1,0 +1,147 @@
+team_id: Nederland
+slug: netherlands
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Ronald Koeman; Gakpo, Depay (8 goals kwal.), Van Dijk,
+  Dumfries, De Jong. Xavi Simons OUT (knie), Timber OUT. Squad 27 mei; groep F vs
+  Japan 14 juni.
+phase_preferences:
+- Sterk Dumfries push + Gakpo binnen.
+- Zwakwer vs 5-man blok (Koeman erkende WK-risico).
+transition_orientation_summary: Koeman 4-2-3-1 asymmetrie; flank-omschakeling.
+psychology_intro: 'Simons-afwezigheid dempt creatie; Malen #9 optie.'
+psychology_vectors:
+- Japan-opener in Dallas; Japan start fel, Oranje moet direct ritme vinden.
+- 5-back frustratie debat.
+matchup_counters_us:
+- Japan Moriyasu press op Oranje-opbouw.
+- Zweden Isak/Gyökeres.
+matchup_we_counter:
+- Tunisia compact.
+- High press zonder dekking.
+dead_ball_swings_matches: Van Dijk/Dumfries corners ,  klassiek NL debat.
+experience_cohesion_notes:
+- Koeman; Depay/Gakpo kwalificatie-topscorers.
+intercontinental_travel_profile: Europa → VS.
+distinctive_spark_notes: Xavi Simons (knie) definitief OUT ,  creatiegat dat Koeman
+  niet kan roteren weg.
+squad_load_notes: Xavi Simons (knie) definitief OUT (mei 2026) ,  creatiegat structureel.
+power_score: 85
+tier: Favoriet
+macro_style: compact, tactisch en sterk in omschakeling
+strengths:
+- defensieve kwaliteit
+- luchtduels
+- coachbare structuur
+risks:
+- creativiteit tegen lage blokken
+- efficiëntie voor goal
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: F
+  opponents_nl:
+  - Japan
+  - Tunesië
+  - Zweden
+  opponents_fifa:
+  - Japan
+  - Sweden
+  - Tunisia
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-14T20:00
+    is_home: true
+    opponent_fifa: Japan
+    opponent_nl: Japan
+    stadium: Dallas Stadium
+  - match_number: 2
+    kickoff: 2026-06-20T17:00
+    is_home: true
+    opponent_fifa: Sweden
+    opponent_nl: Zweden
+    stadium: Houston Stadium
+  - match_number: 3
+    kickoff: 2026-06-25T23:00
+    is_home: false
+    opponent_fifa: Tunisia
+    opponent_nl: Tunesië
+    stadium: Kansas City Stadium
+  fixture_hooks:
+  - 'Groep F: tegen Japan, Tunesië, Zweden.'
+  - 'Groepswedstrijd 1 (14 Jun): thuis vs Japan @ Dallas Stadium'
+  - 'Groepswedstrijd 2 (20 Jun): thuis vs Zweden @ Houston Stadium'
+  - 'Groepswedstrijd 3 (25 Jun): uit vs Tunesië @ Kansas City Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Japan en Zweden: Dallas Stadium → Houston Stadium (6
+    dag(en) ertussen). Tussen wedstrijd Zweden en Tunesië: Houston Stadium → Kansas
+    City Stadium (5 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 3 stadions: Dallas Stadium (Dallas, heet
+    droog); Houston Stadium (Houston, heet vochtig); Kansas City Stadium (Kansas City,
+    warm continentaal). Alleen USA-venues in de poule ,  beperkte binnenlandse reis.
+    Impact: Dallas (heet droog) vraagt hitte-management; Houston (heet vochtig) vraagt
+    hitte-management.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: squad_load
+    delta: -2
+    reason: Nederland speelt deze wedstrijd zonder Xavi Simons (knie); dat verzwakt
+      de creatie van Oranje.
+  versus:
+    Japan:
+    - id: style_matchup
+      delta: 1
+      reason: Lucht/standaardprofiel t.o.v. Japan
+    - id: matchup_risk
+      delta: -1
+      reason: Japan zet onder bondscoach Moriyasu hoog druk aan; dat maakt de opbouw
+        van Nederland lastig.
+    Sweden:
+    - id: matchup_risk
+      delta: -1
+      reason: Zweden Isak/Gyökeres.
+    Tunisia:
+    - id: matchup_edge
+      delta: 1
+      reason: Tunisia brengt met compact extra dreiging mee; lastig voor Nederland
+        in dit duel tegen Tunesië.

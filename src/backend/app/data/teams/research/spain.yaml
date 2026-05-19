@@ -1,0 +1,152 @@
+team_id: Spanje
+slug: spain
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Luis de la Fuente; Yamal (impact sub plan), Nico Williams,
+  Pedri, Rodri, Morata-less Euro 2024 core. Squad 25 mei; groep H vs Cabo Verde 15
+  juni.
+phase_preferences:
+- Sterk Euro 2024 directheid + wing speed.
+- Kwetsbaar Yamal/Nico blessure-minuten.
+transition_orientation_summary: 'Modern Roja: vertical na pressing, niet tiki-monopolie.'
+psychology_intro: Euro-winnaars favoriet; Yamal hamstring → sub rol.
+psychology_vectors:
+- 'De la Fuente: 20 goede minuten Yamal.'
+- Knock-out fit prioriteit.
+matchup_counters_us:
+- Bielsa Uruguay counters achter backs.
+- Saudi disruptie.
+matchup_we_counter:
+- Cabo Verde.
+- Pressing niet afgemaakt.
+dead_ball_swings_matches: Rodri/Pedri frees; CB hoogtes.
+experience_cohesion_notes:
+- De la Fuente jeugd-routes; Barça/Real mix.
+intercontinental_travel_profile: Europa → VS.
+distinctive_spark_notes: 'De la Fuente: Yamal (hamstring) bewust als impact-sub ,
+  ''20 beslissende minuten''-plan.'
+club_concentration_notes: Barça/Real/Atlético-mix met duidelijke rivaliserende clubculturen
+  in één XI.
+squad_load_notes: Yamal hamstring ,  bewust impact-sub-plan (mei 2026); check vóór
+  opener.
+power_score: 89
+tier: Topfavoriet
+macro_style: possession, pressing en controle via middenveld
+strengths:
+- balcontrole
+- pressing
+- technische zekerheid
+risks:
+- kan kwetsbaar zijn als kansen niet snel vallen
+- ruimte achter de backs
+confederation: UEFA
+cohost_status: false
+group_stage: &id001
+  group: H
+  opponents_nl:
+  - Kaapverdië
+  - Saoedi-Arabië
+  - Uruguay
+  opponents_fifa:
+  - Cabo Verde
+  - Saudi Arabia
+  - Uruguay
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-15T16:00
+    is_home: true
+    opponent_fifa: Cabo Verde
+    opponent_nl: Kaapverdië
+    stadium: Atlanta Stadium
+  - match_number: 2
+    kickoff: 2026-06-21T16:00
+    is_home: true
+    opponent_fifa: Saudi Arabia
+    opponent_nl: Saoedi-Arabië
+    stadium: Atlanta Stadium
+  - match_number: 3
+    kickoff: 2026-06-27T00:00
+    is_home: false
+    opponent_fifa: Uruguay
+    opponent_nl: Uruguay
+    stadium: Guadalajara Stadium
+  fixture_hooks:
+  - 'Groep H: tegen Kaapverdië, Saoedi-Arabië, Uruguay.'
+  - 'Groepswedstrijd 1 (15 Jun): thuis vs Kaapverdië @ Atlanta Stadium'
+  - 'Groepswedstrijd 2 (21 Jun): thuis vs Saoedi-Arabië @ Atlanta Stadium'
+  - 'Groepswedstrijd 3 (27 Jun): uit vs Uruguay @ Guadalajara Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 6, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Saoedi-Arabië en Uruguay: Atlanta Stadium → Guadalajara
+    Stadium (6 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Atlanta Stadium (Atlanta, heet
+    vochtig); Guadalajara Stadium (Guadalajara, ≈1560m). Cross-border poule (USA,
+    Mexico) ,  extra vlucht/tijdzone tussen groepswedstrijden. Impact: Atlanta (heet
+    vochtig) vraagt hitte-management; Guadalajara (≈1560m) kan sprintherstel en balhang
+    beïnvloeden.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent:
+  - id: squad_load
+    delta: -2
+    reason: Yamal hamstring , bewust invaller met grote impact-plan (mei 2026); check
+      vóór opener.
+  versus:
+    Cabo Verde:
+    - id: opponent_profile_weak
+      delta: 1
+      reason: Marcelo Bielsa zet als bondscoach van Spanje in op extreem hoge druk
+        en pressing.
+    - id: style_matchup
+      delta: -1
+      reason: Compacte counters van Kaapverdië tegen ons aanvalsspel
+    Saudi Arabia:
+    - id: style_matchup
+      delta: -1
+      reason: Hoge press van Saoedi-Arabië verstoort opbouw
+    Uruguay:
+    - id: opponent_profile_weak
+      delta: 1
+      reason: 'In dit duel speelt mee: Kwetsbaar ruimte achter druk tegen Spanje;
+        dat vraagt extra aandacht van Spanje.'
+    - id: style_matchup
+      delta: -1
+      reason: Hoge press van Uruguay verstoort opbouw

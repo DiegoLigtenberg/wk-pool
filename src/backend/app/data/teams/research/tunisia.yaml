@@ -1,0 +1,135 @@
+team_id: Tunesië
+slug: tunisia
+context_as_of: '2026-05-19'
+sources:
+- Football365
+- FourFourTwo
+- BBC/Sky
+- national FA press
+- open web (May 2026)
+analyzed:
+- coach_tactics
+- key_players
+- group_context
+- psychology_pressure
+- travel_environment
+interpretive_ceiling_vs_floor: Sabri Lamouchi; Skhiri (Frankfurt), Hannibal (Burnley),
+  Ayari (PSG youth). Groep F vs Zweden 14 juni.
+phase_preferences:
+- Sterk compact CAF + Skhiri duel.
+- Zwakwer Isak/Gyökeres.
+transition_orientation_summary: Counters reactief; Skhiri anchor.
+psychology_intro: CAF underdog; Lamouchi ervaring (Ivory Coast).
+psychology_vectors:
+- Zweden opener fysiek.
+- Ayari young PSG talent.
+matchup_counters_us:
+- Zweden Isak.
+- Japan Kubo.
+matchup_we_counter:
+- Low-scoring.
+- Foul games.
+dead_ball_swings_matches: Skhiri/Hannibal discipline + corners.
+experience_cohesion_notes:
+- Lamouchi; Europa mix.
+heat_altitude_acclimatization_notes: Noord-Afrika hitte.
+intercontinental_travel_profile: CAF → VS.
+power_score: 68
+tier: Underdog
+macro_style: compact, fel en defensief gedisciplineerd
+strengths:
+- organisatie
+- duels
+- teamdiscipline
+risks:
+- scorend vermogen
+- risico nemen
+confederation: CAF
+cohost_status: false
+group_stage: &id001
+  group: F
+  opponents_nl:
+  - Japan
+  - Nederland
+  - Zweden
+  opponents_fifa:
+  - Japan
+  - Netherlands
+  - Sweden
+  fixtures:
+  - match_number: 1
+    kickoff: 2026-06-15T02:00
+    is_home: false
+    opponent_fifa: Sweden
+    opponent_nl: Zweden
+    stadium: Monterrey Stadium
+  - match_number: 2
+    kickoff: 2026-06-21T04:00
+    is_home: true
+    opponent_fifa: Japan
+    opponent_nl: Japan
+    stadium: Monterrey Stadium
+  - match_number: 3
+    kickoff: 2026-06-25T23:00
+    is_home: true
+    opponent_fifa: Netherlands
+    opponent_nl: Nederland
+    stadium: Kansas City Stadium
+  fixture_hooks:
+  - 'Groep F: tegen Japan, Nederland, Zweden.'
+  - 'Groepswedstrijd 1 (15 Jun): uit vs Zweden @ Monterrey Stadium'
+  - 'Groepswedstrijd 2 (21 Jun): thuis vs Japan @ Monterrey Stadium'
+  - 'Groepswedstrijd 3 (25 Jun): thuis vs Nederland @ Kansas City Stadium'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4, 6 dag(en); kortste window
+    >3 dagen. Tussen wedstrijd Japan en Nederland: Monterrey Stadium → Kansas City
+    Stadium (4 dag(en) ertussen). 2 vroege/late kickoff-slots (UTC-nacht) in groep
+    ,  recovery relevant.'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Monterrey Stadium (Monterrey,
+    ≈540m); Kansas City Stadium (Kansas City, warm continentaal). Cross-border poule
+    (Mexico, USA) ,  extra vlucht/tijdzone tussen groepswedstrijden. Impact: Monterrey
+    (heet droog) vraagt hitte-management; 2 late kickoffs in groep ,  rustritme en
+    recovery extra relevant.'
+tournament_context:
+  schema_version: 1
+  phases:
+    group:
+      status: upcoming
+      fixture_plan: *id001
+      played_matches: []
+      standings:
+        points: 0
+        played: 0
+        wins: 0
+        draws: 0
+        losses: 0
+        goals_for: 0
+        goals_against: 0
+        position: null
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+    knockout:
+      status: not_applicable
+      fixture_plan: null
+      played_matches: []
+      momentum:
+        label: null
+        notes: null
+      phase_notes: null
+  head_to_head: []
+context_scoring:
+  persistent: []
+  versus:
+    Japan:
+    - id: matchup_risk
+      delta: -1
+      reason: Japan leunt in dit duel op Kubo; dat vraagt een gericht plan van Tunesië.
+    Netherlands:
+    - id: style_matchup
+      delta: 1
+      reason: Omschakeling/transities passen tegen compact Nederland
+    Sweden:
+    - id: matchup_risk
+      delta: -1
+      reason: Zweden leunt in dit duel op Isak; dat vraagt een gericht plan van Tunesië.

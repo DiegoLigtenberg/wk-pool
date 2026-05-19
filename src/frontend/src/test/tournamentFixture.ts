@@ -11,12 +11,18 @@ const mexicoInsight: TeamInsight = {
 };
 
 const southAfricaInsight: TeamInsight = {
-  team: "South Africa",
+  team: "Zuid-Afrika",
   tier: "Kanshebber",
   style: "energiek en opportunistisch",
+  powerScore: 66,
   strengths: ["wedstrijdenergie", "counters"],
   risks: ["controle"],
-  niche: ["kan profiteren als de tegenstander onder druk staat"],
+  group: "A",
+  opponents: ["Mexico", "Tsjechië", "Zuid-Korea"],
+  groupContext: [
+    "Wedstrijd 1: thuis tegen Tsjechië (Guadalajara Stadium)",
+    "Wedstrijd 2: uit tegen Mexico (Guadalajara Stadium)",
+  ],
   summary: "Zuid-Afrika kan via energie fases kantelen.",
 };
 
@@ -35,9 +41,65 @@ export const completedMatch: Match = {
   aiPrediction: {
     pick: "1",
     confidence: 58,
-    explanation: "Mexico krijgt het voordeel door thuisregio en openingsenergie.",
+    explanation:
+      "In groepsronde 1 ligt Mexico voor (82, 65 effectief). Belangrijkste signalen uit research: Omschakeling/transities passen tegen compact Zuid-Afrika.",
     status: "correct",
-    themes: ["thuisregio en publiek", "groepscontext Poule A"],
+    insight: {
+      scoreSummary: "Mexico staat effectief 82 tegen 65 (17 punten verschil).",
+      verdict: "De AI voorspelt dat Mexico wint.",
+      narrative:
+        "Dit is berekend met ons AI-model. Mexico staat hoger (82 tegen 65 voor Zuid-Afrika).\n\nDat ondersteunt de voorspelling: Mexico kan snel omschakelen tegen het lage blok van Zuid-Afrika.",
+      steps: [
+        {
+          title: "Hoe dit werkt",
+          body: "Dit is berekend met ons AI-model. Mexico staat hoger (82 tegen 65 voor Zuid-Afrika). Die score combineert de basissterkte van beide teams met punten uit de analyse van dit duel.",
+        },
+        {
+          title: "Belangrijk in dit duel",
+          body: "Mexico speelt thuis als co-host. Hun spel past bij de compacte verdediging van Zuid-Afrika, terwijl Zuid-Afrika weinig doelpuntenkansen haalt tegen Giménez en Jiménez achterin.",
+        },
+      ],
+      tags: ["Mexico: Tactiek +1", "Mexico: Co-host +3"],
+      diff: 17,
+      winnerSide: "home",
+      home: {
+        team: "Mexico",
+        powerScore: 77,
+        contextDelta: 5,
+        effectiveScore: 82,
+        factors: [
+          {
+            id: "style_matchup",
+            delta: 1,
+            label: "Tactiek",
+            reason: "Omschakeling/transities passen tegen compact Zuid-Afrika",
+            scope: "match",
+          },
+          {
+            id: "host_region",
+            delta: 3,
+            label: "Co-host",
+            reason: "Co-host: thuisregio en publiek",
+            scope: "team",
+          },
+        ],
+      },
+      away: {
+        team: "Zuid-Afrika",
+        powerScore: 66,
+        contextDelta: -1,
+        effectiveScore: 65,
+        factors: [
+          {
+            id: "distinctive_spark",
+            delta: -1,
+            label: "Opvallend",
+            reason: "Opener op hoogte vs co-host Mexico",
+            scope: "team",
+          },
+        ],
+      },
+    },
     homeWinProbability: 58,
     drawProbability: 25,
     awayWinProbability: 17,
@@ -61,7 +123,6 @@ export const upcomingMatch: Match = {
     confidence: 0,
     explanation: "De AI wacht met inhoudelijke voorspelling tot beide landen bekend zijn.",
     status: "pending",
-    themes: ["Teams nog onbekend"],
     homeWinProbability: null,
     drawProbability: null,
     awayWinProbability: null,
@@ -84,8 +145,8 @@ export function tournamentFixture(overrides: Partial<TournamentView> = {}): Tour
     recentMatches: [completedMatch],
     upcomingMatches: [upcomingMatch],
     teamInsights: {
-      Mexico: mexicoInsight,
-      "South Africa": southAfricaInsight,
+      Mexico: { ...mexicoInsight, team: "Mexico" },
+      "Zuid-Afrika": { ...southAfricaInsight, team: "Zuid-Afrika" },
     },
     groups: [
       {
@@ -103,7 +164,7 @@ export function tournamentFixture(overrides: Partial<TournamentView> = {}): Tour
             points: 3,
           },
           {
-            team: "South Africa",
+            team: "Zuid-Afrika",
             played: 1,
             wins: 0,
             draws: 0,

@@ -414,6 +414,224 @@
   gap: 0.4rem;
 }
 
+.prediction-probabilities span.is-pick,
+.prediction-themes span.is-pick {
+  border-color: rgba(var(--accent-rgb), 0.55);
+  background: rgba(var(--accent-rgb), 0.14);
+  color: #f8fafc;
+}
+
+.prediction-score-summary {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+}
+
+.prediction-verdict {
+  margin: 0;
+  color: #e2e8f0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.prediction-intro,
+.prediction-components {
+  margin: 0 0 0.75rem;
+  line-height: 1.5;
+  color: var(--text-secondary, #4a5568);
+}
+
+.prediction-score-primer {
+  margin: 0.75rem 0 0.35rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text-secondary, #4a5568);
+}
+
+.prediction-verdict--lead {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.prediction-steps {
+  margin: 0.5rem 0 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.prediction-steps li {
+  color: #cbd5e1;
+}
+
+.prediction-steps strong {
+  display: block;
+  color: #e2e8f0;
+  font-size: 0.82rem;
+  margin-bottom: 0.25rem;
+}
+
+.prediction-steps p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.prediction-details {
+  margin-top: 0.65rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.12);
+  padding-top: 0.55rem;
+}
+
+.prediction-details summary {
+  cursor: pointer;
+  color: #94a3b8;
+  font-size: 0.78rem;
+}
+
+.prediction-legacy-hint {
+  margin: 0.35rem 0 0;
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.45rem;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  color: #fde68a;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.prediction-narrative {
+  margin: 0.55rem 0 0;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.prediction-team-card__score-line {
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #94a3b8;
+}
+
+.prediction-score-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.prediction-team-card {
+  min-width: 0;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 0.75rem;
+  background: rgba(15, 23, 42, 0.55);
+  padding: 0.65rem 0.7rem;
+}
+
+.prediction-team-card__header h3 {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.prediction-team-card__score {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.prediction-team-card__base {
+  color: #cbd5e1;
+  font-weight: 700;
+}
+
+.prediction-team-card__ctx {
+  color: #94a3b8;
+}
+
+.prediction-team-card__eq,
+.prediction-team-card__eff {
+  color: #f8fafc;
+  font-weight: 800;
+}
+
+.prediction-team-card__empty {
+  margin: 0.35rem 0 0;
+  color: #64748b;
+  font-size: 0.74rem;
+}
+
+.prediction-factor-group {
+  margin-top: 0.55rem;
+}
+
+.prediction-factor-group h4 {
+  margin: 0 0 0.35rem;
+  color: #94a3b8;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.prediction-factor-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.prediction-factor-group li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.45rem;
+  align-items: start;
+}
+
+.prediction-factor-delta {
+  flex-shrink: 0;
+  min-width: 1.75rem;
+  border-radius: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.prediction-factor-group li.is-plus .prediction-factor-delta {
+  background: rgba(34, 197, 94, 0.16);
+  color: #86efac;
+}
+
+.prediction-factor-group li.is-minus .prediction-factor-delta {
+  background: rgba(248, 113, 113, 0.14);
+  color: #fca5a5;
+}
+
+.prediction-factor-body {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+  font-size: 0.74rem;
+  line-height: 1.4;
+  color: #cbd5e1;
+}
+
+.prediction-factor-body strong {
+  color: #e2e8f0;
+  font-size: 0.72rem;
+}
+
 .prediction-probabilities span,
 .prediction-themes span {
   min-width: 0;
@@ -603,6 +821,10 @@
   .team-pick .flag {
     width: 1.25rem;
     height: 0.86rem;
+  }
+
+  .prediction-score-grid {
+    grid-template-columns: 1fr;
   }
 
   .prediction-probabilities span,

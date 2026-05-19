@@ -23,7 +23,7 @@ Railway provides `PORT` automatically. The backend binds to `0.0.0.0` whenever `
 
 Railway reads `src/frontend/railway.json` when the service root is `src/frontend`.
 
-Nixpacks installs dependencies with `npm ci` and then runs `npm run build`. Do not chain another `npm ci` in `buildCommand` — that can fail with `EBUSY` on `node_modules/.cache`. The frontend requires **Node 20.19+** (configured via `.node-version` / `nixpacks.toml`).
+Nixpacks installs dependencies with `npm ci` and then runs `npm run build`. Do not chain another `npm ci` in `buildCommand` ,  that can fail with `EBUSY` on `node_modules/.cache`. The frontend requires **Node 20.19+** (configured via `.node-version` / `nixpacks.toml`).
 
 Set this frontend build variable before building:
 

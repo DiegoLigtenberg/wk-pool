@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from app.predictions import is_known_team, predict_match, team_insight
+from app.teams import display_team_name
 
 
 CSV_PATH = Path(__file__).resolve().parent / "data" / "fifa-world-cup-2026-UTC.csv"
@@ -111,8 +112,8 @@ def _match_view(fixture: Fixture) -> dict[str, object]:
         "group": fixture.group,
         "kickoffAt": fixture.kickoff_at.isoformat().replace("+00:00", "Z"),
         "location": fixture.location,
-        "homeTeam": fixture.home_team,
-        "awayTeam": fixture.away_team,
+        "homeTeam": display_team_name(fixture.home_team),
+        "awayTeam": display_team_name(fixture.away_team),
         "status": "completed" if is_completed else "upcoming",
         "score": _score_view(score),
         "actualPick": actual_pick,
@@ -132,7 +133,11 @@ def _team_insights(fixtures: list[Fixture]) -> dict[str, object]:
             if is_known_team(team)
         }
     )
-    return {team: insight for team in teams if (insight := team_insight(team))}
+    return {
+        display_team_name(team): insight
+        for team in teams
+        if (insight := team_insight(team))
+    }
 
 
 def _group_views(matches: list[dict[str, object]]) -> list[dict[str, object]]:

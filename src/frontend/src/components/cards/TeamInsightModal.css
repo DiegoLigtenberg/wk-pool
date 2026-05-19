@@ -53,17 +53,112 @@
   align-items: center;
 }
 
-.team-insight-modal h2 > span {
-  border: 1px solid rgba(var(--accent-rgb), 0.28);
-  border-radius: 999px;
-  color: var(--accent-text);
-  font-size: 0.8rem;
-  padding: 0.18rem 0.55rem;
-}
-
 .team-insight-modal p {
   color: #cbd5e1;
   line-height: 1.55;
+}
+
+.team-insight-style {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 0.65rem;
+  font-size: 0.95rem;
+}
+
+.team-insight-style__label {
+  color: var(--accent-text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.team-insight-meta {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.team-insight-group-context {
+  margin-top: 0.85rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 0.75rem;
+  background: rgba(2, 6, 23, 0.28);
+}
+
+.team-insight-group-context__title {
+  color: var(--accent-text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.45rem;
+  text-transform: uppercase;
+}
+
+.team-insight-group-context ul {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #cbd5e1;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.team-insight-score {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.15rem 0.65rem;
+  align-items: baseline;
+  margin: 0.85rem 0 0;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 0.75rem;
+  background: rgba(2, 6, 23, 0.35);
+}
+
+.team-insight-score__label {
+  color: var(--accent-text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.team-insight-score__value {
+  color: #f8fafc;
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.team-insight-score__hint {
+  grid-column: 1 / -1;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.team-insight-spark-block {
+  margin-top: 0.85rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 0.75rem;
+  background: rgba(2, 6, 23, 0.28);
+}
+
+.team-insight-spark__title {
+  color: var(--accent-text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+}
+
+.team-insight-spark {
+  margin: 0;
+  font-size: 0.95rem;
 }
 
 .team-insight-grid {
