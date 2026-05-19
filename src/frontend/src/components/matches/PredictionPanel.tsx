@@ -44,12 +44,12 @@ export const PredictionPanel = forwardRef<HTMLElement, PredictionPanelProps>(fun
           {presentation.legacyHint ? (
             <p className="prediction-legacy-hint">{presentation.legacyHint}</p>
           ) : null}
-          {presentation.intro ? <p className="prediction-intro">{presentation.intro}</p> : null}
           {presentation.components ? (
             <p className="prediction-components">{presentation.components}</p>
           ) : null}
           <details className="prediction-details">
             <summary>Scores en research-details</summary>
+            {presentation.intro ? <p className="prediction-intro">{presentation.intro}</p> : null}
             <p className="prediction-score-primer">
               Dueltotaal = basisscore plus onderstaande onderdelen. Plus en min staan alleen in de tabel.
             </p>

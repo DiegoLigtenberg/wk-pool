@@ -131,7 +131,7 @@ context_scoring:
     Japan:
     - id: style_matchup
       delta: 1
-      reason: Lucht/standaardprofiel t.o.v. Japan
+      reason: Lucht/standaardprofiel t.o.v. Japan.
     - id: matchup_risk
       delta: -1
       reason: Japan zet onder bondscoach Moriyasu hoog druk aan; dat maakt de opbouw

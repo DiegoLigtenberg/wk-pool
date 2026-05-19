@@ -128,18 +128,20 @@ context_scoring:
     Japan:
     - id: style_matchup
       delta: 1
-      reason: Lucht/standaardprofiel t.o.v. Japan
+      reason: Lucht/standaardprofiel t.o.v. Japan.
     - id: tactical_weakness
       delta: -1
       reason: Zweden heeft in dit duel moeite met het profiel van Japan.
     Netherlands:
     - id: style_matchup
       delta: 1
-      reason: Eigen press kan compact blok Nederland onder druk zetten
+      reason: Zweden zet met hoge druk aan; Nederland krijgt daardoor weinig rust
+        in de opbouw.
     Tunisia:
     - id: style_matchup
       delta: 1
-      reason: Eigen press kan compact blok Tunesië onder druk zetten
+      reason: Zweden zet met hoge druk aan; Tunesië krijgt daardoor weinig rust in
+        de opbouw.
     - id: matchup_edge
       delta: 1
       reason: Tunesië leunt in dit duel op Lamouchi; dat vraagt een gericht plan van

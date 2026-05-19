@@ -124,9 +124,8 @@ context_scoring:
   persistent:
   - id: distinctive_spark
     delta: -1
-    reason: 'In dit duel speelt mee: Eilandnatie opent tegen Euro-kampioen Spanje
-      (in Atlanta), historisch punt = nationaal feest; dat vraagt extra aandacht van
-      Kaapverdië.'
+    reason: Eilandnatie opent tegen Euro-kampioen Spanje (in Atlanta), historisch
+      punt = nationaal feest.
   versus:
     Saudi Arabia: []
     Spain:

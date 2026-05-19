@@ -124,8 +124,8 @@ context_scoring:
   persistent:
   - id: distinctive_spark
     delta: -1
-    reason: Al-Taamari (club Rennes) enige speler uit Europese topcompetitie in groep
-      J met Argentinië; 04:00 San Francisco-slot.
+    reason: Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari (Rennes)
+      in dit duel tegen de tegenstander.
   - id: star_dependency
     delta: -1
     reason: 'Sterafhankelijkheid: weinig marge als de ster uit de wedstrijd is.'
@@ -133,24 +133,24 @@ context_scoring:
     Algeria:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Algerije
+      reason: Snelle omschakeling past bij het lage, compacte blok van Algerije.
     - id: fixture_narrative
       delta: -1
-      reason: Jamal Sellami; Musa Al-Taamari (Rennes), groep J vs Oostenrijk/Algerije/Argentinië.
-        Aziatisch underdog met AFC-discipline.
+      reason: Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari
+        (Rennes) in dit duel tegen Algerije.
     Argentina:
     - id: fixture_narrative
       delta: -1
-      reason: Jamal Sellami; Musa Al-Taamari (Rennes), groep J vs Oostenrijk/Algerije/Argentinië.
-        Aziatisch underdog met AFC-discipline.
+      reason: Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari
+        (Rennes) in dit duel tegen Argentinië.
     - id: matchup_risk
       delta: -1
       reason: Argentinië/Algerije.
     Austria:
     - id: fixture_narrative
       delta: -1
-      reason: Jamal Sellami; Musa Al-Taamari (Rennes), groep J vs Oostenrijk/Algerije/Argentinië.
-        Aziatisch underdog met AFC-discipline.
+      reason: Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari
+        (Rennes) in dit duel tegen Oostenrijk.
     - id: matchup_risk
       delta: -1
       reason: Oostenrijk zet intens pressing neer; dat verstoort de opbouw van Jordanië.

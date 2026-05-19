@@ -16,12 +16,12 @@ analyzed:
 interpretive_ceiling_vs_floor: Dick Advocaat (78); debut WK. Groep E vs Duitsland
   14 juni (opener). Nederlands-Caribisch talent, Advocaat organisatie-ervaring.
 phase_preferences:
-- Sterk compact blok vs Duitsland frustratie.
+- Compact blok kan Duitsland frustreren in de opbouw.
 - Zwakwer 90 min vs Nagelsmann/Wirtz.
 transition_orientation_summary: 'Advocaat pragmatisme: survival, counters, set-pieces.'
 psychology_intro: Historisch debut; Advocaat laatste grote toernooi?
 psychology_vectors:
-- Duitsland opener intimiderend.
+- Duitsland favoriet in de WK-opener; extra mentale druk.
 - Discipline 90 min.
 matchup_counters_us:
 - Duitsland Musiala/Wirtz.
@@ -132,8 +132,7 @@ context_scoring:
     Germany:
     - id: tactical_strength
       delta: 1
-      reason: 'In dit duel speelt mee: Sterk compact blok tegen Duitsland frustratie;
-        dat vraagt extra aandacht van Curaçao.'
+      reason: Curaçao rekent op een compact blok om Duitsland te frustreren.
     - id: psychology
       delta: -1
-      reason: Duitsland opener intimiderend.
+      reason: Duitsland favoriet in de WK-opener; extra mentale druk.

@@ -131,22 +131,22 @@ context_scoring:
     Belgium:
     - id: tactical_strength
       delta: 1
-      reason: 'In dit duel speelt mee: Sterk Salah/Marmoush transitions tegen Garcia-België;
-        dat vraagt extra aandacht van Egypte.'
+      reason: Egypte pakt voordeel met Salah/Marmoush transitions in dit duel tegen
+        België.
     - id: matchup_risk
       delta: -1
       reason: België Doku/De Bruyne.
     IR Iran:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Iran
+      reason: Snelle omschakeling past bij het lage, compacte blok van Iran.
     - id: matchup_risk
       delta: -1
       reason: Iran leunt in dit duel op compact; dat vraagt een gericht plan van Egypte.
     New Zealand:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Nieuw-Zeeland
+      reason: Snelle omschakeling past bij het lage, compacte blok van Nieuw-Zeeland.
     - id: matchup_edge
       delta: 1
       reason: Nieuw-Zeeland leunt in dit duel op Wood; dat vraagt een gericht plan

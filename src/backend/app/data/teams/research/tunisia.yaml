@@ -128,7 +128,7 @@ context_scoring:
     Netherlands:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Nederland
+      reason: Snelle omschakeling past bij het lage, compacte blok van Nederland.
     Sweden:
     - id: matchup_risk
       delta: -1

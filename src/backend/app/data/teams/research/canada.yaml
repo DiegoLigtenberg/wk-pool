@@ -131,24 +131,25 @@ context_scoring:
       dan Verenigde Staten/Mexico maar thuislogistiek.
   - id: selection_drama
     delta: -1
-    reason: 'In dit duel speelt mee: Keeper: St. Clair tegen Crépeau, selectiedruk
-      vlak voor definitieve 23; dat vraagt extra aandacht van Canada.'
+    reason: 'Keepersstrijd St. Clair, Crépeau: vlak voor het WK moet Canada definitief
+      een eerste keeper kiezen.'
   versus:
     Bosnia and Herzegovina:
     - id: home_fixture
       delta: 1
-      reason: Thuis in Toronto Stadium (co-host)
+      reason: Thuis in Toronto Stadium (co-host).
     - id: fixture_story
       delta: -1
-      reason: Co-host opener vs Bosnië
+      reason: Canada opent het WK als co-host tegen Bosnië-Herzegovina , extra druk
+        op het openingsduel.
     Qatar:
     - id: home_fixture
       delta: 1
-      reason: Thuis in BC Place Vancouver (co-host)
+      reason: Thuis in BC Place Vancouver (co-host).
     - id: matchup_risk
       delta: -1
       reason: bestand tegen hoge druk Qatar.
     Switzerland:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Zwitserland
+      reason: Snelle omschakeling past bij het lage, compacte blok van Zwitserland.

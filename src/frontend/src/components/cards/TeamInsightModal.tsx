@@ -72,21 +72,11 @@ export function TeamInsightModal({ insight, onClose }: TeamInsightModalProps) {
             {insight.style}
           </p>
         ) : null}
-        {insight.group && insight.opponents?.length ? (
-          <p className="team-insight-meta">
-            Groep {insight.group}: {insight.opponents.join(", ")}
-          </p>
-        ) : null}
-        {insight.groupContext?.length ? (
-          <section className="team-insight-group-context" aria-label="Groepsprogramma">
-            <h3 className="team-insight-group-context__title">Groepsprogramma</h3>
-            <ul>
-              {insight.groupContext.map((line) => (
-                <li key={line}>{line}</li>
-              ))}
-            </ul>
-          </section>
-        ) : null}
+        <GroupProgram
+          group={insight.group}
+          opponents={insight.opponents}
+          fixtures={insight.groupContext}
+        />
         {insight.powerScore != null ? (
           <p className="team-insight-score">
             <span className="team-insight-score__label">Basisscore</span>
@@ -139,6 +129,42 @@ function trapFocus(event: KeyboardEvent, container: HTMLElement | null) {
     event.preventDefault();
     first.focus();
   }
+}
+
+function GroupProgram({
+  group,
+  opponents,
+  fixtures,
+}: {
+  group?: string;
+  opponents?: string[];
+  fixtures?: string[];
+}) {
+  if (!group) {
+    return null;
+  }
+
+  const hasFixtures = Boolean(fixtures?.length);
+  const hasOpponents = Boolean(opponents?.length);
+
+  if (!hasFixtures && !hasOpponents) {
+    return null;
+  }
+
+  return (
+    <section className="team-insight-group-program" aria-label={`Groep ${group}`}>
+      <h3 className="team-insight-group-program__title">Groep {group}</h3>
+      {hasFixtures ? (
+        <ul className="team-insight-group-program__fixtures">
+          {fixtures!.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+      ) : (
+        <p className="team-insight-group-program__opponents">Tegen {opponents!.join(", ")}</p>
+      )}
+    </section>
+  );
 }
 
 function InsightList({ title, items }: { title: string; items: string[] }) {

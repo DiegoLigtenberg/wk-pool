@@ -122,10 +122,11 @@ context_scoring:
     Netherlands:
     - id: style_matchup
       delta: 1
-      reason: Eigen press kan compact blok Nederland onder druk zetten
+      reason: Japan zet met hoge druk aan; Nederland krijgt daardoor weinig rust in
+        de opbouw.
     - id: fixture_story
       delta: 0
-      reason: Japan zet hoog druk aan; Nederland begint vaak compact
+      reason: Japan zet hoog druk aan; Nederland begint vaak compact.
     Sweden:
     - id: matchup_risk
       delta: -1

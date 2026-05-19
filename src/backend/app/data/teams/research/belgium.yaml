@@ -124,18 +124,17 @@ context_scoring:
   persistent:
   - id: selection_drama
     delta: -1
-    reason: 'In dit duel speelt mee: Courtois tegen Sanchez, bondscoach moet keeperhiërarchie
-      helder maken; dat vraagt extra aandacht van België.'
+    reason: 'Keepersdilemma Courtois, Sánchez: de bondscoach moet de nummer 1 voor
+      het WK nog kiezen , spanning rond België.'
   versus:
     Egypt:
     - id: tactical_weakness
       delta: -1
-      reason: 'In dit duel speelt mee: Zwakker tegen Salah-Egypte counters; dat vraagt
-        extra aandacht van België.'
+      reason: 'België heeft moeite met het profiel van Egypte: salah-Egypte counters.'
     - id: opponent_profile_strong
       delta: -1
-      reason: 'In dit duel speelt mee: Sterk Salah/Marmoush transitions tegen Garcia-België;
-        dat vraagt extra aandacht van België.'
+      reason: Egypte is sterk met Salah/Marmoush transitions , dat maakt het lastig
+        voor België.
     IR Iran:
     - id: matchup_risk
       delta: -1
@@ -144,4 +143,4 @@ context_scoring:
     New Zealand:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Nieuw-Zeeland
+      reason: Snelle omschakeling past bij het lage, compacte blok van Nieuw-Zeeland.

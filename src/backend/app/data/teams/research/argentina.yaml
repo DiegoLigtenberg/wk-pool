@@ -129,9 +129,8 @@ context_scoring:
   persistent:
   - id: crowd_bias
     delta: 1
-    reason: 'In dit duel speelt mee: Grote Argentijnse gemeenschap in de tegen (New
-      York, Los Angeles, Miami); in die steden voelt het vaak alsof er een thuispubliek
-      is; dat vraagt extra aandacht van Argentinië.'
+    reason: Grote Argentijnse gemeenschap in de VS geeft Argentinië in veel stadions
+      extra steun.
   - id: distinctive_spark
     delta: -1
     reason: Lionel Messi (39 jaar) is waarschijnlijk voor het laatst op een WK bij
@@ -148,8 +147,7 @@ context_scoring:
     Austria:
     - id: opponent_profile_weak
       delta: 1
-      reason: 'In dit duel speelt mee: Zwakker tegen Argentinië balrust en Messi;
-        dat vraagt extra aandacht van Argentinië.'
+      reason: Argentinië is kwetsbaar voor Argentinië balrust en Messi.
     - id: tactical_weakness
       delta: -1
       reason: Kwetsbaar als centrum dicht (Algerije/Oostenrijk) en Messi geïsoleerd.

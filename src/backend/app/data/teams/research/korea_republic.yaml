@@ -131,7 +131,7 @@ context_scoring:
     Czechia:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Tsjechië
+      reason: Snelle omschakeling past bij het lage, compacte blok van Tsjechië.
     - id: matchup_edge
       delta: 1
       reason: Tsjechië leunt in dit duel op underdog; dat vraagt een gericht plan
@@ -139,11 +139,11 @@ context_scoring:
     Mexico:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Mexico
+      reason: Snelle omschakeling past bij het lage, compacte blok van Mexico.
     - id: away_fixture
       delta: -1
-      reason: Uit tegen co-host Mexico (Guadalajara Stadium)
+      reason: Uit tegen co-host Mexico (Guadalajara Stadium).
     South Africa:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Zuid-Afrika
+      reason: Snelle omschakeling past bij het lage, compacte blok van Zuid-Afrika.

@@ -126,7 +126,7 @@ context_scoring:
       reason: Curaçao.
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Curaçao
+      reason: Snelle omschakeling past bij het lage, compacte blok van Curaçao.
     Côte d'Ivoire: []
     Germany:
     - id: matchup_risk

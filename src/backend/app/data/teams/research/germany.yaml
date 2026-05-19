@@ -28,7 +28,7 @@ matchup_counters_us:
 - Spanje counters achter hoge lijn.
 - Ivory Coast Pepe snelheid.
 matchup_we_counter:
-- Curaçao opener.
+- Curaçao WK-debuut in de groepsopener.
 - Teams hoog zonder dekking.
 dead_ball_swings_matches: Duitse hoogtes Schlotterbeck/Tah.
 experience_cohesion_notes:
@@ -130,17 +130,16 @@ context_scoring:
     Curaçao:
     - id: matchup_edge
       delta: 1
-      reason: Curaçao leunt in dit duel op opener; dat vraagt een gericht plan van
-        Duitsland.
+      reason: Duitsland opent de groep tegen Curaçao; de eerste wedstrijd telt meteen
+        zwaar.
     - id: opponent_profile_strong
       delta: -1
-      reason: 'In dit duel speelt mee: Sterk compact blok tegen Duitsland frustratie;
-        dat vraagt extra aandacht van Duitsland.'
+      reason: Curaçao speelt compact en kan Duitsland moeilijk maken in de opbouw.
     Côte d'Ivoire:
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Ivoorkust tegen ons aanvalsspel
+      reason: Ivoorkust kan gevaarlijk omschakelen tegen het aanvalsspel van Duitsland.
     Ecuador:
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Ecuador tegen ons aanvalsspel
+      reason: Ecuador kan gevaarlijk omschakelen tegen het aanvalsspel van Duitsland.

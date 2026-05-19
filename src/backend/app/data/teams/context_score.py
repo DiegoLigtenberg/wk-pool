@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from app.data.teams.context_scoring_schema import ContextFactor, ContextScoring
-from app.data.teams.factor_dedupe import dedupe_overlapping_factors
+from app.data.teams.factor_dedupe import dedupe_overlapping_factors, dedupe_pair_factors
 from app.data.teams.team_loader import get_team_bundle
 from app.data.teams.team_registry import HOST_NATIONS
 from app.display_text import humanize_factor_reason
@@ -26,7 +26,7 @@ def _sum_factors(factors: tuple[ContextFactor, ...]) -> int:
     return max(-SIDE_CONTEXT_CAP, min(SIDE_CONTEXT_CAP, sum(f.delta for f in factors)))
 
 
-def side_context(team_fifa: str, opponent_fifa: str) -> SideContextResult:
+def _raw_side_factors(team_fifa: str, opponent_fifa: str) -> tuple[list[ContextFactor], int]:
     bundle = get_team_bundle(team_fifa)
     scoring: ContextScoring | None = bundle.context_scoring
     factors: list[ContextFactor] = []
@@ -44,17 +44,35 @@ def side_context(team_fifa: str, opponent_fifa: str) -> SideContextResult:
                 reason="Co-host: thuisregio en publiek",
             )
         )
+    return factors, host_delta
 
-    factors = dedupe_overlapping_factors(factors)
 
+def _context_from_factors(factors: list[ContextFactor], host_delta: int) -> SideContextResult:
     research_delta = _sum_factors(tuple(f for f in factors if f.id != "host_region"))
-    total = research_delta + host_delta
-
     return SideContextResult(
         factors=tuple(factors),
         research_delta=research_delta,
         host_delta=host_delta,
-        total_delta=total,
+        total_delta=research_delta + host_delta,
+    )
+
+
+def side_context(team_fifa: str, opponent_fifa: str) -> SideContextResult:
+    factors, host_delta = _raw_side_factors(team_fifa, opponent_fifa)
+    factors = dedupe_overlapping_factors(factors)
+    return _context_from_factors(factors, host_delta)
+
+
+def side_context_pair(home_fifa: str, away_fifa: str) -> tuple[SideContextResult, SideContextResult]:
+    """Beide zijden met paar-dedupe (geen gespiegelde +/- op hetzelfde duelthema)."""
+    home_fifa = fifa_team_key(home_fifa)
+    away_fifa = fifa_team_key(away_fifa)
+    home_factors, home_host = _raw_side_factors(home_fifa, away_fifa)
+    away_factors, away_host = _raw_side_factors(away_fifa, home_fifa)
+    home_factors, away_factors = dedupe_pair_factors(home_factors, away_factors)
+    return (
+        _context_from_factors(home_factors, home_host),
+        _context_from_factors(away_factors, away_host),
     )
 
 
@@ -64,8 +82,7 @@ def match_context_breakdown(home_fifa: str, away_fifa: str) -> dict[str, object]
     home = get_team_bundle(home_fifa)
     away = get_team_bundle(away_fifa)
 
-    home_ctx = side_context(home_fifa, away_fifa)
-    away_ctx = side_context(away_fifa, home_fifa)
+    home_ctx, away_ctx = side_context_pair(home_fifa, away_fifa)
 
     home_eff = home.power_score + home_ctx.total_delta
     away_eff = away.power_score + away_ctx.total_delta
@@ -117,8 +134,7 @@ def context_adjustments(home_fifa: str, away_fifa: str) -> tuple[int, int]:
     """Punten-equivalent thuis/uit voor diff (max totaal ±6 op het duel)."""
     home_fifa = fifa_team_key(home_fifa)
     away_fifa = fifa_team_key(away_fifa)
-    home_ctx = side_context(home_fifa, away_fifa)
-    away_ctx = side_context(away_fifa, home_fifa)
+    home_ctx, away_ctx = side_context_pair(home_fifa, away_fifa)
 
     home_adj = home_ctx.total_delta
     away_adj = away_ctx.total_delta

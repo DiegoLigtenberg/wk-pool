@@ -174,24 +174,11 @@ def _build_headline(pick: str, home_name: str, away_name: str) -> str:
 
 
 def _build_model_intro(home_name: str, away_name: str, home_eff: int, away_eff: int) -> str:
-    score_line = (
-        f"Het dueltotaal is gelijk: {home_eff} punten voor {home_name} en {away_eff} voor {away_name}."
-        if home_eff == away_eff
-        else _leader_score_line(home_name, away_name, home_eff, away_eff)
-    )
     return (
         f"Dit is berekend met ons AI-model. "
-        f"{score_line} "
-        f"Dat dueltotaal is de basissterkte van het team plus extra punten uit de analyse van dit specifieke duel."
+        f"Dueltotalen voor dit duel: {home_name} {home_eff}, {away_name} {away_eff}. "
+        f"Dat is basissterkte plus kleine onderdelen uit de analyse van dit duel en de groepsfase."
     )
-
-
-def _leader_score_line(home_name: str, away_name: str, home_eff: int, away_eff: int) -> str:
-    if home_eff > away_eff:
-        leader, trailer, lead_score, trail_score = home_name, away_name, home_eff, away_eff
-    else:
-        leader, trailer, lead_score, trail_score = away_name, home_name, away_eff, home_eff
-    return f"{leader} heeft een hoger dueltotaal ({lead_score} tegen {trail_score} voor {trailer})."
 
 
 def _clean_reason_text(reason: str) -> str:

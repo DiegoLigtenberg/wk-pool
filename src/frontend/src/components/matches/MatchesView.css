@@ -232,6 +232,16 @@
   align-self: stretch;
 }
 
+.result-stack--draw-tip {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-width: 6.75rem;
+}
+
 .result-pill {
   display: grid;
   width: 5.4rem;
@@ -440,7 +450,13 @@
 .prediction-components {
   margin: 0 0 0.75rem;
   line-height: 1.5;
-  color: var(--text-secondary, #4a5568);
+  color: #cbd5e1;
+}
+
+.prediction-details .prediction-intro {
+  margin: 0.55rem 0 0.65rem;
+  font-size: 0.82rem;
+  color: #94a3b8;
 }
 
 .prediction-score-primer {
@@ -739,16 +755,29 @@
   }
 
   .scoreboard-line {
-    --ai-marker-font-size: 0.54rem;
-    --ai-marker-pad-y: 0.08rem;
-    --ai-marker-pad-x: 0.34rem;
-    --ai-marker-min-height: 0.82rem;
-    --ai-marker-min-width: 1.52rem;
-    --ai-marker-slot-height: 0.82rem;
-    --ai-marker-slot-width: 1.52rem;
+    --ai-marker-font-size: 0.58rem;
+    --ai-marker-pad-y: 0.1rem;
+    --ai-marker-pad-x: 0.38rem;
+    --ai-marker-min-height: 1.05rem;
+    --ai-marker-min-width: 1.85rem;
+    --ai-marker-slot-height: 1.05rem;
+    --ai-marker-slot-width: 1.85rem;
 
-    grid-template-columns: minmax(0, 1fr) 4rem minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(6.75rem, auto) minmax(0, 1fr);
     gap: 0.45rem;
+  }
+
+  .result-stack--draw-tip .ai-marker-button {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.35rem 0.55rem;
+  }
+
+  .result-stack--draw-tip .result-pill {
+    width: auto;
+    min-width: 3.6rem;
+    flex: 1 1 auto;
+    padding-inline: 0.55rem;
   }
 
   .team-with-ai .team-label > span:last-child {
@@ -801,13 +830,22 @@
   }
 
   .scoreboard-line {
-    grid-template-columns: minmax(0, 1fr) 3.4rem minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(6.25rem, auto) minmax(0, 1fr);
     gap: 0.3rem;
   }
 
+  .result-stack--draw-tip {
+    min-width: 6.25rem;
+    gap: 0.28rem;
+  }
+
   .result-pill {
-    width: 3.4rem;
+    width: 3.6rem;
     font-size: 0.78rem;
+  }
+
+  .result-stack--draw-tip .result-pill {
+    min-width: 3.1rem;
   }
 
   .team-pick {

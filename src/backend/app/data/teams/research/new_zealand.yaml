@@ -135,7 +135,7 @@ context_scoring:
     Belgium:
     - id: style_matchup
       delta: 1
-      reason: Lucht/standaardprofiel t.o.v. België
+      reason: Lucht/standaardprofiel t.o.v. België.
     - id: matchup_risk
       delta: -1
       reason: België.

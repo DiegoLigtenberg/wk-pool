@@ -143,15 +143,15 @@ context_scoring:
     Morocco:
     - id: opener_context
       delta: 0
-      reason: 'Ancelotti: eerste niet-Braziliëiaanse bondscoach sinds 1965; 100%-fit-regel
-        Neymar/Vini; NY-opener = 2022-semi-rematch vs Marokko.'
+      reason: Carlo Ancelotti is de eerste niet-Braziliaanse bondscoach van Brazilië
+        sinds 1965.
     - id: matchup_risk
       delta: -1
       reason: Marokko Ouahbi blok + Hakimi.
     Scotland:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Schotland
+      reason: Snelle omschakeling past bij het lage, compacte blok van Schotland.
     - id: matchup_edge
       delta: 1
       reason: Haiti/Scotland hoog zonder dekking.

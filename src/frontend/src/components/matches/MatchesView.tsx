@@ -180,7 +180,7 @@ function FixtureRow({ match }: { match: Match }) {
               <TeamLabel team={match.homeTeam} compact truncate={false} />
             </span>
           </span>
-          <span className="result-stack">
+          <span className={`result-stack${aiPick === "3" ? " result-stack--draw-tip" : ""}`}>
             {aiPick === "3" ? (
               <AiBadge
                 ref={aiTriggerRef}

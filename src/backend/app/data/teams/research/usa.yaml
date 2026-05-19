@@ -127,25 +127,27 @@ context_scoring:
   persistent:
   - id: cohost_crowd
     delta: 1
-    reason: 'In dit duel speelt mee: Co-host met thuiswedstrijden in meerdere hubs;
-      publiek voordeel tegen CONCACAF-rivals; dat vraagt extra aandacht van Verenigde
-      Staten.'
+    reason: Verenigde Staten speelt als co-host meerdere wedstrijden in eigen regio
+      met thuispubliek.
   versus:
     Australia:
     - id: style_matchup
       delta: 1
-      reason: Eigen press kan compact blok Australië onder druk zetten
+      reason: Verenigde Staten zet met hoge druk aan; Australië krijgt daardoor weinig
+        rust in de opbouw.
     - id: home_fixture
       delta: 1
-      reason: Thuis in Seattle Stadium (co-host)
+      reason: Thuis in Seattle Stadium (co-host).
     Paraguay:
     - id: style_matchup
       delta: 1
-      reason: Eigen press kan compact blok Paraguay onder druk zetten
+      reason: Verenigde Staten zet met hoge druk aan; Paraguay krijgt daardoor weinig
+        rust in de opbouw.
     - id: tactical_weakness
       delta: -1
       reason: Verenigde Staten heeft in dit duel moeite met het profiel van Paraguay.
     Türkiye:
     - id: style_matchup
       delta: 1
-      reason: Eigen press kan compact blok Turkije onder druk zetten
+      reason: Verenigde Staten zet met hoge druk aan; Turkije krijgt daardoor weinig
+        rust in de opbouw.

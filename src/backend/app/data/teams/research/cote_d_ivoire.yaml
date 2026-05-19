@@ -133,7 +133,7 @@ context_scoring:
     Germany:
     - id: psychology
       delta: -1
-      reason: Duitsland test.
+      reason: De wedstrijd tegen Duitsland geldt als zware test voor Ivoorkust.
     - id: matchup_risk
       delta: -1
       reason: Duitsland zet intens pressing neer; dat verstoort de opbouw van Ivoorkust.

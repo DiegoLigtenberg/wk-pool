@@ -127,16 +127,18 @@ context_scoring:
     Australia:
     - id: opponent_profile_weak
       delta: 1
-      reason: 'In dit duel speelt mee: Zwakker tegen Montella-Türkiye tempo en creatie-gap;
-        dat vraagt extra aandacht van Turkije.'
+      reason: Turkije is kwetsbaar voor Montella-Türkiye tempo en creatie-gap.
     - id: style_matchup
       delta: 1
-      reason: Eigen press kan compact blok Australië onder druk zetten
+      reason: Turkije zet met hoge druk aan; Australië krijgt daardoor weinig rust
+        in de opbouw.
     Paraguay:
     - id: style_matchup
       delta: 1
-      reason: Eigen press kan compact blok Paraguay onder druk zetten
+      reason: Turkije zet met hoge druk aan; Paraguay krijgt daardoor weinig rust
+        in de opbouw.
     USA:
     - id: style_matchup
       delta: 1
-      reason: Eigen press kan compact blok Verenigde Staten onder druk zetten
+      reason: Turkije zet met hoge druk aan; Verenigde Staten krijgt daardoor weinig
+        rust in de opbouw.

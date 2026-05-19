@@ -6,7 +6,12 @@ from app.data.teams.context_scoring_schema import ContextFactor, ContextScoring
 from app.data.teams.fixture_schedule import NOTABLE_FIXTURE_NARRATIVES
 from app.data.teams.pairwise_matchup import _spark_is_opener_altitude, build_pairwise_factors
 from app.data.teams.team_bundle import TeamBundle
-from app.display_text import humanize_matchup_shorthand, humanize_research_line, normalize_display_text
+from app.display_text import (
+    humanize_factor_reason,
+    humanize_matchup_shorthand,
+    humanize_research_line,
+    normalize_display_text,
+)
 from app.teams import display_team_name, fifa_team_key
 
 MAX_PERSISTENT = 2
@@ -230,6 +235,46 @@ def build_context_scoring(
     for opp_fifa in bundle.group_stage.opponents_fifa:
         opp = (all_bundles or {}).get(fifa_team_key(opp_fifa))
         versus[opp_fifa] = build_versus_factors(bundle, opp_fifa, opponent=opp)
+    return _humanize_scoring_for_export(
+        ContextScoring(persistent=persistent, versus=versus),
+        bundle,
+    )
+
+
+def _humanize_scoring_for_export(
+    scoring: ContextScoring,
+    bundle: TeamBundle,
+) -> ContextScoring:
+    """Schrijf alleen leesbare zinnen naar YAML (geen 'In dit duel speelt mee')."""
+    persistent = tuple(
+        ContextFactor(
+            id=f.id,
+            delta=f.delta,
+            reason=humanize_factor_reason(
+                f.reason,
+                factor_id=f.id,
+                subject_team=bundle.team_name_nl,
+                opponent_team="",
+            ),
+        )
+        for f in scoring.persistent
+    )
+    versus: dict[str, tuple[ContextFactor, ...]] = {}
+    for opp_fifa, factors in scoring.versus.items():
+        opp_nl = display_team_name(opp_fifa)
+        versus[opp_fifa] = tuple(
+            ContextFactor(
+                id=f.id,
+                delta=f.delta,
+                reason=humanize_factor_reason(
+                    f.reason,
+                    factor_id=f.id,
+                    subject_team=bundle.team_name_nl,
+                    opponent_team=opp_nl,
+                ),
+            )
+            for f in factors
+        )
     return ContextScoring(persistent=persistent, versus=versus)
 
 

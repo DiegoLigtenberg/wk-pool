@@ -125,7 +125,7 @@ context_scoring:
     Australia:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Australië
+      reason: Snelle omschakeling past bij het lage, compacte blok van Australië.
     - id: matchup_risk
       delta: -1
       reason: Australia brengt met tempo extra dreiging mee; lastig voor Paraguay
@@ -133,11 +133,11 @@ context_scoring:
     Türkiye:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Turkije
+      reason: Snelle omschakeling past bij het lage, compacte blok van Turkije.
     USA:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Verenigde Staten
+      reason: Snelle omschakeling past bij het lage, compacte blok van Verenigde Staten.
     - id: away_fixture
       delta: -1
-      reason: Uit tegen co-host Verenigde Staten (Los Angeles Stadium)
+      reason: Uit tegen co-host Verenigde Staten (Los Angeles Stadium).

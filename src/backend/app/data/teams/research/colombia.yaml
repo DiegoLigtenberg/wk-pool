@@ -129,13 +129,13 @@ context_scoring:
   persistent:
   - id: squad_load
     delta: -2
-    reason: 'In dit duel speelt mee: James Rodriguez minuten/schouderblessure, persoonlijke
-      trainer tegen wedstrijdrust; dat vraagt extra aandacht van Colombia.'
+    reason: James Rodríguez is blessuregevoelig (schouder) en trainde apart , onzeker
+      hoeveel minuten hij voor Colombia haalt.
   versus:
     Congo DR:
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Congo tegen ons aanvalsspel
+      reason: Congo kan gevaarlijk omschakelen tegen het aanvalsspel van Colombia.
     - id: matchup_risk
       delta: -1
       reason: DR Congo atletiek.
@@ -150,4 +150,4 @@ context_scoring:
         in dit duel tegen Oezbekistan.
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Oezbekistan tegen ons aanvalsspel
+      reason: Oezbekistan kan gevaarlijk omschakelen tegen het aanvalsspel van Colombia.

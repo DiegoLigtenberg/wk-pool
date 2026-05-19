@@ -127,12 +127,13 @@ context_scoring:
     Czechia:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Tsjechië
+      reason: Snelle omschakeling past bij het lage, compacte blok van Tsjechië.
     Korea Republic: []
     Mexico:
     - id: opener_context
       delta: -1
-      reason: Opener op 2240m vs co-host Mexico ,  direct fysieke test zonder acclimatisatietijd.
+      reason: Zuid-Afrika opent als co-host op grote hoogte in Mexico City met massaal
+        thuispubliek.
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Mexico
+      reason: Snelle omschakeling past bij het lage, compacte blok van Mexico.

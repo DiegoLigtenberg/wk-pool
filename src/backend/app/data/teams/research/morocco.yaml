@@ -130,9 +130,8 @@ context_scoring:
   persistent:
   - id: crowd_bias
     delta: 1
-    reason: Marokko is geen co-host, maar door de grote Marokkaanse gemeenschap in
-      New York en Los Angeles voelt het in die steden vaak alsof er een thuispubliek
-      is.
+    reason: Grote Argentijnse gemeenschap in de VS geeft Marokko in veel stadions
+      extra steun.
   - id: distinctive_spark
     delta: -1
     reason: Mohamed Ouahbi volgde Walid Regragui op in maart 2026, ongeveer twaalf
@@ -142,10 +141,10 @@ context_scoring:
     Brazil:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Brazilië
+      reason: Snelle omschakeling past bij het lage, compacte blok van Brazilië.
     - id: fixture_story
       delta: -1
-      reason: Rematch WK 2022 halve finale
+      reason: Rematch WK 2022 halve finale.
     Haiti:
     - id: matchup_edge
       delta: 1
@@ -153,4 +152,4 @@ context_scoring:
     Scotland:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Schotland
+      reason: Snelle omschakeling past bij het lage, compacte blok van Schotland.

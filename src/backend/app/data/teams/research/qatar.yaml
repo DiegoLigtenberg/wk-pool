@@ -131,18 +131,18 @@ context_scoring:
     Bosnia and Herzegovina:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Bosnië-Herzegovina
+      reason: Snelle omschakeling past bij het lage, compacte blok van Bosnië-Herzegovina.
     Canada:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Canada
+      reason: Snelle omschakeling past bij het lage, compacte blok van Canada.
     - id: away_fixture
       delta: -1
-      reason: Uit tegen co-host Canada (BC Place Vancouver)
+      reason: Uit tegen co-host Canada (BC Place Vancouver).
     Switzerland:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Zwitserland
+      reason: Snelle omschakeling past bij het lage, compacte blok van Zwitserland.
     - id: matchup_risk
       delta: -1
       reason: Zwitserland Yakin compact.

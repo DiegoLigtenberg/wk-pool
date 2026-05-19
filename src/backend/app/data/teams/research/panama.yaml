@@ -120,14 +120,14 @@ context_scoring:
     Croatia:
     - id: style_matchup
       delta: 1
-      reason: Lucht/standaardprofiel t.o.v. Kroatië
+      reason: Lucht/standaardprofiel t.o.v. Kroatië.
     - id: matchup_risk
       delta: -1
       reason: Croatia.
     England:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Engeland
+      reason: Snelle omschakeling past bij het lage, compacte blok van Engeland.
     - id: matchup_risk
       delta: -1
       reason: Engeland heeft met coach Tuchel een duidelijk tactisch plan; lastig
@@ -135,7 +135,7 @@ context_scoring:
     Ghana:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Ghana
+      reason: Snelle omschakeling past bij het lage, compacte blok van Ghana.
     - id: matchup_edge
       delta: 1
       reason: Ghana leunt in dit duel op grillig; dat vraagt een gericht plan van

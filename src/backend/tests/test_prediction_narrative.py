@@ -25,8 +25,8 @@ def test_even_match_intro_does_not_claim_leader() -> None:
     intro = pred["insight"]["steps"][0]["body"]
     assert pred["pick"] == "3"
     assert "hoger" not in intro.lower()
-    assert "gelijk" in intro.lower()
     assert "71" in intro
+    assert intro.count("71") >= 2
 
 
 def test_netherlands_narrative_has_no_english_lean() -> None:

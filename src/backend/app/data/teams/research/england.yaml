@@ -133,14 +133,14 @@ context_scoring:
     Croatia:
     - id: style_matchup
       delta: 1
-      reason: Lucht/standaardprofiel t.o.v. Kroatië
+      reason: Lucht/standaardprofiel t.o.v. Kroatië.
     - id: matchup_risk
       delta: -1
       reason: Luka Modrić (40 jaar) is nog steeds geselecteerd; zeldzaam op dit niveau.
     Ghana:
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Ghana tegen ons aanvalsspel
+      reason: Ghana kan gevaarlijk omschakelen tegen het aanvalsspel van Engeland.
     - id: matchup_risk
       delta: -1
       reason: Ghana leunt in dit duel op compact; dat vraagt een gericht plan van
@@ -151,4 +151,4 @@ context_scoring:
       reason: Panama/Haiti-tier pressing.
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Panama tegen ons aanvalsspel
+      reason: Panama kan gevaarlijk omschakelen tegen het aanvalsspel van Engeland.

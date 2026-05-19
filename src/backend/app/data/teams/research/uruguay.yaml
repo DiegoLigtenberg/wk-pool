@@ -131,8 +131,7 @@ context_scoring:
     Spain:
     - id: tactical_weakness
       delta: -1
-      reason: 'In dit duel speelt mee: Kwetsbaar ruimte achter druk tegen Spanje;
-        dat vraagt extra aandacht van Uruguay.'
+      reason: Kwetsbaar ruimte achter druk tegen Spanje.
     - id: matchup_risk
       delta: -1
       reason: Spanje third-man egress.

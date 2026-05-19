@@ -124,7 +124,8 @@ context_scoring:
     Bosnia and Herzegovina:
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Bosnië-Herzegovina tegen ons aanvalsspel
+      reason: Bosnië-Herzegovina kan gevaarlijk omschakelen tegen het aanvalsspel
+        van Zwitserland.
     Canada:
     - id: matchup_risk
       delta: -1
@@ -137,4 +138,4 @@ context_scoring:
         in een zeer compacte ploeg.
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Qatar tegen ons aanvalsspel
+      reason: Qatar kan gevaarlijk omschakelen tegen het aanvalsspel van Zwitserland.

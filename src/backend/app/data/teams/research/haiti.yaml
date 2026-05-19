@@ -24,8 +24,8 @@ psychology_vectors:
 - Scotland opener Hampden-achtige sfeer ontbreekt.
 - Concentratie set-pieces.
 matchup_counters_us:
-- Scotland Clarke compact.
-- Brazil group later.
+- Schotland compact blok onder Clarke.
+- Later in de groep wacht Brazilië; nu eerst focus op Schotland.
 matchup_we_counter:
 - Teams hoog risico.
 - Foul-heavy games.
@@ -33,8 +33,8 @@ dead_ball_swings_matches: Isidor hoogtes vs Schotse centrals.
 experience_cohesion_notes:
 - Migne; MLS/Caribisch/Europa mix; squad mei 2026.
 intercontinental_travel_profile: Caribisch → VS.
-distinctive_spark_notes: 'Isidor (Sunderland) + Bellegarde (Wolves): onverwachte Europese
-  kern voor Caribbean underdog.'
+distinctive_spark_notes: Wilson Isidor (Sunderland) en Bellegarde (Wolves) vormen
+  onverwachte Europese kernspelers voor Haïti.
 power_score: 60
 tier: Verrassingsploeg
 macro_style: direct, atletisch en emotioneel
@@ -124,24 +124,25 @@ context_scoring:
   persistent:
   - id: distinctive_spark
     delta: -1
-    reason: 'Isidor (club Sunderland) + Bellegarde (club Wolves): onverwachte Europese
-      kern voor Caribbean underdog.'
+    reason: Haïti leunt op Wilson Isidor (spits bij Sunderland) en Jean-Ricner Bellegarde
+      (Wolves) als onverwachte Europese kernspelers.
   versus:
     Brazil:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Brazilië
+      reason: Snelle omschakeling past bij het lage, compacte blok van Brazilië.
     - id: matchup_risk
       delta: -1
-      reason: Brazil group later.
+      reason: Later in de groep wacht Brazilië; nu eerst focus op Schotland.
     Morocco:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Marokko
+      reason: Snelle omschakeling past bij het lage, compacte blok van Marokko.
     Scotland:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Schotland
+      reason: Snelle omschakeling past bij het lage, compacte blok van Schotland.
     - id: matchup_risk
       delta: -1
-      reason: Scotland Clarke compact.
+      reason: Schotland speelt onder bondscoach Steve Clarke zeer compact; daardoor
+        krijgt Haïti weinig ruimte om aanvallend te spelen.

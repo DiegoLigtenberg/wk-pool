@@ -167,6 +167,11 @@ def _rewrite_known_spark_patterns(
         return f"Thomas Tuchel is de eerste Duitse bondscoach van {team_nl}"
     if "advocaat" in low and team_nl:
         return f"Dick Advocaat (78 jaar) leidt {team_nl} bij hun eerste WK ooit"
+    if "isidor" in low and "bellegarde" in low and team_nl:
+        return (
+            f"{team_nl} leunt op Wilson Isidor (spits bij Sunderland) en "
+            f"Jean-Ricner Bellegarde (Wolves) als onverwachte Europese kernspelers."
+        )
     if "xavi simons" in low and team_nl:
         return (
             f"Xavi Simons is definitief uitgeschakeld (knie); dat laat een gat in de "
@@ -302,6 +307,14 @@ def _humanize_short_matchup_counter(text: str, *, team_nl: str, opponent_nl: str
     if moriyasu:
         return moriyasu
 
+    if "clarke" in low and "compact" in low:
+        opp = opponent_nl or "Schotland"
+        if team_nl:
+            return (
+                f"{opp} speelt onder bondscoach Steve Clarke zeer compact; "
+                f"daardoor krijgt {team_nl} weinig ruimte om aanvallend te spelen."
+            )
+
     if "simons" in low:
         return _humanize_simons_note(t, team_nl=team_nl, opponent_nl=opponent_nl)
 
@@ -312,13 +325,47 @@ def _humanize_short_matchup_counter(text: str, *, team_nl: str, opponent_nl: str
         country = t.rsplit(maxsplit=1)[0]
         return f"De wedstrijd tegen {country} geldt als zware test voor {who}."
 
+    compact_blok = re.match(r"^(.+?)\s+compact\s+blok\.?$", t, re.I)
+    if compact_blok and team_nl and opponent_nl:
+        return (
+            f"{opponent_nl} speelt met een compact blok — "
+            f"lastig voor {team_nl} om ruimte te vinden."
+        )
+
     vs_match = re.match(r"^(.+?)\s+vs\s+(.+)$", t, re.I)
+    if vs_match and team_nl and vs_match.group(1).rstrip().lower().endswith("de"):
+        vs_match = None
     if vs_match and team_nl:
         left, right = vs_match.group(1).strip(), vs_match.group(2).strip()
+        left_low = left.lower()
+        if left_low.startswith(("zwakker", "zwakwer", "sterk", "kwetsbaar")):
+            expanded = _humanize_phase_preference_line(
+                t,
+                factor_id="",
+                subject_team=team_nl,
+                opponent_team=opponent_nl or right,
+            )
+            if expanded != t:
+                return expanded
+        if "compact" in left_low and "blok" in left_low:
+            opp = opponent_nl or right
+            return f"{team_nl} rekent op een compact blok om {opp} te frustreren in dit duel."
         return (
             f"In dit duel speelt mee: {left} tegen {right}; "
             f"dat vraagt extra aandacht van {who}."
         )
+
+    if "opener" in low and team_nl:
+        if "intimiderend" in low and opponent_nl:
+            return (
+                f"{opponent_nl} is favoriet in de openingswedstrijd; "
+                f"dat maakt het mentaal zwaarder voor {team_nl}."
+            )
+        if "leunt" in low and "opener" in low and team_nl == "Duitsland":
+            return (
+                "Curaçao speelt zijn WK-debuut in de groepsopener; "
+                "Duitsland moet direct tempo en druk neerzetten."
+            )
 
     if " vs " in t.lower() and team_nl and len(t) < 80:
         return f"{t}; dat maakt het lastiger voor {who}."
@@ -407,6 +454,142 @@ _MACHINE_PREFIX_RE = re.compile(
     re.IGNORECASE,
 )
 _ZWAKWER_RE = re.compile(r"^zwakwer\s+", re.IGNORECASE)
+_DUEL_MEESPEEL_RE = re.compile(r"^in dit duel speelt mee:\s*", re.IGNORECASE)
+_EXTRA_AANDACHT_RE = re.compile(
+    r";\s*dat vraagt extra aandacht van [^.]+\.?$",
+    re.IGNORECASE,
+)
+
+
+def _strip_baked_duel_phrases(text: str) -> str:
+    t = _DUEL_MEESPEEL_RE.sub("", text.strip())
+    t = _EXTRA_AANDACHT_RE.sub("", t).strip().rstrip(".")
+    return t
+
+
+def _humanize_phase_preference_line(
+    text: str,
+    *,
+    factor_id: str,
+    subject_team: str,
+    opponent_team: str,
+) -> str:
+    """Research-regels uit phase_preferences / opgeslagen context_scoring."""
+    t = text.strip().rstrip(".")
+    low = t.lower()
+
+    if re.match(r"^brazil group later\.?$", low):
+        opp = opponent_team or "Brazilië"
+        who = subject_team or "dit team"
+        return (
+            f"De wedstrijd tegen {opp} komt later in de groep; "
+            f"{who} kan zich eerst op de directe tegenstander richten."
+        )
+
+    if "courtois" in low and "sanchez" in low and subject_team:
+        return (
+            "Keepersdilemma Courtois–Sánchez: de bondscoach moet de nummer 1 "
+            f"voor het WK nog kiezen — spanning rond {subject_team}."
+        )
+
+    if ("st. clair" in low or "st clair" in low) and "crépeau" in low:
+        return (
+            "Keepersstrijd St. Clair–Crépeau: vlak voor het WK moet Canada "
+            "definitief een eerste keeper kiezen."
+        )
+
+    if "gemeenschap" in low and any(
+        w in low
+        for w in ("new york", "los angeles", "diaspora", "ny/la", "in de vs")
+    ):
+        who = subject_team or "dit team"
+        return (
+            f"Grote Argentijnse gemeenschap in de VS geeft {who} "
+            f"in veel stadions extra steun."
+        )
+
+    if "co-host" in low and "thuiswedstrijden" in low and subject_team:
+        return (
+            f"{subject_team} speelt als co-host meerdere wedstrijden "
+            f"in eigen regio met thuispubliek."
+        )
+
+    if "james rodriguez" in low or "james rodríguez" in low:
+        who = subject_team or "Colombia"
+        return (
+            "James Rodríguez is blessuregevoelig (schouder) en trainde apart — "
+            f"onzeker hoeveel minuten hij voor {who} haalt."
+        )
+
+    if "haller" in low and subject_team:
+        return (
+            "Sébastien Haller is terug na een lang blessuretraject; "
+            f"zijn fitheid bepaalt hoe scherp {subject_team} voorin is."
+        )
+
+    if "co-host" in low and ("2240" in low or "mexico city" in low or "azteca" in low):
+        who = subject_team or "Mexico"
+        return (
+            f"{who} opent als co-host op grote hoogte in Mexico City "
+            f"met massaal thuispubliek."
+        )
+
+    if "co-host" in low and "opener" in low and subject_team and opponent_team:
+        return (
+            f"{subject_team} opent het WK als co-host tegen {opponent_team} — "
+            f"extra druk op het openingsduel."
+        )
+
+    if "groep" in low and "opener" in low and subject_team and opponent_team:
+        return (
+            f"{subject_team} opent de groep tegen {opponent_team}; "
+            f"de eerste wedstrijd telt meteen zwaar."
+        )
+
+    if ("sellami" in low or "taamari" in low) and subject_team:
+        opp = opponent_team or "de tegenstander"
+        return (
+            "Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari (Rennes) "
+            f"in dit duel tegen {opp}."
+        )
+
+    if "2022" in low and "argentin" in low:
+        who = subject_team or "Saoedi-Arabië"
+        opp = opponent_team or "Argentinië"
+        return (
+            f"{who} put nog vertrouwen uit de 2-1 zege op {opp} bij het WK 2022 "
+            f"richting dit duel."
+        )
+
+    zw = re.match(r"^Zwakker (?:tegen|vs)\s+(.+)$", t, re.IGNORECASE)
+    if zw and subject_team:
+        detail = zw.group(1).strip()
+        if factor_id == "tactical_weakness" and opponent_team:
+            return (
+                f"{subject_team} heeft moeite met het profiel van {opponent_team}: "
+                f"{detail[0].lower()}{detail[1:]}."
+            )
+        return f"{subject_team} is kwetsbaar voor {detail}."
+
+    sterk = re.match(r"^Sterk\s+(.+?)\s+tegen\s+(.+)$", t, re.IGNORECASE)
+    if sterk and subject_team and opponent_team:
+        asset = sterk.group(1).strip()
+        if factor_id == "opponent_profile_strong":
+            return (
+                f"{opponent_team} is sterk met {asset} — "
+                f"dat maakt het lastig voor {subject_team}."
+            )
+        if factor_id == "tactical_strength":
+            return (
+                f"{subject_team} pakt voordeel met {asset} "
+                f"in dit duel tegen {opponent_team}."
+            )
+        return (
+            f"{opponent_team} is sterk met {asset} — "
+            f"lastig voor {subject_team} in dit duel."
+        )
+
+    return text
 
 
 def humanize_factor_reason(
@@ -417,8 +600,17 @@ def humanize_factor_reason(
     opponent_team: str = "",
 ) -> str:
     """Zet factor-redenen uit context_scoring om."""
-    text = reason.strip().rstrip(".")
-    text = _MACHINE_PREFIX_RE.sub("", text).strip()
+    text = _strip_baked_duel_phrases(reason)
+    text = _MACHINE_PREFIX_RE.sub("", text).strip().rstrip(".")
+
+    phase = _humanize_phase_preference_line(
+        text,
+        factor_id=factor_id,
+        subject_team=subject_team,
+        opponent_team=opponent_team,
+    )
+    if phase != text:
+        return normalize_display_text(phase)
 
     if _ZWAKWER_RE.match(text):
         return normalize_display_text(
@@ -429,12 +621,45 @@ def humanize_factor_reason(
                 opponent_team=opponent_team,
             )
         )
+    if factor_id in ("fixture_story", "fixture_narrative", "opener_context"):
+        phase = _humanize_phase_preference_line(
+            text,
+            factor_id=factor_id,
+            subject_team=subject_team,
+            opponent_team=opponent_team,
+        )
+        if phase != text:
+            return normalize_display_text(phase)
+
+    if factor_id == "matchup_edge" and "isidor" in text.lower() and subject_team and opponent_team:
+        return normalize_display_text(
+            f"{opponent_team} leunt op spits Wilson Isidor (Sunderland); "
+            f"{subject_team} moet hem vroeg afdekken."
+        )
+
     if factor_id == "style_matchup":
         return normalize_display_text(
             _humanize_style_matchup(
                 text, subject_team=subject_team, opponent_team=opponent_team
             )
         )
+    if factor_id == "tactical_strength" and subject_team and opponent_team:
+        low = text.lower()
+        if "compact" in low and "blok" in low:
+            return normalize_display_text(
+                f"{subject_team} rekent op een compact blok om {opponent_team} te frustreren."
+            )
+    if factor_id == "opponent_profile_strong" and subject_team and opponent_team:
+        low = text.lower()
+        if "compact" in low and (
+            "blok" in low
+            or "opbouw" in low
+            or "moeilijk maken" in low
+            or "frustreren" in low
+        ):
+            return normalize_display_text(
+                f"{opponent_team} speelt compact en kan {subject_team} moeilijk maken in de opbouw."
+            )
 
     return humanize_research_line(
         text,

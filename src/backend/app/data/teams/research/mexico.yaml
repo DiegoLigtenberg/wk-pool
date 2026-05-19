@@ -129,25 +129,25 @@ context_scoring:
   persistent:
   - id: cohost_crowd
     delta: 1
-    reason: Mexico speelt als co-host thuis in Mexico City (circa 2240 meter); massaal
-      publiek en vertrouwde hoogte werken in hun voordeel.
+    reason: Mexico opent als co-host op grote hoogte in Mexico City met massaal thuispubliek.
   versus:
     Czechia:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Tsjechië
+      reason: Snelle omschakeling past bij het lage, compacte blok van Tsjechië.
     Korea Republic:
     - id: home_fixture
       delta: 1
-      reason: Thuis in Guadalajara Stadium (co-host)
+      reason: Thuis in Guadalajara Stadium (co-host).
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Zuid-Korea tegen ons aanvalsspel
+      reason: Zuid-Korea kan gevaarlijk omschakelen tegen het aanvalsspel van Mexico.
     South Africa:
     - id: opener_context
       delta: 0
-      reason: Co-host opener op ≈2240m (Mexico City) ,  hoogte + publiek uniek vs
-        rest van deelnemers.
+      reason: Mexico opent als co-host op grote hoogte in Mexico City met massaal
+        thuispubliek.
     - id: home_fixture
       delta: 1
-      reason: Thuis in Mexico City Stadium (co-host)
+      reason: Mexico opent als co-host op grote hoogte in Mexico City met massaal
+        thuispubliek.

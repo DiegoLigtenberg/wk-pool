@@ -125,7 +125,7 @@ context_scoring:
     France:
     - id: opener_context
       delta: 0
-      reason: Pape Thiaw verving Cissé kort voor tornooi ,  Frankrijk-opener NY direct
+      reason: Pape Thiaw verving Cissé kort voor tornooi , Frankrijk-opener NY direct
         na coachwissel.
     - id: matchup_risk
       delta: -1
@@ -138,7 +138,7 @@ context_scoring:
     Norway:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Noorwegen
+      reason: Snelle omschakeling past bij het lage, compacte blok van Noorwegen.
     - id: matchup_risk
       delta: -1
       reason: Noorwegen leunt op Haaland als belangrijkste aanvalsbedreiging; extra

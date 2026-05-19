@@ -140,9 +140,9 @@ context_scoring:
         Australië in dit duel tegen Turkije.
     - id: tactical_weakness
       delta: -1
-      reason: 'In dit duel speelt mee: Zwakker tegen Montella-Türkiye tempo en creatie-gap;
-        dat vraagt extra aandacht van Australië.'
+      reason: 'Australië heeft moeite met het profiel van Turkije: montella-Türkiye
+        tempo en creatie-gap.'
     USA:
     - id: away_fixture
       delta: -1
-      reason: Uit tegen co-host Verenigde Staten (Seattle Stadium)
+      reason: Uit tegen co-host Verenigde Staten (Seattle Stadium).

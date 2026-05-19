@@ -126,18 +126,18 @@ context_scoring:
       reason: Canada nervositeit co-host.
     - id: away_fixture
       delta: -1
-      reason: Uit tegen co-host Canada (Toronto Stadium)
+      reason: Uit tegen co-host Canada (Toronto Stadium).
     Qatar:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Qatar
+      reason: Snelle omschakeling past bij het lage, compacte blok van Qatar.
     - id: matchup_risk
       delta: -1
       reason: Qatar/Switzerland geduld.
     Switzerland:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Zwitserland
+      reason: Snelle omschakeling past bij het lage, compacte blok van Zwitserland.
     - id: matchup_risk
       delta: -1
       reason: Qatar/Switzerland geduld.

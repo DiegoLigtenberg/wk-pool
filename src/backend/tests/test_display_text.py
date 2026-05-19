@@ -66,6 +66,43 @@ def test_simons_absence_is_not_parsed_as_japan_star() -> None:
     assert "Japan leunt" not in text_jp
 
 
+def test_baked_machine_prefix_stripped() -> None:
+    text = humanize_factor_reason(
+        "In dit duel speelt mee: Zwakker tegen Salah-Egypte counters; "
+        "dat vraagt extra aandacht van België.",
+        factor_id="tactical_weakness",
+        subject_team="België",
+        opponent_team="Egypte",
+    )
+    assert "in dit duel speelt mee" not in text.lower()
+    assert "extra aandacht" not in text.lower()
+    assert "België" in text
+    assert "Egypte" in text
+
+
+def test_sterk_tegen_readable() -> None:
+    text = humanize_factor_reason(
+        "Sterk Salah/Marmoush transitions tegen Garcia-België",
+        factor_id="opponent_profile_strong",
+        subject_team="België",
+        opponent_team="Egypte",
+    )
+    assert "Egypte" in text
+    assert "Salah" in text
+    assert "in dit duel speelt mee" not in text.lower()
+
+
+def test_haiti_brazil_group_later() -> None:
+    text = humanize_factor_reason(
+        "Brazil group later.",
+        factor_id="matchup_risk",
+        subject_team="Haïti",
+        opponent_team="Brazilië",
+    )
+    assert "Brazilië" in text
+    assert "groep" in text.lower()
+
+
 def test_humanize_england_tuchel_with_dutch_opponent_name() -> None:
     text = humanize_factor_reason(
         "England Tuchel.",
@@ -97,6 +134,29 @@ def test_humanize_short_colon_underdog() -> None:
     assert "underdog" in text.lower()
     assert "Tsjechië" in text
     assert ":" not in text or "geldt" in text
+
+
+def test_haiti_isidor_spark_readable() -> None:
+    text = humanize_team_spark(
+        "Wilson Isidor (Sunderland) en Bellegarde (Wolves) vormen onverwachte Europese kernspelers.",
+        "Haïti",
+    )
+    assert "Wilson Isidor" in text
+    assert "Sunderland" in text
+    assert "Bellegarde" in text
+    assert "club " not in text.lower()
+
+
+def test_argentina_crowd_vs_not_split_as_matchup() -> None:
+    text = humanize_factor_reason(
+        "Grote Argentijnse gemeenschap in de VS geeft Argentinië in veel stadions extra steun.",
+        factor_id="crowd_bias",
+        subject_team="Argentinië",
+        opponent_team="Algerije",
+    )
+    assert "in dit duel speelt mee" not in text.lower()
+    assert "in de tegen geeft" not in text.lower()
+    assert "in de VS" in text
 
 
 def test_mexico_cohost_crowd_not_against_itself() -> None:

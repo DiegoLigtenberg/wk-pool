@@ -131,7 +131,7 @@ context_scoring:
     Norway:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Noorwegen
+      reason: Snelle omschakeling past bij het lage, compacte blok van Noorwegen.
     - id: matchup_risk
       delta: -1
       reason: Norway Haaland direct.
@@ -141,4 +141,5 @@ context_scoring:
       reason: Senegal Mane counters.
     - id: fixture_story
       delta: -1
-      reason: Groep I-opener vs Senegal
+      reason: Frankrijk opent de groep tegen Senegal; de eerste wedstrijd telt meteen
+        zwaar.

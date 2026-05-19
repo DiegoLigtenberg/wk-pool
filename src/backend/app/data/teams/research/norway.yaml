@@ -131,8 +131,7 @@ context_scoring:
     France:
     - id: matchup_risk
       delta: -1
-      reason: 'In dit duel speelt mee: Frankrijk Saliba tegen Haaland; dat vraagt
-        extra aandacht van Noorwegen.'
+      reason: Frankrijk Saliba tegen Haaland.
     Iraq:
     - id: matchup_edge
       delta: 1
@@ -140,7 +139,7 @@ context_scoring:
         Noorwegen.
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Irak tegen ons aanvalsspel
+      reason: Irak kan gevaarlijk omschakelen tegen het aanvalsspel van Noorwegen.
     Senegal:
     - id: matchup_risk
       delta: -1

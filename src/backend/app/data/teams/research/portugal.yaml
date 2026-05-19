@@ -126,14 +126,15 @@ context_scoring:
     Congo DR:
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Congo tegen ons aanvalsspel
+      reason: Congo kan gevaarlijk omschakelen tegen het aanvalsspel van Portugal.
     - id: matchup_risk
       delta: -1
-      reason: DR Congo Haller.
+      reason: Sébastien Haller is terug na een lang blessuretraject; zijn fitheid
+        bepaalt hoe scherp Portugal voorin is.
     Uzbekistan:
     - id: matchup_edge
       delta: 1
       reason: Uzbekistan.
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Oezbekistan
+      reason: Snelle omschakeling past bij het lage, compacte blok van Oezbekistan.

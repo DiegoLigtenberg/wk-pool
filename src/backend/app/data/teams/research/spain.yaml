@@ -137,16 +137,15 @@ context_scoring:
         en pressing.
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Kaapverdië tegen ons aanvalsspel
+      reason: Kaapverdië kan gevaarlijk omschakelen tegen het aanvalsspel van Spanje.
     Saudi Arabia:
     - id: style_matchup
       delta: -1
-      reason: Hoge press van Saoedi-Arabië verstoort opbouw
+      reason: De hoge druk van Saoedi-Arabië kan de opbouw verstoren.
     Uruguay:
     - id: opponent_profile_weak
       delta: 1
-      reason: 'In dit duel speelt mee: Kwetsbaar ruimte achter druk tegen Spanje;
-        dat vraagt extra aandacht van Spanje.'
+      reason: Kwetsbaar ruimte achter druk tegen Spanje.
     - id: style_matchup
       delta: -1
-      reason: Hoge press van Uruguay verstoort opbouw
+      reason: De hoge druk van Uruguay kan de opbouw verstoren.

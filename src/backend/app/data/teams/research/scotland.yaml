@@ -120,7 +120,7 @@ context_scoring:
     Brazil:
     - id: style_matchup
       delta: 1
-      reason: Lucht/standaardprofiel t.o.v. Brazilië
+      reason: Lucht/standaardprofiel t.o.v. Brazilië.
     - id: matchup_risk
       delta: -1
       reason: Brazilië leunt in dit duel op later; dat vraagt een gericht plan van
@@ -128,11 +128,12 @@ context_scoring:
     Haiti:
     - id: matchup_edge
       delta: 1
-      reason: Haïti leunt in dit duel op Isidor; dat vraagt een gericht plan van Schotland.
+      reason: Haïti leunt op spits Wilson Isidor (Sunderland); Schotland moet hem
+        vroeg afdekken.
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Haïti tegen ons aanvalsspel
+      reason: Haïti kan gevaarlijk omschakelen tegen het aanvalsspel van Schotland.
     Morocco:
     - id: style_matchup
       delta: 1
-      reason: Lucht/standaardprofiel t.o.v. Marokko
+      reason: Lucht/standaardprofiel t.o.v. Marokko.

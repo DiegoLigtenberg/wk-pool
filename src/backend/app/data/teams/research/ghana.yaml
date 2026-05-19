@@ -128,7 +128,7 @@ context_scoring:
     England:
     - id: style_matchup
       delta: 1
-      reason: Omschakeling/transities passen tegen compact Engeland
+      reason: Snelle omschakeling past bij het lage, compacte blok van Engeland.
     - id: matchup_risk
       delta: -1
       reason: Engeland heeft met coach Tuchel een duidelijk tactisch plan; lastig
@@ -139,4 +139,4 @@ context_scoring:
       reason: Panama.
     - id: style_matchup
       delta: -1
-      reason: Compacte counters van Panama tegen ons aanvalsspel
+      reason: Panama kan gevaarlijk omschakelen tegen het aanvalsspel van Ghana.

@@ -73,12 +73,7 @@
   text-transform: uppercase;
 }
 
-.team-insight-meta {
-  margin-top: 0.75rem;
-  font-size: 0.95rem;
-}
-
-.team-insight-group-context {
+.team-insight-group-program {
   margin-top: 0.85rem;
   padding: 0.75rem 0.9rem;
   border: 1px solid rgba(148, 163, 184, 0.14);
@@ -86,7 +81,7 @@
   background: rgba(2, 6, 23, 0.28);
 }
 
-.team-insight-group-context__title {
+.team-insight-group-program__title {
   color: var(--accent-text);
   font-size: 0.78rem;
   font-weight: 600;
@@ -95,11 +90,18 @@
   text-transform: uppercase;
 }
 
-.team-insight-group-context ul {
+.team-insight-group-program__fixtures {
   display: grid;
   gap: 0.35rem;
   margin: 0;
   padding-left: 1.1rem;
+  color: #cbd5e1;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.team-insight-group-program__opponents {
+  margin: 0;
   color: #cbd5e1;
   font-size: 0.92rem;
   line-height: 1.45;
