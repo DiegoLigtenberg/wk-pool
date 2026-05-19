@@ -117,11 +117,20 @@ def _match_view(fixture: Fixture) -> dict[str, object]:
         "status": "completed" if is_completed else "upcoming",
         "score": _score_view(score),
         "actualPick": actual_pick,
-        "aiPrediction": {
-            **ai_prediction,
-            "status": prediction_status,
-        },
+        "aiPrediction": _ai_prediction_view(ai_prediction, prediction_status),
     }
+
+
+def _ai_prediction_view(prediction: dict[str, object], status: str) -> dict[str, object]:
+    """API view; includes legacy ``themes`` for older frontends still deployed."""
+    view: dict[str, object] = {**prediction, "status": status}
+    if "themes" not in view:
+        insight = view.get("insight")
+        if isinstance(insight, dict) and isinstance(insight.get("tags"), list):
+            view["themes"] = [str(tag) for tag in insight["tags"]]
+        else:
+            view["themes"] = []
+    return view
 
 
 def _team_insights(fixtures: list[Fixture]) -> dict[str, object]:

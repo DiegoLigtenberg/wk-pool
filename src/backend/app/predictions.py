@@ -137,6 +137,7 @@ def team_insight(team: str) -> dict[str, object] | None:
         "powerScore": bundle.power_score,
         "strengths": list(bundle.strengths),
         "risks": list(bundle.risks),
+        "niche": _team_insight_niche(bundle),
         "group": bundle.group_stage.group,
         "opponents": list(bundle.group_stage.opponents_nl),
         "distinctiveSpark": humanize_team_spark(bundle.distinctive_spark_notes, bundle.team_name_nl)
@@ -145,6 +146,13 @@ def team_insight(team: str) -> dict[str, object] | None:
         "groupContext": _group_context_lines(bundle),
         "summary": _team_summary(team, profile),
     }
+
+
+def _team_insight_niche(bundle: TeamBundle) -> list[str]:
+    """Legacy veld voor oudere frontends; nieuwe UI gebruikt groupContext/distinctiveSpark."""
+    if bundle.distinctive_spark_notes:
+        return [humanize_team_spark(bundle.distinctive_spark_notes, bundle.team_name_nl)]
+    return list(bundle.experience_cohesion_notes[:2])
 
 
 def _group_context_lines(bundle: TeamBundle) -> list[str]:
