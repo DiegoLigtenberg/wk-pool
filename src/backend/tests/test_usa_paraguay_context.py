@@ -15,4 +15,5 @@ def test_paraguay_does_not_gain_from_usa_self_weakness_note() -> None:
     assert "tactical_weakness" in usa_ids
     assert "opponent_profile_weak" not in paraguay_ids
     assert paraguay["effectiveScore"] == 72
-    assert usa["effectiveScore"] == 82
+    assert usa["effectiveScore"] == 78 + usa["contextDelta"]
+    assert usa["hostDelta"] == 3

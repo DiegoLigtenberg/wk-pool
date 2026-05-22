@@ -5,7 +5,17 @@ from dataclasses import dataclass
 from app.data.teams.context_score import match_context_breakdown
 from app.data.teams.team_bundle import TeamBundle
 from app.data.teams.team_loader import get_team_bundle
-from app.display_text import humanize_research_line, humanize_team_spark
+from app.display_text import (
+    humanize_research_line,
+    humanize_team_spark,
+    humanize_team_trait_for_insight,
+)
+from app.pool_edge import (
+    PickAdjustment,
+    apply_adjustments,
+    collect_pick_adjustments,
+    live_form_from_group_played_yaml,
+)
 from app.prediction_narrative import build_prediction_insight
 from app.teams import display_team_name, fifa_team_key
 
@@ -135,9 +145,15 @@ def team_insight(team: str) -> dict[str, object] | None:
         "tier": bundle.tier,
         "style": bundle.macro_style,
         "powerScore": bundle.power_score,
-        "strengths": list(bundle.strengths),
-        "risks": list(bundle.risks),
-        "niche": _team_insight_niche(bundle),
+        "strengths": [
+            humanize_team_trait_for_insight(s, slot="strength", team_nl=bundle.team_name_nl)
+            for s in bundle.strengths
+        ],
+        "risks": [
+            humanize_team_trait_for_insight(r, slot="risk", team_nl=bundle.team_name_nl)
+            for r in bundle.risks
+        ],
+        "niche": _team_insight_niche(bundle, fifa_team_key=fifa_team_key(team)),
         "group": bundle.group_stage.group,
         "opponents": list(bundle.group_stage.opponents_nl),
         "distinctiveSpark": humanize_team_spark(bundle.distinctive_spark_notes, bundle.team_name_nl)
@@ -148,11 +164,24 @@ def team_insight(team: str) -> dict[str, object] | None:
     }
 
 
-def _team_insight_niche(bundle: TeamBundle) -> list[str]:
-    """Legacy veld voor oudere frontends; nieuwe UI gebruikt groupContext/distinctiveSpark."""
-    if bundle.distinctive_spark_notes:
-        return [humanize_team_spark(bundle.distinctive_spark_notes, bundle.team_name_nl)]
-    return list(bundle.experience_cohesion_notes[:2])
+def _team_insight_niche(bundle: TeamBundle, *, fifa_team_key: str) -> list[str]:
+    """Los van `distinctiveSpark`: grotere-lijn verhalen / tweede signalen (geen opener‑hoogte‑kopie)."""
+
+    pool_profile = TEAM_PROFILES.get(fifa_team_key)
+    if pool_profile and pool_profile.niche:
+        lines = [
+            humanize_research_line(line.strip(), team_nl=bundle.team_name_nl).strip()
+            for line in pool_profile.niche
+            if line.strip()
+        ]
+        return [x for x in lines if x]
+
+    a, b = bundle.psychology_vectors
+    lines = [
+        humanize_research_line(a, team_nl=bundle.team_name_nl).strip(),
+        humanize_research_line(b, team_nl=bundle.team_name_nl).strip(),
+    ]
+    return [x for x in lines if x]
 
 
 def _group_context_lines(bundle: TeamBundle) -> list[str]:
@@ -184,7 +213,15 @@ def _humanize_fixture_hook(hook: str, team_nl: str) -> str:
     return humanize_research_line(hook, team_nl=team_nl)
 
 
-def predict_match(home_team: str, away_team: str, stage: str, round_name: str, group: str | None) -> dict[str, object]:
+def predict_match(
+    home_team: str,
+    away_team: str,
+    stage: str,
+    round_name: str,
+    group: str | None,
+    *,
+    match_number: int | None = None,
+) -> dict[str, object]:
     if not is_known_team(home_team) or not is_known_team(away_team):
         return {
             "pick": "3",
@@ -198,20 +235,80 @@ def predict_match(home_team: str, away_team: str, stage: str, round_name: str, g
     home_key = fifa_team_key(home_team)
     away_key = fifa_team_key(away_team)
     breakdown = match_context_breakdown(home_key, away_key)
-    diff = int(breakdown["diff"])
+    base_diff = int(breakdown["diff"])
     can_draw = stage == "group"
 
-    probabilities = _probabilities(diff, can_draw)
-    pick = _pick_from_probabilities(probabilities, can_draw)
+    home_power = int(breakdown["home"]["powerScore"])
+    away_power = int(breakdown["away"]["powerScore"])
+    home_factors = list(breakdown["home"]["reasons"])
+    away_factors = list(breakdown["away"]["reasons"])
+
+    # Pre-WK: hele groepsfase statisch (research/YAML). Vorm uit groep alleen bij knock-out.
+    live_form = (
+        live_form_from_group_played_yaml(home_key, away_key) if stage == "knockout" else None
+    )
+    adjustments = collect_pick_adjustments(
+        home_key=home_key,
+        away_key=away_key,
+        home_power=home_power,
+        away_power=away_power,
+        home_factors=home_factors,
+        away_factors=away_factors,
+        live_form=live_form,
+        include_live_form=stage == "knockout",
+    )
+    adjusted_diff = apply_adjustments(base_diff, adjustments)
+    pick = _pick_from_diff(
+        adjusted_diff,
+        can_draw=can_draw,
+        home_power=home_power,
+        away_power=away_power,
+    )
+    probabilities = _align_probabilities_to_pick(
+        _probabilities(adjusted_diff, can_draw), pick
+    )
     confidence = _confidence_from_probabilities(pick, probabilities)
+    home_nl = str(breakdown["home"]["team"])
+    away_nl = str(breakdown["away"]["team"])
+    pick_logic_note = explain_pick(
+        pick,
+        diff=adjusted_diff,
+        home_power=home_power,
+        away_power=away_power,
+        can_draw=can_draw,
+        home_name=home_nl,
+        away_name=away_nl,
+        base_diff=base_diff,
+        adjustments=adjustments,
+        probabilities=probabilities,
+    )
+    pick_score_note = explain_pick_score_note(
+        pick,
+        diff=adjusted_diff,
+        home_power=home_power,
+        away_power=away_power,
+        can_draw=can_draw,
+        home_name=home_nl,
+        away_name=away_nl,
+    )
+    merged_pick_detail = merge_pick_notes_for_score_summary(
+        pick,
+        can_draw=can_draw,
+        logic=pick_logic_note,
+        score=pick_score_note,
+    )
     insight = build_prediction_insight(
         home_team=home_key,
         away_team=away_key,
         pick=pick,
         breakdown=breakdown,
-        diff=int(breakdown["diff"]),
+        diff=base_diff,
+        base_diff=base_diff,
         stage=stage,
         round_name=round_name,
+        pool_adjustments=[a.to_dict() for a in adjustments],
+        pick_logic_note="",
+        pick_score_note=merged_pick_detail,
     )
 
     return {
@@ -227,9 +324,10 @@ def predict_match(home_team: str, away_team: str, stage: str, round_name: str, g
 
 def _team_summary(team: str, profile: TeamProfile) -> str:
     name = display_team_name(team)
-    text = f"{name} wordt gezien als {profile.tier.lower()}."
+    text = f"{name} staat bij ons als {profile.tier.lower()}."
     if profile.risks:
-        text += f" Belangrijkste risico: {profile.risks[0]}."
+        hook = profile.risks[0].strip().rstrip(".")
+        text += f" Hét aandachtspunt op papier: hoe stabiel ze blijven bij {hook}."
     return text
 
 
@@ -244,6 +342,11 @@ _GROUP_HOME_LOGIT_B = math.log(0.36 / 0.64)
 # Knock-out: steilere curve, geen gelijk.
 _KNOCKOUT_HOME_LOGIT_K = 0.155
 
+# Groep: pick = wedstrijdscore-diff; gelijk in band; uitzondering duidelijke basisfavoriet.
+GROUP_DRAW_ABS_DIFF_MAX = 8
+GROUP_DRAW_BASE_CLEAR_GAP = 7
+GROUP_DRAW_DIFF_CLEAR_MIN = 5
+
 
 def _probabilities(diff: int, can_draw: bool) -> dict[str, int]:
     if can_draw:
@@ -252,6 +355,7 @@ def _probabilities(diff: int, can_draw: bool) -> dict[str, int]:
 
 
 def _group_probabilities(diff: int) -> dict[str, int]:
+    """Illustratieve kansen op diff; pick wordt daarna leidend via _align_probabilities_to_pick."""
     draw_pct = int(round(max(16, min(32, 29 - 1.1 * abs(diff)))))
     p_draw = draw_pct / 100.0
     p_home = _sigmoid(diff * _GROUP_HOME_LOGIT_K + _GROUP_HOME_LOGIT_B)
@@ -261,14 +365,6 @@ def _group_probabilities(diff: int) -> dict[str, int]:
     home = int(round(100 * p_home / total))
     draw = int(round(100 * p_draw / total))
     away = 100 - home - draw
-
-    # Gelijkwaardige duels: gelijk strikt hoogste kans (pick = gelijk).
-    if abs(diff) <= 2 and draw <= max(home, away):
-        draw = max(home, away) + 1
-        away = max(8, 100 - home - draw)
-        if home + draw + away != 100:
-            away = 100 - home - draw
-
     return {"home": home, "draw": draw, "away": away}
 
 
@@ -279,13 +375,191 @@ def _knockout_probabilities(diff: int) -> dict[str, int]:
     return {"home": home, "draw": 0, "away": 100 - home}
 
 
-def _pick_from_probabilities(probabilities: dict[str, int], can_draw: bool) -> str:
-    home = int(probabilities["home"])
-    away = int(probabilities["away"])
-    draw = int(probabilities.get("draw") or 0)
-    if can_draw and draw >= home and draw >= away:
+def _would_be_draw_without_favorite_rule(
+    diff: int, *, home_power: int, away_power: int
+) -> bool:
+    return abs(diff) <= GROUP_DRAW_ABS_DIFF_MAX
+
+
+def _clear_favorite_overrides_draw(
+    diff: int, *, home_power: int, away_power: int
+) -> bool:
+    base_gap = abs(home_power - away_power)
+    return (
+        base_gap >= GROUP_DRAW_BASE_CLEAR_GAP
+        and abs(diff) >= GROUP_DRAW_DIFF_CLEAR_MIN
+    )
+
+
+def explain_pick(
+    pick: str,
+    *,
+    diff: int,
+    home_power: int,
+    away_power: int,
+    can_draw: bool,
+    home_name: str,
+    away_name: str,
+    base_diff: int,
+    adjustments: list[PickAdjustment],
+    probabilities: dict[str, int],
+) -> str:
+    """Korte uitleg voor de gebruiker: waarom winst, gelijk of verlies."""
+    del base_diff, adjustments, probabilities  # pick/kansen staan al in de UI
+
+    if not can_draw:
+        side = home_name if pick == "1" else away_name
+        return (
+            f"In de knock-out moet er een winnaar zijn; "
+            f"de AI ziet {side} als sterker."
+        )
+
+    if pick == "3":
+        return (
+            "Het verschil tussen beide teams is klein; "
+            "een gelijkspel past bij deze analyse."
+        )
+
+    winner = home_name if pick == "1" else away_name
+    other = away_name if pick == "1" else home_name
+
+    if (
+        abs(diff) <= GROUP_DRAW_ABS_DIFF_MAX
+        and _clear_favorite_overrides_draw(
+            diff, home_power=home_power, away_power=away_power
+        )
+    ):
+        return f"{winner} is op papier het sterkere team in dit duel."
+
+    return f"{winner} heeft in deze analyse net iets meer kansen dan {other}."
+
+
+def merge_pick_notes_for_score_summary(
+    pick: str,
+    *,
+    can_draw: bool,
+    logic: str,
+    score: str,
+) -> str:
+    """Eén korte toelichting bij de score-regel; voorkomt dubbele gelijk/favoriet-zinnen."""
+    logic = logic.strip()
+    score = score.strip()
+    if not logic:
+        return score
+    if not score:
+        return logic
+    if not can_draw:
+        return logic
+
+    low_l = logic.lower()
+    low_s = score.lower()
+
+    if pick == "3" and "gelijkspel" in low_l and "gelijkspel" in low_s:
+        return score
+
+    if (
+        pick in ("1", "2")
+        and "net iets meer kansen" in low_l
+        and "ondersteunt de lichte favoriet" in low_s
+    ):
+        return score
+
+    return f"{logic} {score}"
+
+
+def explain_pick_score_note(
+    pick: str,
+    *,
+    diff: int,
+    home_power: int,
+    away_power: int,
+    can_draw: bool,
+    home_name: str,
+    away_name: str,
+) -> str:
+    """Punten-uitleg voor de sectie Scores en research-details (niet bovenaan de kaart)."""
+    if not can_draw:
+        return ""
+
+    score_gap = abs(diff)
+    base_gap = abs(home_power - away_power)
+    punt = "punt" if score_gap == 1 else "punten"
+    basis_punt = "punt" if base_gap == 1 else "punten"
+
+    if pick == "3":
+        if score_gap <= GROUP_DRAW_ABS_DIFF_MAX:
+            return (
+                f"De wedstrijdscore ligt dicht bij elkaar ({score_gap} {punt} verschil); "
+                f"daarom past een gelijkspel bij deze analyse."
+            )
+        return ""
+
+    winner = home_name if pick == "1" else away_name
+    other = away_name if pick == "1" else home_name
+
+    if _clear_favorite_overrides_draw(
+        diff, home_power=home_power, away_power=away_power
+    ) and score_gap <= GROUP_DRAW_ABS_DIFF_MAX:
+        return (
+            f"De wedstrijdscore is krap ({score_gap} {punt} verschil), maar {winner} heeft "
+            f"een hogere basissterkte ({base_gap} {basis_punt} op papier). "
+            f"Daarom wint de voorspelling, geen gelijk."
+        )
+
+    if score_gap <= GROUP_DRAW_ABS_DIFF_MAX and pick in ("1", "2"):
+        return (
+            f"In de wedstrijdscore scheiden beide teams {score_gap} {punt}; "
+            f"dat ondersteunt de lichte favoriet ({winner})."
+        )
+
+    return ""
+
+
+def _pick_from_diff(
+    diff: int,
+    *,
+    can_draw: bool,
+    home_power: int = 0,
+    away_power: int = 0,
+) -> str:
+    """Enige bron voor pick: wedstrijdscore-diff + basisfavoriet-uitzondering."""
+    if can_draw and abs(diff) <= GROUP_DRAW_ABS_DIFF_MAX:
+        base_gap = abs(home_power - away_power)
+        if (
+            base_gap >= GROUP_DRAW_BASE_CLEAR_GAP
+            and abs(diff) >= GROUP_DRAW_DIFF_CLEAR_MIN
+        ):
+            return "1" if diff > 0 else "2"
         return "3"
-    return "1" if home >= away else "2"
+    return "1" if diff > 0 else "2"
+
+
+def _align_probabilities_to_pick(
+    probabilities: dict[str, int], pick: str
+) -> dict[str, int]:
+    """Kansen tonen dezelfde pick als wedstrijdscore (pick-outcome strikt hoogste %)."""
+    home = int(probabilities["home"])
+    draw = int(probabilities.get("draw") or 0)
+    away = int(probabilities["away"])
+    vals: dict[str, int] = {"1": home, "2": away, "3": draw}
+
+    if vals[pick] > max(vals[k] for k in vals if k != pick):
+        return probabilities
+
+    new_pick = max(vals[k] for k in vals if k != pick) + 1
+    remainder = 100 - new_pick
+    other_keys = [k for k in vals if k != pick]
+    other_sum = sum(vals[k] for k in other_keys)
+    scaled = {
+        k: max(8, int(round(vals[k] * remainder / other_sum))) if other_sum else remainder // len(other_keys)
+        for k in other_keys
+    }
+    scaled[pick] = new_pick
+    total = sum(scaled.values())
+    if total != 100:
+        adjust_key = other_keys[0]
+        scaled[adjust_key] += 100 - total
+    return {"home": scaled["1"], "draw": scaled["3"], "away": scaled["2"]}
 
 
 def _confidence_from_probabilities(pick: str, probabilities: dict[str, int]) -> int:

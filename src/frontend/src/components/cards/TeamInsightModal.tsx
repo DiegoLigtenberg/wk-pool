@@ -82,7 +82,7 @@ export function TeamInsightModal({ insight, onClose }: TeamInsightModalProps) {
             <span className="team-insight-score__label">Basisscore</span>
             <span className="team-insight-score__value">{insight.powerScore}</span>
             <span className="team-insight-score__hint">
-              Vaste teamsterkte in het model; per wedstrijd komt daar duelcontext bij (dueltotaal).
+              Vaste teamsterkte in het model; per wedstrijd komt daar duelcontext bij (wedstrijdscore).
             </span>
           </p>
         ) : null}

@@ -44,16 +44,15 @@ export const PredictionPanel = forwardRef<HTMLElement, PredictionPanelProps>(fun
           {presentation.legacyHint ? (
             <p className="prediction-legacy-hint">{presentation.legacyHint}</p>
           ) : null}
-          {presentation.components ? (
-            <p className="prediction-components">{presentation.components}</p>
+          {presentation.leadSummary ? (
+            <p className="prediction-lead-summary">{presentation.leadSummary}</p>
           ) : null}
           <details className="prediction-details">
             <summary>Scores en research-details</summary>
             {presentation.intro ? <p className="prediction-intro">{presentation.intro}</p> : null}
-            <p className="prediction-score-primer">
-              Dueltotaal = basisscore plus onderstaande onderdelen. Plus en min staan alleen in de tabel.
-            </p>
-            <p className="prediction-score-summary">{presentation.scoreSummary}</p>
+            {presentation.scoreSummary ? (
+              <p className="prediction-score-summary">{presentation.scoreSummary}</p>
+            ) : null}
             <div className="prediction-score-grid">
               <TeamScoreCard side={presentation.home} />
               <TeamScoreCard side={presentation.away} />
@@ -69,26 +68,28 @@ export const PredictionPanel = forwardRef<HTMLElement, PredictionPanelProps>(fun
 
 type Presentation = PredictionInsight & {
   intro?: string;
-  components?: string;
+  leadSummary?: string;
   legacyHint?: string;
 };
 
 function presentInsight(insight: PredictionInsight): Presentation {
   const modelStep = insight.steps?.find((s) => s.title === "Hoe dit werkt");
-  const componentStep = insight.steps?.find((s) => s.title === "Belangrijk in dit duel");
+  const duelStep = insight.steps?.find((s) => s.title === "Belangrijk in dit duel");
+  const leadSummary =
+    insight.leadSummary ?? duelStep?.body ?? insight.steps?.[1]?.body;
 
-  if (modelStep && componentStep) {
+  if (modelStep && leadSummary) {
     return {
       ...insight,
       intro: modelStep.body,
-      components: componentStep.body,
+      leadSummary,
     };
   }
 
   return {
     ...insight,
     intro: insight.steps?.[0]?.body,
-    components: insight.steps?.[1]?.body ?? insight.narrative,
+    leadSummary: leadSummary ?? insight.narrative,
     legacyHint: "Herstart de backend voor de nieuwste uitleg (poetry run wk-pool-backend).",
   };
 }

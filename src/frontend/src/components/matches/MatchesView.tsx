@@ -22,6 +22,7 @@ export function MatchesView({ matches, summary }: MatchesViewProps) {
   const [status, setStatus] = useState<MatchStatusFilter>(DEFAULT_STATUS);
   const [team, setTeam] = useState(DEFAULT_TEAM);
   const [phase, setPhase] = useState<MatchPhaseFilter>(DEFAULT_PHASE);
+  const [openPredictionMatchNumber, setOpenPredictionMatchNumber] = useState<number | null>(null);
   const teamOptions = useMemo(() => teamSelectOptions(matches), [matches]);
   const phaseOptions = useMemo(() => phaseSelectOptions(matches), [matches]);
 
@@ -49,6 +50,64 @@ export function MatchesView({ matches, summary }: MatchesViewProps) {
     const matchesPhase = phase === "all" || match.stage === phase || phase === `group:${match.group ?? ""}`;
     return matchesStatus && matchesTeam && matchesPhase;
   });
+
+  const closePrediction = useCallback(() => {
+    setOpenPredictionMatchNumber(null);
+  }, []);
+
+  const togglePrediction = useCallback((matchNumber: number) => {
+    setOpenPredictionMatchNumber((current) => (current === matchNumber ? null : matchNumber));
+  }, []);
+
+  useEffect(() => {
+    if (openPredictionMatchNumber === null) {
+      return;
+    }
+
+    const stillVisible = filteredMatches.some((match) => match.matchNumber === openPredictionMatchNumber);
+    if (!stillVisible) {
+      setOpenPredictionMatchNumber(null);
+    }
+  }, [filteredMatches, openPredictionMatchNumber]);
+
+  useEffect(() => {
+    if (openPredictionMatchNumber === null) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closePrediction();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [openPredictionMatchNumber, closePrediction]);
+
+  useEffect(() => {
+    if (openPredictionMatchNumber === null) {
+      return;
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (target.closest(".prediction-panel")) {
+        return;
+      }
+      if (target.closest(".ai-marker-button")) {
+        return;
+      }
+      if (target.closest(".match-cell--interactive")) {
+        return;
+      }
+      closePrediction();
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [openPredictionMatchNumber, closePrediction]);
 
   return (
     <section className="panel" id="wedstrijden">
@@ -94,7 +153,15 @@ export function MatchesView({ matches, summary }: MatchesViewProps) {
         </div>
         <div id="match-table-body">
           {filteredMatches.length ? (
-            filteredMatches.map((match) => <FixtureRow key={match.matchNumber} match={match} />)
+            filteredMatches.map((match) => (
+              <FixtureRow
+                key={match.matchNumber}
+                match={match}
+                isPredictionOpen={openPredictionMatchNumber === match.matchNumber}
+                onTogglePrediction={() => togglePrediction(match.matchNumber)}
+                onClosePrediction={closePrediction}
+              />
+            ))
           ) : (
             <div className="empty-state">Geen wedstrijden gevonden voor deze filters.</div>
           )}
@@ -104,43 +171,61 @@ export function MatchesView({ matches, summary }: MatchesViewProps) {
   );
 }
 
-function FixtureRow({ match }: { match: Match }) {
+type FixtureRowProps = {
+  match: Match;
+  isPredictionOpen: boolean;
+  onTogglePrediction: () => void;
+  onClosePrediction: () => void;
+};
+
+function FixtureRow({ match, isPredictionOpen, onTogglePrediction, onClosePrediction }: FixtureRowProps) {
   const aiPick = match.aiPrediction.pick;
   const homeOutcome = teamOutcome(match, "home");
   const awayOutcome = teamOutcome(match, "away");
-  const [showPrediction, setShowPrediction] = useState(false);
   const predictionPanelRef = useRef<HTMLElement>(null);
   const predictionCloseRef = useRef<HTMLButtonElement>(null);
   const aiTriggerRef = useRef<HTMLButtonElement>(null);
   const predictionId = `prediction-${match.matchNumber}`;
   const matchLabel = `${displayTeamName(match.homeTeam)} tegen ${displayTeamName(match.awayTeam)}`;
-  const aiLabel = showPrediction
+  const aiLabel = isPredictionOpen
     ? `Sluit AI-uitleg voor ${matchLabel}`
     : `Toon AI-uitleg voor ${matchLabel}`;
 
   const closePrediction = useCallback(() => {
-    setShowPrediction(false);
+    onClosePrediction();
     queueMicrotask(() => aiTriggerRef.current?.focus());
-  }, []);
+  }, [onClosePrediction]);
 
-  useEffect(() => {
-    if (!showPrediction) {
-      return;
-    }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        closePrediction();
+  const handleMatchCellClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      const target = event.target as HTMLElement;
+      if (target.closest(".team-label-button")) {
+        if (isPredictionOpen) {
+          onClosePrediction();
+        }
+        return;
       }
-    };
+      if (target.closest(".ai-marker-button")) {
+        return;
+      }
+      if (target.closest(".prediction-panel")) {
+        return;
+      }
+      onTogglePrediction();
+    },
+    [isPredictionOpen, onClosePrediction, onTogglePrediction],
+  );
 
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [showPrediction, closePrediction]);
+  const handleAiBadgeClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      onTogglePrediction();
+    },
+    [onTogglePrediction],
+  );
 
   useEffect(() => {
-    if (!showPrediction) {
+    if (!isPredictionOpen) {
       return;
     }
 
@@ -152,15 +237,19 @@ function FixtureRow({ match }: { match: Match }) {
     });
 
     return () => window.cancelAnimationFrame(frame);
-  }, [showPrediction]);
+  }, [isPredictionOpen]);
 
   return (
-    <article className={`fixture-row ${match.status}${showPrediction ? " fixture-row--prediction-open" : ""}`}>
+    <article className={`fixture-row ${match.status}${isPredictionOpen ? " fixture-row--prediction-open" : ""}`}>
       <div className="date-cell">
         <strong>{formatDateShort(match.kickoffAt)}</strong>
         <span>{formatTime(match.kickoffAt)}</span>
       </div>
-      <div className="match-cell">
+      <div
+        className="match-cell match-cell--interactive"
+        onClick={handleMatchCellClick}
+        role="presentation"
+      >
         <div className="scoreboard-line">
           <span className={`team-pick ${homeOutcome}`}>
             <span className="team-with-ai team-with-ai--home">
@@ -170,9 +259,9 @@ function FixtureRow({ match }: { match: Match }) {
                   status={match.aiPrediction.status}
                   matchStatus={match.status}
                   label={aiLabel}
-                  expanded={showPrediction}
+                  expanded={isPredictionOpen}
                   controls={predictionId}
-                  onClick={() => setShowPrediction((current) => !current)}
+                  onClick={handleAiBadgeClick}
                 />
               ) : (
                 <AiMarkerSlot />
@@ -187,10 +276,10 @@ function FixtureRow({ match }: { match: Match }) {
                 status={match.aiPrediction.status}
                 matchStatus={match.status}
                 label={aiLabel}
-                expanded={showPrediction}
+                expanded={isPredictionOpen}
                 controls={predictionId}
                 pickKind="draw"
-                onClick={() => setShowPrediction((current) => !current)}
+                onClick={handleAiBadgeClick}
               />
             ) : null}
             <strong className={`result-pill${match.score ? "" : " result-upcoming"}`}>
@@ -205,9 +294,9 @@ function FixtureRow({ match }: { match: Match }) {
                   status={match.aiPrediction.status}
                   matchStatus={match.status}
                   label={aiLabel}
-                  expanded={showPrediction}
+                  expanded={isPredictionOpen}
                   controls={predictionId}
-                  onClick={() => setShowPrediction((current) => !current)}
+                  onClick={handleAiBadgeClick}
                 />
               ) : (
                 <AiMarkerSlot />
@@ -216,7 +305,7 @@ function FixtureRow({ match }: { match: Match }) {
             </span>
           </span>
         </div>
-        {showPrediction ? (
+        {isPredictionOpen ? (
           <PredictionPanel
             ref={predictionPanelRef}
             closeButtonRef={predictionCloseRef}
@@ -259,7 +348,7 @@ const AiBadge = forwardRef<
     expanded: boolean;
     controls: string;
     pickKind?: "team" | "draw";
-    onClick: () => void;
+    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   }
 >(function AiBadge(
   { status, matchStatus, label, expanded, controls, pickKind = "team", onClick },

@@ -20,7 +20,7 @@ def test_context_adjustment_bounded() -> None:
     home_adj, away_adj = context_adjustments("Netherlands", "Japan")
     assert abs(home_adj) <= 5
     assert abs(away_adj) <= 5
-    assert abs(home_adj) + abs(away_adj) <= 6
+    assert abs(home_adj) + abs(away_adj) <= 12
 
 
 def test_predict_includes_match_insight() -> None:

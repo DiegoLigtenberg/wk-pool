@@ -152,26 +152,29 @@ def test_tournament_view_contains_pickem_preview() -> None:
     summary = tournament["summary"]
 
     assert summary["groupMatches"] == 72
-    assert summary["completed"] == 36
-    assert summary["aiCorrect"] + summary["aiWrong"] == 36
+    assert summary["completed"] == 0
+    assert summary["upcoming"] == 104
+    assert summary["aiCorrect"] == 0
+    assert summary["aiWrong"] == 0
+    assert summary["aiPending"] == 72
     assert len(tournament["groups"]) == 12
 
 
 def test_tournament_preview_matches_are_chronological() -> None:
     tournament = build_tournament_view()
 
-    assert tournament["nextMatch"]["matchNumber"] == 38
+    assert tournament["nextMatch"]["matchNumber"] == 1
     assert [match["matchNumber"] for match in tournament["upcomingMatches"]] == [
-        38,
-        39,
-        37,
-        40,
-        43,
-        42,
-        41,
-        44,
+        1,
+        2,
+        3,
+        4,
+        8,
+        7,
+        5,
+        6,
     ]
-    assert [match["matchNumber"] for match in tournament["recentMatches"]] == [29, 31, 35, 33, 34, 36]
+    assert tournament["recentMatches"] == []
 
 
 def test_tournament_view_uses_dutch_team_names() -> None:
@@ -221,7 +224,51 @@ def is_tournament_view(tournament: object) -> bool:
         assert all(is_match(match) for match in group["matches"])
 
     assert all(is_match(match) for match in tournament["knockoutMatches"])
+    assert is_crystal_ball(tournament["crystalBall"])
     return True
+
+
+def is_crystal_ball(value: object) -> bool:
+    if not isinstance(value, dict):
+        return False
+
+    group_winners = value.get("groupWinners")
+    if not isinstance(group_winners, list):
+        return False
+    for entry in group_winners:
+        if not isinstance(entry, dict):
+            return False
+        if not isinstance(entry.get("group"), str) or not isinstance(entry.get("team"), str):
+            return False
+
+    projected_groups = value.get("projectedGroups")
+    if not isinstance(projected_groups, list):
+        return False
+    for group in projected_groups:
+        if not isinstance(group, dict):
+            return False
+        if not isinstance(group.get("name"), str):
+            return False
+        if group.get("winner") is not None and not isinstance(group.get("winner"), str):
+            return False
+        standings = group.get("standings")
+        if not isinstance(standings, list) or not all(is_standing(standing) for standing in standings):
+            return False
+
+    bonus_questions = value.get("bonusQuestions")
+    if not isinstance(bonus_questions, list):
+        return False
+    for question in bonus_questions:
+        if not isinstance(question, dict):
+            return False
+        if not all(isinstance(question.get(key), str) for key in ("id", "label", "value", "helper")):
+            return False
+
+    sources = value.get("sources")
+    if not isinstance(sources, list) or not all(isinstance(source, str) for source in sources):
+        return False
+
+    return isinstance(value.get("contextAsOf"), str)
 
 
 def get(path: str, headers: dict[str, str] | None = None) -> tuple[HTTPResponse, bytes]:

@@ -30,7 +30,8 @@ Voorspellingen gebruiken `get_team_bundle()` → `power_score` + begrensde **con
 
 - `team_loader.py` ,  laadt YAML
 - `fixture_schedule.py` / `fixture_venues.py` ,  CSV-verrijking
-- `context_score.py` ,  som `context_scoring` + co-host (max ±6 pt-equivalent op duel)
+- `factor_weights.py` ,  vaste herweging ruwe factoren → effectieve punten + bucket-caps
+- `context_score.py` ,  som `context_scoring` + co-host (duel-research max ±6 op het veld)
 - `build_context_scoring_yaml.py` ,  genereert `context_scoring` uit research
 - `predictions.py` ,  leest bundles, niet meer losse JSON-facetten
 

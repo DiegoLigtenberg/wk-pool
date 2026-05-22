@@ -77,7 +77,54 @@ export function getTournamentValidationErrors(value: unknown, limit = 8): string
     }
   }
 
+  push("crystalBall", isCrystalBall(value.crystalBall));
+
   return errors;
+}
+
+function isCrystalBall(value: unknown): boolean {
+  if (!isRecord(value)) {
+    return false;
+  }
+  if (!Array.isArray(value.groupWinners) || !value.groupWinners.every(isCrystalBallGroupWinner)) {
+    return false;
+  }
+  if (!Array.isArray(value.projectedGroups) || !value.projectedGroups.every(isProjectedGroup)) {
+    return false;
+  }
+  if (!Array.isArray(value.bonusQuestions) || !value.bonusQuestions.every(isCrystalBallBonusQuestion)) {
+    return false;
+  }
+  return isStringArray(value.sources) && typeof value.contextAsOf === "string";
+}
+
+function isCrystalBallGroupWinner(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    typeof value.group === "string" &&
+    typeof value.team === "string"
+  );
+}
+
+function isProjectedGroup(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    typeof value.name === "string" &&
+    (value.winner === null || typeof value.winner === "string") &&
+    Array.isArray(value.standings) &&
+    value.standings.every(isStanding)
+  );
+}
+
+function isCrystalBallBonusQuestion(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    typeof value.id === "string" &&
+    typeof value.label === "string" &&
+    typeof value.value === "string" &&
+    typeof value.helper === "string" &&
+    (value.rationale === undefined || typeof value.rationale === "string")
+  );
 }
 
 export function describeUnexpectedTournamentPayload(value: unknown, apiUrl: string): string {
@@ -184,9 +231,19 @@ function isAiPrediction(value: unknown): boolean {
     typeof value.explanation === "string" &&
     PREDICTION_STATUSES.has(value.status as string) &&
     (value.confidence === 0 ? value.insight == null : isPredictionInsight(value.insight)) &&
+    (value.suggestedScore == null || isSuggestedScore(value.suggestedScore)) &&
     (value.homeWinProbability === null || isNumber(value.homeWinProbability)) &&
     (value.drawProbability === null || isNumber(value.drawProbability)) &&
     (value.awayWinProbability === null || isNumber(value.awayWinProbability))
+  );
+}
+
+function isSuggestedScore(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    isNumber(value.home) &&
+    isNumber(value.away) &&
+    typeof value.reason === "string"
   );
 }
 
@@ -199,13 +256,39 @@ function isPredictionInsight(value: unknown): boolean {
     value.steps == null || (Array.isArray(value.steps) && value.steps.every(isPredictionStep));
   return (
     typeof value.scoreSummary === "string" &&
+    (value.leadSummary == null || typeof value.leadSummary === "string") &&
     typeof value.verdict === "string" &&
     narrativeOk &&
     stepsOk &&
     isStringArray(value.tags) &&
     isNumber(value.diff) &&
+    (value.baseDiff == null || isNumber(value.baseDiff)) &&
+    (value.pickSteps == null ||
+      (Array.isArray(value.pickSteps) && value.pickSteps.every(isPickStep))) &&
+    (value.poolAdjustments == null ||
+      (Array.isArray(value.poolAdjustments) && value.poolAdjustments.every(isPoolAdjustment))) &&
+    (value.pickLogicNote == null || typeof value.pickLogicNote === "string") &&
     isPredictionScoreSide(value.home) &&
     isPredictionScoreSide(value.away)
+  );
+}
+
+function isPickStep(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    typeof value.title === "string" &&
+    typeof value.body === "string"
+  );
+}
+
+function isPoolAdjustment(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    typeof value.id === "string" &&
+    typeof value.kind === "string" &&
+    typeof value.label === "string" &&
+    isNumber(value.delta) &&
+    typeof value.reason === "string"
   );
 }
 
@@ -221,10 +304,15 @@ function isPredictionScoreSide(value: unknown): boolean {
   if (!isRecord(value)) {
     return false;
   }
+  const optionalDeltas =
+    (value.researchDelta == null || isNumber(value.researchDelta)) &&
+    (value.hostDelta == null || isNumber(value.hostDelta)) &&
+    (value.travelDelta == null || isNumber(value.travelDelta));
   return (
     typeof value.team === "string" &&
     isNumber(value.powerScore) &&
     isNumber(value.contextDelta) &&
+    optionalDeltas &&
     isNumber(value.effectiveScore) &&
     Array.isArray(value.factors) &&
     value.factors.every(isPredictionFactor)

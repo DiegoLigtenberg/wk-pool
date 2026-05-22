@@ -2,6 +2,14 @@
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _audit_bootstrap as _audit_bootstrap  # noqa: E402
+
+_audit_bootstrap.configure_audit_stdio()
+
 from collections import defaultdict
 
 from app.data.teams.context_scoring_builder import build_versus_factors

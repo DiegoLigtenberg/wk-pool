@@ -1,0 +1,1023 @@
+{
+  "summary": {
+    "matches": 72,
+    "picks": {
+      "1": 28,
+      "2": 23,
+      "3": 21
+    },
+    "draw_pct": 29.2,
+    "issue_count": 0,
+    "issues": []
+  },
+  "rows": [
+    {
+      "match": "Mexico – Zuid-Afrika",
+      "base_diff": 12,
+      "adjusted_diff": 12,
+      "pick": "1",
+      "probs": {
+        "home": 68,
+        "draw": 16,
+        "away": 16
+      },
+      "verdict": "De AI voorspelt dat Mexico wint.",
+      "lead": "Let op: Zuid-Afrika speelt de openingswedstrijd uit tegen co-host Mexico op grote hoogte in Mexico City, met massaal thuispubliek voor de thuisploeg. Mexico speelt compact; Zuid-Afrika kan snel omschakelen om ruimte te vinden.",
+      "pick_logic_note": "Mexico heeft in deze analyse net iets meer kansen dan Zuid-Afrika."
+    },
+    {
+      "match": "Zuid-Korea – Tsjechië",
+      "base_diff": 1,
+      "adjusted_diff": 1,
+      "pick": "3",
+      "probs": {
+        "home": 32,
+        "draw": 40,
+        "away": 28
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Zuid-Korea en Tsjechië liggen dicht bij elkaar. Tsjechië speelt compact; Zuid-Korea kan snel omschakelen om ruimte te vinden.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Canada – Bosnië-Herzegovina",
+      "base_diff": 4,
+      "adjusted_diff": 4,
+      "pick": "3",
+      "probs": {
+        "home": 33,
+        "draw": 48,
+        "away": 19
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Canada heeft op papier een licht voordeel, maar het duel blijft open. Bosnië-Herzegovina speelt uit tegen co-host Canada, met thuisvoordeel voor de tegenstander.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Verenigde Staten – Paraguay",
+      "base_diff": 7,
+      "adjusted_diff": 7,
+      "pick": "3",
+      "probs": {
+        "home": 31,
+        "draw": 56,
+        "away": 13
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Verenigde Staten heeft op papier een licht voordeel, maar het duel blijft open. Verenigde Staten zet met hoge druk aan; Paraguay krijgt daardoor weinig rust in de opbouw.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Haïti – Schotland",
+      "base_diff": -11,
+      "adjusted_diff": -11,
+      "pick": "2",
+      "probs": {
+        "home": 14,
+        "draw": 17,
+        "away": 69
+      },
+      "verdict": "De AI voorspelt dat Schotland wint.",
+      "lead": "Haïti kan met counters het compacte blok van Schotland oprekken.",
+      "pick_logic_note": "Schotland heeft in deze analyse net iets meer kansen dan Haïti."
+    },
+    {
+      "match": "Australië – Turkije",
+      "base_diff": -13,
+      "adjusted_diff": -13,
+      "pick": "2",
+      "probs": {
+        "home": 12,
+        "draw": 16,
+        "away": 72
+      },
+      "verdict": "De AI voorspelt dat Turkije wint.",
+      "lead": "Turkije zet met hoge druk aan; Australië krijgt daardoor weinig rust in de opbouw. Australië heeft moeite met het hoge tempo en de creatie van Turkije onder Vincenzo Montella.",
+      "pick_logic_note": "Turkije heeft in deze analyse net iets meer kansen dan Australië."
+    },
+    {
+      "match": "Brazilië – Marokko",
+      "base_diff": 3,
+      "adjusted_diff": 3,
+      "pick": "3",
+      "probs": {
+        "home": 33,
+        "draw": 45,
+        "away": 22
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Brazilië heeft op papier een licht voordeel, maar het duel blijft open. Let op: Marokko speelt compact met Hakimi op rechts; nieuwe bondscoach Mohamed Ouahbi moet het succesvolle WK 2022-plan snel implementeren.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Qatar – Zwitserland",
+      "base_diff": -15,
+      "adjusted_diff": -15,
+      "pick": "2",
+      "probs": {
+        "home": 9,
+        "draw": 16,
+        "away": 75
+      },
+      "verdict": "De AI voorspelt dat Zwitserland wint.",
+      "lead": "Qatar kan met counters het compacte blok van Zwitserland oprekken.",
+      "pick_logic_note": "Zwitserland heeft in deze analyse net iets meer kansen dan Qatar."
+    },
+    {
+      "match": "Ivoorkust – Ecuador",
+      "base_diff": -2,
+      "adjusted_diff": -2,
+      "pick": "3",
+      "probs": {
+        "home": 24,
+        "draw": 43,
+        "away": 33
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Ivoorkust en Ecuador liggen dicht bij elkaar. Let op: Moisés Caicedo is Ecuadors spil op het middenveld (club Chelsea); lastig duel in het centrum voor Ivoorkust.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Duitsland – Curaçao",
+      "base_diff": 27,
+      "adjusted_diff": 27,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Duitsland wint.",
+      "lead": "Voor Duitsland telt ook mee: Lennart Karl (18, Bayern) in Nagelsmann-selectie, generatiesprong na Kroos/Müller. Curaçao rekent op een compact blok om Duitsland te frustreren.",
+      "pick_logic_note": "Duitsland heeft in deze analyse net iets meer kansen dan Curaçao."
+    },
+    {
+      "match": "Nederland – Japan",
+      "base_diff": 2,
+      "adjusted_diff": 2,
+      "pick": "3",
+      "probs": {
+        "home": 33,
+        "draw": 42,
+        "away": 25
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Nederland en Japan liggen dicht bij elkaar. Nederland is sterk op standaards en in de lucht tegen Japan.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Zweden – Tunesië",
+      "base_diff": 11,
+      "adjusted_diff": 11,
+      "pick": "1",
+      "probs": {
+        "home": 66,
+        "draw": 17,
+        "away": 17
+      },
+      "verdict": "De AI voorspelt dat Zweden wint.",
+      "lead": "Zweden zet met hoge druk aan; Tunesië krijgt daardoor weinig rust in de opbouw. Voor Zweden telt ook mee: Graham Potter is de onverwachte Engelse bondscoach van Zweden.",
+      "pick_logic_note": "Zweden heeft in deze analyse net iets meer kansen dan Tunesië."
+    },
+    {
+      "match": "Saoedi-Arabië – Uruguay",
+      "base_diff": -12,
+      "adjusted_diff": -12,
+      "pick": "2",
+      "probs": {
+        "home": 13,
+        "draw": 16,
+        "away": 71
+      },
+      "verdict": "De AI voorspelt dat Uruguay wint.",
+      "lead": "Voor Uruguay telt ook mee: Marcelo Bielsa zet als bondscoach van Uruguay in op extreem hoge druk en pressing.",
+      "pick_logic_note": "Uruguay heeft in deze analyse net iets meer kansen dan Saoedi-Arabië."
+    },
+    {
+      "match": "Spanje – Kaapverdië",
+      "base_diff": 31,
+      "adjusted_diff": 31,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Spanje wint.",
+      "lead": "Spanje heeft het moeilijk tegen de flanken en hoge druk van Kaapverdië. Kaapverdië heeft last van: Zwak tegen Yamal/Williams Spanje en Bielsa-press.",
+      "pick_logic_note": "Spanje heeft in deze analyse net iets meer kansen dan Kaapverdië."
+    },
+    {
+      "match": "Iran – Nieuw-Zeeland",
+      "base_diff": 11,
+      "adjusted_diff": 11,
+      "pick": "1",
+      "probs": {
+        "home": 66,
+        "draw": 17,
+        "away": 17
+      },
+      "verdict": "De AI voorspelt dat Iran wint.",
+      "lead": "Nieuw-Zeeland leunt in dit duel op Wood; dat vraagt een gericht plan van Iran. Iran kan met counters het compacte blok van Nieuw-Zeeland oprekken.",
+      "pick_logic_note": "Iran heeft in deze analyse net iets meer kansen dan Nieuw-Zeeland."
+    },
+    {
+      "match": "België – Egypte",
+      "base_diff": 8,
+      "adjusted_diff": 5,
+      "pick": "1",
+      "probs": {
+        "home": 50,
+        "draw": 24,
+        "away": 26
+      },
+      "verdict": "De AI voorspelt dat België wint.",
+      "lead": "Let op: België heeft met Doku en Kevin De Bruyne veel aanvalskracht op de flanken; lastig voor Egypte. Egypte pakt voordeel met Salah/Marmoush transitions in dit duel tegen België.",
+      "pick_logic_note": "België is op papier het sterkere team in dit duel."
+    },
+    {
+      "match": "Frankrijk – Senegal",
+      "base_diff": 13,
+      "adjusted_diff": 13,
+      "pick": "1",
+      "probs": {
+        "home": 71,
+        "draw": 16,
+        "away": 13
+      },
+      "verdict": "De AI voorspelt dat Frankrijk wint.",
+      "lead": "Let op: Senegal is gevaarlijk in de omschakeling via Sadio Mané; extra aandachtspunt voor Frankrijk in de opbouw.",
+      "pick_logic_note": "Frankrijk heeft in deze analyse net iets meer kansen dan Senegal."
+    },
+    {
+      "match": "Irak – Noorwegen",
+      "base_diff": -9,
+      "adjusted_diff": -9,
+      "pick": "2",
+      "probs": {
+        "home": 17,
+        "draw": 19,
+        "away": 64
+      },
+      "verdict": "De AI voorspelt dat Noorwegen wint.",
+      "lead": "Irak leunt in dit duel op Arnold-blok; dat vraagt een gericht plan van Noorwegen. Let op: Noorwegen leunt op Haaland als belangrijkste aanvalsbedreiging; extra aandachtspunt voor Irak.",
+      "pick_logic_note": "Noorwegen heeft in deze analyse net iets meer kansen dan Irak."
+    },
+    {
+      "match": "Argentinië – Algerije",
+      "base_diff": 23,
+      "adjusted_diff": 23,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Argentinië wint.",
+      "lead": "Zwakker als Argentinië bal rustig circuleert zonder Algerije uit positie te lokken. Algerije heeft last van: Zwakker als Argentinië bal rustig circuleert zonder Algerije uit positie te lokken.",
+      "pick_logic_note": "Argentinië heeft in deze analyse net iets meer kansen dan Algerije."
+    },
+    {
+      "match": "Oostenrijk – Jordanië",
+      "base_diff": 24,
+      "adjusted_diff": 24,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Oostenrijk wint.",
+      "lead": "Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari (Rennes) in dit duel tegen Oostenrijk.",
+      "pick_logic_note": "Oostenrijk heeft in deze analyse net iets meer kansen dan Jordanië."
+    },
+    {
+      "match": "Ghana – Panama",
+      "base_diff": 5,
+      "adjusted_diff": 5,
+      "pick": "1",
+      "probs": {
+        "home": 50,
+        "draw": 24,
+        "away": 26
+      },
+      "verdict": "De AI voorspelt dat Ghana wint.",
+      "lead": "Ghana leunt in dit duel op grillig; dat vraagt een gericht plan van Panama. Ghana speelt compact; Panama kan snel omschakelen om ruimte te vinden.",
+      "pick_logic_note": "Ghana is op papier het sterkere team in dit duel."
+    },
+    {
+      "match": "Engeland – Kroatië",
+      "base_diff": 8,
+      "adjusted_diff": 8,
+      "pick": "3",
+      "probs": {
+        "home": 30,
+        "draw": 59,
+        "away": 11
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Engeland heeft op papier een licht voordeel, maar het duel blijft open. Engeland is sterk op standaards en in de lucht tegen Kroatië.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Portugal – Congo",
+      "base_diff": 24,
+      "adjusted_diff": 24,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Portugal wint.",
+      "lead": "Let op: Sébastien Haller is terug na een lang blessuretraject; zijn fitheid bepaalt hoe scherp Portugal voorin is.",
+      "pick_logic_note": "Portugal heeft in deze analyse net iets meer kansen dan Congo."
+    },
+    {
+      "match": "Oezbekistan – Colombia",
+      "base_diff": -15,
+      "adjusted_diff": -15,
+      "pick": "2",
+      "probs": {
+        "home": 9,
+        "draw": 16,
+        "away": 75
+      },
+      "verdict": "De AI voorspelt dat Colombia wint.",
+      "lead": "Oezbekistan speelt zijn eerste WK en kan zenuwachtig starten; Colombia moet direct tempo en structuur neerzetten. Let op: Colombia leunt in dit duel op Díaz; dat vraagt een gericht plan van Oezbekistan.",
+      "pick_logic_note": "Colombia heeft in deze analyse net iets meer kansen dan Oezbekistan."
+    },
+    {
+      "match": "Tsjechië – Zuid-Afrika",
+      "base_diff": 3,
+      "adjusted_diff": 3,
+      "pick": "3",
+      "probs": {
+        "home": 33,
+        "draw": 45,
+        "away": 22
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Tsjechië heeft op papier een licht voordeel, maar het duel blijft open. Tsjechië speelt compact; Zuid-Afrika kan snel omschakelen om ruimte te vinden.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Zwitserland – Bosnië-Herzegovina",
+      "base_diff": 12,
+      "adjusted_diff": 12,
+      "pick": "1",
+      "probs": {
+        "home": 68,
+        "draw": 16,
+        "away": 16
+      },
+      "verdict": "De AI voorspelt dat Zwitserland wint.",
+      "lead": "Snelle omschakeling past bij het lage, compacte blok van Zwitserland.",
+      "pick_logic_note": "Zwitserland heeft in deze analyse net iets meer kansen dan Bosnië-Herzegovina."
+    },
+    {
+      "match": "Canada – Qatar",
+      "base_diff": 5,
+      "adjusted_diff": 5,
+      "pick": "3",
+      "probs": {
+        "home": 32,
+        "draw": 51,
+        "away": 17
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Canada heeft op papier een licht voordeel, maar het duel blijft open. Let op: Bestand tegen hoge druk Qatar.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Mexico – Zuid-Korea",
+      "base_diff": 10,
+      "adjusted_diff": 10,
+      "pick": "1",
+      "probs": {
+        "home": 63,
+        "draw": 18,
+        "away": 19
+      },
+      "verdict": "De AI voorspelt dat Mexico wint.",
+      "lead": "Zuid-Korea speelt uit tegen co-host Mexico, met thuisvoordeel voor de tegenstander. Snelle omschakeling past bij het lage, compacte blok van Mexico.",
+      "pick_logic_note": "Mexico heeft in deze analyse net iets meer kansen dan Zuid-Korea."
+    },
+    {
+      "match": "Brazilië – Haïti",
+      "base_diff": 30,
+      "adjusted_diff": 30,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Brazilië wint.",
+      "lead": "Voor Brazilië telt ook mee: Carlo Ancelotti is de eerste niet-Braziliaanse bondscoach van Brazilië sinds 1965. Brazilië speelt compact; Haïti kan snel omschakelen om ruimte te vinden.",
+      "pick_logic_note": "Brazilië heeft in deze analyse net iets meer kansen dan Haïti."
+    },
+    {
+      "match": "Schotland – Marokko",
+      "base_diff": -10,
+      "adjusted_diff": -10,
+      "pick": "2",
+      "probs": {
+        "home": 16,
+        "draw": 18,
+        "away": 66
+      },
+      "verdict": "De AI voorspelt dat Marokko wint.",
+      "lead": "Marokko kan met counters het compacte blok van Schotland oprekken.",
+      "pick_logic_note": "Marokko heeft in deze analyse net iets meer kansen dan Schotland."
+    },
+    {
+      "match": "Turkije – Paraguay",
+      "base_diff": 4,
+      "adjusted_diff": 4,
+      "pick": "3",
+      "probs": {
+        "home": 33,
+        "draw": 48,
+        "away": 19
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Turkije heeft op papier een licht voordeel, maar het duel blijft open. Turkije zet met hoge druk aan; Paraguay krijgt daardoor weinig rust in de opbouw.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Verenigde Staten – Australië",
+      "base_diff": 16,
+      "adjusted_diff": 16,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Verenigde Staten wint.",
+      "lead": "Verenigde Staten zet met hoge druk aan; Australië krijgt daardoor weinig rust in de opbouw. Australië speelt uit tegen co-host Verenigde Staten, met thuisvoordeel voor de tegenstander.",
+      "pick_logic_note": "Verenigde Staten heeft in deze analyse net iets meer kansen dan Australië."
+    },
+    {
+      "match": "Duitsland – Ivoorkust",
+      "base_diff": 12,
+      "adjusted_diff": 12,
+      "pick": "1",
+      "probs": {
+        "home": 68,
+        "draw": 16,
+        "away": 16
+      },
+      "verdict": "De AI voorspelt dat Duitsland wint.",
+      "lead": "Let op: De wedstrijd tegen Duitsland geldt als zware test voor Ivoorkust.",
+      "pick_logic_note": "Duitsland heeft in deze analyse net iets meer kansen dan Ivoorkust."
+    },
+    {
+      "match": "Ecuador – Curaçao",
+      "base_diff": 19,
+      "adjusted_diff": 19,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Ecuador wint.",
+      "lead": "Ecuador kan met counters het compacte blok van Curaçao oprekken. Ecuador leunt in dit duel op tweede seed; dat vraagt een gericht plan van Curaçao.",
+      "pick_logic_note": "Ecuador heeft in deze analyse net iets meer kansen dan Curaçao."
+    },
+    {
+      "match": "Nederland – Zweden",
+      "base_diff": 4,
+      "adjusted_diff": 4,
+      "pick": "3",
+      "probs": {
+        "home": 33,
+        "draw": 48,
+        "away": 19
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Nederland heeft op papier een licht voordeel, maar het duel blijft open. Let op: Zweden leunt in dit duel op Isak/Gyökeres; dat vraagt een gericht plan van Nederland.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Tunesië – Japan",
+      "base_diff": -11,
+      "adjusted_diff": -11,
+      "pick": "2",
+      "probs": {
+        "home": 14,
+        "draw": 17,
+        "away": 69
+      },
+      "verdict": "De AI voorspelt dat Japan wint.",
+      "lead": "Let op: Japan leunt in dit duel op Kubo; dat vraagt een gericht plan van Tunesië.",
+      "pick_logic_note": "Japan heeft in deze analyse net iets meer kansen dan Tunesië."
+    },
+    {
+      "match": "Uruguay – Kaapverdië",
+      "base_diff": 24,
+      "adjusted_diff": 24,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Uruguay wint.",
+      "lead": "Let op: Uruguay leunt in dit duel op turnovers; dat vraagt een gericht plan van Kaapverdië.",
+      "pick_logic_note": "Uruguay heeft in deze analyse net iets meer kansen dan Kaapverdië."
+    },
+    {
+      "match": "Spanje – Saoedi-Arabië",
+      "base_diff": 19,
+      "adjusted_diff": 19,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Spanje wint.",
+      "lead": "Saoedi-Arabië heeft in dit duel moeite met het profiel van Spanje.",
+      "pick_logic_note": "Spanje heeft in deze analyse net iets meer kansen dan Saoedi-Arabië."
+    },
+    {
+      "match": "België – Iran",
+      "base_diff": 9,
+      "adjusted_diff": 9,
+      "pick": "1",
+      "probs": {
+        "home": 61,
+        "draw": 19,
+        "away": 20
+      },
+      "verdict": "De AI voorspelt dat België wint.",
+      "lead": "Let op: Iran leunt in dit duel op Ghalenoei-blok; dat vraagt een gericht plan van België. Voor België telt ook mee: Keepersdilemma Courtois, Sánchez: de bondscoach moet de nummer 1 voor het WK nog kiezen, spanning rond België.",
+      "pick_logic_note": "België heeft in deze analyse net iets meer kansen dan Iran."
+    },
+    {
+      "match": "Nieuw-Zeeland – Egypte",
+      "base_diff": -14,
+      "adjusted_diff": -14,
+      "pick": "2",
+      "probs": {
+        "home": 10,
+        "draw": 16,
+        "away": 74
+      },
+      "verdict": "De AI voorspelt dat Egypte wint.",
+      "lead": "Egypte kan met counters het compacte blok van Nieuw-Zeeland oprekken. Let op: Egypte is tactisch lastig voor Nieuw-Zeeland in dit duel.",
+      "pick_logic_note": "Egypte heeft in deze analyse net iets meer kansen dan Nieuw-Zeeland."
+    },
+    {
+      "match": "Noorwegen – Senegal",
+      "base_diff": -8,
+      "adjusted_diff": -8,
+      "pick": "3",
+      "probs": {
+        "home": 9,
+        "draw": 62,
+        "away": 29
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Senegal heeft op papier een licht voordeel, maar het duel blijft open. Noorwegen speelt compact; Senegal kan snel omschakelen om ruimte te vinden.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Frankrijk – Irak",
+      "base_diff": 34,
+      "adjusted_diff": 34,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Frankrijk wint.",
+      "lead": "Irak speelt compact; Frankrijk kan met standaards en geduld het blok openbreken. Let op: Frankrijk leunt op Mbappé als belangrijkste aanvalsbedreiging; extra aandachtspunt voor Irak.",
+      "pick_logic_note": "Frankrijk heeft in deze analyse net iets meer kansen dan Irak."
+    },
+    {
+      "match": "Argentinië – Oostenrijk",
+      "base_diff": 11,
+      "adjusted_diff": 11,
+      "pick": "1",
+      "probs": {
+        "home": 66,
+        "draw": 17,
+        "away": 17
+      },
+      "verdict": "De AI voorspelt dat Argentinië wint.",
+      "lead": "Voor Argentinië telt ook mee: Lionel Messi (39 jaar) is waarschijnlijk voor het laatst op een WK bij Argentinië als titelverdediger. Argentinië raakt kwetsbaar als het centrum dicht staat en Lionel Messi geïsoleerd wordt; Oostenrijk kan daarop inspelen.",
+      "pick_logic_note": "Argentinië heeft in deze analyse net iets meer kansen dan Oostenrijk."
+    },
+    {
+      "match": "Jordanië – Algerije",
+      "base_diff": -12,
+      "adjusted_diff": -12,
+      "pick": "2",
+      "probs": {
+        "home": 13,
+        "draw": 16,
+        "away": 71
+      },
+      "verdict": "De AI voorspelt dat Algerije wint.",
+      "lead": "Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari (Rennes) in dit duel tegen Algerije. Algerije speelt compact; Jordanië kan snel omschakelen om ruimte te vinden.",
+      "pick_logic_note": "Algerije heeft in deze analyse net iets meer kansen dan Jordanië."
+    },
+    {
+      "match": "Engeland – Ghana",
+      "base_diff": 14,
+      "adjusted_diff": 14,
+      "pick": "1",
+      "probs": {
+        "home": 73,
+        "draw": 16,
+        "away": 11
+      },
+      "verdict": "De AI voorspelt dat Engeland wint.",
+      "lead": "Let op: Ghana speelt compact; lastig voor Engeland om ruimte te vinden in dit duel. Voor Engeland telt ook mee: Thomas Tuchel is de eerste Duitse bondscoach van Engeland.",
+      "pick_logic_note": "Engeland heeft in deze analyse net iets meer kansen dan Ghana."
+    },
+    {
+      "match": "Panama – Kroatië",
+      "base_diff": -17,
+      "adjusted_diff": -17,
+      "pick": "2",
+      "probs": {
+        "home": 8,
+        "draw": 16,
+        "away": 76
+      },
+      "verdict": "De AI voorspelt dat Kroatië wint.",
+      "lead": "Let op: Kroatië is tactisch lastig voor Panama in dit duel. Panama is sterk op standaards en in de lucht tegen Kroatië.",
+      "pick_logic_note": "Kroatië heeft in deze analyse net iets meer kansen dan Panama."
+    },
+    {
+      "match": "Portugal – Oezbekistan",
+      "base_diff": 30,
+      "adjusted_diff": 30,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Portugal wint.",
+      "lead": "Oezbekistan speelt compact; Portugal kan snel omschakelen om ruimte te vinden. Let op: Portugal leunt in dit duel op balbezit; dat vraagt een gericht plan van Oezbekistan.",
+      "pick_logic_note": "Portugal heeft in deze analyse net iets meer kansen dan Oezbekistan."
+    },
+    {
+      "match": "Colombia – Congo",
+      "base_diff": 11,
+      "adjusted_diff": 11,
+      "pick": "1",
+      "probs": {
+        "home": 66,
+        "draw": 17,
+        "away": 17
+      },
+      "verdict": "De AI voorspelt dat Colombia wint.",
+      "lead": "Let op: Congo leunt op fysiek atletische spelers; Colombia moet het duel lang volhouden.",
+      "pick_logic_note": "Colombia heeft in deze analyse net iets meer kansen dan Congo."
+    },
+    {
+      "match": "Schotland – Brazilië",
+      "base_diff": -19,
+      "adjusted_diff": -19,
+      "pick": "2",
+      "probs": {
+        "home": 8,
+        "draw": 16,
+        "away": 76
+      },
+      "verdict": "De AI voorspelt dat Brazilië wint.",
+      "lead": "Schotland speelt compact; Brazilië kan snel omschakelen om ruimte te vinden. Let op: Brazilië leunt in dit duel op later; dat vraagt een gericht plan van Schotland.",
+      "pick_logic_note": "Brazilië heeft in deze analyse net iets meer kansen dan Schotland."
+    },
+    {
+      "match": "Marokko – Haïti",
+      "base_diff": 23,
+      "adjusted_diff": 23,
+      "pick": "1",
+      "probs": {
+        "home": 76,
+        "draw": 16,
+        "away": 8
+      },
+      "verdict": "De AI voorspelt dat Marokko wint.",
+      "lead": "Marokko speelt compact; Haïti kan snel omschakelen om ruimte te vinden.",
+      "pick_logic_note": "Marokko heeft in deze analyse net iets meer kansen dan Haïti."
+    },
+    {
+      "match": "Zwitserland – Canada",
+      "base_diff": 4,
+      "adjusted_diff": 4,
+      "pick": "3",
+      "probs": {
+        "home": 33,
+        "draw": 48,
+        "away": 19
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Zwitserland heeft op papier een licht voordeel, maar het duel blijft open. Let op: Canada leunt in dit duel op Davies; dat vraagt een gericht plan van Zwitserland.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Bosnië-Herzegovina – Qatar",
+      "base_diff": 1,
+      "adjusted_diff": 1,
+      "pick": "3",
+      "probs": {
+        "home": 32,
+        "draw": 40,
+        "away": 28
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Bosnië-Herzegovina en Qatar liggen dicht bij elkaar. Bosnië-Herzegovina kan met counters het compacte blok van Qatar oprekken.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Tsjechië – Mexico",
+      "base_diff": -9,
+      "adjusted_diff": -9,
+      "pick": "2",
+      "probs": {
+        "home": 17,
+        "draw": 19,
+        "away": 64
+      },
+      "verdict": "De AI voorspelt dat Mexico wint.",
+      "lead": "Snelle omschakeling past bij het lage, compacte blok van Tsjechië.",
+      "pick_logic_note": "Mexico heeft in deze analyse net iets meer kansen dan Tsjechië."
+    },
+    {
+      "match": "Zuid-Afrika – Zuid-Korea",
+      "base_diff": -4,
+      "adjusted_diff": -4,
+      "pick": "3",
+      "probs": {
+        "home": 17,
+        "draw": 50,
+        "away": 33
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Zuid-Korea heeft op papier een licht voordeel, maar het duel blijft open. Snelle omschakeling past bij het lage, compacte blok van Zuid-Afrika.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Curaçao – Ivoorkust",
+      "base_diff": -19,
+      "adjusted_diff": -19,
+      "pick": "2",
+      "probs": {
+        "home": 8,
+        "draw": 16,
+        "away": 76
+      },
+      "verdict": "De AI voorspelt dat Ivoorkust wint.",
+      "lead": "Ivoorkust heeft tactisch iets meer te bieden dan Curaçao in dit duel.",
+      "pick_logic_note": "Ivoorkust heeft in deze analyse net iets meer kansen dan Curaçao."
+    },
+    {
+      "match": "Ecuador – Duitsland",
+      "base_diff": -10,
+      "adjusted_diff": -10,
+      "pick": "2",
+      "probs": {
+        "home": 16,
+        "draw": 18,
+        "away": 66
+      },
+      "verdict": "De AI voorspelt dat Duitsland wint.",
+      "lead": "Let op: Duitsland heeft met coach Nagelsmann een duidelijk tactisch plan; lastig voor Ecuador om dat te ontwrichten.",
+      "pick_logic_note": "Duitsland heeft in deze analyse net iets meer kansen dan Ecuador."
+    },
+    {
+      "match": "Japan – Zweden",
+      "base_diff": 2,
+      "adjusted_diff": 2,
+      "pick": "3",
+      "probs": {
+        "home": 33,
+        "draw": 42,
+        "away": 25
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Japan en Zweden liggen dicht bij elkaar. Let op: Zweden leunt in dit duel op hoogtes; dat vraagt een gericht plan van Japan.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Tunesië – Nederland",
+      "base_diff": -13,
+      "adjusted_diff": -13,
+      "pick": "2",
+      "probs": {
+        "home": 12,
+        "draw": 16,
+        "away": 72
+      },
+      "verdict": "De AI voorspelt dat Nederland wint.",
+      "lead": "Tunesië speelt compact; Nederland kan met standaards en geduld het blok openbreken. Snelle omschakeling past bij het lage, compacte blok van Nederland.",
+      "pick_logic_note": "Nederland heeft in deze analyse net iets meer kansen dan Tunesië."
+    },
+    {
+      "match": "Turkije – Verenigde Staten",
+      "base_diff": -3,
+      "adjusted_diff": -3,
+      "pick": "3",
+      "probs": {
+        "home": 21,
+        "draw": 46,
+        "away": 33
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Verenigde Staten heeft op papier een licht voordeel, maar het duel blijft open. Verenigde Staten zet met hoge druk aan; Turkije krijgt daardoor weinig rust in de opbouw.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Paraguay – Australië",
+      "base_diff": 5,
+      "adjusted_diff": 5,
+      "pick": "3",
+      "probs": {
+        "home": 32,
+        "draw": 51,
+        "away": 17
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Paraguay heeft op papier een licht voordeel, maar het duel blijft open. Snelle omschakeling past bij het lage, compacte blok van Australië.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Noorwegen – Frankrijk",
+      "base_diff": -23,
+      "adjusted_diff": -23,
+      "pick": "2",
+      "probs": {
+        "home": 8,
+        "draw": 15,
+        "away": 77
+      },
+      "verdict": "De AI voorspelt dat Frankrijk wint.",
+      "lead": "Noorwegen speelt compact; Frankrijk kan snel omschakelen om ruimte te vinden. Let op: Noorwegen leunt op Erling Haaland als spits met directe diepte; lastig voor Frankrijk om ruimte achter de verdediging te houden.",
+      "pick_logic_note": "Frankrijk heeft in deze analyse net iets meer kansen dan Noorwegen."
+    },
+    {
+      "match": "Senegal – Irak",
+      "base_diff": 15,
+      "adjusted_diff": 15,
+      "pick": "1",
+      "probs": {
+        "home": 75,
+        "draw": 16,
+        "away": 9
+      },
+      "verdict": "De AI voorspelt dat Senegal wint.",
+      "lead": "Senegal heeft tactisch iets meer te bieden dan Irak in dit duel. Senegal speelt compact; Irak kan snel omschakelen om ruimte te vinden.",
+      "pick_logic_note": "Senegal heeft in deze analyse net iets meer kansen dan Irak."
+    },
+    {
+      "match": "Egypte – Iran",
+      "base_diff": -1,
+      "adjusted_diff": -1,
+      "pick": "3",
+      "probs": {
+        "home": 28,
+        "draw": 40,
+        "away": 32
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Egypte en Iran liggen dicht bij elkaar. Snelle omschakeling past bij het lage, compacte blok van Egypte.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Nieuw-Zeeland – België",
+      "base_diff": -22,
+      "adjusted_diff": -22,
+      "pick": "2",
+      "probs": {
+        "home": 8,
+        "draw": 15,
+        "away": 77
+      },
+      "verdict": "De AI voorspelt dat België wint.",
+      "lead": "Snelle omschakeling past bij het lage, compacte blok van Nieuw-Zeeland. Let op: België is tactisch lastig voor Nieuw-Zeeland in dit duel.",
+      "pick_logic_note": "België heeft in deze analyse net iets meer kansen dan Nieuw-Zeeland."
+    },
+    {
+      "match": "Kaapverdië – Saoedi-Arabië",
+      "base_diff": -12,
+      "adjusted_diff": -12,
+      "pick": "2",
+      "probs": {
+        "home": 13,
+        "draw": 16,
+        "away": 71
+      },
+      "verdict": "De AI voorspelt dat Saoedi-Arabië wint.",
+      "lead": "Kaapverdië speelt georganiseerd en compact; lastig voor Saoedi-Arabië om kansen te creëren.",
+      "pick_logic_note": "Saoedi-Arabië heeft in deze analyse net iets meer kansen dan Kaapverdië."
+    },
+    {
+      "match": "Uruguay – Spanje",
+      "base_diff": -9,
+      "adjusted_diff": -9,
+      "pick": "2",
+      "probs": {
+        "home": 17,
+        "draw": 19,
+        "away": 64
+      },
+      "verdict": "De AI voorspelt dat Spanje wint.",
+      "lead": "Uruguay laat ruimte achter bij hoge druk; Spanje kan daar tussen de linies profiteren. Voor Spanje telt ook mee: Yamal hamstring, bewust invaller met grote impact-plan (mei 2026); check vóór opener.",
+      "pick_logic_note": "Spanje heeft in deze analyse net iets meer kansen dan Uruguay."
+    },
+    {
+      "match": "Panama – Engeland",
+      "base_diff": -27,
+      "adjusted_diff": -27,
+      "pick": "2",
+      "probs": {
+        "home": 8,
+        "draw": 15,
+        "away": 77
+      },
+      "verdict": "De AI voorspelt dat Engeland wint.",
+      "lead": "Engeland krijgt te maken met het hoge pressingspel van Panama. Let op: Engeland heeft met coach Tuchel een duidelijk tactisch plan; lastig voor Panama om dat te ontwrichten.",
+      "pick_logic_note": "Engeland heeft in deze analyse net iets meer kansen dan Panama."
+    },
+    {
+      "match": "Kroatië – Ghana",
+      "base_diff": 8,
+      "adjusted_diff": 8,
+      "pick": "1",
+      "probs": {
+        "home": 58,
+        "draw": 20,
+        "away": 22
+      },
+      "verdict": "De AI voorspelt dat Kroatië wint.",
+      "lead": "Let op: Ghana is gevaarlijk in de omschakeling via Mohammed Kudus; extra aandachtspunt voor Kroatië in de opbouw.",
+      "pick_logic_note": "Kroatië is op papier het sterkere team in dit duel."
+    },
+    {
+      "match": "Algerije – Oostenrijk",
+      "base_diff": -8,
+      "adjusted_diff": -8,
+      "pick": "3",
+      "probs": {
+        "home": 9,
+        "draw": 62,
+        "away": 29
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Oostenrijk heeft op papier een licht voordeel, maar het duel blijft open. Oostenrijk zet met hoge druk aan; Algerije krijgt daardoor weinig rust in de opbouw.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    },
+    {
+      "match": "Jordanië – Argentinië",
+      "base_diff": -39,
+      "adjusted_diff": -39,
+      "pick": "2",
+      "probs": {
+        "home": 7,
+        "draw": 15,
+        "away": 78
+      },
+      "verdict": "De AI voorspelt dat Argentinië wint.",
+      "lead": "Argentinië kan profiteren als Jordanië dekking mist in de opstelling. Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari (Rennes) in dit duel tegen Argentinië.",
+      "pick_logic_note": "Argentinië heeft in deze analyse net iets meer kansen dan Jordanië."
+    },
+    {
+      "match": "Colombia – Portugal",
+      "base_diff": -11,
+      "adjusted_diff": -11,
+      "pick": "2",
+      "probs": {
+        "home": 14,
+        "draw": 17,
+        "away": 69
+      },
+      "verdict": "De AI voorspelt dat Portugal wint.",
+      "lead": "Let op: Colombia leunt in dit duel op Díaz; dat vraagt een gericht plan van Portugal.",
+      "pick_logic_note": "Portugal heeft in deze analyse net iets meer kansen dan Colombia."
+    },
+    {
+      "match": "Congo – Oezbekistan",
+      "base_diff": 2,
+      "adjusted_diff": 2,
+      "pick": "3",
+      "probs": {
+        "home": 33,
+        "draw": 42,
+        "away": 25
+      },
+      "verdict": "De AI voorspelt een gelijkspel.",
+      "lead": "Congo en Oezbekistan liggen dicht bij elkaar. Oezbekistan speelt zijn eerste WK en kan zenuwachtig starten; Congo moet direct tempo en structuur neerzetten.",
+      "pick_logic_note": "Het verschil tussen beide teams is klein; een gelijkspel past bij deze analyse."
+    }
+  ]
+}

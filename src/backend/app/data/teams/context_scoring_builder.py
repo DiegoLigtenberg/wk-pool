@@ -7,6 +7,7 @@ from app.data.teams.fixture_schedule import NOTABLE_FIXTURE_NARRATIVES
 from app.data.teams.pairwise_matchup import _spark_is_opener_altitude, build_pairwise_factors
 from app.data.teams.team_bundle import TeamBundle
 from app.display_text import (
+    clip_research_excerpt,
     humanize_factor_reason,
     humanize_matchup_shorthand,
     humanize_research_line,
@@ -97,7 +98,9 @@ def build_persistent_factors(bundle: TeamBundle) -> tuple[ContextFactor, ...]:
             ContextFactor(
                 id="squad_load",
                 delta=-2,
-                reason=humanize_research_line(bundle.squad_load_notes[:160], team_nl=bundle.team_name_nl),
+                reason=humanize_research_line(
+                    clip_research_excerpt(bundle.squad_load_notes), team_nl=bundle.team_name_nl
+                ),
             )
         )
 
@@ -112,7 +115,9 @@ def build_persistent_factors(bundle: TeamBundle) -> tuple[ContextFactor, ...]:
             ContextFactor(
                 id="distinctive_spark",
                 delta=delta,
-                reason=humanize_research_line(spark[:160], team_nl=bundle.team_name_nl),
+                reason=humanize_research_line(
+                    clip_research_excerpt(spark), team_nl=bundle.team_name_nl
+                ),
             )
         )
 
@@ -131,7 +136,10 @@ def build_persistent_factors(bundle: TeamBundle) -> tuple[ContextFactor, ...]:
             ContextFactor(
                 id="selection_drama",
                 delta=-1,
-                reason=humanize_research_line(bundle.selection_drama_notes[:160], team_nl=bundle.team_name_nl),
+                reason=humanize_research_line(
+                    clip_research_excerpt(bundle.selection_drama_notes),
+                    team_nl=bundle.team_name_nl,
+                ),
             )
         )
 
@@ -140,7 +148,10 @@ def build_persistent_factors(bundle: TeamBundle) -> tuple[ContextFactor, ...]:
             ContextFactor(
                 id="crowd_bias",
                 delta=1,
-                reason=humanize_research_line(bundle.crowd_home_bias_notes[:160], team_nl=bundle.team_name_nl),
+                reason=humanize_research_line(
+                    clip_research_excerpt(bundle.crowd_home_bias_notes),
+                    team_nl=bundle.team_name_nl,
+                ),
             )
         )
 
@@ -149,7 +160,10 @@ def build_persistent_factors(bundle: TeamBundle) -> tuple[ContextFactor, ...]:
             ContextFactor(
                 id="cohost_crowd",
                 delta=1,
-                reason=humanize_research_line(bundle.crowd_home_bias_notes[:120], team_nl=bundle.team_name_nl),
+                reason=humanize_research_line(
+                    clip_research_excerpt(bundle.crowd_home_bias_notes, max_len=200),
+                    team_nl=bundle.team_name_nl,
+                ),
             )
         )
 
@@ -176,7 +190,10 @@ def build_versus_factors(
                     id="matchup_risk",
                     delta=-1,
                     reason=humanize_matchup_shorthand(
-                        line[:160], opp_nl, team_nl=bundle.team_name_nl
+                        clip_research_excerpt(line),
+                        opp_nl,
+                        team_nl=bundle.team_name_nl,
+                        kind="risk",
                     ),
                 )
             )
@@ -188,7 +205,10 @@ def build_versus_factors(
                     id="matchup_edge",
                     delta=1,
                     reason=humanize_matchup_shorthand(
-                        line[:160], opp_nl, team_nl=bundle.team_name_nl
+                        clip_research_excerpt(line),
+                        opp_nl,
+                        team_nl=bundle.team_name_nl,
+                        kind="edge",
                     ),
                 )
             )
@@ -197,13 +217,17 @@ def build_versus_factors(
     if narrative:
         delta = -1 if any(w in narrative.lower() for w in ("rematch", "titels", "underdog", "opener")) else 0
         candidates.append(
-            ContextFactor(id="fixture_story", delta=delta, reason=narrative[:160])
+            ContextFactor(
+                id="fixture_story", delta=delta, reason=clip_research_excerpt(narrative)
+            )
         )
 
     for fx in bundle.group_stage.fixtures:
         if fx.opponent_fifa == opponent_fifa and fx.narrative and not narrative:
             candidates.append(
-                ContextFactor(id="fixture_story", delta=0, reason=fx.narrative[:160])
+                ContextFactor(
+                    id="fixture_story", delta=0, reason=clip_research_excerpt(fx.narrative)
+                )
             )
 
     if bundle.discipline_risk_notes and _mentions_opponent(
@@ -213,7 +237,10 @@ def build_versus_factors(
             ContextFactor(
                 id="discipline",
                 delta=-1,
-                reason=humanize_research_line(bundle.discipline_risk_notes[:160], team_nl=bundle.team_name_nl),
+                reason=humanize_research_line(
+                    clip_research_excerpt(bundle.discipline_risk_notes),
+                    team_nl=bundle.team_name_nl,
+                ),
             )
         )
 

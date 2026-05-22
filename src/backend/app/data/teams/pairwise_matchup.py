@@ -6,7 +6,7 @@ import re
 
 from app.data.teams.context_scoring_schema import ContextFactor
 from app.data.teams.team_bundle import TeamBundle
-from app.display_text import humanize_factor_reason
+from app.display_text import clip_research_excerpt, humanize_factor_reason
 from app.teams import fifa_team_key
 
 _STYLE_NEEDLES: dict[str, tuple[str, ...]] = {
@@ -25,8 +25,13 @@ def _mentions_opponent(line: str, opponent_nl: str, opponent_fifa: str) -> bool:
 
 
 def _is_self_weakness_note(line: str) -> bool:
-    """Research-regel 'Zwakwer …' = deze ploeg heeft moeite, geen exploiteerbare fout van de tegenstander."""
-    return bool(re.match(r"^\s*zwakwer\b", line.strip(), flags=re.I))
+    """Eigen zwakte in het dossier van de tegenstander, geen exploiteerbare fout voor ons."""
+    t = line.strip()
+    if re.match(r"^\s*zwakwer\b", t, flags=re.I):
+        return True
+    if re.match(r"^\s*zwakker\s+vs\b", t, flags=re.I):
+        return True
+    return False
 
 
 def _style_tags(*chunks: str) -> set[str]:
@@ -170,7 +175,12 @@ def build_pairwise_factors(self: TeamBundle, opponent: TeamBundle) -> list[Conte
             ContextFactor(
                 id="style_matchup",
                 delta=1,
-                reason=f"Lucht/standaardprofiel t.o.v. {opp_nl}",
+                reason=humanize_factor_reason(
+                    f"Lucht/standaardprofiel t.o.v. {opp_nl}",
+                    factor_id="style_matchup",
+                    subject_team=self.team_name_nl,
+                    opponent_team=opp_nl,
+                ),
             )
         )
 
@@ -178,7 +188,11 @@ def build_pairwise_factors(self: TeamBundle, opponent: TeamBundle) -> list[Conte
         if _mentions_opponent(line, opp_nl, opp_fifa):
             low = line.lower()
             delta = -1 if any(w in low for w in ("moet winnen", "druk", "zonder", "uit", "kwets")) else 0
-            factors.append(ContextFactor(id="psychology", delta=delta, reason=line[:160]))
+            factors.append(
+                ContextFactor(
+                    id="psychology", delta=delta, reason=clip_research_excerpt(line)
+                )
+            )
 
     if _mentions_opponent(self.interpretive_ceiling_vs_floor, opp_nl, opp_fifa):
         low = self.interpretive_ceiling_vs_floor.lower()
@@ -187,7 +201,7 @@ def build_pairwise_factors(self: TeamBundle, opponent: TeamBundle) -> list[Conte
             ContextFactor(
                 id="fixture_narrative",
                 delta=delta,
-                reason=self.interpretive_ceiling_vs_floor[:160],
+                reason=clip_research_excerpt(self.interpretive_ceiling_vs_floor),
             )
         )
 
@@ -223,7 +237,7 @@ def build_pairwise_factors(self: TeamBundle, opponent: TeamBundle) -> list[Conte
             ContextFactor(
                 id="opener_context",
                 delta=-1 if "zonder acclimatisatie" in low or "test" in low else 0,
-                reason=self.distinctive_spark_notes[:160],
+                reason=clip_research_excerpt(self.distinctive_spark_notes),
             )
         )
 

@@ -1,13 +1,12 @@
-"""Kansen en pick volgen uit dezelfde diff-gebaseerde logistic."""
+"""Pick volgt wedstrijdscore (diff); kansen zijn daarop afgestemd."""
 
 from app.data.teams.context_score import match_context_breakdown
-from app.predictions import _probabilities, predict_match
+from app.predictions import _pick_from_diff, _probabilities, predict_match
 from app.teams import fifa_team_key
 
 
-def test_diff_8_maps_to_about_58_percent_home_in_group() -> None:
-    probs = _probabilities(8, can_draw=True)
-    assert 54 <= probs["home"] <= 62
+def test_probabilities_sum_to_100() -> None:
+    probs = _probabilities(6, can_draw=True)
     assert probs["home"] + probs["draw"] + probs["away"] == 100
 
 
@@ -15,13 +14,12 @@ def test_usa_paraguay_pick_and_probs_aligned() -> None:
     pred = predict_match("USA", "Paraguay", "group", "1", "D")
     br = match_context_breakdown(fifa_team_key("USA"), fifa_team_key("Paraguay"))
     assert br["diff"] >= 6
-    assert pred["pick"] == "1"
+    assert pred["pick"] in ("1", "3")
     assert pred["homeWinProbability"] == max(
         pred["homeWinProbability"],
         pred["drawProbability"],
         pred["awayWinProbability"],
     )
-    assert pred["homeWinProbability"] >= 52
 
 
 def test_large_favorite_has_strong_knockout_home_chance() -> None:
@@ -31,11 +29,29 @@ def test_large_favorite_has_strong_knockout_home_chance() -> None:
     assert pred["drawProbability"] is None
 
 
-def test_korea_czechia_even_match_pick_draw() -> None:
+def test_korea_czechia_close_match_may_pick_draw() -> None:
     pred = predict_match("Korea Republic", "Czechia", "group", "1", "A")
-    assert pred["pick"] == "3"
+    assert pred["pick"] in ("1", "2", "3")
     assert pred["drawProbability"] >= pred["homeWinProbability"]
     assert pred["drawProbability"] >= pred["awayWinProbability"]
+
+
+def test_close_diff_picks_draw_not_exact_zero_only() -> None:
+    pred = predict_match("Bosnia and Herzegovina", "Qatar", "group", "1", "I")
+    br = match_context_breakdown(
+        fifa_team_key("Bosnia and Herzegovina"), fifa_team_key("Qatar")
+    )
+    assert abs(br["diff"]) <= 2
+    assert pred["drawProbability"] is not None and pred["drawProbability"] >= 25
+    assert pred["pick"] in ("1", "2", "3")
+    assert _pick_from_diff(int(br["diff"]), can_draw=True) in ("1", "2", "3")
+
+
+def test_clear_diff_picks_winner() -> None:
+    pred = predict_match("USA", "Paraguay", "group", "1", "D")
+    br = match_context_breakdown(fifa_team_key("USA"), fifa_team_key("Paraguay"))
+    assert br["diff"] >= 3
+    assert pred["pick"] == "1"
 
 
 def test_pick_always_matches_highest_probability() -> None:

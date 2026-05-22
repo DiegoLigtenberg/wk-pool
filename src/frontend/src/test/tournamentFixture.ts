@@ -45,14 +45,18 @@ export const completedMatch: Match = {
       "In groepsronde 1 ligt Mexico voor (82, 65 effectief). Belangrijkste signalen uit research: Omschakeling/transities passen tegen compact Zuid-Afrika.",
     status: "correct",
     insight: {
-      scoreSummary: "Mexico staat effectief 82 tegen 65 (17 punten verschil).",
+      scoreSummary:
+        "Mexico 82 – Zuid-Afrika 65 (17 punten verschil in wedstrijdscore). Mexico heeft in deze analyse net iets meer kansen dan Zuid-Afrika.",
+      leadSummary:
+        "Mexico speelt thuis als co-host. Hun spel past bij de compacte verdediging van Zuid-Afrika.",
       verdict: "De AI voorspelt dat Mexico wint.",
+      pickLogicNote: "",
       narrative:
         "Dit is berekend met ons AI-model. Mexico staat hoger (82 tegen 65 voor Zuid-Afrika).\n\nDat ondersteunt de voorspelling: Mexico kan snel omschakelen tegen het lage blok van Zuid-Afrika.",
       steps: [
         {
           title: "Hoe dit werkt",
-          body: "Dit is berekend met ons AI-model. Mexico staat hoger (82 tegen 65 voor Zuid-Afrika). Die score combineert de basissterkte van beide teams met punten uit de analyse van dit duel.",
+          body: "Dit rekent ons AI-model uit in één getal per team: basissterkte plus aanpassingen uit Mexico–Zuid-Afrika en uit de hele groepsfase. In de kaarten hieronder zie je het totaal (wedstrijdscore) en welke onderdelen meetellen (+ en −).",
         },
         {
           title: "Belangrijk in dit duel",
@@ -66,6 +70,9 @@ export const completedMatch: Match = {
         team: "Mexico",
         powerScore: 77,
         contextDelta: 5,
+        researchDelta: 2,
+        hostDelta: 3,
+        travelDelta: 0,
         effectiveScore: 82,
         factors: [
           {
@@ -179,6 +186,67 @@ export function tournamentFixture(overrides: Partial<TournamentView> = {}): Tour
       },
     ],
     knockoutMatches: [upcomingMatch],
+    crystalBall: {
+      groupWinners: [{ group: "A", team: "Mexico" }],
+      projectedGroups: [
+        {
+          name: "A",
+          winner: "Mexico",
+          standings: [
+            {
+              team: "Mexico",
+              played: 1,
+              wins: 1,
+              draws: 0,
+              losses: 0,
+              goalsFor: 1,
+              goalsAgainst: 0,
+              goalDifference: 1,
+              points: 3,
+            },
+            {
+              team: "Zuid-Afrika",
+              played: 1,
+              wins: 0,
+              draws: 0,
+              losses: 1,
+              goalsFor: 0,
+              goalsAgainst: 1,
+              goalDifference: -1,
+              points: 0,
+            },
+          ],
+        },
+      ],
+      bonusQuestions: [
+        {
+          id: "yellow_cards_total",
+          label: "Gele kaarten",
+          value: "368",
+          helper: "Test helper",
+        },
+        {
+          id: "direct_red_cards",
+          label: "Direct rood",
+          value: "7",
+          helper: "Test helper",
+        },
+        {
+          id: "champion",
+          label: "Wereldkampioen",
+          value: "Frankrijk",
+          helper: "Test helper",
+        },
+        {
+          id: "top_scorer",
+          label: "Topscorer",
+          value: "Kylian Mbappé",
+          helper: "Test helper",
+        },
+      ],
+      sources: ["test"],
+      contextAsOf: "2026-05-19",
+    },
     ...overrides,
   };
 }

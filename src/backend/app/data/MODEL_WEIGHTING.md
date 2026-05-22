@@ -1,49 +1,76 @@
 # Modelgewichten: basisscore vs. wedstrijdcontext (WK 2026 pool)
 
-Doel: voorspellingen zijn **stabiel**, **vooraf vast te leggen**, en **uitlegbaar**. Dit document beschrijft hoe zwaar welke signalen wegen voordat numerieke matchup‑lagen worden toegevoegd.
+Doel: voorspellingen zijn **stabiel**, **vooraf vast te leggen**, en **uitlegbaar**. Geen runtime-LLM: alle punten staan in team-YAML en vaste regels in `factor_weights.py`.
 
 ## 1. Anker: `power_score` (basissterkte)
 
-- Dit is **het primaire ordeningsanker**: wie heeft meer kwaliteit, diepte en verwacht tournament‑impact op basis van selectie‑ en voetbalinhoudelijke prior (geen live odds).
-- **Interpretatie voor eindgebruiker**: ~**80, 90%** van het **gedrag van het model** (wie is favoriet in een neutrale wedstrijd) moet hieruit volgen.
-- Kleine verschillen (1, 3 punten) zijn **bewust**: voetbal heeft hoge variantie; het model pretendeert geen kommagetallen‑precisie.
+- Primair ordeningsanker (~80–90% van wie favoriet is in een neutrale setting).
+- Context verfijnt vooral spannende duels; grote gaps (10+ punten basis) blijven dominant.
 
-## 2. Wedstrijdcontext (fixtures): host‑regio, fase, ronde
+## 2. Pipeline (runtime)
 
-**Bedoeld als correctie op het duel**, niet als tweede parallelle ranglijst.
+1. Laad `context_scoring` uit `data/teams/research/{slug}.yaml` (max 2 persistent + 2 per groepstegenstander, ruwe delta).
+2. Voeg `host_region` toe voor Canada / Mexico / USA (co-host).
+3. Dedupe (`factor_dedupe.py`).
+4. **Herweging** (`factor_weights.py`) → effectieve punten + bucket-caps.
+5. **Duel-cap (optie B):** `|research_thuis| + |research_uit| ≤ 12` (schaal alleen research, niet host/uit-straf). YAML ±1 → **±2** effectief (`RESEARCH_POINT_SCALE = 2`).
+6. `effectiveScore = power_score + contextDelta` → `diff` → kansen (`predictions.py`).
 
-- **Co‑hosts Canada / Mexico / USA**: kleine bonus **alleen voor het team dat effectief speelt in eigen host‑context** (zoals nu in code: +3 aan die zijde van het veld). Dit is **logistiek/publiek‑adjacent**, niet “tactiek”.
-- **Groep vs knock‑out**: beïnvloedt vooral **beslisregels** (gelijk mogelijk in groep) ,  dat staat los van kwaliteit.
-- **Openingsronde / pouledruk**: kan later tekst‑context (`themes`) uitbreiden; numeriek alleen als er een **harde, begrensde regel** agreed is.
+## 3. Herwegingstabel (ruw → effectief)
 
-**Caps‑filosofie**: context‑bonussen blijven **klein** t.o.v. `power_score`‑verschil (orde grootte enkele punten), tenzij jullie bewust een uitzondering documenteren.
+| Factor-id | Type | Ruw (YAML) | Effectief | Bucket-cap |
+|-----------|------|------------|-----------|------------|
+| `host_region` | Co-host regio | +1 (inject) | **+2** | Host totaal max **+3** |
+| `cohost_crowd` | Co-host publiek | +1 | +1 | (zelfde host-bucket) |
+| `home_fixture` | Co-host thuisstad | +1 | +1 | (zelfde host-bucket) |
+| `away_fixture` | Uit bij co-host | −1 | **−1** | apart (travel) |
+| `crowd_bias` | Publiek (niet co-host) | +1 | +1 | Persistent max ±3 |
+| `squad_load` | Selectiebelasting | −2 | **−2** | Persistent |
+| `distinctive_spark` | Verhaal/risico | −1 / −2 | −1 / −2 | Persistent |
+| `star_dependency` | Sterafhankelijkheid | −1 | −1 | Persistent |
+| `selection_drama` | Selectiechaos | −1 | −1 | Persistent |
+| `style_matchup` | Stijl vs stijl | ±1 | **±2** | Duel max ±6 |
+| `tactical_strength` / `tactical_weakness` | Fase-voorkeur duel | ±1 | **±2** | Duel |
+| `opponent_profile_weak` / `opponent_profile_strong` | Tegenstanderprofiel | ±1 | **±2** | Duel |
+| `matchup_edge` | Wij counteren hen | +1 | **+2** | Duel |
+| `matchup_risk` | Zij counteren ons | −1 | **−2** | Duel |
+| `psychology` | Druk in dit duel | −1 / 0 | −1 / 0 | Duel |
+| `discipline` | Kaartenrisico duel | −1 | −1 | Duel |
+| `opener_context` | Openings/hoogte | −1 / 0 | −1 / 0 | Duel |
+| `fixture_story` / `fixture_narrative` | Verhaal | −1 / 0 | −1 / 0 | Duel |
 
-## 3. Teamdossier per land (`data/teams/research/{slug}.yaml`)
+**Research per zijde:** persistent + duel samen max **±8**.  
+**Host-bucket:** `host_region` + `cohost_crowd` + `home_fixture` samen max **+3** (geen +5-stack meer).  
+**Duel op het veld:** `|research_home| + |research_away| ≤ 12` (implementatie: `scale_matchup_research`).
 
-**Eén YAML per land** ,  research, `power_score`, groepsprogramma (tegenstanders, stadions, rust). Geen aparte JSON-build; de backend laadt YAML bij runtime.
+## 4. Co-host (Canada, Mexico, USA)
 
-- **Basis:** `power_score` + tier uit het dossier (pool-snapshot, handmatig bij te werken).
-- **Context-laag** (`app/data/teams/context_score.py`): kleine correctie uit vooraf vastgelegde `context_scoring` (max 2 persistent + 2 per groeps tegenstander) + co-host ,  **max ±6 punten-equivalent** op het verschil.
-- **Groepsfase:** `group_stage` uit sync met FIFA-CSV (`sync_research_yaml`).
+- **Niet** meer +3 los plus alle +1’s onbegrensd.
+- Structureel voordeel: **+2** regio (`host_region`) + optioneel +1 crowd/fixture tot **max +3** host per wedstrijd.
+- Tegenstander **uit** in co-host-stadion: **−1** (`away_fixture`), niet in host-bucket.
+- Host geldt in hele toernooi (ook knock-out); dat is bewust voor dit WK-model.
 
-Matchup‑\(\Delta\) is geen tweede ranglijst; het verfijnt vooral spannende duels t.o.v. kale `power_score`.
+## 5. Kansen en pick (`predictions.py` + `pool_edge.py`)
 
-## 4. Kansen en pick (`predictions.py`)
+1. **Research-score:** `baseDiff` = wedstrijdscore uit YAML/context (`context_score.py`).
+2. **Pool-bijsturing** (`pool_edge.py`, max ±6 op diff):
+   - YAML: `played_matches`, `momentum`, `standings`
+   - Onderlinge historie (`head_to_head`)
+   - Tactische upset (underdog met sterke duel-signalen vs basisfavoriet)
+   - **Groepsvorm (knock-out):** `played_matches` in team-YAML na de groepsfase; **niet** uit demo-CSV en **niet** tijdens pre-WK groepsvoorspelling
+3. **Pick** = `_pick_from_diff(adjustedDiff)` (wedstrijdscore + uitzondering basisfavoriet).
+4. **Kansen** op `adjustedDiff`, daarna **afgestemd op pick** (pick heeft altijd hoogste %).
+5. UI: korte pick-uitleg (`explain_pick` + `explain_pick_score_note`, samengevoegd) staat achteraan in `scoreSummary` onder «Scores en research-details»; `pickLogicNote` blijft leeg.
 
-- **Eén bron:** `diff` = effectieve thuisscore − effectieve uitscore (basis + context + co-host).
-- **Groepsfase:** logistic op `diff` voor marginaal thuis%; gelijk daalt met \|diff\|; bij \|diff\| ≤ 2 is gelijk de pick.
-- **Knock-out:** steilere logistic, geen gelijk, thuis% tot ~88.
-- **Pick** = uitkomst met hoogste percentage (geen aparte drempel meer).
-- Richtwaarden groep: diff 0 → ~36% thuis; diff 8 → ~58% thuis.
+Knock-out: geen gelijk; pick tussen thuis en uit op `adjustedDiff`.
 
-## 4. Wat we **niet** automatisch hoog gewicht geven zonder actuele data
+## 6. Onderhoud (andere agents)
 
-- Blessures/schorsingen dag‑van‑wedstrijd (alleen handmatige overrides als je die vastlegt).
-- “Vorm van de laatste twee clubweekenden” als aparte tijdreeks ,  tenzij je die expliciet bijwerkt voor een freeze.
+| Agent | Taak |
+|-------|------|
+| Research / YAML | Ruwe delta ±1/±2 in `context_scoring`; geen coach bij verkeerd land |
+| Builder | `context_scoring_builder.py` genereert ruwe factoren; herweging gebeurt runtime |
+| Narrative | `verdict` + `leadSummary` zonder score-cijfers; `scoreSummary` + tabel alleen in uitklap |
+| Calibration | Alleen `predictions.py` logistic als % niet kloppen met punten |
 
-## 5. Volgende stap (implementatie‑los van deze repo‑tekst)
-
-Wanneer matchup‑ \(\Delta\) live gaat:
-
-- Hanteer harde grenzen (bijv. totaal matchup‑effect **≤ ±6 punten equivalent** op het duelverschil), tenzij jullie dat breed consensus‑matig verhogen.
-- Elke \(\Delta\) heeft een **machine‑leesbare sleutel + menselijke rationale** voor de UI‑breakdown.
+Code: `app/data/teams/factor_weights.py`, `context_score.py`.

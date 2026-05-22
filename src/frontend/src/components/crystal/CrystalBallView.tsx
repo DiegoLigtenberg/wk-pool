@@ -1,28 +1,42 @@
-import type { Group } from "../../types";
+import type { CrystalBallView as CrystalBallData } from "../../types";
 import { TeamLabel } from "../cards/TeamLabel";
 import "./CrystalBallView.css";
 
 type CrystalBallViewProps = {
-  groups: Group[];
+  crystalBall: CrystalBallData;
 };
 
-export function CrystalBallView({ groups }: CrystalBallViewProps) {
+export function CrystalBallView({ crystalBall }: CrystalBallViewProps) {
+  const winners =
+    crystalBall.groupWinners.length > 0
+      ? crystalBall.groupWinners
+      : crystalBall.projectedGroups
+          .filter((group) => group.winner)
+          .map((group) => ({ group: group.name, team: group.winner as string }));
+
   return (
     <section className="panel" id="crystal-ball">
       <div className="panel-header">
         <div>
           <p className="eyebrow">Crystal Ball</p>
           <h2>Toernooi-voorspellingen</h2>
+          {crystalBall.contextAsOf ? (
+            <p className="muted crystal-meta">
+              Groepswinnaars uit alle 72 AI 1/2/3-picks · bonus onderzoek t/m {crystalBall.contextAsOf}
+            </p>
+          ) : null}
         </div>
       </div>
       <div className="crystal-layout">
         <div>
-          <div className="section-label">Groepswinnaars</div>
+          <div className="section-label">Groepswinnaars (uit AI-picks)</div>
           <div className="winner-grid">
-            {groups.map((group) => (
-              <article className="winner-card" key={group.name}>
-                <span>Poule {group.name}</span>
-                <strong>{group.standings[0] ? <TeamLabel team={group.standings[0].team} /> : "Nog onbekend"}</strong>
+            {winners.map((entry) => (
+              <article className="winner-card" key={entry.group}>
+                <span>Poule {entry.group}</span>
+                <strong>
+                  <TeamLabel team={entry.team} />
+                </strong>
               </article>
             ))}
           </div>
@@ -30,10 +44,14 @@ export function CrystalBallView({ groups }: CrystalBallViewProps) {
         <div>
           <div className="section-label">Bonusvragen</div>
           <div className="bonus-grid">
-            <BonusCard label="Gele kaarten" value="221" helper="Indirect rood telt als 2 gele kaarten." />
-            <BonusCard label="Direct rood" value="8" helper="Alleen directe rode kaarten tellen mee." />
-            <BonusCard label="Wereldkampioen" value="Frankrijk" helper="De AI ziet Frankrijk als meest complete ploeg." />
-            <BonusCard label="Topscorer" value="Kylian Mbappé" helper="Meeste verwachte goals in de knock-outfase." />
+            {crystalBall.bonusQuestions.map((question) => (
+              <BonusCard
+                key={question.id}
+                label={question.label}
+                value={question.value}
+                helper={question.helper}
+              />
+            ))}
           </div>
         </div>
       </div>

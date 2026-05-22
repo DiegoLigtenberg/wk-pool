@@ -2,6 +2,14 @@
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _audit_bootstrap as _audit_bootstrap  # noqa: E402
+
+_audit_bootstrap.configure_audit_stdio()
+
 import re
 from collections import defaultdict
 

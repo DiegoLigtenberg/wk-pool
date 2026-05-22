@@ -4,7 +4,7 @@ import { completedMatch } from "../../test/tournamentFixture";
 import { PredictionPanel } from "./PredictionPanel";
 
 describe("PredictionPanel", () => {
-  it("keeps model intro inside details so the pick is not explained twice", () => {
+  it("houdt model-uitleg en score-toelichting in research-details (geen dubbele pick-regel boven)", () => {
     const match = {
       ...completedMatch,
       aiPrediction: {
@@ -13,10 +13,11 @@ describe("PredictionPanel", () => {
         insight: {
           ...completedMatch.aiPrediction.insight!,
           verdict: "De AI voorspelt dat Schotland wint.",
+          pickLogicNote: "",
           steps: [
             {
               title: "Hoe dit werkt",
-              body: "Dit is berekend met ons AI-model. Dueltotalen voor dit duel: Haïti 59, Schotland 71.",
+              body: "Dit rekent ons AI-model uit in één getal per team: basissterkte plus aanpassingen uit Haïti–Schotland en uit de hele groepsfase. In de kaarten hieronder zie je het totaal (wedstrijdscore) en welke onderdelen meetellen (+ en −).",
             },
             {
               title: "Belangrijk in dit duel",
@@ -37,14 +38,23 @@ describe("PredictionPanel", () => {
     );
 
     expect(screen.getByText("De AI voorspelt dat Schotland wint.")).toBeInTheDocument();
-    expect(screen.getByText(/kleine tactische punten voor Schotland/)).toBeInTheDocument();
+    expect(screen.getByText(/Mexico speelt thuis als co-host/)).toBeInTheDocument();
 
     const intros = container.querySelectorAll(".prediction-intro");
     expect(intros).toHaveLength(1);
     expect(intros[0]?.closest("details")).toBeTruthy();
 
     const lead = container.querySelector(".prediction-verdict--lead");
-    const components = container.querySelector(".prediction-components");
-    expect(lead?.compareDocumentPosition(components!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    const summary = container.querySelector(".prediction-lead-summary");
+    expect(lead?.compareDocumentPosition(summary!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    const leadSummary = container.querySelector(".prediction-lead-summary");
+    expect(leadSummary?.textContent?.toLowerCase()).not.toContain("wedstrijdscore");
+
+    expect(container.querySelector(".prediction-pick-reason")).toBeNull();
+
+    expect(container.querySelector(".prediction-suggested-score")).toBeNull();
+    expect(container.querySelector(".prediction-match-stats")).toBeNull();
+    expect(container.querySelector(".prediction-pick-steps")).toBeNull();
+    expect(screen.getByText("Scores en research-details")).toBeInTheDocument();
   });
 });

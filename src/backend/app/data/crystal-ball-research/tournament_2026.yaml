@@ -1,0 +1,46 @@
+id: wc2026
+context_as_of: "2026-05-19"
+sources:
+  - FIFA World Cup 2014/2018/2022 disciplinary records (EverybodyWiki / Wikipedia)
+  - FIFA FACT sheet comparative statistics 1982–2010
+  - ESPN discipline stats 2018
+  - Tony's Toto poolreglement (geel/indirect/direct rood)
+  - WK Pool team research (power scores, mei 2026)
+  - Open web: 48-team format 104 matches, CONCACAF hosts, expanded squad rules
+bonus_questions:
+  yellow_cards_total:
+    value: "368"
+    helper: "Pool-telling: indirect rood (2e geel) telt als 2 gele kaarten. 104 wedstrijden, hoger tempo dan 64-team WK'en."
+    rationale: |
+      Historisch (FIFA-gele kaarten, 64 wedstrijden): 2014 ~187, 2018 ~219, 2022 ~228
+      → ~2,9–3,6 gele per wedstrijd. 2026 heeft 104 wedstrijden (+62,5% volume).
+      Ruwe schaling: 228 × (104/64) ≈ 370. CONCACAF-hosts (VS/Mexico/Canada), 48 landen
+      en meer groepsdruk geven lichte opslag; VAR dempt extreme duels iets.
+      Voor de pool tellen tweede-geel-uitsluitingen dubbel mee (+ enkele tientallen t.o.v.
+      kale FIFA-telling). Schatting bandbreedte 355–385; punt 368.
+  direct_red_cards:
+    value: "7"
+    helper: "Alleen straight reds, geen tweede-geel-uitsluitingen."
+    rationale: |
+      2018 en 2022: elk 4 rode kaarten totaal; daarvan typisch ~1 directe rood (2022 Hennessey)
+      en de rest tweede geel. 2014 had 10 rood totaal (oudere arbitragestijl).
+      Bij 104 wedstrijden en fysiekere groepsfase (minder bekende paren) verwachten we
+      iets meer directe roden dan historisch gemiddelde per 64 wedstrijden, maar nog
+      laag enkelcijferig. Bandbreedte 5–9; punt 7.
+  champion:
+    value: "Frankrijk"
+    helper: "Hoogste power score (92) + diepe selectie; titelverdediger Argentinië (91) dicht erachter."
+    rationale: |
+      Model-ranking: Frankrijk 92 (Topfavoriet), Argentinië 91 (titels verdedigen, Messi-slot),
+      Spanje/Engeland/Brazilië iets lager. Frankrijk: Mbappé/Olise-transities, knock-out-ervaring
+      Deschamps, minder media-druk dan Engeland. Argentinië blijft plausibel upset-route.
+      Co-hosts VS/Mexico/Canada versterken thuisvoordeel elders, niet voor Frankrijk.
+  top_scorer:
+    value: "Kylian Mbappé"
+    helper: "Hele toernooi (groep + KO); Frankrijk verwacht diep te lopen met centrale aanvaller."
+    rationale: |
+      Poolvraag = topscorer toernooi (niet alleen knock-out). 2022: Mbappé 8 goals (gedeeld).
+      2018: Kane 6. Met 104 wedstrijden kan de winnaar ~7–9 goals halen.
+      Mbappé: penalty-nemer, diepe Franse run in model. Alternatieven: Harry Kane (Engeland 88,
+      groep L), Lautaro (Argentinië), Haaland (Noorwegen, check kwalificatie). Kane tweede keuze
+      bij minder vertrouwen in Engeland-KO-mentaliteit.

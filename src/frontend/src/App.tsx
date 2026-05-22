@@ -93,7 +93,7 @@ export function App() {
         {view === "matches" ? <MatchesView matches={matches} summary={tournament.summary} /> : null}
         {view === "groups" ? <GroupsView tournament={tournament} /> : null}
         {view === "knockout" ? <KnockoutView knockoutMatches={tournament.knockoutMatches} /> : null}
-        {view === "crystal" ? <CrystalBallView groups={tournament.groups} /> : null}
+        {view === "crystal" ? <CrystalBallView crystalBall={tournament.crystalBall} /> : null}
       </main>
       <TeamInsightModal insight={selectedTeam ? tournament.teamInsights[selectedTeam] ?? null : null} onClose={() => setSelectedTeam(null)} />
     </TeamInsightProvider>

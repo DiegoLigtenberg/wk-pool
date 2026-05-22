@@ -3,22 +3,12 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
+from app.match_results_store import load_results, result_for_match
 from app.predictions import is_known_team, predict_match, team_insight
 from app.teams import display_team_name
 
 
 CSV_PATH = Path(__file__).resolve().parent / "data" / "fifa-world-cup-2026-UTC.csv"
-FINISHED_MATCH_COUNT = 36
-FAKE_SCORES = (
-    (2, 0),
-    (1, 1),
-    (0, 1),
-    (3, 1),
-    (1, 0),
-    (2, 2),
-    (0, 0),
-    (1, 2),
-)
 
 
 @dataclass(frozen=True)
@@ -42,13 +32,15 @@ def load_fixtures(path: Path = CSV_PATH) -> list[Fixture]:
 
 def build_tournament_view(path: Path = CSV_PATH) -> dict[str, object]:
     fixtures = load_fixtures(path)
-    matches = [_match_view(fixture) for fixture in fixtures]
+    results_store = load_results()
+    matches = [_match_view(fixture, results_store) for fixture in fixtures]
     group_stage_matches = [match for match in matches if match["stage"] == "group"]
     completed_matches = [match for match in matches if match["status"] == "completed"]
     upcoming_matches = [match for match in matches if match["status"] == "upcoming"]
     completed_by_kickoff = sorted(completed_matches, key=_match_kickoff)
     upcoming_by_kickoff = sorted(upcoming_matches, key=_match_kickoff)
     prediction_summary = _prediction_summary(group_stage_matches)
+    from app.crystal_ball import build_crystal_ball_view
 
     return {
         "summary": {
@@ -67,6 +59,9 @@ def build_tournament_view(path: Path = CSV_PATH) -> dict[str, object]:
         "teamInsights": _team_insights(fixtures),
         "groups": _group_views(group_stage_matches),
         "knockoutMatches": [match for match in matches if match["stage"] == "knockout"],
+        "crystalBall": build_crystal_ball_view(group_stage_matches),
+        "cardTotals": results_store.get("tournamentTotals", {"yellowCards": 0, "directRedCards": 0}),
+        "resultsUpdatedAt": results_store.get("updatedAt"),
     }
 
 
@@ -90,20 +85,25 @@ def _match_kickoff(match: dict[str, object]) -> str:
     return str(match["kickoffAt"])
 
 
-def _match_view(fixture: Fixture) -> dict[str, object]:
+def _match_view(fixture: Fixture, results_store: dict[str, object] | None = None) -> dict[str, object]:
     is_group_match = fixture.group is not None
-    is_completed = is_group_match and fixture.match_number <= FINISHED_MATCH_COUNT
-    score = _fake_score(fixture) if is_completed else None
-    actual_pick = _actual_pick(score) if score else None
+    stored = result_for_match(results_store or {}, fixture.match_number) if results_store else None
+    score_tuple: tuple[int, int] | None = None
+    if stored and isinstance(stored.get("score"), dict):
+        score_tuple = (int(stored["score"]["home"]), int(stored["score"]["away"]))
+
     ai_prediction = predict_match(
         fixture.home_team,
         fixture.away_team,
         "group" if is_group_match else "knockout",
         fixture.round_number,
         fixture.group,
+        match_number=fixture.match_number,
     )
     ai_pick = str(ai_prediction["pick"])
+    actual_pick = _actual_pick(score_tuple) if score_tuple else None
     prediction_status = _prediction_status(ai_pick, actual_pick)
+    is_completed = score_tuple is not None
 
     return {
         "matchNumber": fixture.match_number,
@@ -115,7 +115,7 @@ def _match_view(fixture: Fixture) -> dict[str, object]:
         "homeTeam": display_team_name(fixture.home_team),
         "awayTeam": display_team_name(fixture.away_team),
         "status": "completed" if is_completed else "upcoming",
-        "score": _score_view(score),
+        "score": _score_view(score_tuple),
         "actualPick": actual_pick,
         "aiPrediction": _ai_prediction_view(ai_prediction, prediction_status),
     }
@@ -166,21 +166,39 @@ def _group_views(matches: list[dict[str, object]]) -> list[dict[str, object]]:
     return groups
 
 
-def _standings(matches: list[dict[str, object]]) -> list[dict[str, object]]:
+def _score_from_pick(pick: str) -> tuple[int, int]:
+    if pick == "1":
+        return (1, 0)
+    if pick == "2":
+        return (0, 1)
+    return (1, 1)
+
+
+def _standings(
+    matches: list[dict[str, object]],
+    *,
+    from_picks: bool = False,
+) -> list[dict[str, object]]:
     table: dict[str, dict[str, object]] = {}
 
     for match in matches:
         _ensure_team(table, str(match["homeTeam"]))
         _ensure_team(table, str(match["awayTeam"]))
 
-        if match["status"] != "completed" or not match["score"]:
+        if from_picks:
+            prediction = match.get("aiPrediction")
+            if not isinstance(prediction, dict):
+                continue
+            home_goals, away_goals = _score_from_pick(str(prediction["pick"]))
+        elif match["status"] != "completed" or not match["score"]:
             continue
+        else:
+            score = match["score"]
+            home_goals = int(score["home"])
+            away_goals = int(score["away"])
 
-        score = match["score"]
         home_team = str(match["homeTeam"])
         away_team = str(match["awayTeam"])
-        home_goals = int(score["home"])
-        away_goals = int(score["away"])
         _apply_result(table[home_team], home_goals, away_goals)
         _apply_result(table[away_team], away_goals, home_goals)
 
@@ -221,10 +239,6 @@ def _apply_result(team: dict[str, object], goals_for: int, goals_against: int) -
         team["points"] = int(team["points"]) + 1
     else:
         team["losses"] = int(team["losses"]) + 1
-
-
-def _fake_score(fixture: Fixture) -> tuple[int, int]:
-    return FAKE_SCORES[(fixture.match_number - 1) % len(FAKE_SCORES)]
 
 
 def _score_view(score: tuple[int, int] | None) -> dict[str, int] | None:

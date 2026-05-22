@@ -1,35 +1,11 @@
 [
   {
-    "team": "Irak",
-    "field": "context_scoring.versus.Senegal[1]",
-    "text": "Diepte bank vs Senegal.",
-    "score": 11,
-    "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord",
-      "losse_notitie"
-    ]
-  },
-  {
     "team": "Noorwegen",
     "field": "matchup_counters_us[0]",
     "text": "Frankrijk Saliba vs Haaland.",
     "score": 11,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord",
-      "losse_notitie"
-    ]
-  },
-  {
-    "team": "Noorwegen",
-    "field": "context_scoring.versus.France[0]",
-    "text": "Frankrijk Saliba vs Haaland.",
-    "score": 11,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord",
       "losse_notitie"
@@ -41,7 +17,7 @@
     "text": "Teams zonder dekking vs Doku.",
     "score": 10,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "land+naam",
       "weinig_werkwoord",
       "losse_notitie"
@@ -53,7 +29,7 @@
     "text": "Scaloni pressing-triggers en Messi-zones.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -64,7 +40,7 @@
     "text": "Ultra-lage blokken rond Messi.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -75,7 +51,7 @@
     "text": "Penalty-situaties met Emiliano Martínez.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -86,7 +62,7 @@
     "text": "Iran Ghalenoei-blok.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -97,7 +73,7 @@
     "text": "Marsch gegenpressing Davies.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -108,7 +84,7 @@
     "text": "Press-resistent Qatar.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -119,18 +95,7 @@
     "text": "Duitsland Nagelsmann.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Ecuador",
-    "field": "context_scoring.versus.Germany[0]",
-    "text": "Duitsland Nagelsmann.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -141,18 +106,7 @@
     "text": "Nieuw-Zeeland Wood.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Egypte",
-    "field": "context_scoring.versus.New Zealand[1]",
-    "text": "Nieuw-Zeeland Wood.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -163,18 +117,7 @@
     "text": "England Tuchel.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Ghana",
-    "field": "context_scoring.versus.England[1]",
-    "text": "England Tuchel.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -185,7 +128,7 @@
     "text": "Frankrijk Mbappé.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -196,29 +139,7 @@
     "text": "Norway Haaland.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Irak",
-    "field": "context_scoring.versus.France[0]",
-    "text": "Frankrijk Mbappé.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Irak",
-    "field": "context_scoring.versus.Norway[1]",
-    "text": "Norway Haaland.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -229,7 +150,7 @@
     "text": "België Doku.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -240,7 +161,7 @@
     "text": "Egypte Salah.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -251,40 +172,7 @@
     "text": "Nieuw-Zeeland Wood.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Iran",
-    "field": "context_scoring.versus.Belgium[1]",
-    "text": "België Doku.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Iran",
-    "field": "context_scoring.versus.Egypt[1]",
-    "text": "Egypte Salah.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Iran",
-    "field": "context_scoring.versus.New Zealand[1]",
-    "text": "Nieuw-Zeeland Wood.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -295,18 +183,7 @@
     "text": "Counter-ruimte Diallo.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Japan",
-    "field": "context_scoring.versus.Netherlands[1]",
-    "text": "Moriyasu-press tegen compact Oranje",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -317,7 +194,7 @@
     "text": "Saudi Donis-tier.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -328,7 +205,7 @@
     "text": "Ancelotti Vinícius.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -339,18 +216,7 @@
     "text": "Zuid-Afrika Broos.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Nederland",
-    "field": "context_scoring.versus.Japan[1]",
-    "text": "Japan opener zonder Simons.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -361,18 +227,7 @@
     "text": "Iran Ghalenoei.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Nieuw-Zeeland",
-    "field": "context_scoring.versus.IR Iran[0]",
-    "text": "Iran Ghalenoei.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -383,7 +238,7 @@
     "text": "Senegal Koulibaly.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -394,29 +249,7 @@
     "text": "Irak Arnold-blok.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Noorwegen",
-    "field": "context_scoring.versus.Iraq[1]",
-    "text": "Irak Arnold-blok.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Noorwegen",
-    "field": "context_scoring.versus.Senegal[0]",
-    "text": "Senegal Koulibaly.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -427,18 +260,7 @@
     "text": "Colombia Díaz.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Oezbekistan",
-    "field": "context_scoring.versus.Colombia[0]",
-    "text": "Colombia Díaz.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -449,7 +271,7 @@
     "text": "England Tuchel.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -460,7 +282,7 @@
     "text": "Colombia Díaz.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -471,29 +293,7 @@
     "text": "DR Congo Haller.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Portugal",
-    "field": "context_scoring.versus.Colombia[0]",
-    "text": "Colombia Díaz.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Portugal",
-    "field": "context_scoring.versus.Congo DR[1]",
-    "text": "DR Congo Haller.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -504,7 +304,7 @@
     "text": "Canada Marsch.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -515,7 +315,7 @@
     "text": "Spanje Yamal.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -526,29 +326,7 @@
     "text": "Cabo Verde.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Saoedi-Arabië",
-    "field": "context_scoring.versus.Spain[1]",
-    "text": "Spanje Yamal.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Saoedi-Arabië",
-    "field": "context_scoring.versus.Uruguay[0]",
-    "text": "Uruguay opener Bielsa.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -559,18 +337,7 @@
     "text": "Haiti Isidor.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Schotland",
-    "field": "context_scoring.versus.Haiti[1]",
-    "text": "Haiti Isidor.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -581,7 +348,7 @@
     "text": "Frankrijk Mbappé.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -592,29 +359,7 @@
     "text": "Norway Haaland.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Senegal",
-    "field": "context_scoring.versus.France[0]",
-    "text": "Frankrijk Mbappé.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Senegal",
-    "field": "context_scoring.versus.Norway[1]",
-    "text": "Norway Haaland.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -625,7 +370,7 @@
     "text": "Cabo Verde.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -636,7 +381,7 @@
     "text": "Zweden Isak.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -647,29 +392,7 @@
     "text": "Japan Kubo.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Tunesië",
-    "field": "context_scoring.versus.Japan[0]",
-    "text": "Japan Kubo.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Tunesië",
-    "field": "context_scoring.versus.Sweden[0]",
-    "text": "Zweden Isak.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -680,7 +403,7 @@
     "text": "Japan Moriyasu.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -691,7 +414,7 @@
     "text": "NL Gakpo.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -702,18 +425,7 @@
     "text": "Tunesië Lamouchi.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Zweden",
-    "field": "context_scoring.versus.Tunisia[1]",
-    "text": "Tunesië Lamouchi.",
-    "score": 8,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -724,53 +436,20 @@
     "text": "Canada Davies.",
     "score": 8,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
   },
   {
-    "team": "Zwitserland",
-    "field": "context_scoring.versus.Canada[0]",
-    "text": "Canada Davies.",
-    "score": 8,
+    "team": "Canada",
+    "field": "context_scoring.versus.Qatar[1]",
+    "text": "bestand tegen hoge druk Qatar.",
+    "score": 7,
     "flags": [
-      "≤4 woorden",
+      "<=7 woorden",
       "land+naam",
       "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Argentinië",
-    "field": "context_scoring.versus.Austria[1]",
-    "text": "Zwakker vs Argentinië balrust en Messi.",
-    "score": 7,
-    "flags": [
-      "≤7 woorden",
-      "land+naam",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "België",
-    "field": "context_scoring.versus.Egypt[0]",
-    "text": "Zwakker vs Salah-Egypte counters.",
-    "score": 7,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord",
-      "losse_notitie"
-    ]
-  },
-  {
-    "team": "Egypte",
-    "field": "context_scoring.versus.Belgium[1]",
-    "text": "Zwakker vs Salah-Egypte counters.",
-    "score": 7,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord",
-      "losse_notitie"
     ]
   },
   {
@@ -779,40 +458,29 @@
     "text": "Corner-dominantie vs smaller teams.",
     "score": 7,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord",
       "losse_notitie"
     ]
   },
   {
-    "team": "Ivoorkust",
-    "field": "context_scoring.versus.Germany[0]",
-    "text": "Duitsland test.",
+    "team": "Haïti",
+    "field": "matchup_counters_us[0]",
+    "text": "Schotland compact blok onder Clarke.",
     "score": 7,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord",
-      "losse_notitie"
-    ]
-  },
-  {
-    "team": "Oostenrijk",
-    "field": "context_scoring.versus.Argentina[0]",
-    "text": "Zwakker vs Argentinië balrust en Messi.",
-    "score": 7,
-    "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
   },
   {
-    "team": "Spanje",
-    "field": "context_scoring.versus.Uruguay[0]",
-    "text": "Kwetsbaar ruimte achter druk vs Spanje.",
+    "team": "Nederland",
+    "field": "matchup_counters_us[0]",
+    "text": "Japan Moriyasu press op Oranje-opbouw.",
     "score": 7,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -820,10 +488,10 @@
   {
     "team": "Uruguay",
     "field": "context_scoring.versus.Spain[0]",
-    "text": "Kwetsbaar ruimte achter druk vs Spanje.",
+    "text": "Kwetsbaar ruimte achter druk tegen Spanje.",
     "score": 7,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "land+naam",
       "weinig_werkwoord"
     ]
@@ -834,20 +502,9 @@
     "text": "Possession zonder doorbraak bij Qatar.",
     "score": 7,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "land+naam",
       "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "België",
-    "field": "context_scoring.versus.Egypt[1]",
-    "text": "Sterk Salah/Marmoush transitions vs Garcia-België.",
-    "score": 6,
-    "flags": [
-      "≤7 woorden",
-      "weinig_werkwoord",
-      "losse_notitie"
     ]
   },
   {
@@ -856,106 +513,7 @@
     "text": "Canada nervositeit co-host.",
     "score": 6,
     "flags": [
-      "≤4 woorden",
-      "jargon",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Egypte",
-    "field": "context_scoring.versus.Belgium[0]",
-    "text": "Sterk Salah/Marmoush transitions vs Garcia-België.",
-    "score": 6,
-    "flags": [
-      "≤7 woorden",
-      "weinig_werkwoord",
-      "losse_notitie"
-    ]
-  },
-  {
-    "team": "Engeland",
-    "field": "context_scoring.versus.Croatia[0]",
-    "text": "Lucht/standaardprofiel t.o.v. Kroatië",
-    "score": 6,
-    "flags": [
-      "≤4 woorden",
-      "jargon",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Nederland",
-    "field": "context_scoring.versus.Japan[0]",
-    "text": "Lucht/standaardprofiel t.o.v. Japan",
-    "score": 6,
-    "flags": [
-      "≤4 woorden",
-      "jargon",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Nieuw-Zeeland",
-    "field": "context_scoring.versus.Belgium[0]",
-    "text": "Lucht/standaardprofiel t.o.v. België",
-    "score": 6,
-    "flags": [
-      "≤4 woorden",
-      "jargon",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Panama",
-    "field": "context_scoring.versus.Croatia[0]",
-    "text": "Lucht/standaardprofiel t.o.v. Kroatië",
-    "score": 6,
-    "flags": [
-      "≤4 woorden",
-      "jargon",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Panama",
-    "field": "context_scoring.versus.England[1]",
-    "text": "Lucht/standaardprofiel t.o.v. Engeland",
-    "score": 6,
-    "flags": [
-      "≤4 woorden",
-      "jargon",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Schotland",
-    "field": "context_scoring.versus.Brazil[0]",
-    "text": "Lucht/standaardprofiel t.o.v. Brazilië",
-    "score": 6,
-    "flags": [
-      "≤4 woorden",
-      "jargon",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Schotland",
-    "field": "context_scoring.versus.Morocco[0]",
-    "text": "Lucht/standaardprofiel t.o.v. Marokko",
-    "score": 6,
-    "flags": [
-      "≤4 woorden",
-      "jargon",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Zweden",
-    "field": "context_scoring.versus.Japan[1]",
-    "text": "Lucht/standaardprofiel t.o.v. Japan",
-    "score": 6,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "jargon",
       "weinig_werkwoord"
     ]
@@ -963,32 +521,52 @@
   {
     "team": "Australië",
     "field": "context_scoring.versus.USA[0]",
-    "text": "Uit tegen co-host Verenigde Staten (Seattle Stadium)",
+    "text": "Uit tegen co-host Verenigde Staten (Seattle Stadium).",
     "score": 5,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "jargon",
       "weinig_werkwoord"
     ]
   },
   {
-    "team": "Mexico",
-    "field": "context_scoring.versus.Korea Republic[1]",
-    "text": "Thuis in Guadalajara Stadium (co-host)",
+    "team": "Bosnië-Herzegovina",
+    "field": "context_scoring.versus.Canada[1]",
+    "text": "Uit tegen co-host Canada (Toronto Stadium).",
     "score": 5,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "jargon",
       "weinig_werkwoord"
     ]
   },
   {
-    "team": "Verenigde Staten",
-    "field": "context_scoring.versus.Australia[1]",
-    "text": "Thuis in Seattle Stadium (co-host)",
+    "team": "Engeland",
+    "field": "context_scoring.versus.Panama[0]",
+    "text": "Engeland krijgt te maken met het hoge pressingspel van Panama.",
     "score": 5,
     "flags": [
-      "≤7 woorden",
+      "land+naam",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Ivoorkust",
+    "field": "context_scoring.versus.Germany[0]",
+    "text": "De wedstrijd tegen Duitsland geldt als zware test voor Ivoorkust.",
+    "score": 5,
+    "flags": [
+      "land+naam",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Qatar",
+    "field": "context_scoring.versus.Canada[1]",
+    "text": "Uit tegen co-host Canada (BC Place Vancouver).",
+    "score": 5,
+    "flags": [
+      "<=7 woorden",
       "jargon",
       "weinig_werkwoord"
     ]
@@ -996,10 +574,10 @@
   {
     "team": "Zuid-Korea",
     "field": "context_scoring.versus.Mexico[1]",
-    "text": "Uit tegen co-host Mexico (Guadalajara Stadium)",
+    "text": "Uit tegen co-host Mexico (Guadalajara Stadium).",
     "score": 5,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "jargon",
       "weinig_werkwoord"
     ]
@@ -1010,7 +588,7 @@
     "text": "Jordanië compact blok.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1020,7 +598,7 @@
     "text": "Rangnick third-man onder pressing.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1030,7 +608,7 @@
     "text": "Algerije/Jordanië die dekking missen.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1040,7 +618,7 @@
     "text": "Montella wingers tussen linies.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1050,7 +628,7 @@
     "text": "Elite standaard-curve.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1060,7 +638,7 @@
     "text": "Türkiye momentum-implosies.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1070,18 +648,17 @@
     "text": "Fysieke duel-wedstrijden.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
     "team": "Australië",
     "field": "context_scoring.versus.Türkiye[1]",
-    "text": "Türkiye momentum-implosies.",
+    "text": "Australië heeft moeite met het hoge tempo en de creatie van Turkije onder Vincenzo Montella.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
     ]
   },
   {
@@ -1090,7 +667,7 @@
     "text": "Salah/Marmoush Egypte.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1100,7 +677,7 @@
     "text": "NZ Wood hoogtes.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1110,7 +687,7 @@
     "text": "Qatar/Switzerland geduld.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1120,7 +697,7 @@
     "text": "Corner-heavy wedstrijden.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1130,7 +707,7 @@
     "text": "Bielsa third-man egress.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1140,7 +717,7 @@
     "text": "Haiti/Scotland hoog zonder dekking.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1150,17 +727,7 @@
     "text": "Vermoeide verdedigingen.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Brazilië",
-    "field": "context_scoring.versus.Scotland[1]",
-    "text": "Haiti/Scotland hoog zonder dekking.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1170,7 +737,7 @@
     "text": "Bosnië Džeko hoogtes.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1180,7 +747,7 @@
     "text": "Bosnië/Qatar hoog zonder dekking.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1190,7 +757,7 @@
     "text": "Fysiek duel-voordeel.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1200,7 +767,7 @@
     "text": "Portugal Martinez mid-block.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1210,7 +777,7 @@
     "text": "DR Congo atletiek.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1220,7 +787,7 @@
     "text": "Uzbekistan debut-nerves.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1230,38 +797,26 @@
     "text": "Hoog druk zonder dekking.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
     "team": "Colombia",
-    "field": "context_scoring.versus.Congo DR[1]",
-    "text": "DR Congo atletiek.",
+    "field": "context_scoring.versus.Congo DR[0]",
+    "text": "Congo kan gevaarlijk omschakelen tegen het aanvalsspel van Colombia.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Colombia",
-    "field": "context_scoring.versus.Portugal[0]",
-    "text": "Portugal Martinez mid-block.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
     ]
   },
   {
     "team": "Colombia",
     "field": "context_scoring.versus.Uzbekistan[1]",
-    "text": "Uzbekistan debut-nerves.",
+    "text": "Oezbekistan kan gevaarlijk omschakelen tegen het aanvalsspel van Colombia.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
     ]
   },
   {
@@ -1270,7 +825,7 @@
     "text": "Portugal 3-2-5.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1280,7 +835,7 @@
     "text": "Colombia Díaz flanken.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1290,7 +845,7 @@
     "text": "Uzbekistan debut.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1300,18 +855,27 @@
     "text": "Hoog druk zonder dekking.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
     "team": "Congo",
-    "field": "context_scoring.versus.Colombia[0]",
-    "text": "Colombia Díaz flanken.",
+    "field": "context_scoring.versus.Portugal[0]",
+    "text": "Portugal 3-2-5.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Congo",
+    "field": "context_scoring.versus.Portugal[1]",
+    "text": "Portugal kan gevaarlijk omschakelen tegen het aanvalsspel van Congo.",
+    "score": 4,
+    "flags": [
+      "land+naam"
     ]
   },
   {
@@ -1320,7 +884,7 @@
     "text": "Duitsland Musiala/Wirtz.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1330,7 +894,7 @@
     "text": "Ivory Coast Pepe/Diallo.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1340,7 +904,7 @@
     "text": "Ecuador als tweede seed.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1350,27 +914,7 @@
     "text": "Rommelige low-scoring games.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Curaçao",
-    "field": "context_scoring.versus.Ecuador[0]",
-    "text": "Ecuador als tweede seed.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Curaçao",
-    "field": "context_scoring.versus.Germany[1]",
-    "text": "Duitsland opener intimiderend.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1380,17 +924,7 @@
     "text": "Ivory Coast Pepe snelheid.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Duitsland",
-    "field": "matchup_we_counter[0]",
-    "text": "Curaçao opener.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1400,8 +934,26 @@
     "text": "Teams hoog zonder dekking.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Duitsland",
+    "field": "context_scoring.versus.Côte d'Ivoire[0]",
+    "text": "Ivoorkust kan gevaarlijk omschakelen tegen het aanvalsspel van Duitsland.",
+    "score": 4,
+    "flags": [
+      "land+naam"
+    ]
+  },
+  {
+    "team": "Duitsland",
+    "field": "context_scoring.versus.Ecuador[0]",
+    "text": "Ecuador kan gevaarlijk omschakelen tegen het aanvalsspel van Duitsland.",
+    "score": 4,
+    "flags": [
+      "land+naam"
     ]
   },
   {
@@ -1410,7 +962,7 @@
     "text": "Ivory Coast Pepe snelheid.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1420,7 +972,7 @@
     "text": "Curaçao.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1430,7 +982,7 @@
     "text": "High-line teams.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1440,7 +992,7 @@
     "text": "België Doku/De Bruyne.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1450,7 +1002,7 @@
     "text": "Iran compact.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1460,17 +1012,7 @@
     "text": "Iran Ghalenoei frustratie.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Egypte",
-    "field": "context_scoring.versus.IR Iran[1]",
-    "text": "Iran compact.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1480,7 +1022,7 @@
     "text": "Croatia Modrić tempo control.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1490,7 +1032,7 @@
     "text": "Ghana compact.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1500,7 +1042,7 @@
     "text": "Panama/Haiti-tier pressing.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1515,22 +1057,29 @@
   },
   {
     "team": "Engeland",
-    "field": "context_scoring.versus.Ghana[1]",
-    "text": "Ghana compact.",
+    "field": "context_scoring.versus.Croatia[0]",
+    "text": "Engeland is sterk op standaards en in de lucht tegen Kroatië.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
+    ]
+  },
+  {
+    "team": "Engeland",
+    "field": "context_scoring.versus.Ghana[0]",
+    "text": "Ghana kan gevaarlijk omschakelen tegen het aanvalsspel van Engeland.",
+    "score": 4,
+    "flags": [
+      "land+naam"
     ]
   },
   {
     "team": "Engeland",
     "field": "context_scoring.versus.Panama[1]",
-    "text": "Panama/Haiti-tier pressing.",
+    "text": "Panama kan gevaarlijk omschakelen tegen het aanvalsspel van Engeland.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
     ]
   },
   {
@@ -1539,7 +1088,7 @@
     "text": "Senegal Mane counters.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1549,7 +1098,7 @@
     "text": "Norway Haaland direct.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1559,17 +1108,7 @@
     "text": "Iraq compact.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Frankrijk",
-    "field": "context_scoring.versus.Norway[1]",
-    "text": "Norway Haaland direct.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1579,7 +1118,7 @@
     "text": "Croatia ervaring.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1589,7 +1128,7 @@
     "text": "Panama.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1599,48 +1138,17 @@
     "text": "Chaotische duels.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Ghana",
-    "field": "context_scoring.versus.Croatia[0]",
-    "text": "Croatia ervaring.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
     "team": "Ghana",
     "field": "context_scoring.versus.Panama[1]",
-    "text": "Panama.",
+    "text": "Panama kan gevaarlijk omschakelen tegen het aanvalsspel van Ghana.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Haïti",
-    "field": "matchup_counters_us[0]",
-    "text": "Scotland Clarke compact.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Haïti",
-    "field": "matchup_counters_us[1]",
-    "text": "Brazil group later.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
     ]
   },
   {
@@ -1649,7 +1157,7 @@
     "text": "Teams hoog risico.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1659,27 +1167,7 @@
     "text": "Foul-heavy games.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Haïti",
-    "field": "context_scoring.versus.Brazil[1]",
-    "text": "Brazil group later.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Haïti",
-    "field": "context_scoring.versus.Scotland[1]",
-    "text": "Scotland Clarke compact.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1689,7 +1177,7 @@
     "text": "Low-scoring grind.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1699,7 +1187,7 @@
     "text": "Corner-heavy.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1709,7 +1197,7 @@
     "text": "Low-scoring fouls.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1719,7 +1207,7 @@
     "text": "Curaçao.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1729,7 +1217,7 @@
     "text": "NL Dumfries/Gakpo.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1739,7 +1227,7 @@
     "text": "Zweden hoogtes.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1749,7 +1237,7 @@
     "text": "Teams lang bouwen.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1759,17 +1247,7 @@
     "text": "Loopvermogen tweede ballen.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Japan",
-    "field": "context_scoring.versus.Sweden[0]",
-    "text": "Zweden hoogtes.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1779,7 +1257,7 @@
     "text": "Argentinië/Algerije.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1789,7 +1267,7 @@
     "text": "Oostenrijk pressing.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1799,7 +1277,7 @@
     "text": "Low-scoring fouls.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1809,27 +1287,7 @@
     "text": "Teams rush counters.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Jordanië",
-    "field": "context_scoring.versus.Argentina[1]",
-    "text": "Argentinië/Algerije.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Jordanië",
-    "field": "context_scoring.versus.Austria[1]",
-    "text": "Oostenrijk pressing.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1839,7 +1297,7 @@
     "text": "Spanje Yamal isolaties.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1849,7 +1307,7 @@
     "text": "Uruguay turnovers.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1859,27 +1317,7 @@
     "text": "Sloppy standaard-verdediging.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Kaapverdië",
-    "field": "context_scoring.versus.Spain[1]",
-    "text": "Spanje Yamal isolaties.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Kaapverdië",
-    "field": "context_scoring.versus.Uruguay[0]",
-    "text": "Uruguay turnovers.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1889,7 +1327,7 @@
     "text": "England Saka/Rice.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1899,7 +1337,7 @@
     "text": "Ghana Kudus counters.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1909,7 +1347,7 @@
     "text": "Panama.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1919,28 +1357,17 @@
     "text": "Low-tempo deadlock.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Kroatië",
-    "field": "context_scoring.versus.England[1]",
-    "text": "England Saka/Rice.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
     "team": "Kroatië",
     "field": "context_scoring.versus.Panama[1]",
-    "text": "Panama.",
+    "text": "Panama kan gevaarlijk omschakelen tegen het aanvalsspel van Kroatië.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
     ]
   },
   {
@@ -1949,7 +1376,7 @@
     "text": "Spanie breedte.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1959,7 +1386,7 @@
     "text": "Haiti.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1969,7 +1396,7 @@
     "text": "Possession zonder dekking.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1979,7 +1406,7 @@
     "text": "Possession elites.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1989,7 +1416,7 @@
     "text": "Clinische counters.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -1999,18 +1426,17 @@
     "text": "High press zonder dekking.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
-    "team": "Nederland",
-    "field": "matchup_counters_us[0]",
-    "text": "Japan Moriyasu press.",
+    "team": "Mexico",
+    "field": "context_scoring.versus.Korea Republic[1]",
+    "text": "Zuid-Korea kan gevaarlijk omschakelen tegen het aanvalsspel van Mexico.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
     ]
   },
   {
@@ -2019,7 +1445,7 @@
     "text": "Zweden Isak/Gyökeres.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2029,7 +1455,7 @@
     "text": "Tunisia compact.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2039,18 +1465,17 @@
     "text": "High press zonder dekking.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
     "team": "Nederland",
-    "field": "context_scoring.versus.Sweden[0]",
-    "text": "Zweden Isak/Gyökeres.",
+    "field": "context_scoring.versus.Japan[0]",
+    "text": "Nederland is sterk op standaards en in de lucht tegen Japan.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
     ]
   },
   {
@@ -2059,7 +1484,7 @@
     "text": "België.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2069,7 +1494,7 @@
     "text": "Egypte.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2079,38 +1504,17 @@
     "text": "Rommelige fouls.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
     "team": "Nieuw-Zeeland",
-    "field": "context_scoring.versus.Belgium[1]",
-    "text": "België.",
+    "field": "context_scoring.versus.Belgium[0]",
+    "text": "Nieuw-Zeeland is sterk op standaards en in de lucht tegen België.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Nieuw-Zeeland",
-    "field": "context_scoring.versus.Egypt[0]",
-    "text": "Egypte.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Nieuw-Zeeland",
-    "field": "context_scoring.versus.IR Iran[1]",
-    "text": "Iran/België sequentie.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
     ]
   },
   {
@@ -2119,28 +1523,17 @@
     "text": "High-line teams.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
     "team": "Noorwegen",
-    "field": "context_scoring.versus.France[1]",
-    "text": "Frankrijk/Senegal dubbel.",
+    "field": "context_scoring.versus.Iraq[1]",
+    "text": "Irak kan gevaarlijk omschakelen tegen het aanvalsspel van Noorwegen.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Noorwegen",
-    "field": "context_scoring.versus.Senegal[1]",
-    "text": "Frankrijk/Senegal dubbel.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
     ]
   },
   {
@@ -2149,7 +1542,7 @@
     "text": "Portugal possession.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2159,7 +1552,7 @@
     "text": "Low-scoring grind.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2169,7 +1562,7 @@
     "text": "Corner-heavy.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2183,32 +1576,12 @@
     ]
   },
   {
-    "team": "Oezbekistan",
-    "field": "context_scoring.versus.Colombia[1]",
-    "text": "Colombia opener intimidatie.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Oezbekistan",
-    "field": "context_scoring.versus.Portugal[0]",
-    "text": "Portugal balbezit.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
     "team": "Oostenrijk",
     "field": "matchup_counters_us[0]",
     "text": "Messi/Mac Allister onder pressing.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2218,7 +1591,7 @@
     "text": "Algerije Ait-Nouri counters.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2228,17 +1601,7 @@
     "text": "Jordanië underdog.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Oostenrijk",
-    "field": "context_scoring.versus.Algeria[1]",
-    "text": "Algerije Ait-Nouri counters.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2248,7 +1611,7 @@
     "text": "Croatia.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2258,7 +1621,7 @@
     "text": "Ghana grillig.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2268,28 +1631,17 @@
     "text": "Transition-heavy.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
     "team": "Panama",
-    "field": "context_scoring.versus.Croatia[1]",
-    "text": "Croatia.",
+    "field": "context_scoring.versus.Croatia[0]",
+    "text": "Panama is sterk op standaards en in de lucht tegen Kroatië.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Panama",
-    "field": "context_scoring.versus.Ghana[1]",
-    "text": "Ghana grillig.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
     ]
   },
   {
@@ -2298,7 +1650,7 @@
     "text": "USA Pochettino athletic mid.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2308,7 +1660,7 @@
     "text": "Australia tempo.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2318,7 +1670,7 @@
     "text": "Frustrated favorites.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2328,7 +1680,7 @@
     "text": "Set-piece heavy.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2338,7 +1690,7 @@
     "text": "Uzbekistan.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2348,18 +1700,17 @@
     "text": "High-line.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
     "team": "Portugal",
-    "field": "context_scoring.versus.Colombia[1]",
-    "text": "Colombia/Díaz later in groep.",
+    "field": "context_scoring.versus.Congo DR[0]",
+    "text": "Congo kan gevaarlijk omschakelen tegen het aanvalsspel van Portugal.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
     ]
   },
   {
@@ -2368,7 +1719,7 @@
     "text": "Zwitserland Yakin compact.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2378,7 +1729,7 @@
     "text": "Bosnië.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2388,7 +1739,7 @@
     "text": "Foul-heavy.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2398,7 +1749,7 @@
     "text": "Bielsa turnovers.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2408,7 +1759,7 @@
     "text": "Chaos games.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2427,7 +1778,7 @@
     "text": "Brazil later.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2437,7 +1788,7 @@
     "text": "Technische possession.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2447,18 +1798,35 @@
     "text": "Chaotic fouls.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
     "team": "Schotland",
-    "field": "context_scoring.versus.Brazil[1]",
-    "text": "Brazil later.",
+    "field": "context_scoring.versus.Brazil[0]",
+    "text": "Schotland is sterk op standaards en in de lucht tegen Brazilië.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
+      "land+naam"
+    ]
+  },
+  {
+    "team": "Schotland",
+    "field": "context_scoring.versus.Haiti[1]",
+    "text": "Haïti kan gevaarlijk omschakelen tegen het aanvalsspel van Schotland.",
+    "score": 4,
+    "flags": [
+      "land+naam"
+    ]
+  },
+  {
+    "team": "Schotland",
+    "field": "context_scoring.versus.Morocco[0]",
+    "text": "Schotland is sterk op standaards en in de lucht tegen Marokko.",
+    "score": 4,
+    "flags": [
+      "land+naam"
     ]
   },
   {
@@ -2467,7 +1835,7 @@
     "text": "Irak.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2477,7 +1845,7 @@
     "text": "Pressing niet afgemaakt.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2487,7 +1855,7 @@
     "text": "Saudi disruptie.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2497,8 +1865,26 @@
     "text": "Pressing niet afgemaakt.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Spanje",
+    "field": "context_scoring.versus.Cabo Verde[0]",
+    "text": "Spanje heeft het moeilijk tegen de flanken en hoge druk van Kaapverdië.",
+    "score": 4,
+    "flags": [
+      "land+naam"
+    ]
+  },
+  {
+    "team": "Spanje",
+    "field": "context_scoring.versus.Cabo Verde[1]",
+    "text": "Kaapverdië kan gevaarlijk omschakelen tegen het aanvalsspel van Spanje.",
+    "score": 4,
+    "flags": [
+      "land+naam"
     ]
   },
   {
@@ -2507,7 +1893,7 @@
     "text": "Korea Son/Lee Kang-in.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2517,7 +1903,7 @@
     "text": "Ecuador pressing.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2527,7 +1913,7 @@
     "text": "Korea als underdog verwachting.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2537,7 +1923,7 @@
     "text": "Fysieke duels.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2547,7 +1933,7 @@
     "text": "Low-scoring.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2557,17 +1943,7 @@
     "text": "Foul games.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Tunesië",
-    "field": "context_scoring.versus.Sweden[1]",
-    "text": "Zweden opener fysiek.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2577,7 +1953,7 @@
     "text": "Possession koel.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2587,7 +1963,7 @@
     "text": "Elite transitions.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2597,7 +1973,7 @@
     "text": "Australië.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2607,7 +1983,7 @@
     "text": "Pressing niet afgemaakt.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2617,7 +1993,7 @@
     "text": "Spanje third-man egress.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2627,7 +2003,7 @@
     "text": "Saudi compact.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2637,7 +2013,7 @@
     "text": "Lang bouwen teams.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2647,17 +2023,7 @@
     "text": "Fysiek dominant.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Uruguay",
-    "field": "context_scoring.versus.Spain[1]",
-    "text": "Spanje third-man egress.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2667,7 +2033,7 @@
     "text": "Alfaro Paraguay grind.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2677,7 +2043,7 @@
     "text": "Press-resistant teams.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2687,7 +2053,7 @@
     "text": "Paraguay high risk.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2697,13 +2063,13 @@
     "text": "Athletic second balls.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
   {
     "team": "Verenigde Staten",
-    "field": "context_scoring.versus.Paraguay[0]",
+    "field": "context_scoring.versus.Paraguay[1]",
     "text": "Verenigde Staten heeft in dit duel moeite met het profiel van Paraguay.",
     "score": 4,
     "flags": [
@@ -2716,7 +2082,7 @@
     "text": "Mexico Giménez/Jiménez.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2726,7 +2092,7 @@
     "text": "Korea Son/Schick duel.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2736,7 +2102,7 @@
     "text": "Mexico nervositeit.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2746,7 +2112,7 @@
     "text": "Foul games.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2756,7 +2122,7 @@
     "text": "Schick target.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2766,7 +2132,7 @@
     "text": "Tsjechië underdog.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2776,17 +2142,7 @@
     "text": "Pressing niet afgemaakt.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Zuid-Korea",
-    "field": "context_scoring.versus.Czechia[1]",
-    "text": "Tsjechië underdog.",
-    "score": 4,
-    "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2796,7 +2152,7 @@
     "text": "Chaotic fouls.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2812,6 +2168,15 @@
   {
     "team": "Zweden",
     "field": "context_scoring.versus.Japan[0]",
+    "text": "Zweden is sterk op standaards en in de lucht tegen Japan.",
+    "score": 4,
+    "flags": [
+      "land+naam"
+    ]
+  },
+  {
+    "team": "Zweden",
+    "field": "context_scoring.versus.Japan[1]",
     "text": "Zweden heeft in dit duel moeite met het profiel van Japan.",
     "score": 4,
     "flags": [
@@ -2824,8 +2189,26 @@
     "text": "Bosnië Džeko.",
     "score": 4,
     "flags": [
-      "≤4 woorden",
+      "<=4 woorden",
       "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Zwitserland",
+    "field": "context_scoring.versus.Bosnia and Herzegovina[0]",
+    "text": "Bosnië-Herzegovina kan gevaarlijk omschakelen tegen het aanvalsspel van Zwitserland.",
+    "score": 4,
+    "flags": [
+      "land+naam"
+    ]
+  },
+  {
+    "team": "Zwitserland",
+    "field": "context_scoring.versus.Qatar[1]",
+    "text": "Qatar kan gevaarlijk omschakelen tegen het aanvalsspel van Zwitserland.",
+    "score": 4,
+    "flags": [
+      "land+naam"
     ]
   },
   {
@@ -2834,7 +2217,7 @@
     "text": "Rangnick Laimer/Sabitzer die Mahrez isoleren.",
     "score": 3,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2844,7 +2227,7 @@
     "text": "Teams die hoog drukken zonder dekking.",
     "score": 3,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2854,7 +2237,7 @@
     "text": "Marokko Ouahbi blok + Hakimi.",
     "score": 3,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2862,16 +2245,6 @@
     "team": "Canada",
     "field": "crowd_home_bias_notes",
     "text": "Co-host; Toronto/Vancouver hubs,  minder diaspora dan USA/Mexico maar thuislogistiek.",
-    "score": 3,
-    "flags": [
-      "jargon",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Canada",
-    "field": "context_scoring.persistent[1]",
-    "text": "Co-host; Toronto/Vancouver hubs, minder diaspora dan Verenigde Staten/Mexico maar thuislogistiek.",
     "score": 3,
     "flags": [
       "jargon",
@@ -2889,22 +2262,22 @@
     ]
   },
   {
-    "team": "Colombia",
-    "field": "context_scoring.persistent[0]",
-    "text": "James Rodriguez minuten/schouderblessure, persoonlijke trainer vs wedstrijdrust.",
-    "score": 3,
-    "flags": [
-      "≤7 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
     "team": "Duitsland",
     "field": "matchup_counters_us[0]",
     "text": "Spanje counters achter hoge lijn.",
     "score": 3,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Duitsland",
+    "field": "matchup_we_counter[0]",
+    "text": "Curaçao WK-debuut in de groepsopener.",
+    "score": 3,
+    "flags": [
+      "<=7 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2914,7 +2287,7 @@
     "text": "Teams die pressing niet afmaken.",
     "score": 3,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2924,7 +2297,7 @@
     "text": "Teams die lang aan tikken.",
     "score": 3,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "weinig_werkwoord"
     ]
   },
@@ -2934,7 +2307,7 @@
     "text": "Bielsa Uruguay counters achter backs.",
     "score": 3,
     "flags": [
-      "≤7 woorden",
+      "<=7 woorden",
       "weinig_werkwoord"
     ]
   }

@@ -17,6 +17,10 @@ export type PredictionScoreSide = {
   team: string;
   powerScore: number;
   contextDelta: number;
+  /** Onderdelen van contextDelta (nieuwere backend). */
+  researchDelta?: number;
+  hostDelta?: number;
+  travelDelta?: number;
   effectiveScore: number;
   factors: PredictionFactor[];
 };
@@ -26,14 +30,46 @@ export type PredictionStep = {
   body: string;
 };
 
+export type PickStep = {
+  title: string;
+  body: string;
+  delta?: number;
+  kind?: string;
+  runningDiff?: number;
+  pick?: "1" | "2" | "3";
+};
+
+export type PoolAdjustment = {
+  id: string;
+  kind: string;
+  label: string;
+  delta: number;
+  reason: string;
+};
+
+export type SuggestedScore = {
+  home: number;
+  away: number;
+  reason: string;
+};
+
 export type PredictionInsight = {
   scoreSummary: string;
+  /** Korte uitleg zonder wedstrijdscore-cijfers (zichtbaar vóór uitklap). */
+  leadSummary?: string;
   verdict: string;
   /** Nieuwere backend; ontbreekt bij verouderde server tot herstart. */
   narrative?: string;
   steps?: PredictionStep[];
   tags: string[];
+  /** Pool-score na bijsturing (pick/kansen). */
   diff: number;
+  /** Alleen research-context, vóór pool-bijsturing. */
+  baseDiff?: number;
+  pickSteps?: PickStep[];
+  poolAdjustments?: PoolAdjustment[];
+  /** Leeg bij nieuwe payloads; pick-uitleg staat achteraan in `scoreSummary` onder research-details. */
+  pickLogicNote?: string;
   winnerSide?: "home" | "away";
   home: PredictionScoreSide;
   away: PredictionScoreSide;
@@ -45,6 +81,8 @@ export type AiPrediction = {
   explanation: string;
   status: PredictionStatus;
   insight?: PredictionInsight;
+  /** Voorgestelde uitslag bij pool-pick (1-X-2). */
+  suggestedScore?: SuggestedScore;
   homeWinProbability: number | null;
   drawProbability: number | null;
   awayWinProbability: number | null;
@@ -98,6 +136,33 @@ export type Group = {
   matches: Match[];
 };
 
+export type CrystalBallGroupWinner = {
+  group: string;
+  team: string;
+};
+
+export type ProjectedGroup = {
+  name: string;
+  winner: string | null;
+  standings: Standing[];
+};
+
+export type CrystalBallBonusQuestion = {
+  id: string;
+  label: string;
+  value: string;
+  helper: string;
+  rationale?: string;
+};
+
+export type CrystalBallView = {
+  groupWinners: CrystalBallGroupWinner[];
+  projectedGroups: ProjectedGroup[];
+  bonusQuestions: CrystalBallBonusQuestion[];
+  sources: string[];
+  contextAsOf: string;
+};
+
 export type TournamentView = {
   summary: {
     totalMatches: number;
@@ -115,6 +180,7 @@ export type TournamentView = {
   teamInsights: Record<string, TeamInsight>;
   groups: Group[];
   knockoutMatches: Match[];
+  crystalBall: CrystalBallView;
 };
 
 export type AppView = "matches" | "groups" | "knockout" | "crystal";

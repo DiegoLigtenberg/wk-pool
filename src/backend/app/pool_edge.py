@@ -1,0 +1,361 @@
+"""Pool-edge: uitlegbare bijsturing op wedstrijdscore voor pick, kansen en uitslag."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Literal
+
+from app.data.teams.team_loader import get_team_bundle
+from app.data.teams.tournament_context_loader import head_to_head_vs
+from app.data.teams.tournament_context_schema import MomentumLabel, PlayedMatch
+from app.teams import display_team_name
+
+PickCode = Literal["1", "2", "3"]
+AdjustmentKind = Literal["live_form", "momentum", "standings", "h2h", "upset"]
+
+_MOMENTUM_DELTA: dict[MomentumLabel, int] = {
+    "rising": 2,
+    "stable": 0,
+    "falling": -2,
+}
+
+_POOL_DIFF_CAP = 6
+
+
+@dataclass(frozen=True, slots=True)
+class PickAdjustment:
+    """`delta` > 0 = voordeel thuis op de pool-wedstrijdscore."""
+
+    id: str
+    kind: AdjustmentKind
+    label: str
+    delta: int
+    reason: str
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "id": self.id,
+            "kind": self.kind,
+            "label": self.label,
+            "delta": self.delta,
+            "reason": self.reason,
+        }
+
+
+def _clamp(value: int, lo: int, hi: int) -> int:
+    return max(lo, min(hi, value))
+
+
+def _factor_delta_sum(factors: list[dict[str, object]], factor_id: str) -> int:
+    return sum(int(f["delta"]) for f in factors if str(f.get("id")) == factor_id)
+
+
+def _played_form_delta(played: tuple[PlayedMatch, ...]) -> tuple[int, str | None]:
+    if not played:
+        return 0, None
+    pts = sum(3 if m.result == "W" else 1 if m.result == "D" else 0 for m in played)
+    if pts >= 6:
+        delta = 2
+    elif pts >= 4:
+        delta = 1
+    elif pts <= 1:
+        delta = -1
+    else:
+        return 0, None
+    summary = ", ".join(m.result or "?" for m in played[:3])
+    return (
+        delta,
+        f"Gespeelde wedstrijden in YAML ({summary}) → {'+' if delta > 0 else ''}{delta} vorm.",
+    )
+
+
+def _momentum_yaml_delta(
+    label: MomentumLabel | None, notes: str | None, team_nl: str
+) -> tuple[int, str | None]:
+    if not label:
+        return 0, None
+    delta = _MOMENTUM_DELTA[label]
+    if delta == 0:
+        return 0, None
+    note = f": {notes.strip()}" if notes and notes.strip() else ""
+    direction = {"rising": "oplopend", "falling": "afnemend"}[label]
+    return (
+        delta,
+        f"{team_nl}: momentum {direction} in tornooi-YAML{note} → {'+' if delta > 0 else ''}{delta}.",
+    )
+
+
+def _standings_delta(points: int, played: int, team_nl: str) -> tuple[int, str | None]:
+    if played < 2:
+        return 0, None
+    ppg = points / played
+    if ppg >= 2.0:
+        return 1, f"{team_nl}: {points} pt uit {played} wedstrijd(en) in stand → +1."
+    if ppg < 0.75:
+        return -1, f"{team_nl}: {points} pt uit {played} wedstrijd(en) in stand → −1."
+    return 0, None
+
+
+def _side_yaml_adjustments(team_fifa: str, *, is_home: bool) -> list[PickAdjustment]:
+    bundle = get_team_bundle(team_fifa)
+    phase = bundle.tournament_context.phases.get("group")
+    if phase is None:
+        return []
+
+    team_nl = display_team_name(team_fifa)
+    sign = 1 if is_home else -1
+    out: list[PickAdjustment] = []
+
+    played_delta, played_reason = _played_form_delta(phase.played_matches)
+    if played_delta and played_reason:
+        d = played_delta * sign
+        out.append(
+            PickAdjustment(
+                id=f"{'home' if is_home else 'away'}_played_form",
+                kind="momentum",
+                label="Vorm (gespeeld)",
+                delta=d,
+                reason=played_reason.replace("→", f"→ {'thuis' if is_home else 'uit'}"),
+            )
+        )
+
+    mom_delta, mom_reason = _momentum_yaml_delta(
+        phase.momentum.label if phase.momentum else None,
+        phase.momentum.notes if phase.momentum else None,
+        team_nl,
+    )
+    if mom_delta and mom_reason:
+        out.append(
+            PickAdjustment(
+                id=f"{'home' if is_home else 'away'}_momentum",
+                kind="momentum",
+                label="Momentum",
+                delta=mom_delta * sign,
+                reason=mom_reason,
+            )
+        )
+
+    if phase.standings:
+        st_delta, st_reason = _standings_delta(
+            phase.standings.points, phase.standings.played, team_nl
+        )
+        if st_delta and st_reason:
+            out.append(
+                PickAdjustment(
+                    id=f"{'home' if is_home else 'away'}_standings",
+                    kind="standings",
+                    label="Stand",
+                    delta=st_delta * sign,
+                    reason=st_reason,
+                )
+            )
+    return out
+
+
+def _h2h_adjustment(home_key: str, away_key: str) -> PickAdjustment | None:
+    home_bundle = get_team_bundle(home_key)
+    rec = head_to_head_vs(home_bundle.tournament_context, away_key)
+    if rec is None or (rec.wins + rec.draws + rec.losses) == 0:
+        return None
+    net = rec.wins - rec.losses
+    if net == 0:
+        return None
+    delta = _clamp(net, -2, 2)
+    return PickAdjustment(
+        id="head_to_head",
+        kind="h2h",
+        label="Onderlinge historie",
+        delta=delta,
+        reason=(
+            f"H2H {display_team_name(home_key)}–{display_team_name(away_key)}: "
+            f"{rec.wins}W-{rec.draws}G-{rec.losses}V → {'+' if delta > 0 else ''}{delta} thuis."
+        ),
+    )
+
+
+def _upset_adjustment(
+    *,
+    home_key: str,
+    away_key: str,
+    home_power: int,
+    away_power: int,
+    home_factors: list[dict[str, object]],
+    away_factors: list[dict[str, object]],
+) -> PickAdjustment | None:
+    gap = home_power - away_power
+    if abs(gap) < 6:
+        return None
+
+    favorite_home = gap > 0
+    fav_factors = home_factors if favorite_home else away_factors
+    dog_factors = away_factors if favorite_home else home_factors
+    fav_key = home_key if favorite_home else away_key
+    dog_key = away_key if favorite_home else home_key
+
+    signal = 0
+    if _factor_delta_sum(dog_factors, "matchup_edge") > 0:
+        signal += 1
+    if _factor_delta_sum(fav_factors, "matchup_risk") < 0:
+        signal += 1
+    if _factor_delta_sum(dog_factors, "tactical_strength") > 0:
+        signal += 1
+    if _factor_delta_sum(fav_factors, "tactical_weakness") < 0:
+        signal += 1
+    if signal < 2:
+        return None
+
+    shift = 3 if abs(gap) >= 10 else 2
+    delta = -shift if favorite_home else shift
+    return PickAdjustment(
+        id="tactical_upset",
+        kind="upset",
+        label="Tactische upset",
+        delta=delta,
+        reason=(
+            f"{display_team_name(dog_key)} countert {display_team_name(fav_key)} op papier "
+            f"(basisverschil {abs(gap)}): duel-onderdelen wijzen op verrassing → "
+            f"{'+' if delta > 0 else ''}{delta} richting underdog."
+        ),
+    )
+
+
+def _points_from_played_matches(played: tuple[PlayedMatch, ...]) -> tuple[int, int]:
+    pts = 0
+    played_count = 0
+    for m in played:
+        if m.result is None:
+            continue
+        played_count += 1
+        if m.result == "W":
+            pts += 3
+        elif m.result == "D":
+            pts += 1
+    return pts, played_count
+
+
+def live_form_from_group_played_yaml(
+    home_fifa: str, away_fifa: str,
+) -> tuple[int, int, int, int] | None:
+    """Groepsfase-uitslagen uit team-YAML (`played_matches`). Leeg vóór het WK."""
+    home_phase = get_team_bundle(home_fifa).tournament_context.phases.get("group")
+    away_phase = get_team_bundle(away_fifa).tournament_context.phases.get("group")
+    home_played = home_phase.played_matches if home_phase else ()
+    away_played = away_phase.played_matches if away_phase else ()
+    hp, hpl = _points_from_played_matches(home_played)
+    ap, apl = _points_from_played_matches(away_played)
+    if hpl == 0 and apl == 0:
+        return None
+    return hp, hpl, ap, apl
+
+
+def live_form_from_results(
+  *,
+    home_fifa: str,
+    away_fifa: str,
+    home_points: int,
+    away_points: int,
+    home_played: int,
+    away_played: int,
+) -> list[PickAdjustment]:
+    """Vorm uit ingevulde groepsuitslagen (YAML), alleen voor knock-out na de groep."""
+    out: list[PickAdjustment] = []
+    if home_played > 0:
+        hp_delta = 2 if home_points >= home_played * 2 else 1 if home_points >= home_played else -1 if home_points == 0 else 0
+        if hp_delta:
+            out.append(
+                PickAdjustment(
+                    id="home_live_form",
+                    kind="live_form",
+                    label="Live vorm thuis",
+                    delta=hp_delta,
+                    reason=(
+                        f"{display_team_name(home_fifa)}: {home_points} pt uit {home_played} "
+                        f"groepswedstrijd(en) in team-YAML → +{hp_delta} thuis."
+                    ),
+                )
+            )
+    if away_played > 0:
+        ap_delta = 2 if away_points >= away_played * 2 else 1 if away_points >= away_played else -1 if away_points == 0 else 0
+        if ap_delta:
+            out.append(
+                PickAdjustment(
+                    id="away_live_form",
+                    kind="live_form",
+                    label="Live vorm uit",
+                    delta=-ap_delta,
+                    reason=(
+                        f"{display_team_name(away_fifa)}: {away_points} pt uit {away_played} "
+                        f"groepswedstrijd(en) in team-YAML → +{ap_delta} uit "
+                        f"(−{ap_delta} op diff)."
+                    ),
+                )
+            )
+    return out
+
+
+def collect_pick_adjustments(
+    *,
+    home_key: str,
+    away_key: str,
+    home_power: int,
+    away_power: int,
+    home_factors: list[dict[str, object]],
+    away_factors: list[dict[str, object]],
+    live_form: tuple[int, int, int, int] | None = None,
+    include_live_form: bool = False,
+) -> list[PickAdjustment]:
+    """Pool-stappen. `live_form` alleen bij knock-out (groeps-YAML), niet pre-WK groep."""
+    adjustments: list[PickAdjustment] = []
+    adjustments.extend(_side_yaml_adjustments(home_key, is_home=True))
+    adjustments.extend(_side_yaml_adjustments(away_key, is_home=False))
+
+    h2h = _h2h_adjustment(home_key, away_key)
+    if h2h:
+        adjustments.append(h2h)
+
+    upset = _upset_adjustment(
+        home_key=home_key,
+        away_key=away_key,
+        home_power=home_power,
+        away_power=away_power,
+        home_factors=home_factors,
+        away_factors=away_factors,
+    )
+    if upset:
+        adjustments.append(upset)
+
+    if include_live_form and live_form:
+        hp, hpl, ap, apl = live_form
+        adjustments.extend(
+            live_form_from_results(
+                home_fifa=home_key,
+                away_fifa=away_key,
+                home_points=hp,
+                away_points=ap,
+                home_played=hpl,
+                away_played=apl,
+            )
+        )
+
+    total = sum(a.delta for a in adjustments)
+    if abs(total) > _POOL_DIFF_CAP:
+        scale = _POOL_DIFF_CAP / abs(total)
+        adjustments = [
+            PickAdjustment(
+                id=a.id,
+                kind=a.kind,
+                label=a.label,
+                delta=round(a.delta * scale) or (1 if a.delta > 0 else -1),
+                reason=a.reason + f" (begrensd tot ±{_POOL_DIFF_CAP} totaal)",
+            )
+            for a in adjustments
+            if a.delta != 0
+        ]
+    return [a for a in adjustments if a.delta != 0]
+
+
+def apply_adjustments(base_diff: int, adjustments: list[PickAdjustment]) -> int:
+    total = sum(a.delta for a in adjustments)
+    return base_diff + _clamp(total, -_POOL_DIFF_CAP, _POOL_DIFF_CAP)
+
+

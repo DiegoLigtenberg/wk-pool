@@ -3,6 +3,7 @@
 from app.data.teams.context_scoring_builder import build_context_scoring, build_versus_factors
 from app.data.teams.context_score import match_context_breakdown
 from app.data.teams.team_loader import load_all_bundles
+from app.predictions import predict_match
 from app.teams import fifa_team_key
 
 
@@ -41,6 +42,28 @@ def test_no_double_positive_style_in_breakdown() -> None:
                 assert len(plus_styles) <= 1, (
                     f"{side['team']}: {len(plus_styles)}x +1 style_matchup"
                 )
+
+
+def test_mexico_south_africa_no_duplicate_cohost_factor_text() -> None:
+  pred = predict_match("Mexico", "South Africa", "group", "1", "A")
+  home = pred["insight"]["home"]
+  reasons = {
+      str(f["reason"]).strip().lower()
+      for f in home["factors"]
+      if f.get("delta") and str(f.get("reason", "")).strip()
+  }
+  cohost_lines = [
+      f
+      for f in home["factors"]
+      if f.get("delta")
+      and str(f.get("id")) in {"cohost_crowd", "home_fixture"}
+  ]
+  assert len(cohost_lines) <= 1, [
+      (f["id"], f["delta"], f.get("reason")) for f in cohost_lines
+  ]
+  assert not any(
+      "mexico opent als co-host" in r and "zuid-afrika" in r for r in reasons
+  )
 
 
 def test_south_africa_opener_not_in_persistent() -> None:

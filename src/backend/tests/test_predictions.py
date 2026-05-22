@@ -18,9 +18,20 @@ def test_team_summary_uses_dutch_country_name() -> None:
     assert insight["team"] == "Zuid-Afrika"
     assert "Zuid-Afrika" in insight["summary"]
     assert "South Africa" not in insight["summary"]
+    assert "staat bij ons als" in insight["summary"]
     assert insight["tier"] == "Underdog"
     assert insight["powerScore"] == 66
     assert "outsider" not in insight["tier"].lower()
+
+
+def test_team_insight_niche_is_not_duplicate_of_distinctive_spark() -> None:
+    insight = team_insight("South Africa")
+    assert insight is not None
+    spark = insight["distinctiveSpark"]
+    niche = insight["niche"]
+    assert spark and niche
+    normalized_spark = spark.replace(" ", "").lower()
+    assert not any(n.replace(" ", "").lower() == normalized_spark for n in niche)
 
 
 def test_tier_ladder_labels() -> None:
@@ -43,9 +54,15 @@ def test_tier_ladder_labels() -> None:
     }
 
 
-def test_even_group_match_predicts_draw_with_highest_draw_chance() -> None:
+def test_even_group_match_pick_aligned_with_probs() -> None:
     prediction = predict_match("Korea Republic", "Czechia", "group", "1", "A")
-    assert prediction["pick"] == "3"
+    pick = prediction["pick"]
+    probs = {
+        "1": prediction["homeWinProbability"],
+        "3": prediction["drawProbability"],
+        "2": prediction["awayWinProbability"],
+    }
+    assert pick == max(probs, key=lambda k: probs[k] or 0)
     draw = prediction["drawProbability"]
     home = prediction["homeWinProbability"]
     away = prediction["awayWinProbability"]

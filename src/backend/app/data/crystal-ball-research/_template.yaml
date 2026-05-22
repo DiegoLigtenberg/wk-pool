@@ -1,0 +1,20 @@
+id: wc20xx
+context_as_of: YYYY-MM-DD
+sources: []
+bonus_questions:
+  yellow_cards_total:
+    value: ""
+    helper: ""
+    rationale: ""
+  direct_red_cards:
+    value: ""
+    helper: ""
+    rationale: ""
+  champion:
+    value: ""
+    helper: ""
+    rationale: ""
+  top_scorer:
+    value: ""
+    helper: ""
+    rationale: ""

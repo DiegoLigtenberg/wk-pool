@@ -5,6 +5,11 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _audit_bootstrap as _audit_bootstrap  # noqa: E402
+
+_audit_bootstrap.configure_audit_stdio()
 from typing import Any
 
 PICKS = {"1", "2", "3"}
@@ -250,7 +255,60 @@ def is_tournament_view(tournament: dict[str, Any]) -> list[str]:
             walk_matches(f"group {g.get('name')}", g.get("matches") or [])
     walk_matches("knockout", tournament.get("knockoutMatches") or [])
 
+    ok, reason = is_crystal_ball(tournament.get("crystalBall"))
+    if not ok:
+        errors.append(f"crystalBall: {reason}")
+
     return errors
+
+
+def is_crystal_ball(value: object) -> tuple[bool, str]:
+    if not is_record(value):
+        return False, "missing or not object"
+    group_winners = value.get("groupWinners")
+    if not isinstance(group_winners, list):
+        return False, "groupWinners"
+    for entry in group_winners:
+        if not is_record(entry) or not isinstance(entry.get("group"), str) or not isinstance(entry.get("team"), str):
+            return False, "groupWinners entry"
+    projected = value.get("projectedGroups")
+    if not isinstance(projected, list):
+        return False, "projectedGroups"
+    for group in projected:
+        ok, reason = is_projected_group(group)
+        if not ok:
+            return False, f"projectedGroups:{reason}"
+    bonus = value.get("bonusQuestions")
+    if not isinstance(bonus, list):
+        return False, "bonusQuestions"
+    for question in bonus:
+        if not is_record(question):
+            return False, "bonusQuestions entry"
+        if not all(isinstance(question.get(key), str) for key in ("id", "label", "value", "helper")):
+            return False, "bonusQuestions fields"
+    if not is_string_array(value.get("sources")):
+        return False, "sources"
+    if not isinstance(value.get("contextAsOf"), str):
+        return False, "contextAsOf"
+    return True, ""
+
+
+def is_projected_group(value: object) -> tuple[bool, str]:
+    if not is_record(value):
+        return False, "not object"
+    if not isinstance(value.get("name"), str):
+        return False, "name"
+    winner = value.get("winner")
+    if winner is not None and not isinstance(winner, str):
+        return False, "winner"
+    standings = value.get("standings")
+    if not isinstance(standings, list):
+        return False, "standings"
+    for standing in standings:
+        ok, reason = is_standing(standing)
+        if not ok:
+            return False, reason
+    return True, ""
 
 
 def main() -> int:

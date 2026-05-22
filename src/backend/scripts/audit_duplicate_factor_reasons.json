@@ -1,0 +1,104 @@
+[
+  {
+    "match": "Algerije – Jordanië",
+    "team": "Jordanië",
+    "reason": "jordanië leunt op coach jamal sellami en aanvoerder musa al-taamari (rennes) in dit duel tegen algerije.",
+    "factors": [
+      {
+        "id": "distinctive_spark",
+        "delta": -2,
+        "scope": "team"
+      },
+      {
+        "id": "fixture_narrative",
+        "delta": -2,
+        "scope": "match"
+      }
+    ]
+  },
+  {
+    "match": "Argentinië – Jordanië",
+    "team": "Jordanië",
+    "reason": "jordanië leunt op coach jamal sellami en aanvoerder musa al-taamari (rennes) in dit duel tegen argentinië.",
+    "factors": [
+      {
+        "id": "distinctive_spark",
+        "delta": -2,
+        "scope": "team"
+      },
+      {
+        "id": "fixture_narrative",
+        "delta": -2,
+        "scope": "match"
+      }
+    ]
+  },
+  {
+    "match": "Oostenrijk – Jordanië",
+    "team": "Jordanië",
+    "reason": "jordanië leunt op coach jamal sellami en aanvoerder musa al-taamari (rennes) in dit duel tegen oostenrijk.",
+    "factors": [
+      {
+        "id": "distinctive_spark",
+        "delta": -2,
+        "scope": "team"
+      },
+      {
+        "id": "fixture_narrative",
+        "delta": -2,
+        "scope": "match"
+      }
+    ]
+  },
+  {
+    "match": "Jordanië – Algerije",
+    "team": "Jordanië",
+    "reason": "jordanië leunt op coach jamal sellami en aanvoerder musa al-taamari (rennes) in dit duel tegen algerije.",
+    "factors": [
+      {
+        "id": "distinctive_spark",
+        "delta": -2,
+        "scope": "team"
+      },
+      {
+        "id": "fixture_narrative",
+        "delta": -2,
+        "scope": "match"
+      }
+    ]
+  },
+  {
+    "match": "Jordanië – Argentinië",
+    "team": "Jordanië",
+    "reason": "jordanië leunt op coach jamal sellami en aanvoerder musa al-taamari (rennes) in dit duel tegen argentinië.",
+    "factors": [
+      {
+        "id": "distinctive_spark",
+        "delta": -2,
+        "scope": "team"
+      },
+      {
+        "id": "fixture_narrative",
+        "delta": -2,
+        "scope": "match"
+      }
+    ]
+  },
+  {
+    "match": "Jordanië – Oostenrijk",
+    "team": "Jordanië",
+    "reason": "jordanië leunt op coach jamal sellami en aanvoerder musa al-taamari (rennes) in dit duel tegen oostenrijk.",
+    "factors": [
+      {
+        "id": "distinctive_spark",
+        "delta": -2,
+        "scope": "team"
+      },
+      {
+        "id": "fixture_narrative",
+        "delta": -2,
+        "scope": "match"
+      }
+    ]
+  }
+]

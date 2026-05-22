@@ -1,4 +1,11 @@
-from app.display_text import humanize_factor_reason, humanize_research_line, humanize_team_spark
+from app.display_text import (
+    clip_research_excerpt,
+    humanize_factor_reason,
+    humanize_matchup_shorthand,
+    humanize_research_line,
+    humanize_team_spark,
+    looks_truncated_reason,
+)
 
 
 def test_zwakwer_becomes_plain_dutch() -> None:
@@ -19,8 +26,9 @@ def test_style_matchup_is_readable() -> None:
         subject_team="Mexico",
         opponent_team="Zuid-Afrika",
     )
-    assert "omschakeling" in text.lower()
-    assert "compact" in text.lower()
+    low = text.lower()
+    assert "compact" in low
+    assert "schakelen" in low or "omschakeling" in low
 
 
 def test_humanize_team_spark_lopetegui() -> None:
@@ -116,6 +124,111 @@ def test_humanize_england_tuchel_with_dutch_opponent_name() -> None:
     assert len(text.split()) >= 8
 
 
+def test_humanize_opponent_profile_weak_argentina_messi() -> None:
+    text = humanize_factor_reason(
+        "Kwetsbaar als centrum dicht (Algerije/Oostenrijk) en Messi geïsoleerd.",
+        factor_id="opponent_profile_weak",
+        subject_team="Algerije",
+        opponent_team="Argentinië",
+    )
+    assert "inspelen" in text.lower()
+    assert "Argentinië" in text
+    assert "Messi" in text
+    assert "Algerije" in text
+
+
+def test_humanize_opponent_profile_weak_uruguay_space() -> None:
+    text = humanize_factor_reason(
+        "Kwetsbaar ruimte achter druk tegen Spanje.",
+        factor_id="opponent_profile_weak",
+        subject_team="Spanje",
+        opponent_team="Uruguay",
+    )
+    assert "profiteren" in text.lower()
+    assert "Uruguay" in text
+
+
+def test_humanize_matchup_edge_compact_and_debuut() -> None:
+    jordan = humanize_matchup_shorthand(
+        "Jordanië compact blok.",
+        "Jordanië",
+        team_nl="Algerije",
+        kind="edge",
+    )
+    assert "profiteren" in jordan.lower() or "ruimte vinden" in jordan.lower()
+    assert "lastig voor Algerije" not in jordan
+
+    debuut = humanize_matchup_shorthand(
+        "Curaçao WK-debuut in de groepsopener.",
+        "Curaçao",
+        team_nl="Duitsland",
+        kind="edge",
+    )
+    assert "favoriet" in debuut.lower()
+    assert "zwaar" not in debuut.lower()
+
+
+def test_looks_truncated_reason_allows_country_and_duel_endings() -> None:
+    assert not looks_truncated_reason(
+        "Egypte leunt op Salah als belangrijkste aanvalsbedreiging; "
+        "extra aandachtspunt voor Iran."
+    )
+    assert not looks_truncated_reason(
+        "Ghana profiteert van de speelstijl van Panama in dit duel."
+    )
+
+
+def test_humanize_ghana_kudus_counters_not_mane() -> None:
+    text = humanize_matchup_shorthand(
+        "Ghana Kudus counters.",
+        "Ghana",
+        team_nl="Kroatië",
+        kind="risk",
+    )
+    assert "Kudus" in text
+    assert "Mané" not in text
+
+
+def test_humanize_bielsa_only_for_uruguay_coach() -> None:
+    text = humanize_team_spark(
+        "Bielsa Uruguay counters achter backs.",
+        "Spanje",
+    )
+    assert "bondscoach van Spanje" not in text
+
+
+def test_humanize_mane_counters_and_debut() -> None:
+    mane = humanize_matchup_shorthand(
+        "Senegal Mane counters.",
+        "Senegal",
+        team_nl="Frankrijk",
+        kind="risk",
+    )
+    assert "Mané" in mane or "Mane" in mane
+    assert "Frankrijk" in mane
+    assert mane.count(".") >= 1
+
+    debut = humanize_matchup_shorthand(
+        "Uzbekistan debut.",
+        "Oezbekistan",
+        team_nl="Congo",
+        kind="risk",
+    )
+    assert "eerste WK" in debut.lower() or "zenuw" in debut.lower()
+
+
+def test_humanize_sweden_isak_matchup_risk_not_profiteert() -> None:
+    text = humanize_matchup_shorthand(
+        "Zweden Isak/Gyökeres.",
+        "Zweden",
+        team_nl="Nederland",
+        kind="risk",
+    )
+    assert "profiteert" not in text.lower()
+    assert "Zweden" in text
+    assert "Nederland" in text
+
+
 def test_humanize_ecuador_caicedo_matchup_risk() -> None:
     text = humanize_factor_reason(
         "Ecuador Caicedo.",
@@ -147,6 +260,18 @@ def test_haiti_isidor_spark_readable() -> None:
     assert "club " not in text.lower()
 
 
+def test_opponent_zwakker_vs_subject_not_self_weak() -> None:
+    text = humanize_factor_reason(
+        "Zwakker vs Argentinië balrust en Messi.",
+        factor_id="opponent_profile_weak",
+        subject_team="Argentinië",
+        opponent_team="Oostenrijk",
+    )
+    assert "Argentinië is kwetsbaar voor Argentinië" not in text
+    assert "Oostenrijk" in text
+    assert "balrust" in text.lower()
+
+
 def test_argentina_crowd_vs_not_split_as_matchup() -> None:
     text = humanize_factor_reason(
         "Grote Argentijnse gemeenschap in de VS geeft Argentinië in veel stadions extra steun.",
@@ -157,6 +282,17 @@ def test_argentina_crowd_vs_not_split_as_matchup() -> None:
     assert "in dit duel speelt mee" not in text.lower()
     assert "in de tegen geeft" not in text.lower()
     assert "in de VS" in text
+
+
+def test_south_africa_opener_away_at_mexico_not_cohost() -> None:
+    text = humanize_factor_reason(
+        "Opener op 2240m vs co-host Mexico",
+        factor_id="opener_context",
+        subject_team="Zuid-Afrika",
+        opponent_team="Mexico",
+    )
+    assert "opent als co-host" not in text.lower()
+    assert "tegen co-host Mexico" in text
 
 
 def test_mexico_cohost_crowd_not_against_itself() -> None:
@@ -214,3 +350,36 @@ def test_parentheses_club_and_age() -> None:
     text = humanize_research_line("James (Minnesota) geselecteerd ondanks arm-fit.")
     assert "club Minnesota" in text or "Minnesota" in text
     assert "schouder" in text.lower() or "blessure" in text.lower()
+
+
+def test_clip_research_excerpt_avoids_mid_word_cut() -> None:
+    spark = (
+        "Mohamed Ouahbi volgde Walid Regragui op in maart 2026, ongeveer twaalf "
+        "weken voor het WK. De staf moet het succesvolle plan uit 2022 (compact spelen, "
+        "snelle counters) opnieuw vormgeven met weinig voorbereidingstijd."
+    )
+    clipped = clip_research_excerpt(spark, max_len=160)
+    assert not looks_truncated_reason(clipped)
+    assert looks_truncated_reason("snelle cou.")
+    assert "WK" in clipped
+
+
+def test_ouahbi_spark_humanized() -> None:
+    text = humanize_research_line(
+        "Mohamed Ouahbi volgde Walid Regragui op, snelle cou.",
+        team_nl="Marokko",
+    )
+    assert "counters" in text.lower()
+    assert "cou." not in text
+
+
+def test_away_fixture_humanized() -> None:
+    text = humanize_factor_reason(
+        "Uit tegen co-host Canada (Toronto Stadium).",
+        factor_id="away_fixture",
+        subject_team="Bosnië-Herzegovina",
+        opponent_team="Canada",
+    )
+    assert "heeft last van" not in text
+    assert "uit tegen co-host canada" in text.lower()
+    assert "toronto" in text.lower()

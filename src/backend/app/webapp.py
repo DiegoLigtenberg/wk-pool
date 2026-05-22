@@ -56,9 +56,20 @@ class WkPoolRequestHandler(BaseHTTPRequestHandler):
         if path == "/api/tournament":
             try:
                 self._send_json(cached_tournament_view())
-            except Exception:
+            except (ConnectionAbortedError, BrokenPipeError):
+                return
+            except Exception as exc:
                 traceback.print_exc()
-                self._send_json({"error": "Failed to build tournament view"}, status=500)
+                try:
+                    self._send_json(
+                        {
+                            "error": "Failed to build tournament view",
+                            "detail": str(exc),
+                        },
+                        status=500,
+                    )
+                except (ConnectionAbortedError, BrokenPipeError):
+                    pass
             return
 
         self._send_json({"error": "Not found"}, status=404)
@@ -75,7 +86,10 @@ class WkPoolRequestHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
-        self.wfile.write(body)
+        try:
+            self.wfile.write(body)
+        except (ConnectionAbortedError, BrokenPipeError):
+            pass
 
     def _send_common_headers(self) -> None:
         self._send_cors_headers()

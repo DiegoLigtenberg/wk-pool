@@ -2,6 +2,14 @@
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _audit_bootstrap as _audit_bootstrap  # noqa: E402
+
+_audit_bootstrap.configure_audit_stdio()
+
 import json
 import re
 from pathlib import Path
@@ -48,10 +56,10 @@ def score_line(text: str) -> tuple[int, list[str]]:
 
     if words <= 4:
         score += 3
-        flags.append("≤4 woorden")
+        flags.append("<=4 woorden")
     elif words <= 7:
         score += 2
-        flags.append("≤7 woorden")
+        flags.append("<=7 woorden")
 
     if LAND_PLAYER.match(t) and " " in t:
         score += 4
@@ -148,7 +156,7 @@ def main() -> int:
     print(f"{len(all_rows)} regels met score >= 3 (UI-velden)")
     print(f"Geschreven naar {OUT}")
     for row in all_rows[:25]:
-        print(f"\n[{row['score']}] {row['team']} — {row['field']}")
+        print(f"\n[{row['score']}] {row['team']}, {row['field']}")
         print(f"  {row['text'][:100]}")
         print(f"  ({', '.join(row['flags'])})")
     return 0

@@ -51,6 +51,12 @@
   overflow-wrap: anywhere;
 }
 
+.crystal-meta {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
 @media (max-width: 760px) {
   .crystal-layout {
     grid-template-columns: minmax(0, 1fr);

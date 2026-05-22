@@ -41,10 +41,16 @@ def factor_topic_key(reason: str) -> str | None:
         return "simons_out"
     if "isidor" in low:
         return "isidor_core"
-    if any(w in low for w in ("opener", "2240", "azteca")) and any(
-        w in low for w in ("hoogte", "acclimatisatie", "2240", "fysieke test")
+    if any(w in low for w in ("opener", "opent", "openingswedstrijd")) and any(
+        w in low for w in ("hoogte", "acclimatisatie", "2240", "fysieke test", "mexico city")
     ):
         return "opener_altitude"
+    if "co-host" in low or "cohost" in low.replace("-", ""):
+        if any(w in low for w in ("mexico city", "2240", "hoogte", "azteca", "thuispubliek")):
+            if any(w in low for w in ("opent", "opener", "openingswedstrijd", "massaal")):
+                return "cohost_opener_altitude"
+        if "thuis in" in low and "stadium" in low:
+            return "cohost_home_stadium"
     if "clarke" in low and "compact" in low:
         return "clarke_compact"
     return None
@@ -206,6 +212,50 @@ def dedupe_pair_factors(
         ]
 
     return home, away
+
+
+def _is_redundant_cohost_venue(reason: str) -> bool:
+    low = reason.lower()
+    return "co-host" in low and any(
+        w in low for w in ("stadium", "thuis in", "speelt thuis", "bc place", "toronto")
+    )
+
+
+def _cohost_story_overlaps(cohost_reason: str, other_reason: str) -> bool:
+    key_a = factor_topic_key(cohost_reason)
+    key_b = factor_topic_key(other_reason)
+    if key_a and key_a == key_b:
+        return True
+    low_a, low_b = cohost_reason.lower(), other_reason.lower()
+    if "co-host" not in low_a or "co-host" not in low_b:
+        return False
+    shared_markers = (
+        "mexico city",
+        "hoogte",
+        "thuispubliek",
+        "massaal thuispubliek",
+        "opent als co-host",
+        "openingswedstrijd",
+    )
+    return sum(1 for marker in shared_markers if marker in low_a and marker in low_b) >= 2
+
+
+def dedupe_cohost_host_factors(factors: list[ContextFactor]) -> list[ContextFactor]:
+    """Voorkom dubbele co-host regels (persistent + home_fixture + host_region)."""
+    cohost = next((f for f in factors if f.id == "cohost_crowd" and f.delta > 0), None)
+    if cohost is None:
+        return factors
+    out: list[ContextFactor] = []
+    for factor in factors:
+        if factor.id == "host_region":
+            continue
+        if factor.id == "home_fixture" and factor.delta > 0:
+            if _is_redundant_cohost_venue(factor.reason):
+                continue
+            if _cohost_story_overlaps(cohost.reason, factor.reason):
+                continue
+        out.append(factor)
+    return out
 
 
 def dedupe_overlapping_factors(factors: list[ContextFactor]) -> list[ContextFactor]:
