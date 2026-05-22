@@ -107,6 +107,51 @@ def test_unknown_route_returns_404() -> None:
     assert b"Not found" in body
 
 
+def test_sync_football_requires_secret(monkeypatch) -> None:
+    monkeypatch.delenv("FOOTBALL_SYNC_SECRET", raising=False)
+
+    response, body = request("POST", "/internal/sync-football")
+
+    assert response.status == 503
+    assert b"FOOTBALL_SYNC_SECRET" in body
+
+
+def test_sync_football_rejects_bad_token(monkeypatch) -> None:
+    monkeypatch.setenv("FOOTBALL_SYNC_SECRET", "secret")
+    monkeypatch.setenv("FOOTBALL_API_KEY", "key")
+
+    response, _body = request(
+        "POST",
+        "/internal/sync-football",
+        headers={"Authorization": "Bearer wrong"},
+    )
+
+    assert response.status == 401
+
+
+def test_sync_football_triggers_sync(monkeypatch) -> None:
+    monkeypatch.setenv("FOOTBALL_SYNC_SECRET", "secret")
+    monkeypatch.setenv("FOOTBALL_API_KEY", "key")
+
+    called: dict[str, bool] = {}
+
+    def fake_sync(*, dry_run: bool = False, force_remap: bool = False) -> int:
+        called["force_remap"] = force_remap
+        return 2
+
+    monkeypatch.setattr("app.football_sync.sync_results", fake_sync)
+
+    response, body = request(
+        "POST",
+        "/internal/sync-football?force-remap=1",
+        headers={"Authorization": "Bearer secret"},
+    )
+
+    assert response.status == 200
+    assert json.loads(body) == {"status": "ok", "synced": 2}
+    assert called["force_remap"] is True
+
+
 def test_load_fixtures_reads_world_cup_csv() -> None:
     fixtures = load_fixtures()
 

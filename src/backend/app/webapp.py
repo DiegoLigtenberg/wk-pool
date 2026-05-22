@@ -4,7 +4,7 @@ import os
 import traceback
 from functools import lru_cache
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 from app.tournament import build_tournament_view
 
@@ -13,6 +13,7 @@ DEFAULT_HOST = "127.0.0.1"
 DEPLOY_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
 ALLOWED_ORIGINS_ENV = "WK_POOL_ALLOWED_ORIGINS"
+SYNC_SECRET_ENV = "FOOTBALL_SYNC_SECRET"
 DEFAULT_ALLOWED_ORIGINS = (
     "http://127.0.0.1:5173",
     "http://localhost:5173",
@@ -35,6 +36,28 @@ def health_payload() -> dict[str, str]:
 def cached_tournament_view() -> dict[str, object]:
     """Cache tournament JSON ,  eerste call ~0.5s, daarna instant."""
     return build_tournament_view()
+
+
+def clear_tournament_cache() -> None:
+    cached_tournament_view.cache_clear()
+
+
+def sync_secret() -> str | None:
+    configured = os.environ.get(SYNC_SECRET_ENV)
+    if configured is None:
+        return None
+    configured = configured.strip()
+    return configured or None
+
+
+def authorized_sync(authorization: str | None) -> bool:
+    secret = sync_secret()
+    if secret is None:
+        return False
+    if authorization is None or not authorization.startswith("Bearer "):
+        return False
+    token = authorization[7:].strip()
+    return token == secret
 
 
 def allowed_cors_origins() -> tuple[str, ...]:
@@ -73,6 +96,47 @@ class WkPoolRequestHandler(BaseHTTPRequestHandler):
             return
 
         self._send_json({"error": "Not found"}, status=404)
+
+    def do_POST(self) -> None:
+        path = urlparse(self.path).path
+
+        if path == "/internal/sync-football":
+            self._handle_sync_football()
+            return
+
+        self._send_json({"error": "Not found"}, status=404)
+
+    def _handle_sync_football(self) -> None:
+        if sync_secret() is None:
+            self._send_json({"error": "FOOTBALL_SYNC_SECRET is not configured"}, status=503)
+            return
+
+        if not authorized_sync(self.headers.get("Authorization")):
+            self._send_json({"error": "Unauthorized"}, status=401)
+            return
+
+        if not os.environ.get("FOOTBALL_API_KEY"):
+            self._send_json({"error": "FOOTBALL_API_KEY is not configured"}, status=503)
+            return
+
+        query = parse_qs(urlparse(self.path).query)
+        force_remap = query.get("force-remap", [""])[0] in {"1", "true", "yes"}
+
+        try:
+            from app.football_sync import sync_results
+
+            synced = sync_results(force_remap=force_remap)
+            clear_tournament_cache()
+            self._send_json({"status": "ok", "synced": synced})
+        except Exception as exc:
+            traceback.print_exc()
+            self._send_json(
+                {
+                    "error": "Football sync failed",
+                    "detail": str(exc),
+                },
+                status=500,
+            )
 
     def do_OPTIONS(self) -> None:
         self.send_response(204)

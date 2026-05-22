@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
-RESULTS_PATH = Path(__file__).resolve().parent / "data" / "match-results.json"
-FIXTURE_MAP_PATH = Path(__file__).resolve().parent / "data" / "football-fixture-map.json"
+_DATA_DIR = Path(os.environ.get("WK_POOL_DATA_DIR", "")).expanduser() if os.environ.get("WK_POOL_DATA_DIR") else None
+_DEFAULT_DATA_DIR = Path(__file__).resolve().parent / "data"
+RESULTS_PATH = (_DATA_DIR or _DEFAULT_DATA_DIR) / "match-results.json"
+FIXTURE_MAP_PATH = (_DATA_DIR or _DEFAULT_DATA_DIR) / "football-fixture-map.json"
 
 
 def _empty_store() -> dict[str, object]:
