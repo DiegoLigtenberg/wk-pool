@@ -124,9 +124,9 @@ FOOTBALL_SYNC_SECRET=choose-a-long-random-string
 
    (or paste the same settings manually)
 
-5. **Settings → Cron Schedule:** `0 3,6,9,23 * 6,7 *`  
+5. **Settings → Cron Schedule:** `30 0,1,2,3,4,5,6,21,22,23 * 6,7 *`  
 
-   → 4× per day in June/July (UTC): 03:00, 06:00, 09:00, 23:00
+   → 10× per day in June/July (UTC), aligned with match finish windows from the local schedule (kickoff + 135 min)
 
 6. **Settings → Start Command** (if not using config file):
 
