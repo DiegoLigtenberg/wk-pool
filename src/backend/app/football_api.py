@@ -212,6 +212,61 @@ def fetch_league_fixtures(season: int) -> list[dict[str, object]]:
     return response if isinstance(response, list) else []
 
 
+def fetch_top_scorers(season: int) -> list[dict[str, object]]:
+    data = call_api_football(
+        "/players/topscorers",
+        {"league": WORLD_CUP_LEAGUE_ID, "season": season},
+    )
+    response = data.get("response", [])
+    return response if isinstance(response, list) else []
+
+
+def parse_top_scorer(entries: list[dict[str, object]]) -> dict[str, object] | None:
+    """Return leading tournament scorer from /players/topscorers response."""
+    best: dict[str, object] | None = None
+    best_goals = -1
+
+    for entry in entries:
+        player = entry.get("player")
+        statistics = entry.get("statistics")
+        if not isinstance(player, dict) or not isinstance(statistics, list) or not statistics:
+            continue
+
+        stats = statistics[0]
+        if not isinstance(stats, dict):
+            continue
+
+        goals_meta = stats.get("goals")
+        if not isinstance(goals_meta, dict):
+            continue
+
+        total = goals_meta.get("total")
+        if total is None:
+            continue
+
+        goals = int(total)
+        if goals <= best_goals:
+            continue
+
+        team_meta = stats.get("team")
+        team_name = ""
+        if isinstance(team_meta, dict) and team_meta.get("name") is not None:
+            team_name = str(team_meta["name"])
+
+        name = player.get("name")
+        if not name:
+            continue
+
+        best_goals = goals
+        best = {
+            "name": str(name),
+            "goals": goals,
+            "team": team_name,
+        }
+
+    return best
+
+
 def match_api_fixture(
     *,
     kickoff_iso: str,

@@ -37,3 +37,20 @@ def test_yellow_red_card_counts_as_yellow_not_direct_red() -> None:
     yellow, direct_red = count_card_events(events)
     assert yellow == 2
     assert direct_red == 0
+
+
+def test_parse_top_scorer_picks_highest_goals() -> None:
+    from app.football_api import parse_top_scorer
+
+    entries = [
+        {
+            "player": {"name": "Kane"},
+            "statistics": [{"team": {"name": "England"}, "goals": {"total": 4}}],
+        },
+        {
+            "player": {"name": "Mbappé"},
+            "statistics": [{"team": {"name": "France"}, "goals": {"total": 6}}],
+        },
+    ]
+
+    assert parse_top_scorer(entries) == {"name": "Mbappé", "goals": 6, "team": "France"}

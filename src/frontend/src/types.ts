@@ -155,6 +155,12 @@ export type CrystalBallBonusQuestion = {
   rationale?: string;
 };
 
+export type CrystalBallTopScorer = {
+  name: string;
+  goals: number;
+  team: string;
+};
+
 export type CrystalBallLiveStats = {
   source: "api-football";
   updatedAt: string | null;
@@ -162,6 +168,7 @@ export type CrystalBallLiveStats = {
   totalMatches: number;
   yellowCards: number;
   directRedCards: number;
+  topScorer: CrystalBallTopScorer | null;
 };
 
 export type CrystalBallView = {

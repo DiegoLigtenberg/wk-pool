@@ -253,6 +253,7 @@ export function tournamentFixture(overrides: Partial<TournamentView> = {}): Tour
         totalMatches: 104,
         yellowCards: 3,
         directRedCards: 0,
+        topScorer: null,
       },
     },
     ...overrides,

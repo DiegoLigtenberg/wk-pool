@@ -103,14 +103,23 @@ function isCrystalBall(value: unknown): boolean {
 }
 
 function isCrystalBallLiveStats(value: unknown): boolean {
+  if (!isRecord(value)) {
+    return false;
+  }
+  const topScorerOk =
+    value.topScorer === null ||
+    (isRecord(value.topScorer) &&
+      typeof value.topScorer.name === "string" &&
+      isNumber(value.topScorer.goals) &&
+      typeof value.topScorer.team === "string");
   return (
-    isRecord(value) &&
     value.source === "api-football" &&
     (value.updatedAt === null || typeof value.updatedAt === "string") &&
     isNumber(value.completedMatches) &&
     isNumber(value.totalMatches) &&
     isNumber(value.yellowCards) &&
-    isNumber(value.directRedCards)
+    isNumber(value.directRedCards) &&
+    topScorerOk
   );
 }
 

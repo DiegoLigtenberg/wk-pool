@@ -6,7 +6,7 @@ type CrystalBallViewProps = {
   crystalBall: CrystalBallData;
 };
 
-const LIVE_BONUS_IDS = new Set(["yellow_cards_total", "direct_red_cards"]);
+const LIVE_COUNT_BONUS_IDS = new Set(["yellow_cards_total", "direct_red_cards"]);
 
 export function CrystalBallView({ crystalBall }: CrystalBallViewProps) {
   const winners =
@@ -22,11 +22,7 @@ export function CrystalBallView({ crystalBall }: CrystalBallViewProps) {
         <div>
           <p className="eyebrow">Crystal Ball</p>
           <h2>Toernooi-voorspellingen</h2>
-          {crystalBall.contextAsOf ? (
-            <p className="muted crystal-meta">
-              Groepswinnaars uit alle 72 AI 1/2/3-picks · bonus onderzoek t/m {crystalBall.contextAsOf}
-            </p>
-          ) : null}
+          <p className="muted crystal-meta">Groepswinnaars uit alle 72 AI 1/2/3-picks</p>
         </div>
       </div>
 
@@ -61,6 +57,7 @@ export function CrystalBallView({ crystalBall }: CrystalBallViewProps) {
 
 function LiveStatsPanel({ liveStats }: { liveStats: CrystalBallLiveStats }) {
   const hasSync = liveStats.updatedAt !== null;
+  const topScorerLabel = formatTopScorer(liveStats.topScorer);
 
   return (
     <section className="crystal-live-panel" aria-label="Live statistieken uit API-Football">
@@ -91,6 +88,11 @@ function LiveStatsPanel({ liveStats }: { liveStats: CrystalBallLiveStats }) {
           value={String(liveStats.directRedCards)}
           helper="Geen 2e-geel uitsluitingen"
         />
+        <LiveStatCard
+          label="Topscorer nu"
+          value={topScorerLabel}
+          helper="Doelpunten in het hele toernooi (API-Football)"
+        />
       </div>
     </section>
   );
@@ -113,23 +115,33 @@ function BonusCard({
   question: CrystalBallBonusQuestion;
   liveStats: CrystalBallLiveStats;
 }) {
-  const liveValue = liveValueFor(question.id, liveStats);
+  const liveCount = liveCountFor(question.id, liveStats);
+  const liveTopScorer = question.id === "top_scorer" ? liveStats.topScorer : null;
   const predicted = Number.parseInt(question.value, 10);
 
   return (
     <article className="bonus-card">
       <span>{question.label}</span>
       <strong>{question.value}</strong>
-      {liveValue !== null ? (
+      {liveCount !== null ? (
         <p className="bonus-live">
-          Live nu: <strong>{liveValue}</strong>
+          Live nu: <strong>{liveCount}</strong>
           {Number.isFinite(predicted) ? (
             <>
               {" "}
               · voorspeld: {predicted}
-              {liveValue > predicted ? " (boven voorspelling)" : liveValue < predicted ? " (onder voorspelling)" : " (op voorspelling)"}
+              {liveCount > predicted ? " (boven voorspelling)" : liveCount < predicted ? " (onder voorspelling)" : " (op voorspelling)"}
             </>
           ) : null}
+        </p>
+      ) : null}
+      {liveTopScorer ? (
+        <p className="bonus-live">
+          Live nu:{" "}
+          <strong>
+            {liveTopScorer.name} ({liveTopScorer.goals} {liveTopScorer.goals === 1 ? "goal" : "goals"})
+          </strong>
+          {liveTopScorer.team ? <> · {liveTopScorer.team}</> : null}
         </p>
       ) : null}
       <p>{question.helper}</p>
@@ -137,8 +149,8 @@ function BonusCard({
   );
 }
 
-function liveValueFor(questionId: string, liveStats: CrystalBallLiveStats): number | null {
-  if (!LIVE_BONUS_IDS.has(questionId)) {
+function liveCountFor(questionId: string, liveStats: CrystalBallLiveStats): number | null {
+  if (!LIVE_COUNT_BONUS_IDS.has(questionId)) {
     return null;
   }
   if (questionId === "yellow_cards_total") {
@@ -148,6 +160,19 @@ function liveValueFor(questionId: string, liveStats: CrystalBallLiveStats): numb
     return liveStats.directRedCards;
   }
   return null;
+}
+
+function formatTopScorer(topScorer: CrystalBallLiveStats["topScorer"]): string {
+  if (!topScorer) {
+    return "—";
+  }
+
+  const goalsLabel = topScorer.goals === 1 ? "goal" : "goals";
+  if (topScorer.team) {
+    return `${topScorer.name} (${topScorer.goals} ${goalsLabel}, ${topScorer.team})`;
+  }
+
+  return `${topScorer.name} (${topScorer.goals} ${goalsLabel})`;
 }
 
 function formatSyncTime(iso: string | null): string {

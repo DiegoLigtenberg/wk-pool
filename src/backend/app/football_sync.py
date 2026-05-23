@@ -8,8 +8,10 @@ from datetime import datetime, timedelta, timezone
 from app.football_api import (
     fetch_fixtures_by_ids,
     fetch_league_fixtures,
+    fetch_top_scorers,
     match_api_fixture,
     parse_fixture_result,
+    parse_top_scorer,
 )
 from app.match_results_store import (
     load_fixture_map,
@@ -75,18 +77,49 @@ def _candidates(now: datetime, fixture_map: dict[int, int], store: dict[str, obj
     return pending
 
 
+def _completed_match_count(store: dict[str, object]) -> int:
+    matches = store.get("matches")
+    if not isinstance(matches, dict):
+        return 0
+    return len(matches)
+
+
+def sync_top_scorer(store: dict[str, object], *, season: int, dry_run: bool = False) -> bool:
+    if _completed_match_count(store) == 0:
+        return False
+
+    if dry_run:
+        print("Would call /players/topscorers")
+        return False
+
+    parsed = parse_top_scorer(fetch_top_scorers(season))
+    if parsed is None:
+        return False
+
+    existing = store.get("topScorer")
+    if existing == parsed:
+        return False
+
+    store["topScorer"] = parsed
+    print(f"Topscorer: {parsed['name']} ({parsed['goals']} goals, {parsed['team']})")
+    return True
+
+
 def sync_results(*, dry_run: bool = False, force_remap: bool = False) -> int:
     now = datetime.now(timezone.utc)
     store = load_results()
     fixture_map = build_fixture_map(season=default_season(), force=force_remap)
+    season = default_season()
     candidates = _candidates(now, fixture_map, store)
 
     if not fixture_map:
-        print(f"No fixture map for season {default_season()} (API plan may not include this season yet).")
+        print(f"No fixture map for season {season} (API plan may not include this season yet).")
         return 0
 
     if not candidates:
         print("No newly finished matches to sync.")
+        if sync_top_scorer(store, season=season, dry_run=dry_run):
+            save_results(store)
         return 0
 
     fixture_ids = [fixture_map[match_number] for match_number in candidates]
@@ -124,9 +157,11 @@ def sync_results(*, dry_run: bool = False, force_remap: bool = False) -> int:
         )
         synced += 1
 
-    if synced:
+    top_scorer_updated = sync_top_scorer(store, season=season, dry_run=dry_run)
+    if synced or top_scorer_updated:
         save_results(store)
         totals = store.get("tournamentTotals", {})
-        print(f"Saved {synced} result(s). Totals: {totals}")
+        if synced:
+            print(f"Saved {synced} result(s). Totals: {totals}")
 
     return synced

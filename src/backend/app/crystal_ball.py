@@ -31,6 +31,9 @@ def build_crystal_ball_view(
     totals = results_store.get("tournamentTotals", {}) if results_store else {}
     if not isinstance(totals, dict):
         totals = {}
+    top_scorer = results_store.get("topScorer") if results_store else None
+    if not isinstance(top_scorer, dict):
+        top_scorer = None
 
     return {
         "groupWinners": group_winners,
@@ -45,6 +48,7 @@ def build_crystal_ball_view(
             "totalMatches": total_count,
             "yellowCards": int(totals.get("yellowCards", 0)),
             "directRedCards": int(totals.get("directRedCards", 0)),
+            "topScorer": top_scorer,
         },
     }
 

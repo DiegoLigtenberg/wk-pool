@@ -44,3 +44,4 @@ def test_crystal_ball_includes_live_api_stats() -> None:
     assert live["completedMatches"] == tournament["summary"]["completed"]
     assert live["yellowCards"] == tournament["cardTotals"]["yellowCards"]
     assert live["directRedCards"] == tournament["cardTotals"]["directRedCards"]
+    assert live["topScorer"] is None

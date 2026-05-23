@@ -328,6 +328,17 @@ def is_crystal_ball(value: object) -> bool:
         if not is_int(live_stats.get(key)):
             return False
 
+    top_scorer = live_stats.get("topScorer")
+    if top_scorer is not None:
+        if not isinstance(top_scorer, dict):
+            return False
+        if not isinstance(top_scorer.get("name"), str):
+            return False
+        if not is_int(top_scorer.get("goals")):
+            return False
+        if not isinstance(top_scorer.get("team"), str):
+            return False
+
     return True
 
 
