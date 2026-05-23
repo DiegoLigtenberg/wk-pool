@@ -46,7 +46,9 @@ describe("PredictionPanel", () => {
 
     const lead = container.querySelector(".prediction-verdict--lead");
     const summary = container.querySelector(".prediction-lead-summary");
-    expect(lead?.compareDocumentPosition(summary!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(lead).not.toBeNull();
+    expect(summary).not.toBeNull();
+    expect(lead!.compareDocumentPosition(summary!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const leadSummary = container.querySelector(".prediction-lead-summary");
     expect(leadSummary?.textContent?.toLowerCase()).not.toContain("wedstrijdscore");
 
