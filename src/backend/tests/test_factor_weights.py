@@ -42,10 +42,11 @@ def test_usa_paraguay_cohost_not_over_stacked() -> None:
     br = match_context_breakdown(fifa_team_key("USA"), fifa_team_key("Paraguay"))
     usa = br["home"]
     paraguay = br["away"]
-    assert usa["hostDelta"] == HOST_BUCKET_MAX
+    assert usa["hostDelta"] <= HOST_BUCKET_MAX
+    assert usa["hostDelta"] >= 1
     assert usa["effectiveScore"] == 78 + usa["contextDelta"]
-    assert paraguay["effectiveScore"] == 72
-    assert usa["contextDelta"] <= 4
+    assert paraguay["effectiveScore"] == 72 + paraguay["contextDelta"]
+    assert usa["contextDelta"] <= 6
 
 
 def test_qatar_switzerland_matchup_edge_about_qatar_not_swiss_coach() -> None:
@@ -61,4 +62,4 @@ def test_squad_load_scaled_under_option_b() -> None:
     eff = effective_delta_for_factor(
         ContextFactor(id="squad_load", delta=-2, reason="Blessures")
     )
-    assert eff == -4
+    assert eff == -6

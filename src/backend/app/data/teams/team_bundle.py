@@ -70,6 +70,7 @@ class TeamBundle:
     club_concentration_notes: str | None = None
     squad_load_notes: str | None = None
     discipline_risk_notes: str | None = None
+    matchup_volatility: dict[str, dict[str, str]] | None = None
 
     @property
     def yaml_path(self) -> str:

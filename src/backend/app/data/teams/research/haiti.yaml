@@ -29,6 +29,9 @@ matchup_counters_us:
 matchup_we_counter:
 - Teams hoog risico.
 - Foul-heavy games.
+matchup_volatility:
+  Morocco:
+    upset: "Haïti is atletisch en chaotisch; compacte underdogs met snelheid kunnen subtoppen in vroege groepswedstrijden verrassen."
 dead_ball_swings_matches: Isidor hoogtes vs Schotse centrals.
 experience_cohesion_notes:
 - Migne; MLS/Caribisch/Europa mix; squad mei 2026.

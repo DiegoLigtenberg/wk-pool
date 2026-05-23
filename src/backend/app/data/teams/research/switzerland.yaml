@@ -134,8 +134,8 @@ context_scoring:
     Qatar:
     - id: matchup_edge
       delta: 1
-      reason: Bondscoach Julen Lopetegui zet bij Zwitserland in op Spaans balbezitspel
-        in een zeer compacte ploeg.
+      reason: Qatar onder Lopetegui speelt compact met Spaans balbezit; lastig voor
+        Zwitserland om ruimte te vinden.
     - id: style_matchup
       delta: -1
       reason: Qatar kan gevaarlijk omschakelen tegen het aanvalsspel van Zwitserland.

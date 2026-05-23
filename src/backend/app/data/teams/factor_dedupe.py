@@ -13,6 +13,8 @@ MATCH_SCOPED_IDS = frozenset(
         "tactical_strength",
         "matchup_risk",
         "matchup_edge",
+        "upset_path",
+        "choke_risk",
         "fixture_story",
         "psychology",
         "home_fixture",

@@ -13,13 +13,14 @@ def test_probabilities_sum_to_100() -> None:
 def test_usa_paraguay_pick_and_probs_aligned() -> None:
     pred = predict_match("USA", "Paraguay", "group", "1", "D")
     br = match_context_breakdown(fifa_team_key("USA"), fifa_team_key("Paraguay"))
-    assert br["diff"] >= 6
+    assert br["diff"] <= 6
     assert pred["pick"] in ("1", "3")
-    assert pred["homeWinProbability"] == max(
-        pred["homeWinProbability"],
-        pred["drawProbability"],
-        pred["awayWinProbability"],
-    )
+    probs = {
+        "1": pred["homeWinProbability"],
+        "3": pred["drawProbability"],
+        "2": pred["awayWinProbability"],
+    }
+    assert probs[pred["pick"]] == max(probs.values())
 
 
 def test_large_favorite_has_strong_knockout_home_chance() -> None:
@@ -48,9 +49,9 @@ def test_close_diff_picks_draw_not_exact_zero_only() -> None:
 
 
 def test_clear_diff_picks_winner() -> None:
-    pred = predict_match("USA", "Paraguay", "group", "1", "D")
-    br = match_context_breakdown(fifa_team_key("USA"), fifa_team_key("Paraguay"))
-    assert br["diff"] >= 3
+    pred = predict_match("Argentina", "Haiti", "group", "1", "F")
+    br = match_context_breakdown(fifa_team_key("Argentina"), fifa_team_key("Haiti"))
+    assert br["diff"] >= 15
     assert pred["pick"] == "1"
 
 

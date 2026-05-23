@@ -13,18 +13,19 @@ analyzed:
 - group_context
 - psychology_pressure
 - travel_environment
-interpretive_ceiling_vs_floor: Jamal Sellami; Musa Al-Taamari (Rennes), groep J vs
-  Oostenrijk/Algerije/Argentinië. Aziatisch underdog met AFC-discipline.
+interpretive_ceiling_vs_floor: Jamal Sellami; Musa Al-Taamari (Rennes), groep J vs Oostenrijk/Algerije/Argentinië. Aziatisch
+  underdog met AFC-discipline.
 phase_preferences:
 - Sterk compact + Al-Taamari counters.
-- Zwakwer vs Messi/Alaba.
+- Zwakwer vs titelverdediger Argentinië en pressing Oostenrijk.
 transition_orientation_summary: Reactief counter-light; Al-Taamari creatie.
-psychology_intro: Debut or second WC; groep J extreem zwaar.
+psychology_intro: Eerste WK ooit; groep J extreem zwaar.
 psychology_vectors:
 - Argentinië slot.
 - Bankdiepte vs blessures.
 matchup_counters_us:
-- Argentinië/Algerije.
+- Argentinië is titelverdediger met veel ervaring op dit niveau.
+- Algerije speelt compact en is lastig te openen.
 - Oostenrijk pressing.
 matchup_we_counter:
 - Low-scoring fouls.
@@ -33,8 +34,7 @@ dead_ball_swings_matches: Compact → corners; Al-Taamari frees.
 experience_cohesion_notes:
 - Sellami; Al-Taamari enige Europese star.
 intercontinental_travel_profile: AFC → VS.
-distinctive_spark_notes: Al-Taamari (Rennes) enige EU-ster in groep J met Argentinië;
-  04:00 San Francisco-slot.
+distinctive_spark_notes: Al-Taamari (Rennes) enige EU-ster in groep J met Argentinië; 04:00 San Francisco-slot.
 star_dependency: high
 power_score: 62
 tier: Verrassingsploeg
@@ -82,15 +82,13 @@ group_stage: &id001
   - 'Groepswedstrijd 1 (17 Jun): uit vs Oostenrijk @ San Francisco Bay Area Stadium'
   - 'Groepswedstrijd 2 (23 Jun): thuis vs Algerije @ San Francisco Bay Area Stadium'
   - 'Groepswedstrijd 3 (28 Jun): thuis vs Argentinië @ Dallas Stadium'
-  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 6 dag(en); kortste window
-    >3 dagen. Tussen wedstrijd Algerije en Argentinië: San Francisco Bay Area Stadium
-    → Dallas Stadium (5 dag(en) ertussen). 3 vroege/late kickoff-slots (UTC-nacht)
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 6 dag(en); kortste window >3 dagen. Tussen wedstrijd Algerije en
+    Argentinië: San Francisco Bay Area Stadium → Dallas Stadium (5 dag(en) ertussen). 3 vroege/late kickoff-slots (UTC-nacht)
     in groep ,  recovery relevant.'
-  venue_dispersion_notes: 'Groepsfase op 2 stadions: San Francisco Bay Area Stadium
-    (San Francisco, mild kust); Dallas Stadium (Dallas, heet droog). Alleen USA-venues
-    in de poule ,  beperkte binnenlandse reis. Impact: San Francisco is koeler ,  kan
-    hitte-gewende tegenstanders neutraliseren; Dallas (heet droog) vraagt hitte-management;
-    3 late kickoffs in groep ,  rustritme en recovery extra relevant.'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: San Francisco Bay Area Stadium (San Francisco, mild kust); Dallas Stadium
+    (Dallas, heet droog). Alleen USA-venues in de poule ,  beperkte binnenlandse reis. Impact: San Francisco is koeler ,  kan
+    hitte-gewende tegenstanders neutraliseren; Dallas (heet droog) vraagt hitte-management; 3 late kickoffs in groep ,  rustritme
+    en recovery extra relevant.'
 tournament_context:
   schema_version: 1
   phases:
@@ -124,8 +122,7 @@ context_scoring:
   persistent:
   - id: distinctive_spark
     delta: -1
-    reason: Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari (Rennes)
-      in dit duel tegen de tegenstander.
+    reason: Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari (Rennes) in dit duel tegen de tegenstander.
   - id: star_dependency
     delta: -1
     reason: 'Sterafhankelijkheid: weinig marge als de ster uit de wedstrijd is.'
@@ -133,24 +130,21 @@ context_scoring:
     Algeria:
     - id: style_matchup
       delta: 1
-      reason: Snelle omschakeling past bij het lage, compacte blok van Algerije.
+      reason: Jordanië kan met counters het compacte blok van Algerije oprekken.
     - id: fixture_narrative
       delta: -1
-      reason: Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari
-        (Rennes) in dit duel tegen Algerije.
+      reason: Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari (Rennes) in dit duel tegen Algerije.
     Argentina:
+    - id: tactical_weakness
+      delta: -1
+      reason: Jordanië heeft in dit duel moeite met het profiel van Argentinië.
     - id: fixture_narrative
       delta: -1
-      reason: Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari
-        (Rennes) in dit duel tegen Argentinië.
-    - id: matchup_risk
-      delta: -1
-      reason: Argentinië/Algerije.
+      reason: Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari (Rennes) in dit duel tegen Argentinië.
     Austria:
+    - id: tactical_weakness
+      delta: -1
+      reason: Jordanië heeft in dit duel moeite met het profiel van Oostenrijk.
     - id: fixture_narrative
       delta: -1
-      reason: Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari
-        (Rennes) in dit duel tegen Oostenrijk.
-    - id: matchup_risk
-      delta: -1
-      reason: Oostenrijk zet intens pressing neer; dat verstoort de opbouw van Jordanië.
+      reason: Jordanië leunt op coach Jamal Sellami en aanvoerder Musa Al-Taamari (Rennes) in dit duel tegen Oostenrijk.

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import unicodedata
 
 _DASH_CHARS = ("\u2014", "\u2013", "\u2212")  # em-dash, en-dash, minus sign
 
@@ -364,13 +365,80 @@ _COUNTRY_ALIASES: dict[str, str] = {
     "senegal": "senegal",
 }
 
+_COMMUNITY_ADJECTIVE: dict[str, str] = {
+    "marokko": "Marokkaanse",
+    "argentinië": "Argentijnse",
+    "mexico": "Mexicaanse",
+    "verenigde staten": "Amerikaanse",
+    "canada": "Canadese",
+}
+
+
+def _normalize_country_key(value: str) -> str:
+    lowered = value.strip().lower()
+    return "".join(
+        char
+        for char in unicodedata.normalize("NFD", lowered)
+        if unicodedata.category(char) != "Mn"
+    )
+
 
 def _refers_to_opponent(country: str, opponent_nl: str) -> bool:
-    c = country.strip().lower()
-    o = opponent_nl.strip().lower()
-    if c == o or c in o or o in c:
+    raw = country.strip().rstrip(".")
+    c = _normalize_country_key(raw)
+    o = _normalize_country_key(opponent_nl)
+    if c == o:
         return True
-    return _COUNTRY_ALIASES.get(c) == o
+    alias = _COUNTRY_ALIASES.get(c)
+    if alias and _normalize_country_key(alias) == o:
+        return True
+    if " " not in raw and (c in o or o in c):
+        return True
+    return False
+
+
+def _humanize_cryptic_opponent_stub(
+    text: str,
+    *,
+    factor_id: str,
+    subject_team: str,
+    opponent_team: str,
+) -> str | None:
+    if not subject_team or not opponent_team:
+        return None
+
+    stub = text.strip().rstrip(".")
+    if not stub:
+        return None
+
+    first_token = stub.split()[0] if stub.split() else stub
+    opponent_only = _refers_to_opponent(stub, opponent_team) or (
+        len(stub.split()) == 1 and _refers_to_opponent(first_token, opponent_team)
+    )
+
+    if factor_id == "matchup_edge" and (
+        opponent_only or _GENERIC_MATCHUP_EDGE_RE.search(stub)
+    ):
+        return (
+            f"{subject_team} heeft tactisch iets meer te bieden dan "
+            f"{opponent_team} in dit duel."
+        )
+
+    if factor_id == "matchup_risk":
+        if opponent_only:
+            return f"{opponent_team} is tactisch lastig voor {subject_team} in dit duel."
+        if "3-2-5" in stub.lower():
+            return (
+                f"{opponent_team} speelt aanvallend met een drie-spits systeem; "
+                f"{subject_team} moet defensief scherp zijn."
+            )
+        if "/" in stub:
+            return (
+                f"{subject_team} krijgt te maken met het niveau van "
+                f"{opponent_team} in dit duel."
+            )
+
+    return None
 
 
 def _humanize_simons_note(text: str, *, team_nl: str, opponent_nl: str) -> str:
@@ -530,9 +598,16 @@ def _humanize_short_matchup_counter(
             f"de halve finale van toen leeft nog na."
         )
     if ("wk-debuut" in low or "wk debuut" in low) and team_nl and opponent_nl:
+        if len(t) > 45 or ";" in t or "ervaring" in low or "groepswedstrijd" in low:
+            return text
+        if "groepsopener" in low or "openingswedstrijd" in low:
+            return (
+                f"{opponent_nl} maakt zijn WK-debuut tegen {team_nl}; "
+                f"{team_nl} start als favoriet in de groepsopener."
+            )
         return (
             f"{opponent_nl} maakt zijn WK-debuut tegen {team_nl}; "
-            f"{team_nl} start als favoriet in de groepsopener."
+            f"{team_nl} heeft meer ervaring op dit niveau."
         )
 
     match = _OPPONENT_PLAYER_NOTE_RE.match(t)
@@ -813,7 +888,8 @@ def _humanize_phase_preference_line(
             t,
             re.IGNORECASE,
         )
-        adj = adj_match.group(1) if adj_match else ""
+        expected_adj = _COMMUNITY_ADJECTIVE.get(_normalize_country_key(who))
+        adj = expected_adj or (adj_match.group(1) if adj_match else "")
         if adj:
             return (
                 f"Grote {adj} gemeenschap in de VS geeft {who} "
@@ -983,6 +1059,14 @@ def humanize_factor_reason(
     text = _strip_baked_duel_phrases(reason)
     text = _MACHINE_PREFIX_RE.sub("", text).strip().rstrip(".")
 
+    if factor_id == "crowd_bias" and subject_team and "gemeenschap" in text.lower():
+        expected_adj = _COMMUNITY_ADJECTIVE.get(_normalize_country_key(subject_team))
+        if expected_adj:
+            return normalize_display_text(
+                f"Grote {expected_adj} gemeenschap in de VS geeft {subject_team} "
+                f"in veel stadions extra steun."
+            )
+
     if factor_id == "opponent_profile_weak" and subject_team and opponent_team:
         weak = _humanize_opponent_profile_weak(
             text, subject_team=subject_team, opponent_team=opponent_team
@@ -1024,6 +1108,15 @@ def humanize_factor_reason(
                 f"{subject_team} heeft tactisch iets meer te bieden dan "
                 f"{opponent_team} in dit duel."
             )
+
+    cryptic = _humanize_cryptic_opponent_stub(
+        text,
+        factor_id=factor_id,
+        subject_team=subject_team,
+        opponent_team=opponent_team,
+    )
+    if cryptic:
+        return normalize_display_text(cryptic)
 
     if (
         factor_id == "matchup_edge"
@@ -1163,7 +1256,6 @@ def _humanize_style_matchup(text: str, *, subject_team: str, opponent_team: str)
     sub = subject_team or "dit team"
     if "omschakeling" in low and "compact" in low and opp:
         variants = (
-            f"Snelle omschakeling past bij het lage, compacte blok van {opp}.",
             f"{sub} kan met counters het compacte blok van {opp} oprekken.",
             f"{opp} speelt compact; {sub} kan snel omschakelen om ruimte te vinden.",
         )

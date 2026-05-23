@@ -16,7 +16,14 @@ from app.display_text import (
 from app.teams import display_team_name
 
 _MATCH_NEGATIVE_IDS = frozenset(
-    {"fixture_story", "matchup_risk", "opener_context", "psychology", "discipline"}
+    {
+        "fixture_story",
+        "matchup_risk",
+        "opener_context",
+        "psychology",
+        "discipline",
+        "choke_risk",
+    }
 )
 
 FACTOR_LABELS: dict[str, str] = {
@@ -34,6 +41,8 @@ FACTOR_LABELS: dict[str, str] = {
     "tactical_strength": "sterkte",
     "matchup_risk": "risico",
     "matchup_edge": "voordeel",
+    "upset_path": "upset-kans",
+    "choke_risk": "choke-risico",
     "fixture_story": "context",
     "psychology": "mentaliteit",
     "home_fixture": "thuis",
@@ -384,6 +393,8 @@ def _narrate_host_bundle(
 
     if crowd:
         detail = _clean_reason_text(str(crowd["reason"]))
+        if str(crowd["id"]) == "crowd_bias":
+            return normalize_display_text(detail)
         if not _include_persistent_cohost_story(winner, opponent, group_opponents):
             return ""
         if winner.lower() in detail.lower()[:20]:

@@ -30,6 +30,9 @@ matchup_counters_us:
 matchup_we_counter:
 - Nieuw-Zeeland Wood.
 - Iran Ghalenoei frustratie.
+matchup_volatility:
+  Belgium:
+    upset: "Salah en Marmoush kunnen België op counters pijn doen; Egypte opent vaak fel tegen groepsfavorieten."
 dead_ball_swings_matches: Salah frees; Marmoush snelheid bij counters.
 experience_cohesion_notes:
 - Hassan twins; veel Europa/Saudi.

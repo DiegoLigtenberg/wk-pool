@@ -192,7 +192,14 @@ def _upset_adjustment(
     fav_key = home_key if favorite_home else away_key
     dog_key = away_key if favorite_home else home_key
 
+    dog_upset = _factor_delta_sum(dog_factors, "upset_path") > 0
+    fav_choke = _factor_delta_sum(fav_factors, "choke_risk") < 0
+
     signal = 0
+    if dog_upset:
+        signal += 2
+    if fav_choke:
+        signal += 2
     if _factor_delta_sum(dog_factors, "matchup_edge") > 0:
         signal += 1
     if _factor_delta_sum(fav_factors, "matchup_risk") < 0:
@@ -201,11 +208,22 @@ def _upset_adjustment(
         signal += 1
     if _factor_delta_sum(fav_factors, "tactical_weakness") < 0:
         signal += 1
-    if signal < 2:
+
+    min_signal = 1 if (dog_upset or fav_choke) else 2
+    if signal < min_signal:
         return None
 
-    shift = 3 if abs(gap) >= 10 else 2
+    if dog_upset or fav_choke:
+        shift = 4 if abs(gap) >= 10 else 3
+    else:
+        shift = 3 if abs(gap) >= 10 else 2
     delta = -shift if favorite_home else shift
+    detail = []
+    if dog_upset:
+        detail.append("underdog-upsetpad")
+    if fav_choke:
+        detail.append("choke-risico favoriet")
+    detail_txt = " + ".join(detail) if detail else "duel-onderdelen"
     return PickAdjustment(
         id="tactical_upset",
         kind="upset",
@@ -213,7 +231,7 @@ def _upset_adjustment(
         delta=delta,
         reason=(
             f"{display_team_name(dog_key)} countert {display_team_name(fav_key)} op papier "
-            f"(basisverschil {abs(gap)}): duel-onderdelen wijzen op verrassing → "
+            f"(basisverschil {abs(gap)}): {detail_txt} → "
             f"{'+' if delta > 0 else ''}{delta} richting underdog."
         ),
     )

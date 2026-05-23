@@ -178,6 +178,41 @@ def test_looks_truncated_reason_allows_country_and_duel_endings() -> None:
     )
 
 
+def test_humanize_matchup_edge_haiti_stub() -> None:
+    text = humanize_factor_reason(
+        "Haiti.",
+        factor_id="matchup_edge",
+        subject_team="Marokko",
+        opponent_team="Haïti",
+    )
+    assert "Marokko" in text
+    assert "Haïti" in text
+    assert "tactisch" in text.lower()
+
+
+def test_humanize_crowd_bias_morocco_community() -> None:
+    text = humanize_factor_reason(
+        "Grote Argentijnse gemeenschap in de VS geeft Marokko in veel stadions extra steun.",
+        factor_id="crowd_bias",
+        subject_team="Marokko",
+        opponent_team="Haïti",
+    )
+    assert "Marokkaanse" in text
+    assert "Argentijnse" not in text
+
+
+def test_humanize_style_matchup_clear_advantage() -> None:
+    text = humanize_factor_reason(
+        "Snelle omschakeling past bij het lage, compacte blok van Zwitserland.",
+        factor_id="style_matchup",
+        subject_team="Canada",
+        opponent_team="Zwitserland",
+    )
+    assert "Canada" in text
+    assert "Zwitserland" in text
+    assert "Snelle omschakeling past bij het lage" not in text
+
+
 def test_humanize_ghana_kudus_counters_not_mane() -> None:
     text = humanize_matchup_shorthand(
         "Ghana Kudus counters.",

@@ -255,9 +255,9 @@
     ]
   },
   {
-    "team": "Oezbekistan",
-    "field": "matchup_counters_us[0]",
-    "text": "Colombia Díaz.",
+    "team": "Noorwegen",
+    "field": "context_scoring.versus.France[0]",
+    "text": "Frankrijk Saliba tegen Haaland.",
     "score": 8,
     "flags": [
       "<=4 woorden",
@@ -266,9 +266,9 @@
     ]
   },
   {
-    "team": "Panama",
+    "team": "Oezbekistan",
     "field": "matchup_counters_us[0]",
-    "text": "England Tuchel.",
+    "text": "Colombia Díaz.",
     "score": 8,
     "flags": [
       "<=4 woorden",
@@ -486,6 +486,17 @@
     ]
   },
   {
+    "team": "Spanje",
+    "field": "context_scoring.versus.Uruguay[0]",
+    "text": "Kwetsbaar ruimte achter druk tegen Spanje.",
+    "score": 7,
+    "flags": [
+      "<=7 woorden",
+      "land+naam",
+      "weinig_werkwoord"
+    ]
+  },
+  {
     "team": "Uruguay",
     "field": "context_scoring.versus.Spain[0]",
     "text": "Kwetsbaar ruimte achter druk tegen Spanje.",
@@ -519,6 +530,72 @@
     ]
   },
   {
+    "team": "Bosnië-Herzegovina",
+    "field": "context_scoring.versus.Canada[0]",
+    "text": "Canada nervositeit co-host.",
+    "score": 6,
+    "flags": [
+      "<=4 woorden",
+      "jargon",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Engeland",
+    "field": "context_scoring.versus.Croatia[0]",
+    "text": "Lucht/standaardprofiel t.o.v. Kroatië.",
+    "score": 6,
+    "flags": [
+      "<=4 woorden",
+      "jargon",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Nederland",
+    "field": "context_scoring.versus.Japan[0]",
+    "text": "Lucht/standaardprofiel t.o.v. Japan.",
+    "score": 6,
+    "flags": [
+      "<=4 woorden",
+      "jargon",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Schotland",
+    "field": "context_scoring.versus.Brazil[0]",
+    "text": "Lucht/standaardprofiel t.o.v. Brazilië.",
+    "score": 6,
+    "flags": [
+      "<=4 woorden",
+      "jargon",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Schotland",
+    "field": "context_scoring.versus.Morocco[0]",
+    "text": "Lucht/standaardprofiel t.o.v. Marokko.",
+    "score": 6,
+    "flags": [
+      "<=4 woorden",
+      "jargon",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Zweden",
+    "field": "context_scoring.versus.Japan[0]",
+    "text": "Lucht/standaardprofiel t.o.v. Japan.",
+    "score": 6,
+    "flags": [
+      "<=4 woorden",
+      "jargon",
+      "weinig_werkwoord"
+    ]
+  },
+  {
     "team": "Australië",
     "field": "context_scoring.versus.USA[0]",
     "text": "Uit tegen co-host Verenigde Staten (Seattle Stadium).",
@@ -541,12 +618,24 @@
     ]
   },
   {
-    "team": "Engeland",
-    "field": "context_scoring.versus.Panama[0]",
-    "text": "Engeland krijgt te maken met het hoge pressingspel van Panama.",
+    "team": "Canada",
+    "field": "context_scoring.versus.Bosnia and Herzegovina[0]",
+    "text": "Thuis in Toronto Stadium (co-host).",
     "score": 5,
     "flags": [
-      "land+naam",
+      "<=7 woorden",
+      "jargon",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Canada",
+    "field": "context_scoring.versus.Qatar[0]",
+    "text": "Thuis in BC Place Vancouver (co-host).",
+    "score": 5,
+    "flags": [
+      "<=7 woorden",
+      "jargon",
       "weinig_werkwoord"
     ]
   },
@@ -561,9 +650,31 @@
     ]
   },
   {
+    "team": "Mexico",
+    "field": "context_scoring.versus.Korea Republic[0]",
+    "text": "Thuis in Guadalajara Stadium (co-host).",
+    "score": 5,
+    "flags": [
+      "<=7 woorden",
+      "jargon",
+      "weinig_werkwoord"
+    ]
+  },
+  {
     "team": "Qatar",
     "field": "context_scoring.versus.Canada[1]",
     "text": "Uit tegen co-host Canada (BC Place Vancouver).",
+    "score": 5,
+    "flags": [
+      "<=7 woorden",
+      "jargon",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Verenigde Staten",
+    "field": "context_scoring.versus.Australia[1]",
+    "text": "Thuis in Seattle Stadium (co-host).",
     "score": 5,
     "flags": [
       "<=7 woorden",
@@ -613,6 +724,25 @@
     ]
   },
   {
+    "team": "Argentinië",
+    "field": "context_scoring.versus.Austria[0]",
+    "text": "Argentinië is kwetsbaar voor Argentinië balrust en Messi.",
+    "score": 4,
+    "flags": [
+      "land+naam"
+    ]
+  },
+  {
+    "team": "Argentinië",
+    "field": "context_scoring.versus.Jordan[0]",
+    "text": "Algerije/Jordanië die dekking missen.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
     "team": "Australië",
     "field": "matchup_counters_us[0]",
     "text": "Montella wingers tussen linies.",
@@ -650,15 +780,6 @@
     "flags": [
       "<=4 woorden",
       "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Australië",
-    "field": "context_scoring.versus.Türkiye[1]",
-    "text": "Australië heeft moeite met het hoge tempo en de creatie van Turkije onder Vincenzo Montella.",
-    "score": 4,
-    "flags": [
-      "land+naam"
     ]
   },
   {
@@ -702,6 +823,26 @@
     ]
   },
   {
+    "team": "Bosnië-Herzegovina",
+    "field": "context_scoring.versus.Qatar[1]",
+    "text": "Qatar/Switzerland geduld.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Bosnië-Herzegovina",
+    "field": "context_scoring.versus.Switzerland[1]",
+    "text": "Qatar/Switzerland geduld.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
     "team": "Brazilië",
     "field": "matchup_counters_us[1]",
     "text": "Bielsa third-man egress.",
@@ -725,6 +866,26 @@
     "team": "Brazilië",
     "field": "matchup_we_counter[1]",
     "text": "Vermoeide verdedigingen.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Brazilië",
+    "field": "context_scoring.versus.Haiti[0]",
+    "text": "Haiti/Scotland hoog zonder dekking.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Brazilië",
+    "field": "context_scoring.versus.Scotland[1]",
+    "text": "Haiti/Scotland hoog zonder dekking.",
     "score": 4,
     "flags": [
       "<=4 woorden",
@@ -812,31 +973,31 @@
   },
   {
     "team": "Colombia",
+    "field": "context_scoring.versus.Congo DR[1]",
+    "text": "DR Congo atletiek.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Colombia",
+    "field": "context_scoring.versus.Portugal[0]",
+    "text": "Portugal Martinez mid-block.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Colombia",
     "field": "context_scoring.versus.Uzbekistan[1]",
     "text": "Oezbekistan kan gevaarlijk omschakelen tegen het aanvalsspel van Colombia.",
     "score": 4,
     "flags": [
       "land+naam"
-    ]
-  },
-  {
-    "team": "Congo",
-    "field": "matchup_counters_us[0]",
-    "text": "Portugal 3-2-5.",
-    "score": 4,
-    "flags": [
-      "<=4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Congo",
-    "field": "matchup_counters_us[1]",
-    "text": "Colombia Díaz flanken.",
-    "score": 4,
-    "flags": [
-      "<=4 woorden",
-      "weinig_werkwoord"
     ]
   },
   {
@@ -853,16 +1014,6 @@
     "team": "Congo",
     "field": "matchup_we_counter[1]",
     "text": "Hoog druk zonder dekking.",
-    "score": 4,
-    "flags": [
-      "<=4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Congo",
-    "field": "context_scoring.versus.Portugal[0]",
-    "text": "Portugal 3-2-5.",
     "score": 4,
     "flags": [
       "<=4 woorden",
@@ -912,6 +1063,16 @@
     "team": "Curaçao",
     "field": "matchup_we_counter[1]",
     "text": "Rommelige low-scoring games.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Curaçao",
+    "field": "context_scoring.versus.Ecuador[0]",
+    "text": "Ecuador als tweede seed.",
     "score": 4,
     "flags": [
       "<=4 woorden",
@@ -987,6 +1148,16 @@
     ]
   },
   {
+    "team": "Ecuador",
+    "field": "context_scoring.versus.Curaçao[0]",
+    "text": "Curaçao.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
     "team": "Egypte",
     "field": "matchup_counters_us[0]",
     "text": "België Doku/De Bruyne.",
@@ -1010,6 +1181,16 @@
     "team": "Egypte",
     "field": "matchup_we_counter[1]",
     "text": "Iran Ghalenoei frustratie.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Egypte",
+    "field": "context_scoring.versus.Belgium[1]",
+    "text": "België Doku/De Bruyne.",
     "score": 4,
     "flags": [
       "<=4 woorden",
@@ -1057,8 +1238,8 @@
   },
   {
     "team": "Engeland",
-    "field": "context_scoring.versus.Croatia[0]",
-    "text": "Engeland is sterk op standaards en in de lucht tegen Kroatië.",
+    "field": "context_scoring.versus.Ghana[0]",
+    "text": "Ghana kan gevaarlijk omschakelen tegen het aanvalsspel van Engeland.",
     "score": 4,
     "flags": [
       "land+naam"
@@ -1066,11 +1247,12 @@
   },
   {
     "team": "Engeland",
-    "field": "context_scoring.versus.Ghana[0]",
-    "text": "Ghana kan gevaarlijk omschakelen tegen het aanvalsspel van Engeland.",
+    "field": "context_scoring.versus.Panama[0]",
+    "text": "Panama/Haiti-tier pressing.",
     "score": 4,
     "flags": [
-      "land+naam"
+      "<=4 woorden",
+      "weinig_werkwoord"
     ]
   },
   {
@@ -1113,6 +1295,26 @@
     ]
   },
   {
+    "team": "Frankrijk",
+    "field": "context_scoring.versus.Norway[1]",
+    "text": "Norway Haaland direct.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Frankrijk",
+    "field": "context_scoring.versus.Senegal[0]",
+    "text": "Senegal Mane counters.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
     "team": "Ghana",
     "field": "matchup_counters_us[1]",
     "text": "Croatia ervaring.",
@@ -1136,6 +1338,16 @@
     "team": "Ghana",
     "field": "matchup_we_counter[1]",
     "text": "Chaotische duels.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Ghana",
+    "field": "context_scoring.versus.Panama[0]",
+    "text": "Panama.",
     "score": 4,
     "flags": [
       "<=4 woorden",
@@ -1212,6 +1424,16 @@
     ]
   },
   {
+    "team": "Ivoorkust",
+    "field": "context_scoring.versus.Curaçao[0]",
+    "text": "Curaçao.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
     "team": "Japan",
     "field": "matchup_counters_us[0]",
     "text": "NL Dumfries/Gakpo.",
@@ -1253,17 +1475,7 @@
   },
   {
     "team": "Jordanië",
-    "field": "matchup_counters_us[0]",
-    "text": "Argentinië/Algerije.",
-    "score": 4,
-    "flags": [
-      "<=4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Jordanië",
-    "field": "matchup_counters_us[1]",
+    "field": "matchup_counters_us[2]",
     "text": "Oostenrijk pressing.",
     "score": 4,
     "flags": [
@@ -1322,6 +1534,16 @@
     ]
   },
   {
+    "team": "Kaapverdië",
+    "field": "context_scoring.versus.Spain[1]",
+    "text": "Spanje Yamal isolaties.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
     "team": "Kroatië",
     "field": "matchup_counters_us[0]",
     "text": "England Saka/Rice.",
@@ -1355,6 +1577,36 @@
     "team": "Kroatië",
     "field": "matchup_we_counter[1]",
     "text": "Low-tempo deadlock.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Kroatië",
+    "field": "context_scoring.versus.England[1]",
+    "text": "England Saka/Rice.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Kroatië",
+    "field": "context_scoring.versus.Ghana[0]",
+    "text": "Ghana Kudus counters.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Kroatië",
+    "field": "context_scoring.versus.Panama[0]",
+    "text": "Panama.",
     "score": 4,
     "flags": [
       "<=4 woorden",
@@ -1471,27 +1723,8 @@
   },
   {
     "team": "Nederland",
-    "field": "context_scoring.versus.Japan[0]",
-    "text": "Nederland is sterk op standaards en in de lucht tegen Japan.",
-    "score": 4,
-    "flags": [
-      "land+naam"
-    ]
-  },
-  {
-    "team": "Nieuw-Zeeland",
-    "field": "matchup_counters_us[0]",
-    "text": "België.",
-    "score": 4,
-    "flags": [
-      "<=4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Nieuw-Zeeland",
-    "field": "matchup_counters_us[1]",
-    "text": "Egypte.",
+    "field": "context_scoring.versus.Sweden[0]",
+    "text": "Zweden Isak/Gyökeres.",
     "score": 4,
     "flags": [
       "<=4 woorden",
@@ -1606,9 +1839,9 @@
     ]
   },
   {
-    "team": "Panama",
-    "field": "matchup_counters_us[1]",
-    "text": "Croatia.",
+    "team": "Oostenrijk",
+    "field": "context_scoring.versus.Algeria[1]",
+    "text": "Algerije Ait-Nouri counters.",
     "score": 4,
     "flags": [
       "<=4 woorden",
@@ -1686,16 +1919,6 @@
   },
   {
     "team": "Portugal",
-    "field": "matchup_we_counter[0]",
-    "text": "Uzbekistan.",
-    "score": 4,
-    "flags": [
-      "<=4 woorden",
-      "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Portugal",
     "field": "matchup_we_counter[1]",
     "text": "High-line.",
     "score": 4,
@@ -1737,6 +1960,16 @@
     "team": "Qatar",
     "field": "matchup_we_counter[1]",
     "text": "Foul-heavy.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
+    "team": "Qatar",
+    "field": "context_scoring.versus.Switzerland[1]",
+    "text": "Zwitserland Yakin compact.",
     "score": 4,
     "flags": [
       "<=4 woorden",
@@ -1804,26 +2037,8 @@
   },
   {
     "team": "Schotland",
-    "field": "context_scoring.versus.Brazil[0]",
-    "text": "Schotland is sterk op standaards en in de lucht tegen Brazilië.",
-    "score": 4,
-    "flags": [
-      "land+naam"
-    ]
-  },
-  {
-    "team": "Schotland",
     "field": "context_scoring.versus.Haiti[1]",
     "text": "Haïti kan gevaarlijk omschakelen tegen het aanvalsspel van Schotland.",
-    "score": 4,
-    "flags": [
-      "land+naam"
-    ]
-  },
-  {
-    "team": "Schotland",
-    "field": "context_scoring.versus.Morocco[0]",
-    "text": "Schotland is sterk op standaards en in de lucht tegen Marokko.",
     "score": 4,
     "flags": [
       "land+naam"
@@ -1850,6 +2065,16 @@
     ]
   },
   {
+    "team": "Senegal",
+    "field": "context_scoring.versus.Iraq[0]",
+    "text": "Irak.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
     "team": "Spanje",
     "field": "matchup_counters_us[1]",
     "text": "Saudi disruptie.",
@@ -1867,15 +2092,6 @@
     "flags": [
       "<=4 woorden",
       "weinig_werkwoord"
-    ]
-  },
-  {
-    "team": "Spanje",
-    "field": "context_scoring.versus.Cabo Verde[0]",
-    "text": "Spanje heeft het moeilijk tegen de flanken en hoge druk van Kaapverdië.",
-    "score": 4,
-    "flags": [
-      "land+naam"
     ]
   },
   {
@@ -2028,6 +2244,16 @@
     ]
   },
   {
+    "team": "Uruguay",
+    "field": "context_scoring.versus.Spain[1]",
+    "text": "Spanje third-man egress.",
+    "score": 4,
+    "flags": [
+      "<=4 woorden",
+      "weinig_werkwoord"
+    ]
+  },
+  {
     "team": "Verenigde Staten",
     "field": "matchup_counters_us[0]",
     "text": "Alfaro Paraguay grind.",
@@ -2160,15 +2386,6 @@
     "team": "Zweden",
     "field": "context_scoring.persistent[0]",
     "text": "Graham Potter is de onverwachte Engelse bondscoach van Zweden.",
-    "score": 4,
-    "flags": [
-      "land+naam"
-    ]
-  },
-  {
-    "team": "Zweden",
-    "field": "context_scoring.versus.Japan[0]",
-    "text": "Zweden is sterk op standaards en in de lucht tegen Japan.",
     "score": 4,
     "flags": [
       "land+naam"

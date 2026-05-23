@@ -29,6 +29,9 @@ matchup_counters_us:
 matchup_we_counter:
 - Frustrated favorites.
 - Set-piece heavy.
+matchup_volatility:
+  USA:
+    upset: "Paraguay is traditioneel lastig in CONCACAF-duels; compact Alfaro-blok plus standaards kan co-host USA frustreren in de opener."
 dead_ball_swings_matches: Gómez/Almirón frees; compact → corners.
 experience_cohesion_notes:
 - Alfaro; 55 provisional mei.

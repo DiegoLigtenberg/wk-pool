@@ -13,8 +13,7 @@ analyzed:
 - group_context
 - psychology_pressure
 - travel_environment
-interpretive_ceiling_vs_floor: Thomas Christiansen; Groep L vs Ghana 17 juni, England,
-  Croatia. CONCACAF-grinder, MLS-kern.
+interpretive_ceiling_vs_floor: Thomas Christiansen; Groep L vs Ghana 17 juni, England, Croatia. CONCACAF-grinder, MLS-kern.
 phase_preferences:
 - Sterk rommelige duels.
 - Zwakwer vs Kane/Modrić.
@@ -24,11 +23,14 @@ psychology_vectors:
 - Ghana opener.
 - Set-piece focus onder stress.
 matchup_counters_us:
-- England Tuchel.
-- Croatia.
+- Engeland heeft met coach Tuchel een duidelijk tactisch plan.
+- Kroatië heeft met Modrić en ervaring op grote toernooien een sterk middenveld.
 matchup_we_counter:
 - Ghana grillig.
 - Transition-heavy.
+matchup_volatility:
+  England:
+    upset: "Panama speelt compact met set-piece dreiging; Engeland kan in groepswedstrijd 3 te laat gas geven na een gecontroleerde start."
 dead_ball_swings_matches: Corners/fouls route.
 experience_cohesion_notes:
 - Christiansen; squad 26 mei.
@@ -79,12 +81,10 @@ group_stage: &id001
   - 'Groepswedstrijd 1 (17 Jun): uit vs Ghana @ Toronto Stadium'
   - 'Groepswedstrijd 2 (23 Jun): thuis vs Kroatië @ Toronto Stadium'
   - 'Groepswedstrijd 3 (27 Jun): thuis vs Engeland @ New York/New Jersey Stadium'
-  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4, 6 dag(en); kortste window
-    >3 dagen. Tussen wedstrijd Kroatië en Engeland: Toronto Stadium → New York/New
-    Jersey Stadium (4 dag(en) ertussen).'
-  venue_dispersion_notes: 'Groepsfase op 2 stadions: Toronto Stadium (Toronto, gematigd
-    zomer); New York/New Jersey Stadium (New York, vochtig zomer). Cross-border poule
-    (Canada, USA) ,  extra vlucht/tijdzone tussen groepswedstrijden.'
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 4, 6 dag(en); kortste window >3 dagen. Tussen wedstrijd Kroatië en
+    Engeland: Toronto Stadium → New York/New Jersey Stadium (4 dag(en) ertussen).'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Toronto Stadium (Toronto, gematigd zomer); New York/New Jersey Stadium
+    (New York, vochtig zomer). Cross-border poule (Canada, USA) ,  extra vlucht/tijdzone tussen groepswedstrijden.'
 tournament_context:
   schema_version: 1
   phases:
@@ -120,23 +120,21 @@ context_scoring:
     Croatia:
     - id: style_matchup
       delta: 1
-      reason: Lucht/standaardprofiel t.o.v. Kroatië.
+      reason: Panama is sterk op standaards en in de lucht tegen Kroatië.
     - id: matchup_risk
       delta: -1
-      reason: Croatia.
+      reason: Luka Modrić (40 jaar) is nog steeds geselecteerd; zeldzaam op dit niveau.
     England:
     - id: style_matchup
       delta: 1
-      reason: Snelle omschakeling past bij het lage, compacte blok van Engeland.
+      reason: Engeland speelt compact; Panama kan snel omschakelen om ruimte te vinden.
     - id: matchup_risk
       delta: -1
-      reason: Engeland heeft met coach Tuchel een duidelijk tactisch plan; lastig
-        voor Panama om dat te ontwrichten.
+      reason: Engeland heeft met coach Tuchel een duidelijk tactisch plan.
     Ghana:
     - id: style_matchup
       delta: 1
-      reason: Snelle omschakeling past bij het lage, compacte blok van Ghana.
+      reason: Panama kan met counters het compacte blok van Ghana oprekken.
     - id: matchup_edge
       delta: 1
-      reason: Ghana leunt in dit duel op grillig; dat vraagt een gericht plan van
-        Panama.
+      reason: Ghana leunt in dit duel op grillig; dat vraagt een gericht plan van Panama.

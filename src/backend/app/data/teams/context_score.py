@@ -25,6 +25,22 @@ from app.display_text import humanize_factor_reason
 from app.teams import display_team_name, fifa_team_key
 
 
+def _volatility_factors(bundle, opponent_fifa: str) -> list[ContextFactor]:
+    """Matchup-specifieke upset/choke (runtime uit YAML, niet land-breed)."""
+    vol = bundle.matchup_volatility or {}
+    entry = vol.get(fifa_team_key(opponent_fifa))
+    if not entry:
+        return []
+    out: list[ContextFactor] = []
+    upset = entry.get("upset")
+    if upset:
+        out.append(ContextFactor(id="upset_path", delta=2, reason=upset))
+    choke = entry.get("choke")
+    if choke:
+        out.append(ContextFactor(id="choke_risk", delta=-2, reason=choke))
+    return out
+
+
 @dataclass(frozen=True, slots=True)
 class SideContextResult:
     factors: tuple[ContextFactor, ...]
@@ -44,6 +60,11 @@ def _raw_side_factors(team_fifa: str, opponent_fifa: str) -> list[ContextFactor]
     if scoring is not None:
         factors.extend(scoring.persistent)
         factors.extend(scoring.versus.get(fifa_team_key(opponent_fifa), ()))
+
+    existing_ids = {f.id for f in factors}
+    for factor in _volatility_factors(bundle, opponent_fifa):
+        if factor.id not in existing_ids:
+            factors.append(factor)
 
     if team_fifa in HOST_NATIONS:
         factors.append(

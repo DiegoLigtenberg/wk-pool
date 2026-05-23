@@ -11,6 +11,7 @@ import yaml
 
 from app.data.teams.context_scoring_builder import build_context_scoring
 from app.data.teams.context_scoring_loader import parse_context_scoring
+from app.data.teams.matchup_volatility_loader import parse_matchup_volatility
 from app.data.teams.team_bundle import GroupStage, TeamBundle
 from app.data.teams.tournament_context_loader import group_stage_from_context, parse_tournament_context
 from app.data.teams.team_registry import CONFEDERATIONS, HOST_NATIONS, TEAM_SLUGS
@@ -102,6 +103,7 @@ def _parse_bundle(path: Path, data: dict[str, Any]) -> TeamBundle:
         squad_load_notes=nl(data.get("squad_load_notes")),
         discipline_risk_notes=nl(data.get("discipline_risk_notes")),
         context_scoring=context_scoring,
+        matchup_volatility=parse_matchup_volatility(data.get("matchup_volatility")),
     )
     return bundle
 

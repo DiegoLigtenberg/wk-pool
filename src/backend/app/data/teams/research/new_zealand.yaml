@@ -13,8 +13,8 @@ analyzed:
 - group_context
 - psychology_pressure
 - travel_environment
-interpretive_ceiling_vs_floor: Darren Bazeley; Chris Wood (Forest, kapitein), Bindon
-  (Forest), Cacace. Groep G vs Iran 15 juni.
+interpretive_ceiling_vs_floor: Darren Bazeley; Chris Wood (Forest, kapitein), Bindon (Forest), Cacace. Groep G vs Iran 15
+  juni.
 phase_preferences:
 - Sterk Wood target + compact OFC-discipline.
 - Zwakwer De Bruyne/Doku.
@@ -24,8 +24,8 @@ psychology_vectors:
 - Iran/België sequentie.
 - Bankdiepte fragiel.
 matchup_counters_us:
-- België.
-- Egypte.
+- België heeft met Doku en Kevin De Bruyne veel aanvalskracht op de flanken.
+- Egypte leunt op Salah als belangrijkste aanvalsbedreiging.
 matchup_we_counter:
 - Iran Ghalenoei.
 - Rommelige fouls.
@@ -33,10 +33,8 @@ dead_ball_swings_matches: Wood hoogtes = primaire route.
 experience_cohesion_notes:
 - Wood-lead; Auckland FC cluster.
 intercontinental_travel_profile: Oceanië → VS ,  zwaarste reis.
-distinctive_spark_notes: Wood enige PL-anker; OFC → LA route = max intercontinentale
-  belasting.
-crowd_home_bias_notes: Wood (PL) trekt Engelse supporters in VS; OFC-deelnemer zonder
-  eigen diaspora-massa.
+distinctive_spark_notes: Wood enige PL-anker; OFC → LA route = max intercontinentale belasting.
+crowd_home_bias_notes: Wood (PL) trekt Engelse supporters in VS; OFC-deelnemer zonder eigen diaspora-massa.
 power_score: 62
 tier: Verrassingsploeg
 macro_style: fysiek, simpel en collectief
@@ -83,15 +81,12 @@ group_stage: &id001
   - 'Groepswedstrijd 1 (16 Jun): uit vs Iran @ Los Angeles Stadium'
   - 'Groepswedstrijd 2 (22 Jun): thuis vs Egypte @ BC Place Vancouver'
   - 'Groepswedstrijd 3 (27 Jun): thuis vs België @ BC Place Vancouver'
-  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 6 dag(en); kortste window
-    >3 dagen. Tussen wedstrijd Iran en Egypte: Los Angeles Stadium → BC Place Vancouver
-    (6 dag(en) ertussen). 3 vroege/late kickoff-slots (UTC-nacht) in groep ,  recovery
+  schedule_rest_notes: 'Rust tussen groepswedstrijden: 5, 6 dag(en); kortste window >3 dagen. Tussen wedstrijd Iran en Egypte:
+    Los Angeles Stadium → BC Place Vancouver (6 dag(en) ertussen). 3 vroege/late kickoff-slots (UTC-nacht) in groep ,  recovery
     relevant.'
-  venue_dispersion_notes: 'Groepsfase op 2 stadions: Los Angeles Stadium (Los Angeles,
-    warm droog); BC Place Vancouver (Vancouver, koeler kust). Cross-border poule (USA,
-    Canada) ,  extra vlucht/tijdzone tussen groepswedstrijden. Impact: Vancouver is
-    koeler ,  kan hitte-gewende tegenstanders neutraliseren; 3 late kickoffs in groep
-    ,  rustritme en recovery extra relevant.'
+  venue_dispersion_notes: 'Groepsfase op 2 stadions: Los Angeles Stadium (Los Angeles, warm droog); BC Place Vancouver (Vancouver,
+    koeler kust). Cross-border poule (USA, Canada) ,  extra vlucht/tijdzone tussen groepswedstrijden. Impact: Vancouver is
+    koeler ,  kan hitte-gewende tegenstanders neutraliseren; 3 late kickoffs in groep ,  rustritme en recovery extra relevant.'
 tournament_context:
   schema_version: 1
   phases:
@@ -125,26 +120,23 @@ context_scoring:
   persistent:
   - id: distinctive_spark
     delta: -2
-    reason: Wood enige speler uit de Premier League; OFC → LA route = max intercontinentale
-      belasting.
+    reason: Wood enige speler uit de Premier League; OFC → LA route = max intercontinentale belasting.
   - id: crowd_bias
     delta: 1
-    reason: Wood (club PL) trekt Engelse supporters in VS; OFC-deelnemer zonder eigen
-      gemeenschap in het buitenland-massa.
+    reason: Wood (club PL) trekt Engelse supporters in VS; OFC-deelnemer zonder eigen gemeenschap in het buitenland-massa.
   versus:
     Belgium:
     - id: style_matchup
       delta: 1
-      reason: Lucht/standaardprofiel t.o.v. België.
+      reason: Nieuw-Zeeland is sterk op standaards en in de lucht tegen België.
     - id: matchup_risk
       delta: -1
-      reason: België.
+      reason: België heeft met Doku en Kevin De Bruyne veel aanvalskracht op de flanken; lastig voor Nieuw-Zeeland.
     Egypt:
     - id: matchup_risk
       delta: -1
-      reason: Egypte.
+      reason: Egypte leunt op Salah als belangrijkste aanvalsbedreiging.
     IR Iran:
     - id: matchup_edge
       delta: 1
-      reason: Iran leunt in dit duel op Ghalenoei; dat vraagt een gericht plan van
-        Nieuw-Zeeland.
+      reason: Iran leunt in dit duel op Ghalenoei; dat vraagt een gericht plan van Nieuw-Zeeland.

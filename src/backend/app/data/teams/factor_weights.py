@@ -1,6 +1,6 @@
 """Vaste herweging research-factoren → punten op wedstrijdscore (geen runtime-LLM).
 
-Optie B: matchup-/research-laag telt **dubbel** t.o.v. eerdere ±1; host blijft apart (max +3).
+Research-factoren: YAML ±1 → ±3 effectief. Upset/choke (matchup-specifiek) wegen zwaarder.
 """
 
 from __future__ import annotations
@@ -10,14 +10,16 @@ from enum import Enum
 
 from app.data.teams.context_scoring_schema import ContextFactor
 
-# --- Schalen (optie B) ---
+# --- Schalen ---
 
-RESEARCH_POINT_SCALE = 2  # tactiek/matchup YAML ±1 → ±2 effectief
+RESEARCH_POINT_SCALE = 3  # tactiek/matchup YAML ±1 → ±3 effectief
+VOLATILITY_POINT_SCALE = 6  # upset_path / choke_risk YAML ±2 → ±12 effectief
 HOST_BUCKET_MAX = 3
-PERSISTENT_BUCKET_MAX = 6
-DUEL_BUCKET_MAX = 6
-RESEARCH_SIDE_MAX = 8  # persistent + duel per kant (excl. host/away_fixture)
-MATCHUP_DIFF_SOFT_CAP = 12  # |home_research| + |away_research| op het duel
+PERSISTENT_BUCKET_MAX = 9
+DUEL_BUCKET_MAX = 12
+VOLATILITY_BUCKET_MAX = 12
+RESEARCH_SIDE_MAX = 24  # persistent + duel + volatility per kant (excl. host/away_fixture)
+MATCHUP_DIFF_SOFT_CAP = 24  # |home_research| + |away_research| op het duel
 
 
 class FactorBucket(str, Enum):
@@ -49,6 +51,8 @@ DUEL_FACTOR_IDS = frozenset(
         "opponent_profile_strong",
         "matchup_edge",
         "matchup_risk",
+        "upset_path",
+        "choke_risk",
         "psychology",
         "discipline",
         "home_fixture",
@@ -58,6 +62,7 @@ DUEL_FACTOR_IDS = frozenset(
     }
 )
 NARRATIVE_ZERO_IDS = frozenset({"fixture_story", "opener_context", "fixture_narrative"})
+VOLATILITY_FACTOR_IDS = frozenset({"upset_path", "choke_risk"})
 
 _RESEARCH_SCALED_IDS = (
     PERSISTENT_FACTOR_IDS
@@ -101,12 +106,13 @@ class SideWeightedContext:
     travel_total: int
     persistent_total: int
     duel_total: int
+    volatility_total: int
     research_total: int
     total_delta: int
 
 
 def effective_delta_for_factor(factor: ContextFactor) -> int:
-    """Ruwe YAML/builder-delta → gewogen punten (research ×2, host ongewijzigd)."""
+    """Ruwe YAML/builder-delta → gewogen punten (research ×3; upset/choke ×6 op raw)."""
     raw = int(factor.delta)
     if raw == 0:
         return 0
@@ -119,11 +125,19 @@ def effective_delta_for_factor(factor: ContextFactor) -> int:
         return 2 if raw > 0 else 0
 
     if factor.id == "squad_load":
-        return -4 if raw < 0 else 0
+        return -RESEARCH_POINT_SCALE * magnitude if raw < 0 else 0
 
     if factor.id == "distinctive_spark":
         eff = -scale * magnitude
-        return max(-4, min(-2, eff))
+        return max(-2 * scale, min(-scale, eff))
+
+    if factor.id == "upset_path":
+        mag = min(abs(raw), 2)
+        return mag * VOLATILITY_POINT_SCALE
+
+    if factor.id == "choke_risk":
+        mag = min(abs(raw), 2)
+        return -mag * VOLATILITY_POINT_SCALE
 
     return sign * scale * magnitude
 
@@ -142,6 +156,7 @@ def aggregate_weighted_side(
     travel_total = 0
     persistent_parts: list[int] = []
     duel_parts: list[int] = []
+    volatility_parts: list[int] = []
 
     for factor in factors:
         eff = effective_delta_for_factor(factor)
@@ -159,6 +174,9 @@ def aggregate_weighted_side(
             host_parts.append(eff)
         elif factor.id in TRAVEL_FACTOR_IDS:
             travel_total += eff
+        elif factor.id in VOLATILITY_FACTOR_IDS:
+            if eff != 0:
+                volatility_parts.append(eff)
         elif factor.id in persistent_ids and factor.id != "cohost_crowd":
             if eff != 0:
                 persistent_parts.append(eff)
@@ -172,7 +190,14 @@ def aggregate_weighted_side(
     host_total = _clamp(sum(host_parts), 0, HOST_BUCKET_MAX)
     persistent_total = _clamp(sum(persistent_parts), -PERSISTENT_BUCKET_MAX, PERSISTENT_BUCKET_MAX)
     duel_total = _clamp(sum(duel_parts), -DUEL_BUCKET_MAX, DUEL_BUCKET_MAX)
-    research_total = _clamp(persistent_total + duel_total, -RESEARCH_SIDE_MAX, RESEARCH_SIDE_MAX)
+    volatility_total = _clamp(
+        sum(volatility_parts), -VOLATILITY_BUCKET_MAX, VOLATILITY_BUCKET_MAX
+    )
+    research_total = _clamp(
+        persistent_total + duel_total + volatility_total,
+        -RESEARCH_SIDE_MAX,
+        RESEARCH_SIDE_MAX,
+    )
     total_delta = research_total + host_total + travel_total
 
     return SideWeightedContext(
@@ -181,6 +206,7 @@ def aggregate_weighted_side(
         travel_total=travel_total,
         persistent_total=persistent_total,
         duel_total=duel_total,
+        volatility_total=volatility_total,
         research_total=research_total,
         total_delta=total_delta,
     )
@@ -219,7 +245,12 @@ def _allocate_proportional(total: int, items: list[tuple[str, int]]) -> dict[str
 
 
 def _allocate_bucket_display(total: int, items: list[tuple[str, int]]) -> dict[str, int]:
-    """Als bucket-netto 0 is maar factoren niet: toon ruwe effectieve deltas (heffen op)."""
+    """Toon per-factor deltas; vermijd teken-flip bij gemengde tekens in de bucket."""
+    if not items:
+        return {}
+    item_sum = sum(w for _, w in items)
+    if item_sum == total:
+        return {k: w for k, w in items}
     if total == 0 and any(w != 0 for _, w in items):
         return {k: w for k, w in items}
     return _allocate_proportional(total, items)
@@ -245,7 +276,14 @@ def display_deltas_for_aggregate(agg: SideWeightedContext) -> dict[str, int]:
     duel_items = [
         (wf.factor.id, wf.effective_delta)
         for wf in agg.factors
-        if wf.bucket == FactorBucket.DUEL and wf.effective_delta != 0
+        if wf.bucket == FactorBucket.DUEL
+        and wf.factor.id not in VOLATILITY_FACTOR_IDS
+        and wf.effective_delta != 0
+    ]
+    volatility_items = [
+        (wf.factor.id, wf.effective_delta)
+        for wf in agg.factors
+        if wf.factor.id in VOLATILITY_FACTOR_IDS and wf.effective_delta != 0
     ]
 
     out: dict[str, int] = {}
@@ -253,6 +291,7 @@ def display_deltas_for_aggregate(agg: SideWeightedContext) -> dict[str, int]:
     out.update(_allocate_bucket_display(agg.travel_total, travel_items))
     out.update(_allocate_bucket_display(agg.persistent_total, persistent_items))
     out.update(_allocate_bucket_display(agg.duel_total, duel_items))
+    out.update(_allocate_bucket_display(agg.volatility_total, volatility_items))
     for wf in agg.factors:
         out.setdefault(wf.factor.id, 0)
     return out

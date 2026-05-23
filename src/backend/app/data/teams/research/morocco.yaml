@@ -29,6 +29,9 @@ matchup_counters_us:
 matchup_we_counter:
 - Haiti.
 - Possession zonder dekking.
+matchup_volatility:
+  Haiti:
+    choke: "Ouahbi moest kort voor het WK het 2022-systeem herstellen; te nonchalante start tegen Haïti kan punten kosten."
 dead_ball_swings_matches: Ziyech/Diaz frees; defensieve corners vs Brazil.
 experience_cohesion_notes:
 - Veel Europa; Ouahbi vormend.
@@ -130,7 +133,7 @@ context_scoring:
   persistent:
   - id: crowd_bias
     delta: 1
-    reason: Grote Argentijnse gemeenschap in de VS geeft Marokko in veel stadions
+    reason: Grote Marokkaanse gemeenschap in de VS geeft Marokko in veel stadions
       extra steun.
   - id: distinctive_spark
     delta: -1
@@ -148,7 +151,7 @@ context_scoring:
     Haiti:
     - id: matchup_edge
       delta: 1
-      reason: Haiti.
+      reason: Marokko heeft tactisch iets meer te bieden dan Haïti in dit duel.
     Scotland:
     - id: style_matchup
       delta: 1

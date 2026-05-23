@@ -18,7 +18,32 @@ from app.teams import display_team_name, fifa_team_key
 MAX_PERSISTENT = 2
 MAX_PER_OPPONENT = 2
 MAX_PERSISTENT_DELTA = 3
-MAX_OPPONENT_DELTA = 2
+MAX_OPPONENT_DELTA = 4
+
+
+def _volatility_candidates(bundle: TeamBundle, opponent_fifa: str) -> list[ContextFactor]:
+    vol = bundle.matchup_volatility or {}
+    entry = vol.get(fifa_team_key(opponent_fifa))
+    if not entry:
+        return []
+    out: list[ContextFactor] = []
+    if upset := entry.get("upset"):
+        out.append(
+            ContextFactor(
+                id="upset_path",
+                delta=2,
+                reason=humanize_research_line(clip_research_excerpt(upset), team_nl=bundle.team_name_nl),
+            )
+        )
+    if choke := entry.get("choke"):
+        out.append(
+            ContextFactor(
+                id="choke_risk",
+                delta=-2,
+                reason=humanize_research_line(clip_research_excerpt(choke), team_nl=bundle.team_name_nl),
+            )
+        )
+    return out
 
 
 def _mentions_opponent(line: str, opponent_nl: str, opponent_fifa: str) -> bool:
@@ -244,11 +269,13 @@ def build_versus_factors(
             )
         )
 
+    candidates.extend(_volatility_candidates(bundle, opponent_fifa))
+
     return _clip_factors(
         _collapse_style_matchups(candidates),
         MAX_PER_OPPONENT,
         MAX_OPPONENT_DELTA,
-        priority_ids=frozenset({"opener_context"}),
+        priority_ids=frozenset({"opener_context", "upset_path", "choke_risk"}),
         balance_signs=True,
     )
 
