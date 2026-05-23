@@ -309,10 +309,6 @@
   --ai-marker-fg: var(--accent-text);
 }
 
-.ai-marker.ai-marker--draw-tip {
-  min-width: var(--ai-marker-min-width);
-}
-
 .ai-marker-slot {
   box-sizing: border-box;
   display: block;
@@ -939,9 +935,9 @@
   }
 
   .scoreboard-line {
-    --ai-marker-font-size: 0.58rem;
-    --ai-marker-pad-y: 0.1rem;
-    --ai-marker-pad-x: 0.38rem;
+    --ai-marker-font-size: 0.62rem;
+    --ai-marker-pad-y: 0.14rem;
+    --ai-marker-pad-x: 0.42rem;
     --ai-marker-min-height: 1.05rem;
     --ai-marker-min-width: 1.85rem;
     --ai-marker-slot-height: 1.05rem;
@@ -951,10 +947,17 @@
     gap: 0.45rem;
   }
 
-  .result-stack--draw-tip .ai-marker-button {
+  .scoreboard-line .ai-marker-button {
     min-width: 2.75rem;
     min-height: 2.75rem;
     padding: 0.35rem 0.55rem;
+    font-size: 0.62rem;
+    box-sizing: border-box;
+  }
+
+  .scoreboard-line .ai-marker-slot {
+    width: 2.75rem;
+    height: 2.75rem;
   }
 
   .result-stack--draw-tip .result-pill {
