@@ -95,7 +95,23 @@ function isCrystalBall(value: unknown): boolean {
   if (!Array.isArray(value.bonusQuestions) || !value.bonusQuestions.every(isCrystalBallBonusQuestion)) {
     return false;
   }
-  return isStringArray(value.sources) && typeof value.contextAsOf === "string";
+  return (
+    isStringArray(value.sources) &&
+    typeof value.contextAsOf === "string" &&
+    isCrystalBallLiveStats(value.liveStats)
+  );
+}
+
+function isCrystalBallLiveStats(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    value.source === "api-football" &&
+    (value.updatedAt === null || typeof value.updatedAt === "string") &&
+    isNumber(value.completedMatches) &&
+    isNumber(value.totalMatches) &&
+    isNumber(value.yellowCards) &&
+    isNumber(value.directRedCards)
+  );
 }
 
 function isCrystalBallGroupWinner(value: unknown): boolean {

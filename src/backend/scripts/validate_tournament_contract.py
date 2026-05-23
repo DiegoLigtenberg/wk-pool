@@ -290,6 +290,17 @@ def is_crystal_ball(value: object) -> tuple[bool, str]:
         return False, "sources"
     if not isinstance(value.get("contextAsOf"), str):
         return False, "contextAsOf"
+    live_stats = value.get("liveStats")
+    if not isinstance(live_stats, dict):
+        return False, "liveStats"
+    if live_stats.get("source") != "api-football":
+        return False, "liveStats.source"
+    updated_at = live_stats.get("updatedAt")
+    if updated_at is not None and not isinstance(updated_at, str):
+        return False, "liveStats.updatedAt"
+    for key in ("completedMatches", "totalMatches", "yellowCards", "directRedCards"):
+        if not isinstance(live_stats.get(key), int):
+            return False, f"liveStats.{key}"
     return True, ""
 
 

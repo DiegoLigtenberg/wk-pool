@@ -246,6 +246,14 @@ export function tournamentFixture(overrides: Partial<TournamentView> = {}): Tour
       ],
       sources: ["test"],
       contextAsOf: "2026-05-19",
+      liveStats: {
+        source: "api-football",
+        updatedAt: null,
+        completedMatches: 1,
+        totalMatches: 104,
+        yellowCards: 3,
+        directRedCards: 0,
+      },
     },
     ...overrides,
   };

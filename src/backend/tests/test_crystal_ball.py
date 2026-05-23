@@ -33,3 +33,14 @@ def test_projected_standings_apply_all_group_picks() -> None:
     # Crystal Ball simulates all six group matches from AI picks.
     assert all(int(row["played"]) == 3 for row in crystal_a["standings"])
     assert crystal_a["winner"] == crystal_a["standings"][0]["team"]
+
+
+def test_crystal_ball_includes_live_api_stats() -> None:
+    tournament = build_tournament_view()
+    live = tournament["crystalBall"]["liveStats"]
+
+    assert live["source"] == "api-football"
+    assert live["totalMatches"] == 104
+    assert live["completedMatches"] == tournament["summary"]["completed"]
+    assert live["yellowCards"] == tournament["cardTotals"]["yellowCards"]
+    assert live["directRedCards"] == tournament["cardTotals"]["directRedCards"]

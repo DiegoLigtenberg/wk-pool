@@ -59,7 +59,12 @@ def build_tournament_view(path: Path = CSV_PATH) -> dict[str, object]:
         "teamInsights": _team_insights(fixtures),
         "groups": _group_views(group_stage_matches),
         "knockoutMatches": [match for match in matches if match["stage"] == "knockout"],
-        "crystalBall": build_crystal_ball_view(group_stage_matches),
+        "crystalBall": build_crystal_ball_view(
+            group_stage_matches,
+            results_store=results_store,
+            completed_count=len(completed_matches),
+            total_count=len(matches),
+        ),
         "cardTotals": results_store.get("tournamentTotals", {"yellowCards": 0, "directRedCards": 0}),
         "resultsUpdatedAt": results_store.get("updatedAt"),
     }

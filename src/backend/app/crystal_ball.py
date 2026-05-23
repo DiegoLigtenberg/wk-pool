@@ -14,7 +14,13 @@ def _score_from_pick(pick: str) -> tuple[int, int]:
     return (1, 1)
 
 
-def build_crystal_ball_view(group_stage_matches: list[dict[str, object]]) -> dict[str, object]:
+def build_crystal_ball_view(
+    group_stage_matches: list[dict[str, object]],
+    *,
+    results_store: dict[str, object] | None = None,
+    completed_count: int = 0,
+    total_count: int = 0,
+) -> dict[str, object]:
     research = load_crystal_ball_research()
     projected_groups = _projected_group_views(group_stage_matches)
     group_winners = [
@@ -22,6 +28,9 @@ def build_crystal_ball_view(group_stage_matches: list[dict[str, object]]) -> dic
         for group in projected_groups
         if group.get("winner")
     ]
+    totals = results_store.get("tournamentTotals", {}) if results_store else {}
+    if not isinstance(totals, dict):
+        totals = {}
 
     return {
         "groupWinners": group_winners,
@@ -29,6 +38,14 @@ def build_crystal_ball_view(group_stage_matches: list[dict[str, object]]) -> dic
         "bonusQuestions": research["bonusQuestions"],
         "sources": research["sources"],
         "contextAsOf": research["contextAsOf"],
+        "liveStats": {
+            "source": "api-football",
+            "updatedAt": results_store.get("updatedAt") if results_store else None,
+            "completedMatches": completed_count,
+            "totalMatches": total_count,
+            "yellowCards": int(totals.get("yellowCards", 0)),
+            "directRedCards": int(totals.get("directRedCards", 0)),
+        },
     }
 
 

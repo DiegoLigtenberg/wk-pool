@@ -155,12 +155,22 @@ export type CrystalBallBonusQuestion = {
   rationale?: string;
 };
 
+export type CrystalBallLiveStats = {
+  source: "api-football";
+  updatedAt: string | null;
+  completedMatches: number;
+  totalMatches: number;
+  yellowCards: number;
+  directRedCards: number;
+};
+
 export type CrystalBallView = {
   groupWinners: CrystalBallGroupWinner[];
   projectedGroups: ProjectedGroup[];
   bonusQuestions: CrystalBallBonusQuestion[];
   sources: string[];
   contextAsOf: string;
+  liveStats: CrystalBallLiveStats;
 };
 
 export type TournamentView = {

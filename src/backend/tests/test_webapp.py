@@ -313,7 +313,22 @@ def is_crystal_ball(value: object) -> bool:
     if not isinstance(sources, list) or not all(isinstance(source, str) for source in sources):
         return False
 
-    return isinstance(value.get("contextAsOf"), str)
+    if not isinstance(value.get("contextAsOf"), str):
+        return False
+
+    live_stats = value.get("liveStats")
+    if not isinstance(live_stats, dict):
+        return False
+    if live_stats.get("source") != "api-football":
+        return False
+    updated_at = live_stats.get("updatedAt")
+    if updated_at is not None and not isinstance(updated_at, str):
+        return False
+    for key in ("completedMatches", "totalMatches", "yellowCards", "directRedCards"):
+        if not is_int(live_stats.get(key)):
+            return False
+
+    return True
 
 
 def get(path: str, headers: dict[str, str] | None = None) -> tuple[HTTPResponse, bytes]:
