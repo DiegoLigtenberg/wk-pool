@@ -40,6 +40,7 @@ def build_tournament_view(path: Path = CSV_PATH) -> dict[str, object]:
     completed_by_kickoff = sorted(completed_matches, key=_match_kickoff)
     upcoming_by_kickoff = sorted(upcoming_matches, key=_match_kickoff)
     prediction_summary = _prediction_summary(group_stage_matches)
+    groups = _group_views(group_stage_matches)
     from app.crystal_ball import build_crystal_ball_view
 
     return {
@@ -57,13 +58,16 @@ def build_tournament_view(path: Path = CSV_PATH) -> dict[str, object]:
         "recentMatches": completed_by_kickoff[-6:],
         "upcomingMatches": upcoming_by_kickoff[:8],
         "teamInsights": _team_insights(fixtures),
-        "groups": _group_views(group_stage_matches),
+        "groups": groups,
         "knockoutMatches": [match for match in matches if match["stage"] == "knockout"],
         "crystalBall": build_crystal_ball_view(
             group_stage_matches,
             results_store=results_store,
             completed_count=len(completed_matches),
             total_count=len(matches),
+            group_winner_status={
+                str(group["name"]): str(group["winnerPredictionStatus"]) for group in groups
+            },
         ),
         "cardTotals": results_store.get("tournamentTotals", {"yellowCards": 0, "directRedCards": 0}),
         "resultsUpdatedAt": results_store.get("updatedAt"),
@@ -165,10 +169,30 @@ def _group_views(matches: list[dict[str, object]]) -> list[dict[str, object]]:
                 "name": group_name,
                 "standings": _standings(group_matches),
                 "matches": group_matches,
+                **_group_winner_prediction_fields(group_matches),
             }
         )
 
     return groups
+
+
+def _group_winner_prediction_fields(
+    group_matches: list[dict[str, object]],
+) -> dict[str, str]:
+    projected = _standings(group_matches, from_picks=True)
+    predicted = str(projected[0]["team"]) if projected else ""
+    completed = sum(1 for match in group_matches if match["status"] == "completed")
+
+    if completed == 0 or not predicted:
+        status = "pending"
+    else:
+        leader = str(_standings(group_matches)[0]["team"])
+        status = "correct" if leader == predicted else "wrong"
+
+    return {
+        "predictedWinner": predicted,
+        "winnerPredictionStatus": status,
+    }
 
 
 def _score_from_pick(pick: str) -> tuple[int, int]:

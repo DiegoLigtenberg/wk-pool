@@ -213,6 +213,12 @@ def is_group(value: object) -> tuple[bool, str]:
         ok, reason = is_match(match)
         if not ok:
             return False, f"match:{reason}"
+    predicted = value.get("predictedWinner")
+    if not isinstance(predicted, str):
+        return False, "predictedWinner"
+    status = value.get("winnerPredictionStatus")
+    if status not in {"correct", "wrong", "pending"}:
+        return False, "winnerPredictionStatus"
     return True, ""
 
 
@@ -271,6 +277,8 @@ def is_crystal_ball(value: object) -> tuple[bool, str]:
     for entry in group_winners:
         if not is_record(entry) or not isinstance(entry.get("group"), str) or not isinstance(entry.get("team"), str):
             return False, "groupWinners entry"
+        if entry.get("status") not in {"correct", "wrong", "pending"}:
+            return False, "groupWinners status"
     projected = value.get("projectedGroups")
     if not isinstance(projected, list):
         return False, "projectedGroups"

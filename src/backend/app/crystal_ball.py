@@ -20,11 +20,17 @@ def build_crystal_ball_view(
     results_store: dict[str, object] | None = None,
     completed_count: int = 0,
     total_count: int = 0,
+    group_winner_status: dict[str, str] | None = None,
 ) -> dict[str, object]:
     research = load_crystal_ball_research()
     projected_groups = _projected_group_views(group_stage_matches)
+    winner_status = group_winner_status or {}
     group_winners = [
-        {"group": group["name"], "team": group["winner"]}
+        {
+            "group": group["name"],
+            "team": group["winner"],
+            "status": winner_status.get(str(group["name"]), "pending"),
+        }
         for group in projected_groups
         if group.get("winner")
     ]

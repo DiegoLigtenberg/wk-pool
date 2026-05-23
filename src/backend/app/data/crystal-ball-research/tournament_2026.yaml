@@ -10,7 +10,7 @@ sources:
 bonus_questions:
   yellow_cards_total:
     value: "368"
-    helper: "Pool-telling: indirect rood (2e geel) telt als 2 gele kaarten. 104 wedstrijden, hoger tempo dan 64-team WK'en."
+    helper: "Na 2e geel tellen 2 kaarten mee. 104 wedstrijden op dit WK."
     rationale: |
       Historisch (FIFA-gele kaarten, 64 wedstrijden): 2014 ~187, 2018 ~219, 2022 ~228
       → ~2,9–3,6 gele per wedstrijd. 2026 heeft 104 wedstrijden (+62,5% volume).
@@ -20,7 +20,7 @@ bonus_questions:
       kale FIFA-telling). Schatting bandbreedte 355–385; punt 368.
   direct_red_cards:
     value: "7"
-    helper: "Alleen straight reds, geen tweede-geel-uitsluitingen."
+    helper: "Alleen kaart direct uit het veld, niet na 2e geel."
     rationale: |
       2018 en 2022: elk 4 rode kaarten totaal; daarvan typisch ~1 directe rood (2022 Hennessey)
       en de rest tweede geel. 2014 had 10 rood totaal (oudere arbitragestijl).
@@ -29,7 +29,7 @@ bonus_questions:
       laag enkelcijferig. Bandbreedte 5–9; punt 7.
   champion:
     value: "Frankrijk"
-    helper: "Hoogste power score (92) + diepe selectie; titelverdediger Argentinië (91) dicht erachter."
+    helper: "Hoogste basisscore (92); Argentinië was onze tweede keuze (91)."
     rationale: |
       Model-ranking: Frankrijk 92 (Topfavoriet), Argentinië 91 (titels verdedigen, Messi-slot),
       Spanje/Engeland/Brazilië iets lager. Frankrijk: Mbappé/Olise-transities, knock-out-ervaring
@@ -37,7 +37,7 @@ bonus_questions:
       Co-hosts VS/Mexico/Canada versterken thuisvoordeel elders, niet voor Frankrijk.
   top_scorer:
     value: "Kylian Mbappé"
-    helper: "Hele toernooi (groep + KO); Frankrijk verwacht diep te lopen met centrale aanvaller."
+    helper: "Doelpunten tellen in alle fases; Mbappé neemt penalty's bij sterk Frankrijk."
     rationale: |
       Poolvraag = topscorer toernooi (niet alleen knock-out). 2022: Mbappé 8 goals (gedeeld).
       2018: Kane 6. Met 104 wedstrijden kan de winnaar ~7–9 goals halen.

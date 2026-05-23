@@ -1,6 +1,6 @@
 import { renderScore } from "../../lib/format";
 import { groupMatches } from "../../lib/tournament";
-import type { Group, Match, Standing, TournamentView } from "../../types";
+import type { Group, Match, PredictionStatus, Standing, TournamentView } from "../../types";
 import { StatsChips } from "../cards/StatsChips";
 import { TeamLabel } from "../cards/TeamLabel";
 import "./GroupsView.css";
@@ -17,13 +17,14 @@ export function GroupsView({ tournament }: GroupsViewProps) {
       <div className="panel-header">
         <div>
           <p className="eyebrow">Poules</p>
-          <h2>Stand en AI-uitslagen per poule</h2>
+          <h2>Live stand per poule</h2>
         </div>
         <StatsChips matches={matches} summary={tournament.summary} />
       </div>
       <p className="panel-subnote">
-        AI-status: <span className="legend-dot legend-dot--correct" /> goed voorspeld,{" "}
-        <span className="legend-dot legend-dot--wrong" /> fout voorspeld,{" "}
+        Stand uit gespeelde wedstrijden. Kleur bij wedstrijden:{" "}
+        <span className="legend-dot legend-dot--correct" /> AI goed,{" "}
+        <span className="legend-dot legend-dot--wrong" /> AI fout,{" "}
         <span className="legend-dot legend-dot--pending" /> nog te spelen.
       </p>
       <div className="groups-grid">{tournament.groups.map((group) => <GroupCard key={group.name} group={group} />)}</div>
@@ -32,14 +33,21 @@ export function GroupsView({ tournament }: GroupsViewProps) {
 }
 
 function GroupCard({ group }: { group: Group }) {
-  const winner = group.standings[0];
+  const leader = group.standings[0];
+  const hasResults = group.matches.some((match) => match.status === "completed");
 
   return (
     <article className="group-card">
       <div className="group-header">
         <p className="eyebrow">Poule {group.name}</p>
-        <h2>{winner ? <TeamLabel team={winner.team} /> : "Nog geen winnaar"}</h2>
-        <p className="group-subtitle">Huidige poulewinnaar</p>
+        <h2>{leader ? <TeamLabel team={leader.team} /> : "—"}</h2>
+        <p className="group-subtitle">{hasResults ? "Huidige poulewinnaar" : "Nog geen uitslagen"}</p>
+        {group.predictedWinner ? (
+          <p className={`group-ai-pick ai-${group.winnerPredictionStatus}`}>
+            <span className={`legend-dot legend-dot--${group.winnerPredictionStatus}`} />
+            {groupWinnerStatusText(group.winnerPredictionStatus, group.predictedWinner, leader?.team)}
+          </p>
+        ) : null}
       </div>
       <div className="section-label">Stand</div>
       <div className="standings">{group.standings.map((standing, index) => <StandingRow key={standing.team} standing={standing} index={index} />)}</div>
@@ -47,6 +55,23 @@ function GroupCard({ group }: { group: Group }) {
       <div className="group-matches">{group.matches.map((match) => <CompactMatch key={match.matchNumber} match={match} />)}</div>
     </article>
   );
+}
+
+function groupWinnerStatusText(
+  status: PredictionStatus,
+  predicted: string,
+  leader?: string,
+): string {
+  if (status === "pending") {
+    return `AI voorspelt poulewinnaar: ${predicted}`;
+  }
+  if (status === "correct") {
+    return `AI-voorspelling klopt: ${predicted}`;
+  }
+  if (leader && leader !== predicted) {
+    return `AI voorspelde ${predicted} · leidt nu ${leader}`;
+  }
+  return `AI voorspelde ${predicted}`;
 }
 
 function StandingRow({ standing, index }: { standing: Standing; index: number }) {

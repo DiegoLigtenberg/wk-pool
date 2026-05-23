@@ -1,4 +1,10 @@
-import type { CrystalBallBonusQuestion, CrystalBallLiveStats, CrystalBallView as CrystalBallData } from "../../types";
+import type {
+  CrystalBallBonusQuestion,
+  CrystalBallGroupWinner,
+  CrystalBallLiveStats,
+  CrystalBallView as CrystalBallData,
+  PredictionStatus,
+} from "../../types";
 import { TeamLabel } from "../cards/TeamLabel";
 import "./CrystalBallView.css";
 
@@ -9,12 +15,16 @@ type CrystalBallViewProps = {
 const LIVE_COUNT_BONUS_IDS = new Set(["yellow_cards_total", "direct_red_cards"]);
 
 export function CrystalBallView({ crystalBall }: CrystalBallViewProps) {
-  const winners =
+  const winners: CrystalBallGroupWinner[] =
     crystalBall.groupWinners.length > 0
       ? crystalBall.groupWinners
       : crystalBall.projectedGroups
           .filter((group) => group.winner)
-          .map((group) => ({ group: group.name, team: group.winner as string }));
+          .map((group) => ({
+            group: group.name,
+            team: group.winner as string,
+            status: "pending" as const,
+          }));
 
   return (
     <section className="panel" id="crystal-ball">
@@ -22,7 +32,6 @@ export function CrystalBallView({ crystalBall }: CrystalBallViewProps) {
         <div>
           <p className="eyebrow">Crystal Ball</p>
           <h2>Toernooi-voorspellingen</h2>
-          <p className="muted crystal-meta">Groepswinnaars uit alle 72 AI 1/2/3-picks</p>
         </div>
       </div>
 
@@ -30,14 +39,18 @@ export function CrystalBallView({ crystalBall }: CrystalBallViewProps) {
 
       <div className="crystal-layout">
         <div>
-          <div className="section-label">Groepswinnaars (uit AI-picks)</div>
+          <div className="section-label">Groepswinnaars</div>
           <div className="winner-grid">
             {winners.map((entry) => (
-              <article className="winner-card" key={entry.group}>
+              <article className={`winner-card ai-${entry.status}`} key={entry.group}>
                 <span>Poule {entry.group}</span>
                 <strong>
                   <TeamLabel team={entry.team} />
                 </strong>
+                <p className="winner-card__status">
+                  <span className={`legend-dot legend-dot--${entry.status}`} />
+                  {groupWinnerStatusText(entry.status)}
+                </p>
               </article>
             ))}
           </div>
@@ -55,43 +68,48 @@ export function CrystalBallView({ crystalBall }: CrystalBallViewProps) {
   );
 }
 
+function groupWinnerStatusText(status: PredictionStatus): string {
+  if (status === "correct") {
+    return "Leidt nu ook in de live stand";
+  }
+  if (status === "wrong") {
+    return "Leidt nu een ander land";
+  }
+  return "Nog af te rekenen";
+}
+
 function LiveStatsPanel({ liveStats }: { liveStats: CrystalBallLiveStats }) {
-  const hasSync = liveStats.updatedAt !== null;
+  const hasResults = liveStats.completedMatches > 0;
   const topScorerLabel = formatTopScorer(liveStats.topScorer);
 
   return (
-    <section className="crystal-live-panel" aria-label="Live statistieken uit API-Football">
+    <section className="crystal-live-panel" aria-label="Stand van zaken">
       <div className="crystal-live-panel__header">
-        <div>
-          <p className="section-label">Live statistieken (API)</p>
-          <p className="crystal-live-panel__note">
-            Wordt automatisch bijgewerkt via de cron sync op de backend (na elke afgeronde wedstrijd).
-          </p>
-        </div>
-        <p className="crystal-live-panel__sync muted">
-          {hasSync ? `Laatste sync: ${formatSyncTime(liveStats.updatedAt)}` : "Nog geen sync — start bij eerste WK-uitslagen"}
-        </p>
+        <p className="section-label">Stand van zaken</p>
+        {liveStats.updatedAt ? (
+          <p className="crystal-live-panel__sync muted">Bijgewerkt {formatSyncTime(liveStats.updatedAt)}</p>
+        ) : null}
       </div>
       <div className="crystal-live-grid">
         <LiveStatCard
-          label="Uitslagen binnen"
+          label="Uitslagen"
           value={`${liveStats.completedMatches} / ${liveStats.totalMatches}`}
-          helper="Wedstrijden met score uit API-Football"
+          helper={hasResults ? "Wedstrijden met uitslag" : "Volgt zodra het WK begint"}
         />
         <LiveStatCard
           label="Gele kaarten"
           value={String(liveStats.yellowCards)}
-          helper="Totaal t/m nu (pool-telling)"
+          helper="2e geel telt dubbel"
         />
         <LiveStatCard
           label="Direct rood"
           value={String(liveStats.directRedCards)}
-          helper="Geen 2e-geel uitsluitingen"
+          helper="Zonder 2e-geel"
         />
         <LiveStatCard
-          label="Topscorer nu"
+          label="Topscorer"
           value={topScorerLabel}
-          helper="Doelpunten in het hele toernooi (API-Football)"
+          helper={hasResults ? "Hele toernooi" : "Nog geen doelpunten"}
         />
       </div>
     </section>
@@ -118,28 +136,23 @@ function BonusCard({
   const liveCount = liveCountFor(question.id, liveStats);
   const liveTopScorer = question.id === "top_scorer" ? liveStats.topScorer : null;
   const predicted = Number.parseInt(question.value, 10);
+  const showLiveCounts = liveCount !== null && liveStats.completedMatches > 0;
 
   return (
     <article className="bonus-card">
       <span>{question.label}</span>
       <strong>{question.value}</strong>
-      {liveCount !== null ? (
+      {showLiveCounts ? (
         <p className="bonus-live">
-          Live nu: <strong>{liveCount}</strong>
-          {Number.isFinite(predicted) ? (
-            <>
-              {" "}
-              · voorspeld: {predicted}
-              {liveCount > predicted ? " (boven voorspelling)" : liveCount < predicted ? " (onder voorspelling)" : " (op voorspelling)"}
-            </>
-          ) : null}
+          Stand: <strong>{liveCount}</strong>
+          {Number.isFinite(predicted) ? <> · voorspelling {predicted}</> : null}
         </p>
       ) : null}
       {liveTopScorer ? (
         <p className="bonus-live">
-          Live nu:{" "}
+          Stand:{" "}
           <strong>
-            {liveTopScorer.name} ({liveTopScorer.goals} {liveTopScorer.goals === 1 ? "goal" : "goals"})
+            {liveTopScorer.name}, {liveTopScorer.goals} {liveTopScorer.goals === 1 ? "goal" : "goals"}
           </strong>
           {liveTopScorer.team ? <> · {liveTopScorer.team}</> : null}
         </p>
@@ -169,10 +182,10 @@ function formatTopScorer(topScorer: CrystalBallLiveStats["topScorer"]): string {
 
   const goalsLabel = topScorer.goals === 1 ? "goal" : "goals";
   if (topScorer.team) {
-    return `${topScorer.name} (${topScorer.goals} ${goalsLabel}, ${topScorer.team})`;
+    return `${topScorer.name} · ${topScorer.goals} ${goalsLabel} · ${topScorer.team}`;
   }
 
-  return `${topScorer.name} (${topScorer.goals} ${goalsLabel})`;
+  return `${topScorer.name} · ${topScorer.goals} ${goalsLabel}`;
 }
 
 function formatSyncTime(iso: string | null): string {

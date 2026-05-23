@@ -6,6 +6,10 @@ const PREDICTION_STATUSES = new Set(["correct", "wrong", "pending"]);
 const MATCH_STATUSES = new Set(["completed", "upcoming"]);
 const MATCH_STAGES = new Set(["group", "knockout"]);
 
+function isPredictionStatus(value: unknown): boolean {
+  return typeof value === "string" && PREDICTION_STATUSES.has(value);
+}
+
 export function isTournamentView(value: unknown): value is TournamentView {
   return getTournamentValidationErrors(value).length === 0;
 }
@@ -127,7 +131,8 @@ function isCrystalBallGroupWinner(value: unknown): boolean {
   return (
     isRecord(value) &&
     typeof value.group === "string" &&
-    typeof value.team === "string"
+    typeof value.team === "string" &&
+    isPredictionStatus(value.status)
   );
 }
 
@@ -211,7 +216,9 @@ function isGroup(value: unknown): boolean {
     Array.isArray(value.standings) &&
     value.standings.every(isStanding) &&
     Array.isArray(value.matches) &&
-    value.matches.every(isMatch)
+    value.matches.every(isMatch) &&
+    typeof value.predictedWinner === "string" &&
+    isPredictionStatus(value.winnerPredictionStatus)
   );
 }
 

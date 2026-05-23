@@ -267,6 +267,8 @@ def is_tournament_view(tournament: object) -> bool:
         assert isinstance(group["name"], str)
         assert all(is_standing(standing) for standing in group["standings"])
         assert all(is_match(match) for match in group["matches"])
+        assert isinstance(group["predictedWinner"], str)
+        assert group["winnerPredictionStatus"] in {"correct", "wrong", "pending"}
 
     assert all(is_match(match) for match in tournament["knockoutMatches"])
     assert is_crystal_ball(tournament["crystalBall"])
@@ -284,6 +286,8 @@ def is_crystal_ball(value: object) -> bool:
         if not isinstance(entry, dict):
             return False
         if not isinstance(entry.get("group"), str) or not isinstance(entry.get("team"), str):
+            return False
+        if entry.get("status") not in {"correct", "wrong", "pending"}:
             return False
 
     projected_groups = value.get("projectedGroups")

@@ -35,6 +35,17 @@ def test_projected_standings_apply_all_group_picks() -> None:
     assert crystal_a["winner"] == crystal_a["standings"][0]["team"]
 
 
+def test_group_winner_prediction_pending_without_results() -> None:
+    tournament = build_tournament_view()
+    group = next(group for group in tournament["groups"] if group["name"] == "A")
+    crystal_winner = next(entry for entry in tournament["crystalBall"]["groupWinners"] if entry["group"] == "A")
+
+    assert group["predictedWinner"]
+    assert group["winnerPredictionStatus"] == "pending"
+    assert crystal_winner["team"] == group["predictedWinner"]
+    assert crystal_winner["status"] == "pending"
+
+
 def test_crystal_ball_includes_live_api_stats() -> None:
     tournament = build_tournament_view()
     live = tournament["crystalBall"]["liveStats"]

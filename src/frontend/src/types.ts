@@ -134,11 +134,14 @@ export type Group = {
   name: string;
   standings: Standing[];
   matches: Match[];
+  predictedWinner: string;
+  winnerPredictionStatus: PredictionStatus;
 };
 
 export type CrystalBallGroupWinner = {
   group: string;
   team: string;
+  status: PredictionStatus;
 };
 
 export type ProjectedGroup = {

@@ -183,11 +183,13 @@ export function tournamentFixture(overrides: Partial<TournamentView> = {}): Tour
           },
         ],
         matches: [completedMatch],
+        predictedWinner: "Mexico",
+        winnerPredictionStatus: "correct",
       },
     ],
     knockoutMatches: [upcomingMatch],
     crystalBall: {
-      groupWinners: [{ group: "A", team: "Mexico" }],
+      groupWinners: [{ group: "A", team: "Mexico", status: "correct" }],
       projectedGroups: [
         {
           name: "A",

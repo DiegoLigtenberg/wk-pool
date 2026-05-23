@@ -24,8 +24,8 @@
   padding: 1rem;
 }
 
-.winner-card span,
-.bonus-card span {
+.winner-card > span,
+.bonus-card > span {
   color: #94a3b8;
   font-size: 0.8rem;
   font-weight: 800;
@@ -38,6 +38,49 @@
   min-width: 0;
   margin-top: 0.5rem;
   font-size: 1.25rem;
+}
+
+.winner-card__status {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.55rem 0 0;
+  color: #94a3b8;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  text-transform: none;
+}
+
+.winner-card.ai-correct .winner-card__status {
+  color: #bbf7d0;
+}
+
+.winner-card.ai-wrong .winner-card__status {
+  color: #fecaca;
+}
+
+.winner-card.ai-pending .winner-card__status {
+  color: #bae6fd;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.legend-dot--correct {
+  background: #22c55e;
+}
+
+.legend-dot--wrong {
+  background: #f87171;
+}
+
+.legend-dot--pending {
+  background: rgb(var(--accent-rgb));
 }
 
 .winner-card .team-label {
