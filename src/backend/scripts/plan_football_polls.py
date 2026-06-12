@@ -29,12 +29,11 @@ def main() -> int:
 
     busiest = max(daily.values()) if daily else 0
     print(
-        f"\nWith 100 requests/day on the free plan you have plenty of headroom "
-        f"(busiest upcoming day ~ {busiest} poll call(s), plus occasional remap)."
+        f"\nBusiest upcoming day ~ {busiest} match session(s) to pick up after FT."
     )
     print(
-        "\nRecommended: run `poetry run python scripts/sync_football_results.py` "
-        "at each poll time (cron / Railway scheduled job), 2–4× on busy match days."
+        "\nProduction: wk-pool-cron-sync triggers POST /internal/sync-football every 5 minutes "
+        "in June/July (see railway.sync.json). ESPN is the default provider — no API key."
     )
     return 0
 

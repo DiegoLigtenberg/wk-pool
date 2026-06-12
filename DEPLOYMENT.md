@@ -124,9 +124,9 @@ FOOTBALL_SYNC_SECRET=choose-a-long-random-string
 
    (or paste the same settings manually)
 
-5. **Settings → Cron Schedule:** `30 0,1,2,3,4,5,6,21,22,23 * 6,7 *`  
+5. **Settings → Cron Schedule:** `*/5 * * * 6,7 *`  
 
-   → 10× per day in June/July (UTC), aligned with match finish windows from the local schedule (kickoff + 135 min)
+   → every 5 minutes in June/July (UTC), so new ESPN results land within a few minutes of full-time
 
 6. **Settings → Start Command** (if not using config file):
 
@@ -162,39 +162,7 @@ You can remove the volume from `wk-pool-cron-sync` if you created one there earl
 
 
 
-### 3. Before the World Cup starts
-
-
-
-Run once against the backend (Railway → backend service → **Run** / one-off, or locally):
-
-
-
-```text
-
-/opt/venv/bin/python scripts/sync_football_results.py --force-remap
-
-```
-
-
-
-Or trigger via HTTP:
-
-
-
-```text
-
-/opt/venv/bin/python scripts/trigger_football_sync.py --force-remap
-
-```
-
-
-
-That builds the CSV → API fixture id map (needs API plan with season 2026).
-
-
-
-### 4. Outside the tournament
+### 3. Outside the tournament
 
 
 
@@ -202,18 +170,15 @@ Pause or remove the cron schedule on the sync service so you do not use API quot
 
 
 
-### Local test
+### Local dev note
 
+Match results are **not** synced locally. `wk-pool-cron-sync` on Railway POSTs to the backend every 5 minutes during June/July. `trigger_football_sync.py` refuses to run outside Railway.
 
+To inspect poll timing locally:
 
 ```bash
-
 cd src/backend
-
 poetry run python scripts/plan_football_polls.py
-
-poetry run python scripts/sync_football_results.py --dry-run
-
 ```
 
 

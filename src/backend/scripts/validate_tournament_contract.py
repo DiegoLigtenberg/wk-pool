@@ -301,7 +301,7 @@ def is_crystal_ball(value: object) -> tuple[bool, str]:
     live_stats = value.get("liveStats")
     if not isinstance(live_stats, dict):
         return False, "liveStats"
-    if live_stats.get("source") != "api-football":
+    if live_stats.get("source") not in {"espn", "api-football"}:
         return False, "liveStats.source"
     updated_at = live_stats.get("updatedAt")
     if updated_at is not None and not isinstance(updated_at, str):

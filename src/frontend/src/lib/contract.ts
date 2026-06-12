@@ -117,7 +117,7 @@ function isCrystalBallLiveStats(value: unknown): boolean {
       isNumber(value.topScorer.goals) &&
       typeof value.topScorer.team === "string");
   return (
-    value.source === "api-football" &&
+    (value.source === "espn" || value.source === "api-football") &&
     (value.updatedAt === null || typeof value.updatedAt === "string") &&
     isNumber(value.completedMatches) &&
     isNumber(value.totalMatches) &&

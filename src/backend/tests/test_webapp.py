@@ -323,7 +323,7 @@ def is_crystal_ball(value: object) -> bool:
     live_stats = value.get("liveStats")
     if not isinstance(live_stats, dict):
         return False
-    if live_stats.get("source") != "api-football":
+    if live_stats.get("source") != "espn":
         return False
     updated_at = live_stats.get("updatedAt")
     if updated_at is not None and not isinstance(updated_at, str):

@@ -50,7 +50,7 @@ def test_crystal_ball_includes_live_api_stats() -> None:
     tournament = build_tournament_view()
     live = tournament["crystalBall"]["liveStats"]
 
-    assert live["source"] == "api-football"
+    assert live["source"] == "espn"
     assert live["totalMatches"] == 104
     assert live["completedMatches"] == tournament["summary"]["completed"]
     assert live["yellowCards"] == tournament["cardTotals"]["yellowCards"]

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from app.crystal_ball_research import load_crystal_ball_research
+from app.football_sync import live_stats_source
 from app.tournament import _standings
 
 
@@ -48,7 +49,7 @@ def build_crystal_ball_view(
         "sources": research["sources"],
         "contextAsOf": research["contextAsOf"],
         "liveStats": {
-            "source": "api-football",
+            "source": live_stats_source(),
             "updatedAt": results_store.get("updatedAt") if results_store else None,
             "completedMatches": completed_count,
             "totalMatches": total_count,

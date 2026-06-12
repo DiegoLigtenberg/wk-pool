@@ -3,3 +3,5 @@
 __pycache__/
 .pytest_cache/
 .mypy_cache/
+app/data/match-results.json
+app/data/football-fixture-map.json

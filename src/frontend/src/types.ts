@@ -165,7 +165,7 @@ export type CrystalBallTopScorer = {
 };
 
 export type CrystalBallLiveStats = {
-  source: "api-football";
+  source: "espn" | "api-football";
   updatedAt: string | null;
   completedMatches: number;
   totalMatches: number;

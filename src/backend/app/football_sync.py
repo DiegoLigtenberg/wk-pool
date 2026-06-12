@@ -40,6 +40,13 @@ def data_provider() -> str:
     return os.environ.get("FOOTBALL_DATA_PROVIDER", "espn").strip().lower()
 
 
+def live_stats_source() -> str:
+    provider = data_provider()
+    if provider in {"api-football", "apifootball", "api_football"}:
+        return "api-football"
+    return "espn"
+
+
 def _ready_at(kickoff: datetime) -> datetime:
     return kickoff + timedelta(minutes=MINUTES_AFTER_KICKOFF)
 

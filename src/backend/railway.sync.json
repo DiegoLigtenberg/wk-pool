@@ -5,7 +5,7 @@
   },
   "deploy": {
     "startCommand": "/opt/venv/bin/python scripts/trigger_football_sync.py",
-    "cronSchedule": "30 0,1,2,3,4,5,6,21,22,23 * 6,7 *",
+    "cronSchedule": "*/5 * * * 6,7 *",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 3
   }
