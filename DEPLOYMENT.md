@@ -100,13 +100,13 @@ Set on **wk-pool-backend**:
 
 WK_POOL_DATA_DIR=/data
 
-FOOTBALL_API_KEY=...
-
-FOOTBALL_API_SEASON=2026
+FOOTBALL_DATA_PROVIDER=espn
 
 FOOTBALL_SYNC_SECRET=choose-a-long-random-string
 
 ```
+
+`FOOTBALL_DATA_PROVIDER=espn` (default) uses ESPN’s free public API for 2026 scores and cards — no API key. Set `FOOTBALL_DATA_PROVIDER=api-football` only if you have a paid API-Football key with 2026 access (`FOOTBALL_API_KEY`, `FOOTBALL_API_SEASON=2026`).
 
 
 

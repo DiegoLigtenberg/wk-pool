@@ -115,7 +115,10 @@ class WkPoolRequestHandler(BaseHTTPRequestHandler):
             self._send_json({"error": "Unauthorized"}, status=401)
             return
 
-        if not os.environ.get("FOOTBALL_API_KEY"):
+        provider = os.environ.get("FOOTBALL_DATA_PROVIDER", "espn").strip().lower()
+        if provider in {"api-football", "apifootball", "api_football"} and not os.environ.get(
+            "FOOTBALL_API_KEY"
+        ):
             self._send_json({"error": "FOOTBALL_API_KEY is not configured"}, status=503)
             return
 
