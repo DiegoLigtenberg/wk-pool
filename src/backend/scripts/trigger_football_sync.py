@@ -6,12 +6,80 @@ import argparse
 import json
 import os
 import sys
+import time
 import urllib.error
 import urllib.request
+
+RETRYABLE_HTTP_CODES = frozenset({502, 503, 504})
+MAX_ATTEMPTS = 4
+RETRY_DELAY_SECONDS = 5
 
 
 def _running_on_railway() -> bool:
     return bool(os.environ.get("RAILWAY_ENVIRONMENT") or os.environ.get("RAILWAY_SERVICE_NAME"))
+
+
+def _warn_if_frontend_url(backend_url: str) -> None:
+    if backend_url.endswith("wk-pool.up.railway.app"):
+        print(
+            "Warning: BACKEND_URL looks like the frontend. Use the backend service URL, "
+            "e.g. https://wk-pool-backend.up.railway.app",
+            file=sys.stderr,
+        )
+
+
+def _request(url: str, *, method: str = "GET", headers: dict[str, str] | None = None, timeout: int = 30) -> str:
+    request = urllib.request.Request(url, method=method, headers=headers or {})
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        return response.read().decode("utf-8")
+
+
+def _warm_backend(backend_url: str) -> None:
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        try:
+            _request(f"{backend_url}/health", timeout=30)
+            return
+        except urllib.error.HTTPError as error:
+            if error.code not in RETRYABLE_HTTP_CODES or attempt == MAX_ATTEMPTS:
+                raise
+        except urllib.error.URLError:
+            if attempt == MAX_ATTEMPTS:
+                raise
+        print(f"Backend warm-up attempt {attempt}/{MAX_ATTEMPTS} failed; retrying...", file=sys.stderr)
+        time.sleep(RETRY_DELAY_SECONDS)
+
+
+def _trigger_sync(backend_url: str, secret: str, *, force_remap: bool) -> str:
+    path = "/internal/sync-football"
+    if force_remap:
+        path += "?force-remap=1"
+
+    headers = {"Authorization": f"Bearer {secret}"}
+    url = f"{backend_url}{path}"
+
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        try:
+            return _request(url, method="POST", headers=headers, timeout=120)
+        except urllib.error.HTTPError as error:
+            detail = error.read().decode("utf-8", errors="replace")
+            if error.code not in RETRYABLE_HTTP_CODES or attempt == MAX_ATTEMPTS:
+                print(f"Sync trigger failed ({error.code}): {detail}", file=sys.stderr)
+                raise
+            print(
+                f"Sync trigger attempt {attempt}/{MAX_ATTEMPTS} got {error.code}; retrying...",
+                file=sys.stderr,
+            )
+        except urllib.error.URLError as error:
+            if attempt == MAX_ATTEMPTS:
+                print(f"Sync trigger failed: {error.reason}", file=sys.stderr)
+                raise
+            print(
+                f"Sync trigger attempt {attempt}/{MAX_ATTEMPTS} failed ({error.reason}); retrying...",
+                file=sys.stderr,
+            )
+        time.sleep(RETRY_DELAY_SECONDS)
+
+    raise RuntimeError("unreachable")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -37,25 +105,12 @@ def main(argv: list[str] | None = None) -> int:
         print("Missing FOOTBALL_SYNC_SECRET on the cron service.", file=sys.stderr)
         return 1
 
-    path = "/internal/sync-football"
-    if args.force_remap:
-        path += "?force-remap=1"
-
-    request = urllib.request.Request(
-        f"{backend_url}{path}",
-        method="POST",
-        headers={"Authorization": f"Bearer {secret}"},
-    )
+    _warn_if_frontend_url(backend_url)
 
     try:
-        with urllib.request.urlopen(request, timeout=120) as response:
-            body = response.read().decode("utf-8")
-    except urllib.error.HTTPError as error:
-        detail = error.read().decode("utf-8", errors="replace")
-        print(f"Sync trigger failed ({error.code}): {detail}", file=sys.stderr)
-        return 1
-    except urllib.error.URLError as error:
-        print(f"Sync trigger failed: {error.reason}", file=sys.stderr)
+        _warm_backend(backend_url)
+        body = _trigger_sync(backend_url, secret, force_remap=args.force_remap)
+    except (urllib.error.HTTPError, urllib.error.URLError):
         return 1
 
     print(body)

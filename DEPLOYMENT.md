@@ -124,9 +124,9 @@ FOOTBALL_SYNC_SECRET=choose-a-long-random-string
 
    (or paste the same settings manually)
 
-5. **Settings → Cron Schedule:** `*/5 * * * 6,7 *`  
+5. **Settings → Cron Schedule:** `0,5,10,15,20,25,30,35,40,45,50,55 * * 6,7 *`  
 
-   → every 5 minutes in June/July (UTC), so new ESPN results land within a few minutes of full-time
+   → every 5 minutes in June/July (UTC). Railway’s UI may wrongly say “every 5 seconds” for `*/5` expressions — that is a display bug; Railway enforces a **5-minute minimum** and cannot run every few seconds.
 
 6. **Settings → Start Command** (if not using config file):
 
@@ -146,9 +146,11 @@ FOOTBALL_SYNC_SECRET=choose-a-long-random-string
 
    ```text
 
-   BACKEND_URL=https://your-backend.up.railway.app
+   BACKEND_URL=https://wk-pool-backend.up.railway.app
 
    FOOTBALL_SYNC_SECRET=same-secret-as-backend
+
+   Use the **backend** public URL, not `wk-pool.up.railway.app` (frontend). A `502 Application failed to respond` usually means the backend was cold-starting or redeploying; the cron script retries automatically.
 
    ```
 
@@ -173,6 +175,8 @@ Pause or remove the cron schedule on the sync service so you do not use API quot
 ### Local dev note
 
 Match results are **not** synced locally. `wk-pool-cron-sync` on Railway POSTs to the backend every 5 minutes during June/July. `trigger_football_sync.py` refuses to run outside Railway.
+
+To verify the real interval: open **Cron Runs** and check timestamps on successive “Container started” lines — they should be ~5 minutes apart, not seconds.
 
 To inspect poll timing locally:
 
