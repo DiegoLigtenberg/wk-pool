@@ -73,6 +73,45 @@ def _mexico_event() -> dict[str, object]:
     }
 
 
+def _usa_paraguay_event() -> dict[str, object]:
+    return {
+        "id": "760414-usa",
+        "date": "2026-06-13T01:00Z",
+        "competitions": [
+            {
+                "status": {"type": {"state": "post", "completed": True, "shortDetail": "FT"}},
+                "competitors": [
+                    {"homeAway": "home", "score": "4", "team": {"displayName": "United States"}},
+                    {"homeAway": "away", "score": "1", "team": {"displayName": "Paraguay"}},
+                ],
+                "details": [],
+            }
+        ],
+    }
+
+
+def test_teams_match_handles_usa_name() -> None:
+    assert teams_match("USA", "Paraguay", _usa_paraguay_event())
+
+
+def test_scoreboard_dates_include_previous_day_for_late_us_kickoff() -> None:
+    from datetime import datetime, timezone
+
+    from app.espn_soccer_api import scoreboard_dates_for_fixture
+    from app.tournament import Fixture
+
+    fixture = Fixture(
+        match_number=4,
+        round_number="1",
+        kickoff_at=datetime(2026, 6, 13, 1, 0, tzinfo=timezone.utc),
+        location="Los Angeles Stadium",
+        home_team="USA",
+        away_team="Paraguay",
+        group="D",
+    )
+    assert scoreboard_dates_for_fixture(fixture) == {"20260612", "20260613"}
+
+
 def test_teams_match_handles_local_names() -> None:
     event = _mexico_event()
     assert teams_match("Mexico", "South Africa", event)

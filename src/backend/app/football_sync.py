@@ -9,6 +9,7 @@ from app.espn_soccer_api import (
     fetch_scoreboards_for_dates,
     match_espn_event,
     parse_espn_result,
+    scoreboard_dates_for_fixtures,
     top_scorer_from_events,
     tournament_dates_through,
 )
@@ -176,7 +177,7 @@ def _sync_results_espn(*, dry_run: bool = False) -> int:
             save_results(store)
         return 0
 
-    dates = {fixture.kickoff_at.strftime("%Y%m%d") for fixture in pending}
+    dates = scoreboard_dates_for_fixtures(pending)
     print(f"Syncing {len(pending)} match(es) via ESPN: {[f.match_number for f in pending]}")
     if dry_run:
         print(f"Would call ESPN scoreboard for {len(dates)} day(s)")

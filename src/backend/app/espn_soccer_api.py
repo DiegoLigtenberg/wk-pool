@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
@@ -28,6 +28,8 @@ TEAM_CANONICAL: dict[str, str] = {
     "Turkey": "turkey",
     "Cabo Verde": "cape verde",
     "Cape Verde": "cape verde",
+    "USA": "united states",
+    "United States": "united states",
 }
 
 
@@ -99,6 +101,23 @@ def fetch_scoreboard(*, date: str) -> list[dict[str, object]]:
 
     events = payload.get("events")
     return events if isinstance(events, list) else []
+
+
+def scoreboard_dates_for_fixture(fixture: Fixture) -> set[str]:
+    """ESPN groups some late US games on the previous calendar day's scoreboard."""
+    kickoff_day = fixture.kickoff_at.date()
+    previous_day = kickoff_day - timedelta(days=1)
+    return {
+        kickoff_day.strftime("%Y%m%d"),
+        previous_day.strftime("%Y%m%d"),
+    }
+
+
+def scoreboard_dates_for_fixtures(fixtures: list[Fixture]) -> set[str]:
+    dates: set[str] = set()
+    for fixture in fixtures:
+        dates.update(scoreboard_dates_for_fixture(fixture))
+    return dates
 
 
 def fetch_scoreboards_for_dates(dates: set[str]) -> list[dict[str, object]]:
