@@ -45,6 +45,15 @@ export function roundLabelNl(round: string): string {
   return labels[round] ?? round;
 }
 
+export function formatKnockoutDateShort(value: string): string {
+  return new Intl.DateTimeFormat("nl-NL", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(value));
+}
+
 export function phaseLabel(match: Match): string {
   if (match.stage === "group") {
     return `Poule ${match.group ?? "-"}`;

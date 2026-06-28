@@ -27,7 +27,8 @@ def test_large_favorite_has_strong_knockout_home_chance() -> None:
     pred = predict_match("Argentina", "Haiti", "knockout", "R16", None)
     assert pred["pick"] == "1"
     assert pred["homeWinProbability"] >= 78
-    assert pred["drawProbability"] is None
+    assert pred["drawProbability"] is not None
+    assert pred["suggestedScore"]["home"] > pred["suggestedScore"]["away"]
 
 
 def test_korea_czechia_close_match_may_pick_draw() -> None:

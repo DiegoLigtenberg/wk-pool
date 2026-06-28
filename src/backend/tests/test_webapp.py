@@ -416,7 +416,14 @@ def is_ai_prediction(value: object) -> bool:
     if not base:
         return False
     if value.get("confidence", 0) > 0:
-        return is_prediction_insight(value.get("insight"))
+        suggested = value.get("suggestedScore")
+        suggested_ok = suggested is None or (
+            isinstance(suggested, dict)
+            and is_int(suggested.get("home"))
+            and is_int(suggested.get("away"))
+            and isinstance(suggested.get("reason"), str)
+        )
+        return suggested_ok and is_prediction_insight(value.get("insight"))
     return value.get("insight") is None
 
 

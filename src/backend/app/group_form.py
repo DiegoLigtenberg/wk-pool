@@ -24,20 +24,41 @@ class GroupFormStats:
     goals_for: int
     goals_against: int
     goal_difference: int
+    goal_log: tuple[int, ...] = ()
+
+    @property
+    def goals_per_game(self) -> float:
+        if self.played == 0:
+            return 0.0
+        return self.goals_for / self.played
+
+    @property
+    def scoring_trend(self) -> int:
+        """+1 stijgende scorelijn, −1 dalend, 0 neutraal (laatste vs eerdere duels)."""
+        if len(self.goal_log) < 2:
+            return 0
+        earlier = self.goal_log[:-1]
+        last = self.goal_log[-1]
+        early_avg = sum(earlier) / len(earlier)
+        if last >= early_avg + 1.0:
+            return 1
+        if last <= max(0.0, early_avg - 1.0):
+            return -1
+        return 0
 
 
-def _apply_result(row: dict[str, int], goals_for: int, goals_against: int) -> None:
-    row["played"] += 1
-    row["goals_for"] += goals_for
-    row["goals_against"] += goals_against
+def _apply_result(row: dict[str, int | list[int]], goals_for: int, goals_against: int) -> None:
+    row["played"] = int(row["played"]) + 1
+    row["goals_for"] = int(row["goals_for"]) + goals_for
+    row["goals_against"] = int(row["goals_against"]) + goals_against
     if goals_for > goals_against:
-        row["wins"] += 1
-        row["points"] += 3
+        row["wins"] = int(row["wins"]) + 1
+        row["points"] = int(row["points"]) + 3
     elif goals_for == goals_against:
-        row["draws"] += 1
-        row["points"] += 1
+        row["draws"] = int(row["draws"]) + 1
+        row["points"] = int(row["points"]) + 1
     else:
-        row["losses"] += 1
+        row["losses"] = int(row["losses"]) + 1
 
 
 def build_group_form_index(
@@ -45,7 +66,7 @@ def build_group_form_index(
     results_store: dict[str, object],
 ) -> dict[str, GroupFormStats]:
     """FIFA team key → poule stats after completed group matches."""
-    tables: dict[str, dict[str, dict[str, int]]] = {}
+    tables: dict[str, dict[str, dict[str, int | list[int]]]] = {}
 
     for fixture in fixtures:
         if fixture.group is None:
@@ -63,6 +84,7 @@ def build_group_form_index(
                     "losses": 0,
                     "goals_for": 0,
                     "goals_against": 0,
+                    "goal_log": [],
                 },
             )
 
@@ -72,8 +94,12 @@ def build_group_form_index(
 
         home_goals = int(stored["score"]["home"])
         away_goals = int(stored["score"]["away"])
-        _apply_result(tables[group][fixture.home_team], home_goals, away_goals)
-        _apply_result(tables[group][fixture.away_team], away_goals, home_goals)
+        home_row = tables[group][fixture.home_team]
+        away_row = tables[group][fixture.away_team]
+        _apply_result(home_row, home_goals, away_goals)
+        _apply_result(away_row, away_goals, home_goals)
+        home_row["goal_log"].append(home_goals)
+        away_row["goal_log"].append(away_goals)
 
     index: dict[str, GroupFormStats] = {}
     for group, team_rows in tables.items():
@@ -87,19 +113,21 @@ def build_group_form_index(
             ),
         )
         for rank, (fifa_team, row) in enumerate(ranked, start=1):
-            gd = row["goals_for"] - row["goals_against"]
+            gd = int(row["goals_for"]) - int(row["goals_against"])
+            goal_log = tuple(int(g) for g in row["goal_log"])
             index[fifa_team] = GroupFormStats(
                 fifa_team=fifa_team,
                 group=group,
                 rank=rank,
-                points=row["points"],
-                played=row["played"],
-                wins=row["wins"],
-                draws=row["draws"],
-                losses=row["losses"],
-                goals_for=row["goals_for"],
-                goals_against=row["goals_against"],
+                points=int(row["points"]),
+                played=int(row["played"]),
+                wins=int(row["wins"]),
+                draws=int(row["draws"]),
+                losses=int(row["losses"]),
+                goals_for=int(row["goals_for"]),
+                goals_against=int(row["goals_against"]),
                 goal_difference=gd,
+                goal_log=goal_log,
             )
     return index
 

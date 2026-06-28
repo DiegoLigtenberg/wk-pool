@@ -1,9 +1,12 @@
 import { Bracket } from "react-bracket-ui";
 import { useEffect, useMemo, useRef } from "react";
 import type { Match as BracketMatch } from "react-bracket-ui";
+import { formatKnockoutDateShort, roundLabelNl } from "../../lib/format";
 import { displayTeamName, hasKnownTeams } from "../../lib/teams";
 import type { Match } from "../../types";
+import { PredictedOutcome } from "../prediction/PredictedOutcome";
 import { TeamLabel } from "../cards/TeamLabel";
+import "../prediction/PredictedOutcome.css";
 import "./KnockoutView.css";
 
 type KnockoutViewProps = {
@@ -44,6 +47,29 @@ export function KnockoutView({ knockoutMatches }: KnockoutViewProps) {
       <p className="panel-subnote">
         De eerste knock-outronde telt {round32.length} wedstrijden. Daarna loopt het schema hieronder van achtste finale tot finale.
       </p>
+      {round32.length ? (
+        <div className="knockout-r32-grid" aria-label="Zestiende finales">
+          {round32.map((match) => (
+            <article key={match.matchNumber} className="knockout-r32-card">
+              <div className="knockout-r32-card__teams">
+                <TeamLabel team={match.homeTeam} />
+                <span className="knockout-r32-card__meta">tegen</span>
+                <TeamLabel team={match.awayTeam} />
+                <span className="knockout-r32-card__meta">{formatKnockoutDateShort(match.kickoffAt)}</span>
+              </div>
+              <div className="knockout-r32-card__prediction">
+                {match.score ? (
+                  <strong className="predicted-outcome__score">
+                    {match.score.home} - {match.score.away}
+                  </strong>
+                ) : (
+                  <PredictedOutcome match={match} variant="compact" />
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : null}
       <div className="knockout-bracket-shell" ref={bracketShellRef}>
         <Bracket
           className="wk-bracket"

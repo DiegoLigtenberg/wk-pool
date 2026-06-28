@@ -1,6 +1,7 @@
 import { forwardRef, type RefObject } from "react";
 import type { Match, PredictionFactor, PredictionInsight, PredictionScoreSide } from "../../types";
 import { displayTeamName } from "../../lib/teams";
+import { PredictedOutcome } from "../prediction/PredictedOutcome";
 
 type PredictionPanelProps = {
   id: string;
@@ -37,6 +38,7 @@ export const PredictionPanel = forwardRef<HTMLElement, PredictionPanelProps>(fun
       </div>
 
       <Probabilities match={match} highlightedPick={prediction.pick} />
+      <PredictedOutcome match={match} variant="panel" />
 
       {presentation ? (
         <>

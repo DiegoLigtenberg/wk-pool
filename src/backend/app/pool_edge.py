@@ -459,6 +459,102 @@ def group_momentum_adjustments(
     return out
 
 
+def group_scoring_trend_adjustments(
+    home: GroupFormStats | None,
+    away: GroupFormStats | None,
+) -> list[PickAdjustment]:
+    """Doelpunten per wedstrijd en recente scorelijn uit de poule."""
+    if home is None or away is None or home.played == 0 or away.played == 0:
+        return []
+
+    out: list[PickAdjustment] = []
+
+    if home.scoring_trend > 0:
+        out.append(
+            PickAdjustment(
+                id="home_scoring_trend",
+                kind="momentum",
+                label="Stijgende scorelijn thuis",
+                delta=1,
+                reason=(
+                    f"{display_team_name(home.fifa_team)} scoorde in het laatste pouleduel sterker "
+                    f"dan eerder (log {list(home.goal_log)}) → +1 thuis."
+                ),
+            )
+        )
+    elif home.scoring_trend < 0:
+        out.append(
+            PickAdjustment(
+                id="home_scoring_trend_down",
+                kind="momentum",
+                label="Dalende scorelijn thuis",
+                delta=-1,
+                reason=(
+                    f"{display_team_name(home.fifa_team)} scoorde minder in het laatste pouleduel "
+                    f"→ −1 thuis."
+                ),
+            )
+        )
+
+    if away.scoring_trend > 0:
+        out.append(
+            PickAdjustment(
+                id="away_scoring_trend",
+                kind="momentum",
+                label="Stijgende scorelijn uit",
+                delta=-1,
+                reason=(
+                    f"{display_team_name(away.fifa_team)} scoorde in het laatste pouleduel sterker "
+                    f"→ +1 uit (−1 op diff)."
+                ),
+            )
+        )
+    elif away.scoring_trend < 0:
+        out.append(
+            PickAdjustment(
+                id="away_scoring_trend_down",
+                kind="momentum",
+                label="Dalende scorelijn uit",
+                delta=1,
+                reason=(
+                    f"{display_team_name(away.fifa_team)} scoorde minder in het laatste pouleduel "
+                    f"→ +1 thuis."
+                ),
+            )
+        )
+
+    gpg_gap = home.goals_per_game - away.goals_per_game
+    if gpg_gap >= 1.0:
+        out.append(
+            PickAdjustment(
+                id="home_goals_per_game",
+                kind="momentum",
+                label="Meer goals per pouleduel thuis",
+                delta=1,
+                reason=(
+                    f"{display_team_name(home.fifa_team)} scoorde gemiddeld {home.goals_per_game:.1f}x per duel, "
+                    f"{display_team_name(away.fifa_team)} {away.goals_per_game:.1f}x → +1 thuis."
+                ),
+            )
+        )
+    elif gpg_gap <= -1.0:
+        out.append(
+            PickAdjustment(
+                id="away_goals_per_game",
+                kind="momentum",
+                label="Meer goals per pouleduel uit",
+                delta=-1,
+                reason=(
+                    f"{display_team_name(away.fifa_team)} scoorde gemiddeld {away.goals_per_game:.1f}x per duel, "
+                    f"{display_team_name(home.fifa_team)} {home.goals_per_game:.1f}x "
+                    f"→ +1 uit (−1 op diff)."
+                ),
+            )
+        )
+
+    return out
+
+
 def collect_pick_adjustments(
     *,
     home_key: str,
@@ -507,6 +603,7 @@ def collect_pick_adjustments(
 
     if include_live_form:
         adjustments.extend(group_momentum_adjustments(home_form, away_form))
+        adjustments.extend(group_scoring_trend_adjustments(home_form, away_form))
 
     total = sum(a.delta for a in adjustments)
     if abs(total) > _POOL_DIFF_CAP:

@@ -19,7 +19,7 @@ describe("App", () => {
     expect(await screen.findByRole("heading", { name: "Volledig wedstrijdschema" })).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: "Poules" }));
-    expect(screen.getByRole("heading", { name: "Stand en AI-uitslagen per poule" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Live stand per poule" })).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: "Knock-out" }));
     expect(screen.getByRole("heading", { name: "Knock-outfase" })).toBeInTheDocument();

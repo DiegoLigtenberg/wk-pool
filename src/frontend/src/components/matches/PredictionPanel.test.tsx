@@ -54,7 +54,8 @@ describe("PredictionPanel", () => {
 
     expect(container.querySelector(".prediction-pick-reason")).toBeNull();
 
-    expect(container.querySelector(".prediction-suggested-score")).toBeNull();
+    expect(container.querySelector(".prediction-suggested-score")).not.toBeNull();
+    expect(screen.getByText("2 - 0")).toBeInTheDocument();
     expect(container.querySelector(".prediction-match-stats")).toBeNull();
     expect(container.querySelector(".prediction-pick-steps")).toBeNull();
     expect(screen.getByText("Scores en research-details")).toBeInTheDocument();

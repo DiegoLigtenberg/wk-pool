@@ -17,6 +17,7 @@ from app.pool_edge import (
     live_form_from_group_played_yaml,
 )
 from app.group_form import GroupFormStats, live_form_tuple
+from app.score_prediction import suggest_match_score
 from app.prediction_narrative import build_prediction_insight
 from app.teams import display_team_name, fifa_team_key
 
@@ -238,7 +239,6 @@ def predict_match(
     away_key = fifa_team_key(away_team)
     breakdown = match_context_breakdown(home_key, away_key)
     base_diff = int(breakdown["diff"])
-    can_draw = stage == "group"
 
     home_power = int(breakdown["home"]["powerScore"])
     away_power = int(breakdown["away"]["powerScore"])
@@ -268,14 +268,11 @@ def predict_match(
         away_form=away_form,
     )
     adjusted_diff = apply_adjustments(base_diff, adjustments)
-    pick = _pick_from_diff(
+    pick, probabilities, can_draw = _resolve_pick_and_probabilities(
         adjusted_diff,
-        can_draw=can_draw,
+        stage=stage,
         home_power=home_power,
         away_power=away_power,
-    )
-    probabilities = _align_probabilities_to_pick(
-        _probabilities(adjusted_diff, can_draw), pick
     )
     confidence = _confidence_from_probabilities(pick, probabilities)
     home_nl = str(breakdown["home"]["team"])
@@ -291,6 +288,7 @@ def predict_match(
         base_diff=base_diff,
         adjustments=adjustments,
         probabilities=probabilities,
+        stage=stage,
     )
     pick_score_note = explain_pick_score_note(
         pick,
@@ -321,11 +319,22 @@ def predict_match(
         pick_score_note=merged_pick_detail,
     )
 
+    home_gpg = home_form.goals_per_game if home_form else 0.0
+    away_gpg = away_form.goals_per_game if away_form else 0.0
+    suggested = suggest_match_score(
+        pick=pick,
+        adjusted_diff=adjusted_diff,
+        stage=stage,
+        home_goals_per_game=home_gpg,
+        away_goals_per_game=away_gpg,
+    )
+
     return {
         "pick": pick,
         "confidence": confidence,
         "explanation": str(insight["verdict"]),
         "insight": insight,
+        "suggestedScore": suggested,
         "homeWinProbability": probabilities["home"],
         "drawProbability": probabilities["draw"] if can_draw else None,
         "awayWinProbability": probabilities["away"],
@@ -349,8 +358,10 @@ def _sigmoid(x: float) -> float:
 _GROUP_HOME_LOGIT_K = 0.112
 _GROUP_HOME_LOGIT_B = math.log(0.36 / 0.64)
 
-# Knock-out: steilere curve, geen gelijk.
+# Knock-out: steilere curve; gelijk na 90 min alleen bij krappe duels.
 _KNOCKOUT_HOME_LOGIT_K = 0.155
+KNOCKOUT_AFTER_90_DRAW_DIFF_MAX = 3
+KNOCKOUT_AFTER_90_DRAW_MIN_PCT = 20
 
 # Groep: pick = wedstrijdscore-diff; gelijk in band; uitzondering duidelijke basisfavoriet.
 GROUP_DRAW_ABS_DIFF_MAX = 8
@@ -362,6 +373,53 @@ def _probabilities(diff: int, can_draw: bool) -> dict[str, int]:
     if can_draw:
         return _group_probabilities(diff)
     return _knockout_probabilities(diff)
+
+
+def _knockout_after_90_probabilities(diff: int) -> dict[str, int]:
+    """Driekans na 90 min (vóór verlenging) — smallere gelijk-band dan in de poule."""
+    draw_pct = int(round(max(14, min(26, 23 - 2.0 * abs(diff)))))
+    p_draw = draw_pct / 100.0
+    p_home = _sigmoid(diff * _GROUP_HOME_LOGIT_K + _GROUP_HOME_LOGIT_B)
+    p_away = max(0.08, 1.0 - p_home - p_draw)
+    p_home = max(0.08, 1.0 - p_away - p_draw)
+    total = p_home + p_draw + p_away
+    home = int(round(100 * p_home / total))
+    draw = int(round(100 * p_draw / total))
+    away = 100 - home - draw
+    return {"home": home, "draw": draw, "away": away}
+
+
+def _resolve_pick_and_probabilities(
+    diff: int,
+    *,
+    stage: str,
+    home_power: int,
+    away_power: int,
+) -> tuple[str, dict[str, int], bool]:
+    if stage == "group":
+        pick = _pick_from_diff(
+            diff,
+            can_draw=True,
+            home_power=home_power,
+            away_power=away_power,
+        )
+        probabilities = _align_probabilities_to_pick(_group_probabilities(diff), pick)
+        return pick, probabilities, True
+
+    after_90 = _knockout_after_90_probabilities(diff)
+    leader = max(after_90["home"], after_90["away"])
+    tight = abs(diff) <= KNOCKOUT_AFTER_90_DRAW_DIFF_MAX
+    draw_favored = (
+        tight
+        and after_90["draw"] >= KNOCKOUT_AFTER_90_DRAW_MIN_PCT
+        and after_90["draw"] >= leader - 2
+    )
+    if draw_favored:
+        pick = "3"
+    else:
+        pick = "1" if diff > 0 else "2"
+    probabilities = _align_probabilities_to_pick(after_90, pick)
+    return pick, probabilities, True
 
 
 def _group_probabilities(diff: int) -> dict[str, int]:
@@ -413,9 +471,23 @@ def explain_pick(
     base_diff: int,
     adjustments: list[PickAdjustment],
     probabilities: dict[str, int],
+    stage: str = "group",
 ) -> str:
     """Korte uitleg voor de gebruiker: waarom winst, gelijk of verlies."""
     del base_diff, adjustments, probabilities  # pick/kansen staan al in de UI
+
+    if stage == "knockout" and pick == "3":
+        return (
+            "Het duel is zeer evenwichtig; na 90 minuten past een gelijkspel "
+            "bij deze analyse (verlenging/penalties daarna)."
+        )
+
+    if stage == "knockout":
+        side = home_name if pick == "1" else away_name
+        return (
+            f"Na 90 minuten ziet de AI {side} als net sterker; "
+            f"verlenging blijft mogelijk bij een gelijkspel."
+        )
 
     if not can_draw:
         side = home_name if pick == "1" else away_name

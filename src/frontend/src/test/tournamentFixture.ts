@@ -110,6 +110,11 @@ export const completedMatch: Match = {
     homeWinProbability: 58,
     drawProbability: 25,
     awayWinProbability: 17,
+    suggestedScore: {
+      home: 2,
+      away: 0,
+      reason: "Overtuigende winst voor thuis; 2-0 in de poule.",
+    },
   },
 };
 
