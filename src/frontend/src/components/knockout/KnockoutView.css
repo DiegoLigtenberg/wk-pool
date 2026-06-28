@@ -38,6 +38,38 @@
   padding: 0 !important;
 }
 
+.wk-bracket .relative[data-status="predicted"] {
+  border-color: rgba(var(--accent-rgb), 0.28) !important;
+}
+
+.wk-bracket .relative::after {
+  content: attr(data-prediction);
+  display: none;
+}
+
+.wk-bracket .relative[data-prediction]::after {
+  display: block;
+  border-top: 1px solid rgba(var(--accent-rgb), 0.22);
+  background: rgba(var(--accent-rgb), 0.1);
+  color: #dbeafe;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  padding: 0.28rem 0.55rem;
+  text-align: center;
+}
+
+.wk-bracket .relative[data-status="upcoming"]:not([data-prediction]) > div:nth-child(2)::after,
+.wk-bracket .relative[data-status="upcoming"]:not([data-prediction]) > div:nth-child(3)::after {
+  content: "–";
+  margin-left: auto;
+  color: #64748b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
 .wk-bracket .relative > div:nth-child(2),
 .wk-bracket .relative > div:nth-child(3) {
   display: flex !important;

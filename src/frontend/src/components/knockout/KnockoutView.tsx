@@ -2,7 +2,8 @@ import { Bracket } from "react-bracket-ui";
 import { useEffect, useMemo, useRef } from "react";
 import type { Match as BracketMatch } from "react-bracket-ui";
 import { flattenKnockoutBracket, knockoutBracketRound, knockoutNextMatchId } from "../../lib/knockoutBracket";
-import { displayTeamName, hasKnownTeams } from "../../lib/teams";
+import { formatSuggestedScore, showsKnockoutScorePrediction } from "../../lib/prediction";
+import { displayTeamName } from "../../lib/teams";
 import type { Match } from "../../types";
 import { TeamLabel } from "../cards/TeamLabel";
 import "./KnockoutView.css";
@@ -21,18 +22,32 @@ export function KnockoutView({ knockoutMatches }: KnockoutViewProps) {
   const final = finals.find((match) => match.matchNumber === 104) ?? finals[finals.length - 1];
   const thirdPlace = finals.find((match) => match.matchNumber !== final?.matchNumber);
   const bracketMatches = toBracketMatches(round32, round16, quarter, semi, final);
-  const bracketDates = useMemo(
-    () => flattenKnockoutBracket(round32, round16, quarter, semi, final).map(formatKnockoutDateLines),
+  const orderedBracketMatches = useMemo(
+    () => flattenKnockoutBracket(round32, round16, quarter, semi, final),
     [round32, round16, quarter, semi, final],
+  );
+  const bracketCardMeta = useMemo(
+    () => orderedBracketMatches.map((match) => bracketCardMetaFor(match)),
+    [orderedBracketMatches],
   );
   const bracketShellRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const cards = bracketShellRef.current?.querySelectorAll<HTMLElement>(".wk-bracket .relative");
     cards?.forEach((card, index) => {
-      card.dataset.date = bracketDates[index] ?? "";
+      const meta = bracketCardMeta[index];
+      if (!meta) {
+        return;
+      }
+      card.dataset.date = meta.date;
+      card.dataset.status = meta.status;
+      if (meta.prediction) {
+        card.dataset.prediction = meta.prediction;
+      } else {
+        delete card.dataset.prediction;
+      }
     });
-  }, [bracketDates]);
+  }, [bracketCardMeta]);
 
   return (
     <section className="panel" id="knockout">
@@ -43,7 +58,8 @@ export function KnockoutView({ knockoutMatches }: KnockoutViewProps) {
         </div>
       </div>
       <p className="panel-subnote">
-        Het schema loopt van zestiende finale tot finale. Later rondes vullen zich zodra teams en uitslagen bekend zijn.
+        Het schema loopt van zestiende finale tot finale. Groene markering = echte winnaar. AI-voorspellingen
+        (Voorsp.) gelden alleen voor nog niet gespeelde duels met bekende teams.
       </p>
       <div className="knockout-bracket-shell" ref={bracketShellRef}>
         <Bracket
@@ -58,7 +74,7 @@ export function KnockoutView({ knockoutMatches }: KnockoutViewProps) {
             5: "Finale",
           }}
           matchWidth={230}
-          matchHeight={104}
+          matchHeight={128}
           gap={24}
           colors={{
             background: "#0f172a",
@@ -107,15 +123,14 @@ function toBracketMatches(
 }
 
 function toBracketMatch(match: Match, roundNumber: number, nextMatchId: number | null): BracketMatch {
-  const scores = participantScores(match);
-  const winner = predictedWinnerId(match);
+  const scores = realParticipantScores(match);
 
   return {
     id: match.matchNumber,
     round: roundNumber,
     matchNumber: match.matchNumber,
     nextMatchId,
-    winner,
+    winner: actualWinnerId(match),
     participant1: {
       id: `${match.matchNumber}-home`,
       name: displayTeamName(match.homeTeam),
@@ -129,32 +144,42 @@ function toBracketMatch(match: Match, roundNumber: number, nextMatchId: number |
   };
 }
 
-function participantScores(match: Match): { home?: number; away?: number } {
+function bracketCardMetaFor(match: Match): {
+  date: string;
+  status: "played" | "predicted" | "upcoming";
+  prediction: string;
+} {
+  const date = formatKnockoutDateLines(match);
   if (match.score) {
-    return { home: match.score.home, away: match.score.away };
+    return { date, status: "played", prediction: "" };
   }
-
-  const suggested = match.aiPrediction.suggestedScore;
-  if (suggested && hasKnownTeams(match)) {
-    return { home: suggested.home, away: suggested.away };
+  if (showsKnockoutScorePrediction(match)) {
+    return {
+      date,
+      status: "predicted",
+      prediction: `Voorsp. ${formatSuggestedScore(match)}`,
+    };
   }
-
-  return {};
+  return { date, status: "upcoming", prediction: "" };
 }
 
-function predictedWinnerId(match: Match): string | null {
-  if (!hasKnownTeams(match)) {
+function realParticipantScores(match: Match): { home?: number; away?: number } {
+  if (!match.score) {
+    return {};
+  }
+  return { home: match.score.home, away: match.score.away };
+}
+
+function actualWinnerId(match: Match): string | null {
+  if (!match.score) {
     return null;
   }
-
-  if (match.aiPrediction.pick === "1") {
+  if (match.score.home > match.score.away) {
     return `${match.matchNumber}-home`;
   }
-
-  if (match.aiPrediction.pick === "2") {
+  if (match.score.away > match.score.home) {
     return `${match.matchNumber}-away`;
   }
-
   return null;
 }
 
