@@ -16,6 +16,7 @@ from app.pool_edge import (
     collect_pick_adjustments,
     live_form_from_group_played_yaml,
 )
+from app.group_form import GroupFormStats, live_form_tuple
 from app.prediction_narrative import build_prediction_insight
 from app.teams import display_team_name, fifa_team_key
 
@@ -221,6 +222,7 @@ def predict_match(
     group: str | None,
     *,
     match_number: int | None = None,
+    group_forms: tuple[GroupFormStats | None, GroupFormStats | None] | None = None,
 ) -> dict[str, object]:
     if not is_known_team(home_team) or not is_known_team(away_team):
         return {
@@ -243,10 +245,16 @@ def predict_match(
     home_factors = list(breakdown["home"]["reasons"])
     away_factors = list(breakdown["away"]["reasons"])
 
-    # Pre-WK: hele groepsfase statisch (research/YAML). Vorm uit groep alleen bij knock-out.
-    live_form = (
-        live_form_from_group_played_yaml(home_key, away_key) if stage == "knockout" else None
-    )
+    # Knock-out: poulevorm uit gespeelde groepsuitslagen (sync), niet uit lege YAML.
+    live_form = None
+    home_form: GroupFormStats | None = None
+    away_form: GroupFormStats | None = None
+    if stage == "knockout":
+        if group_forms:
+            home_form, away_form = group_forms
+            live_form = live_form_tuple(home_form, away_form)
+        else:
+            live_form = live_form_from_group_played_yaml(home_key, away_key)
     adjustments = collect_pick_adjustments(
         home_key=home_key,
         away_key=away_key,
@@ -256,6 +264,8 @@ def predict_match(
         away_factors=away_factors,
         live_form=live_form,
         include_live_form=stage == "knockout",
+        home_form=home_form,
+        away_form=away_form,
     )
     adjusted_diff = apply_adjustments(base_diff, adjustments)
     pick = _pick_from_diff(

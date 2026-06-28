@@ -72,3 +72,44 @@ def test_knockout_without_yaml_played_has_no_live_form() -> None:
     pred = predict_match("Argentina", "France", "knockout", "Final", None)
     kinds = {a.get("kind") for a in pred["insight"].get("poolAdjustments", [])}
     assert "live_form" not in kinds
+
+
+def test_group_momentum_adjustments_on_knockout() -> None:
+    from app.group_form import GroupFormStats
+
+    home = GroupFormStats(
+        fifa_team="Germany",
+        group="E",
+        rank=1,
+        points=7,
+        played=3,
+        wins=2,
+        draws=1,
+        losses=0,
+        goals_for=8,
+        goals_against=2,
+        goal_difference=6,
+    )
+    away = GroupFormStats(
+        fifa_team="Paraguay",
+        group="D",
+        rank=3,
+        points=4,
+        played=3,
+        wins=1,
+        draws=1,
+        losses=1,
+        goals_for=3,
+        goals_against=5,
+        goal_difference=-2,
+    )
+    pred = predict_match(
+        "Germany",
+        "Paraguay",
+        "knockout",
+        "Round of 32",
+        None,
+        group_forms=(home, away),
+    )
+    labels = [a.get("label") for a in pred["insight"].get("poolAdjustments", [])]
+    assert any("Poule" in str(label) for label in labels)

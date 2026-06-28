@@ -4,6 +4,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from app.match_results_store import load_results, result_for_match
+from app.knockout_bracket import build_knockout_bracket_state, resolve_knockout_teams
+from app.group_form import build_group_form_index
 from app.predictions import is_known_team, predict_match, team_insight
 from app.teams import display_team_name
 
@@ -33,7 +35,12 @@ def load_fixtures(path: Path = CSV_PATH) -> list[Fixture]:
 def build_tournament_view(path: Path = CSV_PATH) -> dict[str, object]:
     fixtures = load_fixtures(path)
     results_store = load_results()
-    matches = [_match_view(fixture, results_store) for fixture in fixtures]
+    bracket = build_knockout_bracket_state(fixtures, results_store)
+    form_index = build_group_form_index(fixtures, results_store) if bracket else {}
+    matches = [
+        _match_view(fixture, results_store, bracket=bracket, form_index=form_index)
+        for fixture in fixtures
+    ]
     group_stage_matches = [match for match in matches if match["stage"] == "group"]
     completed_matches = [match for match in matches if match["status"] == "completed"]
     upcoming_matches = [match for match in matches if match["status"] == "upcoming"]
@@ -57,7 +64,7 @@ def build_tournament_view(path: Path = CSV_PATH) -> dict[str, object]:
         "nextMatch": upcoming_by_kickoff[0] if upcoming_by_kickoff else None,
         "recentMatches": completed_by_kickoff[-6:],
         "upcomingMatches": upcoming_by_kickoff[:8],
-        "teamInsights": _team_insights(fixtures),
+        "teamInsights": _team_insights(fixtures, bracket=bracket),
         "groups": groups,
         "knockoutMatches": [match for match in matches if match["stage"] == "knockout"],
         "crystalBall": build_crystal_ball_view(
@@ -94,20 +101,35 @@ def _match_kickoff(match: dict[str, object]) -> str:
     return str(match["kickoffAt"])
 
 
-def _match_view(fixture: Fixture, results_store: dict[str, object] | None = None) -> dict[str, object]:
+def _match_view(
+    fixture: Fixture,
+    results_store: dict[str, object] | None = None,
+    *,
+    bracket=None,
+    form_index: dict | None = None,
+) -> dict[str, object]:
     is_group_match = fixture.group is not None
     stored = result_for_match(results_store or {}, fixture.match_number) if results_store else None
     score_tuple: tuple[int, int] | None = None
     if stored and isinstance(stored.get("score"), dict):
         score_tuple = (int(stored["score"]["home"]), int(stored["score"]["away"]))
 
+    home_team = fixture.home_team
+    away_team = fixture.away_team
+    group_forms = None
+    if not is_group_match and bracket is not None:
+        home_team, away_team = resolve_knockout_teams(fixture, bracket)
+        if form_index:
+            group_forms = (form_index.get(home_team), form_index.get(away_team))
+
     ai_prediction = predict_match(
-        fixture.home_team,
-        fixture.away_team,
+        home_team,
+        away_team,
         "group" if is_group_match else "knockout",
         fixture.round_number,
         fixture.group,
         match_number=fixture.match_number,
+        group_forms=group_forms,
     )
     ai_pick = str(ai_prediction["pick"])
     actual_pick = _actual_pick(score_tuple) if score_tuple else None
@@ -121,8 +143,8 @@ def _match_view(fixture: Fixture, results_store: dict[str, object] | None = None
         "group": fixture.group,
         "kickoffAt": fixture.kickoff_at.isoformat().replace("+00:00", "Z"),
         "location": fixture.location,
-        "homeTeam": display_team_name(fixture.home_team),
-        "awayTeam": display_team_name(fixture.away_team),
+        "homeTeam": display_team_name(home_team),
+        "awayTeam": display_team_name(away_team),
         "status": "completed" if is_completed else "upcoming",
         "score": _score_view(score_tuple),
         "actualPick": actual_pick,
@@ -142,18 +164,20 @@ def _ai_prediction_view(prediction: dict[str, object], status: str) -> dict[str,
     return view
 
 
-def _team_insights(fixtures: list[Fixture]) -> dict[str, object]:
-    teams = sorted(
-        {
-            team
-            for fixture in fixtures
-            for team in (fixture.home_team, fixture.away_team)
-            if is_known_team(team)
-        }
-    )
+def _team_insights(fixtures: list[Fixture], *, bracket=None) -> dict[str, object]:
+    teams: set[str] = set()
+    for fixture in fixtures:
+        for team in (fixture.home_team, fixture.away_team):
+            if is_known_team(team):
+                teams.add(team)
+    if bracket is not None:
+        for home, away in bracket.resolved_teams.values():
+            for team in (home, away):
+                if team and is_known_team(team):
+                    teams.add(team)
     return {
         display_team_name(team): insight
-        for team in teams
+        for team in sorted(teams)
         if (insight := team_insight(team))
     }
 

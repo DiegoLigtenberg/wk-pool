@@ -8,6 +8,7 @@ from typing import Literal
 from app.data.teams.team_loader import get_team_bundle
 from app.data.teams.tournament_context_loader import head_to_head_vs
 from app.data.teams.tournament_context_schema import MomentumLabel, PlayedMatch
+from app.group_form import GroupFormStats
 from app.teams import display_team_name
 
 PickCode = Literal["1", "2", "3"]
@@ -311,6 +312,153 @@ def live_form_from_results(
     return out
 
 
+def group_momentum_adjustments(
+    home: GroupFormStats | None,
+    away: GroupFormStats | None,
+) -> list[PickAdjustment]:
+    """Poulefase: rang, punten, doelsaldo en goals als momentum na de groep."""
+    if home is None or away is None or home.played == 0 or away.played == 0:
+        return []
+
+    out: list[PickAdjustment] = []
+
+    rank_gap = away.rank - home.rank
+    if rank_gap > 0:
+        delta = 2 if rank_gap >= 2 else 1
+        out.append(
+            PickAdjustment(
+                id="home_group_rank",
+                kind="standings",
+                label="Poulerang thuis",
+                delta=delta,
+                reason=(
+                    f"{display_team_name(home.fifa_team)} eindigde #{home.rank} in groep {home.group}, "
+                    f"{display_team_name(away.fifa_team)} #{away.rank} in groep {away.group} "
+                    f"→ +{delta} thuis."
+                ),
+            )
+        )
+    elif rank_gap < 0:
+        delta = 2 if rank_gap <= -2 else 1
+        out.append(
+            PickAdjustment(
+                id="away_group_rank",
+                kind="standings",
+                label="Poulerang uit",
+                delta=-delta,
+                reason=(
+                    f"{display_team_name(away.fifa_team)} eindigde #{away.rank} in groep {away.group}, "
+                    f"{display_team_name(home.fifa_team)} #{home.rank} in groep {home.group} "
+                    f"→ +{delta} uit (−{delta} op diff)."
+                ),
+            )
+        )
+
+    if home.wins >= 3:
+        out.append(
+            PickAdjustment(
+                id="home_group_wins",
+                kind="momentum",
+                label="Poule-winstreeks thuis",
+                delta=1,
+                reason=f"{display_team_name(home.fifa_team)} won alle {home.wins} groepsduels → +1 thuis.",
+            )
+        )
+    if away.wins >= 3:
+        out.append(
+            PickAdjustment(
+                id="away_group_wins",
+                kind="momentum",
+                label="Poule-winstreeks uit",
+                delta=-1,
+                reason=(
+                    f"{display_team_name(away.fifa_team)} won alle {away.wins} groepsduels "
+                    f"→ +1 uit (−1 op diff)."
+                ),
+            )
+        )
+
+    if home.goal_difference >= 4:
+        out.append(
+            PickAdjustment(
+                id="home_group_gd",
+                kind="momentum",
+                label="Sterk doelsaldo thuis",
+                delta=1,
+                reason=(
+                    f"{display_team_name(home.fifa_team)} doelsaldo +{home.goal_difference} in de poule → +1 thuis."
+                ),
+            )
+        )
+    elif home.goal_difference <= -3:
+        out.append(
+            PickAdjustment(
+                id="home_group_gd_weak",
+                kind="momentum",
+                label="Zwak doelsaldo thuis",
+                delta=-1,
+                reason=(
+                    f"{display_team_name(home.fifa_team)} doelsaldo {home.goal_difference} in de poule → −1 thuis."
+                ),
+            )
+        )
+
+    if away.goal_difference >= 4:
+        out.append(
+            PickAdjustment(
+                id="away_group_gd",
+                kind="momentum",
+                label="Sterk doelsaldo uit",
+                delta=-1,
+                reason=(
+                    f"{display_team_name(away.fifa_team)} doelsaldo +{away.goal_difference} in de poule "
+                    f"→ +1 uit (−1 op diff)."
+                ),
+            )
+        )
+    elif away.goal_difference <= -3:
+        out.append(
+            PickAdjustment(
+                id="away_group_gd_weak",
+                kind="momentum",
+                label="Zwak doelsaldo uit",
+                delta=1,
+                reason=(
+                    f"{display_team_name(away.fifa_team)} doelsaldo {away.goal_difference} in de poule "
+                    f"→ +1 thuis."
+                ),
+            )
+        )
+
+    if home.goals_for >= 7:
+        out.append(
+            PickAdjustment(
+                id="home_group_goals",
+                kind="momentum",
+                label="Aanvallende poule thuis",
+                delta=1,
+                reason=(
+                    f"{display_team_name(home.fifa_team)} scoorde {home.goals_for}x in de poule → +1 thuis."
+                ),
+            )
+        )
+    if away.goals_for >= 7:
+        out.append(
+            PickAdjustment(
+                id="away_group_goals",
+                kind="momentum",
+                label="Aanvallende poule uit",
+                delta=-1,
+                reason=(
+                    f"{display_team_name(away.fifa_team)} scoorde {away.goals_for}x in de poule "
+                    f"→ +1 uit (−1 op diff)."
+                ),
+            )
+        )
+
+    return out
+
+
 def collect_pick_adjustments(
     *,
     home_key: str,
@@ -321,8 +469,10 @@ def collect_pick_adjustments(
     away_factors: list[dict[str, object]],
     live_form: tuple[int, int, int, int] | None = None,
     include_live_form: bool = False,
+    home_form: GroupFormStats | None = None,
+    away_form: GroupFormStats | None = None,
 ) -> list[PickAdjustment]:
-    """Pool-stappen. `live_form` alleen bij knock-out (groeps-YAML), niet pre-WK groep."""
+    """Pool-stappen. `live_form` / `home_form` alleen bij knock-out na de groep."""
     adjustments: list[PickAdjustment] = []
     adjustments.extend(_side_yaml_adjustments(home_key, is_home=True))
     adjustments.extend(_side_yaml_adjustments(away_key, is_home=False))
@@ -354,6 +504,9 @@ def collect_pick_adjustments(
                 away_played=apl,
             )
         )
+
+    if include_live_form:
+        adjustments.extend(group_momentum_adjustments(home_form, away_form))
 
     total = sum(a.delta for a in adjustments)
     if abs(total) > _POOL_DIFF_CAP:
