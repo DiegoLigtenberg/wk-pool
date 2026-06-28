@@ -362,10 +362,7 @@ def _sigmoid(x: float) -> float:
 _GROUP_HOME_LOGIT_K = 0.112
 _GROUP_HOME_LOGIT_B = math.log(0.36 / 0.64)
 
-# Knock-out: steilere curve; gelijk na 90 min alleen bij krappe duels.
-_KNOCKOUT_HOME_LOGIT_K = 0.155
-KNOCKOUT_AFTER_90_DRAW_DIFF_MAX = 3
-KNOCKOUT_AFTER_90_DRAW_MIN_PCT = 20
+# Knock-out: zelfde 90-min toto-regel als poule (via _pick_from_diff + _group_probabilities).
 
 # Groep: pick = wedstrijdscore-diff; gelijk in band; uitzondering duidelijke basisfavoriet.
 GROUP_DRAW_ABS_DIFF_MAX = 8
@@ -379,20 +376,6 @@ def _probabilities(diff: int, can_draw: bool) -> dict[str, int]:
     return _knockout_probabilities(diff)
 
 
-def _knockout_after_90_probabilities(diff: int) -> dict[str, int]:
-    """Driekans na 90 min (vóór verlenging) — smallere gelijk-band dan in de poule."""
-    draw_pct = int(round(max(14, min(26, 23 - 2.0 * abs(diff)))))
-    p_draw = draw_pct / 100.0
-    p_home = _sigmoid(diff * _GROUP_HOME_LOGIT_K + _GROUP_HOME_LOGIT_B)
-    p_away = max(0.08, 1.0 - p_home - p_draw)
-    p_home = max(0.08, 1.0 - p_away - p_draw)
-    total = p_home + p_draw + p_away
-    home = int(round(100 * p_home / total))
-    draw = int(round(100 * p_draw / total))
-    away = 100 - home - draw
-    return {"home": home, "draw": draw, "away": away}
-
-
 def _resolve_pick_and_probabilities(
     diff: int,
     *,
@@ -400,29 +383,15 @@ def _resolve_pick_and_probabilities(
     home_power: int,
     away_power: int,
 ) -> tuple[str, dict[str, int], bool]:
-    if stage == "group":
-        pick = _pick_from_diff(
-            diff,
-            can_draw=True,
-            home_power=home_power,
-            away_power=away_power,
-        )
-        probabilities = _align_probabilities_to_pick(_group_probabilities(diff), pick)
-        return pick, probabilities, True
-
-    after_90 = _knockout_after_90_probabilities(diff)
-    leader = max(after_90["home"], after_90["away"])
-    tight = abs(diff) <= KNOCKOUT_AFTER_90_DRAW_DIFF_MAX
-    draw_favored = (
-        tight
-        and after_90["draw"] >= KNOCKOUT_AFTER_90_DRAW_MIN_PCT
-        and after_90["draw"] >= leader - 2
+    """Poule en knock-out: zelfde pick-regel en kansen — uitslag na 90 min (toto)."""
+    del stage  # zelfde regels voor group en knockout
+    pick = _pick_from_diff(
+        diff,
+        can_draw=True,
+        home_power=home_power,
+        away_power=away_power,
     )
-    if draw_favored:
-        pick = "3"
-    else:
-        pick = "1" if diff > 0 else "2"
-    probabilities = _align_probabilities_to_pick(after_90, pick)
+    probabilities = _align_probabilities_to_pick(_group_probabilities(diff), pick)
     return pick, probabilities, True
 
 
@@ -441,7 +410,7 @@ def _group_probabilities(diff: int) -> dict[str, int]:
 
 
 def _knockout_probabilities(diff: int) -> dict[str, int]:
-    p_home = _sigmoid(diff * _KNOCKOUT_HOME_LOGIT_K)
+    p_home = _sigmoid(diff * 0.155)
     home = int(round(100 * p_home))
     home = max(15, min(88, home))
     return {"home": home, "draw": 0, "away": 100 - home}

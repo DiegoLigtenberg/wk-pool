@@ -113,3 +113,39 @@ def test_group_momentum_adjustments_on_knockout() -> None:
     )
     labels = [a.get("label") for a in pred["insight"].get("poolAdjustments", [])]
     assert any("Poule" in str(label) for label in labels)
+
+
+def test_group_expectation_adjustment_only_for_large_surprise() -> None:
+    from app.group_form import GroupFormStats
+    from app.pool_edge import group_expectation_adjustments
+
+    mexico = GroupFormStats(
+        fifa_team="Mexico",
+        group="A",
+        rank=1,
+        points=9,
+        played=3,
+        wins=3,
+        draws=0,
+        losses=0,
+        goals_for=8,
+        goals_against=2,
+        goal_difference=6,
+    )
+    adj = group_expectation_adjustments(mexico, None, home_power=78, away_power=70)
+    assert any(a.id == "home_group_expectation_over" for a in adj)
+
+    stable = GroupFormStats(
+        fifa_team="France",
+        group="B",
+        rank=1,
+        points=7,
+        played=3,
+        wins=2,
+        draws=1,
+        losses=0,
+        goals_for=6,
+        goals_against=3,
+        goal_difference=3,
+    )
+    assert group_expectation_adjustments(stable, None, home_power=88, away_power=70) == []

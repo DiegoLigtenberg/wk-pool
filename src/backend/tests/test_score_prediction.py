@@ -100,4 +100,11 @@ def test_tight_knockout_can_pick_draw_after_90() -> None:
         group_forms=(home, away),
     )
     assert pred["drawProbability"] is not None
-    assert pred["suggestedScore"]["home"] == pred["suggestedScore"]["away"] or pred["pick"] in ("1", "2", "3")
+    assert pred["pick"] == "3"
+    assert pred["suggestedScore"]["home"] == pred["suggestedScore"]["away"]
+
+
+def test_knockout_draw_rule_matches_group_for_same_diff() -> None:
+    group_pred = predict_match("Netherlands", "Morocco", "group", "1", "F")
+    knockout_pred = predict_match("Netherlands", "Morocco", "knockout", "Round of 32", None)
+    assert group_pred["pick"] == knockout_pred["pick"]

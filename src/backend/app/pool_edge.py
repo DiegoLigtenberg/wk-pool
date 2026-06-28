@@ -21,6 +21,20 @@ _MOMENTUM_DELTA: dict[MomentumLabel, int] = {
 }
 
 _POOL_DIFF_CAP = 6
+# Poule vs papier: alleen grote verrassingen, lichte bijsturing (situatieafhankelijk).
+_GROUP_EXPECTATION_SURPRISE_MIN = 3
+_GROUP_EXPECTATION_DELTA = 1
+
+
+def expected_group_points_from_power(power: int) -> int:
+    """Ruwe verwachting poulepunten op basis van basissterkte (3 duels)."""
+    if power >= 82:
+        return 7
+    if power >= 74:
+        return 5
+    if power >= 68:
+        return 4
+    return 2
 
 
 @dataclass(frozen=True, slots=True)
@@ -555,6 +569,82 @@ def group_scoring_trend_adjustments(
     return out
 
 
+def group_expectation_adjustments(
+    home: GroupFormStats | None,
+    away: GroupFormStats | None,
+    *,
+    home_power: int,
+    away_power: int,
+) -> list[PickAdjustment]:
+    """Poule-uitslag vs papier: max ±1 per team, alleen bij grote verrassing (≥3 punten)."""
+    out: list[PickAdjustment] = []
+
+    if home is not None and home.played >= 3:
+        surprise = home.points - expected_group_points_from_power(home_power)
+        if surprise >= _GROUP_EXPECTATION_SURPRISE_MIN:
+            out.append(
+                PickAdjustment(
+                    id="home_group_expectation_over",
+                    kind="momentum",
+                    label="Poule boven verwachting thuis",
+                    delta=_GROUP_EXPECTATION_DELTA,
+                    reason=(
+                        f"{display_team_name(home.fifa_team)} haalde {home.points} punten in de poule "
+                        f"(op papier ~{expected_group_points_from_power(home_power)}) "
+                        f"→ lichte +{_GROUP_EXPECTATION_DELTA} thuis; kan situatiegebonden zijn."
+                    ),
+                )
+            )
+        elif surprise <= -_GROUP_EXPECTATION_SURPRISE_MIN:
+            out.append(
+                PickAdjustment(
+                    id="home_group_expectation_under",
+                    kind="momentum",
+                    label="Poule onder verwachting thuis",
+                    delta=-_GROUP_EXPECTATION_DELTA,
+                    reason=(
+                        f"{display_team_name(home.fifa_team)} haalde {home.points} punten in de poule "
+                        f"(op papier ~{expected_group_points_from_power(home_power)}) "
+                        f"→ lichte −{_GROUP_EXPECTATION_DELTA} thuis; kan situatiegebonden zijn."
+                    ),
+                )
+            )
+
+    if away is not None and away.played >= 3:
+        surprise = away.points - expected_group_points_from_power(away_power)
+        if surprise >= _GROUP_EXPECTATION_SURPRISE_MIN:
+            out.append(
+                PickAdjustment(
+                    id="away_group_expectation_over",
+                    kind="momentum",
+                    label="Poule boven verwachting uit",
+                    delta=-_GROUP_EXPECTATION_DELTA,
+                    reason=(
+                        f"{display_team_name(away.fifa_team)} haalde {away.points} punten in de poule "
+                        f"(op papier ~{expected_group_points_from_power(away_power)}) "
+                        f"→ lichte +{_GROUP_EXPECTATION_DELTA} uit (−{_GROUP_EXPECTATION_DELTA} op diff); "
+                        f"kan situatiegebonden zijn."
+                    ),
+                )
+            )
+        elif surprise <= -_GROUP_EXPECTATION_SURPRISE_MIN:
+            out.append(
+                PickAdjustment(
+                    id="away_group_expectation_under",
+                    kind="momentum",
+                    label="Poule onder verwachting uit",
+                    delta=_GROUP_EXPECTATION_DELTA,
+                    reason=(
+                        f"{display_team_name(away.fifa_team)} haalde {away.points} punten in de poule "
+                        f"(op papier ~{expected_group_points_from_power(away_power)}) "
+                        f"→ lichte +{_GROUP_EXPECTATION_DELTA} thuis; kan situatiegebonden zijn."
+                    ),
+                )
+            )
+
+    return out
+
+
 def collect_pick_adjustments(
     *,
     home_key: str,
@@ -604,6 +694,14 @@ def collect_pick_adjustments(
     if include_live_form:
         adjustments.extend(group_momentum_adjustments(home_form, away_form))
         adjustments.extend(group_scoring_trend_adjustments(home_form, away_form))
+        adjustments.extend(
+            group_expectation_adjustments(
+                home_form,
+                away_form,
+                home_power=home_power,
+                away_power=away_power,
+            )
+        )
 
     total = sum(a.delta for a in adjustments)
     if abs(total) > _POOL_DIFF_CAP:

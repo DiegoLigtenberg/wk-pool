@@ -1,0 +1,426 @@
+{
+  "summary": {
+    "matches_with_results": 72,
+    "wrong_picks": 27,
+    "accuracy_pct": 62.5,
+    "draw_actual": 20
+  },
+  "wrong": [
+    {
+      "matchNumber": 2,
+      "match": "Zuid-Korea – Tsjechië",
+      "score": "2-1",
+      "predicted": "3",
+      "actual": "1",
+      "diff": 2
+    },
+    {
+      "matchNumber": 4,
+      "match": "Verenigde Staten – Paraguay",
+      "score": "4-1",
+      "predicted": "3",
+      "actual": "1",
+      "diff": -5
+    },
+    {
+      "matchNumber": 6,
+      "match": "Australië – Turkije",
+      "score": "2-0",
+      "predicted": "2",
+      "actual": "1",
+      "diff": -17
+    },
+    {
+      "matchNumber": 8,
+      "match": "Qatar – Zwitserland",
+      "score": "1-1",
+      "predicted": "2",
+      "actual": "3",
+      "diff": -16
+    },
+    {
+      "matchNumber": 9,
+      "match": "Ivoorkust – Ecuador",
+      "score": "1-0",
+      "predicted": "3",
+      "actual": "1",
+      "diff": -3
+    },
+    {
+      "matchNumber": 13,
+      "match": "Saoedi-Arabië – Uruguay",
+      "score": "1-1",
+      "predicted": "2",
+      "actual": "3",
+      "diff": -11
+    },
+    {
+      "matchNumber": 14,
+      "match": "Spanje – Kaapverdië",
+      "score": "0-0",
+      "predicted": "1",
+      "actual": "3",
+      "diff": 32
+    },
+    {
+      "matchNumber": 15,
+      "match": "Iran – Nieuw-Zeeland",
+      "score": "2-2",
+      "predicted": "1",
+      "actual": "3",
+      "diff": 13
+    },
+    {
+      "matchNumber": 16,
+      "match": "België – Egypte",
+      "score": "1-1",
+      "predicted": "2",
+      "actual": "3",
+      "diff": -6
+    },
+    {
+      "matchNumber": 27,
+      "match": "Canada – Qatar",
+      "score": "6-0",
+      "predicted": "3",
+      "actual": "1",
+      "diff": 4
+    },
+    {
+      "matchNumber": 31,
+      "match": "Turkije – Paraguay",
+      "score": "0-1",
+      "predicted": "3",
+      "actual": "2",
+      "diff": 4
+    },
+    {
+      "matchNumber": 34,
+      "match": "Ecuador – Curaçao",
+      "score": "0-0",
+      "predicted": "1",
+      "actual": "3",
+      "diff": 21
+    },
+    {
+      "matchNumber": 35,
+      "match": "Nederland – Zweden",
+      "score": "5-1",
+      "predicted": "3",
+      "actual": "1",
+      "diff": 1
+    },
+    {
+      "matchNumber": 37,
+      "match": "Uruguay – Kaapverdië",
+      "score": "2-2",
+      "predicted": "1",
+      "actual": "3",
+      "diff": 25
+    },
+    {
+      "matchNumber": 39,
+      "match": "België – Iran",
+      "score": "0-0",
+      "predicted": "1",
+      "actual": "3",
+      "diff": 7
+    },
+    {
+      "matchNumber": 41,
+      "match": "Noorwegen – Senegal",
+      "score": "3-2",
+      "predicted": "2",
+      "actual": "1",
+      "diff": -11
+    },
+    {
+      "matchNumber": 45,
+      "match": "Engeland – Ghana",
+      "score": "0-0",
+      "predicted": "1",
+      "actual": "3",
+      "diff": 12
+    },
+    {
+      "matchNumber": 50,
+      "match": "Marokko – Haïti",
+      "score": "4-2",
+      "predicted": "3",
+      "actual": "1",
+      "diff": 0
+    },
+    {
+      "matchNumber": 51,
+      "match": "Zwitserland – Canada",
+      "score": "2-1",
+      "predicted": "3",
+      "actual": "1",
+      "diff": 3
+    },
+    {
+      "matchNumber": 52,
+      "match": "Bosnië-Herzegovina – Qatar",
+      "score": "3-1",
+      "predicted": "3",
+      "actual": "1",
+      "diff": -1
+    },
+    {
+      "matchNumber": 54,
+      "match": "Zuid-Afrika – Zuid-Korea",
+      "score": "1-0",
+      "predicted": "3",
+      "actual": "1",
+      "diff": -4
+    },
+    {
+      "matchNumber": 56,
+      "match": "Ecuador – Duitsland",
+      "score": "2-1",
+      "predicted": "2",
+      "actual": "1",
+      "diff": -9
+    },
+    {
+      "matchNumber": 59,
+      "match": "Turkije – Verenigde Staten",
+      "score": "3-2",
+      "predicted": "3",
+      "actual": "1",
+      "diff": -3
+    },
+    {
+      "matchNumber": 65,
+      "match": "Kaapverdië – Saoedi-Arabië",
+      "score": "0-0",
+      "predicted": "2",
+      "actual": "3",
+      "diff": -14
+    },
+    {
+      "matchNumber": 69,
+      "match": "Algerije – Oostenrijk",
+      "score": "3-3",
+      "predicted": "2",
+      "actual": "3",
+      "diff": -9
+    },
+    {
+      "matchNumber": 71,
+      "match": "Colombia – Portugal",
+      "score": "0-0",
+      "predicted": "2",
+      "actual": "3",
+      "diff": -13
+    },
+    {
+      "matchNumber": 72,
+      "match": "Congo – Oezbekistan",
+      "score": "3-1",
+      "predicted": "3",
+      "actual": "1",
+      "diff": 3
+    }
+  ],
+  "surprises": [
+    {
+      "team": "Argentinië",
+      "power": 91,
+      "points": 9,
+      "expected": 7,
+      "delta": 2,
+      "rank": 1,
+      "gd": 7
+    },
+    {
+      "team": "België",
+      "power": 82,
+      "points": 5,
+      "expected": 7,
+      "delta": -2,
+      "rank": 1,
+      "gd": 4
+    },
+    {
+      "team": "Bosnië-Herzegovina",
+      "power": 65,
+      "points": 4,
+      "expected": 2,
+      "delta": 2,
+      "rank": 3,
+      "gd": -1
+    },
+    {
+      "team": "Colombia",
+      "power": 80,
+      "points": 7,
+      "expected": 5,
+      "delta": 2,
+      "rank": 1,
+      "gd": 3
+    },
+    {
+      "team": "Congo",
+      "power": 65,
+      "points": 4,
+      "expected": 2,
+      "delta": 2,
+      "rank": 3,
+      "gd": 1
+    },
+    {
+      "team": "Frankrijk",
+      "power": 92,
+      "points": 9,
+      "expected": 7,
+      "delta": 2,
+      "rank": 1,
+      "gd": 8
+    },
+    {
+      "team": "Haïti",
+      "power": 60,
+      "points": 0,
+      "expected": 2,
+      "delta": -2,
+      "rank": 4,
+      "gd": -6
+    },
+    {
+      "team": "Irak",
+      "power": 64,
+      "points": 0,
+      "expected": 2,
+      "delta": -2,
+      "rank": 4,
+      "gd": -11
+    },
+    {
+      "team": "Jordanië",
+      "power": 62,
+      "points": 0,
+      "expected": 2,
+      "delta": -2,
+      "rank": 4,
+      "gd": -5
+    },
+    {
+      "team": "Marokko",
+      "power": 81,
+      "points": 7,
+      "expected": 5,
+      "delta": 2,
+      "rank": 2,
+      "gd": 3
+    },
+    {
+      "team": "Mexico",
+      "power": 77,
+      "points": 9,
+      "expected": 5,
+      "delta": 4,
+      "rank": 1,
+      "gd": 6
+    },
+    {
+      "team": "Oezbekistan",
+      "power": 65,
+      "points": 0,
+      "expected": 2,
+      "delta": -2,
+      "rank": 4,
+      "gd": -9
+    },
+    {
+      "team": "Panama",
+      "power": 61,
+      "points": 0,
+      "expected": 2,
+      "delta": -2,
+      "rank": 4,
+      "gd": -4
+    },
+    {
+      "team": "Portugal",
+      "power": 87,
+      "points": 5,
+      "expected": 7,
+      "delta": -2,
+      "rank": 2,
+      "gd": 5
+    },
+    {
+      "team": "Saoedi-Arabië",
+      "power": 68,
+      "points": 2,
+      "expected": 4,
+      "delta": -2,
+      "rank": 4,
+      "gd": -4
+    },
+    {
+      "team": "Senegal",
+      "power": 77,
+      "points": 3,
+      "expected": 5,
+      "delta": -2,
+      "rank": 3,
+      "gd": 2
+    },
+    {
+      "team": "Tsjechië",
+      "power": 71,
+      "points": 1,
+      "expected": 4,
+      "delta": -3,
+      "rank": 4,
+      "gd": -4
+    },
+    {
+      "team": "Tunesië",
+      "power": 68,
+      "points": 0,
+      "expected": 4,
+      "delta": -4,
+      "rank": 4,
+      "gd": -10
+    },
+    {
+      "team": "Turkije",
+      "power": 76,
+      "points": 3,
+      "expected": 5,
+      "delta": -2,
+      "rank": 4,
+      "gd": -2
+    },
+    {
+      "team": "Uruguay",
+      "power": 82,
+      "points": 2,
+      "expected": 7,
+      "delta": -5,
+      "rank": 3,
+      "gd": -1
+    },
+    {
+      "team": "Zuid-Afrika",
+      "power": 66,
+      "points": 4,
+      "expected": 2,
+      "delta": 2,
+      "rank": 2,
+      "gd": -1
+    },
+    {
+      "team": "Zwitserland",
+      "power": 79,
+      "points": 7,
+      "expected": 5,
+      "delta": 2,
+      "rank": 1,
+      "gd": 4
+    }
+  ]
+}

@@ -50,9 +50,6 @@ export function PredictedOutcome({ match, variant = "row" }: PredictedOutcomePro
     <div className="knockout-prediction-row" title={`AI-voorspelling (90 min): ${reason ?? score}`}>
       <span className="knockout-prediction-row__label">Voorsp.</span>
       <span className="knockout-prediction-row__score">{score}</span>
-      <span className="knockout-prediction-row__toto" aria-label={`Toto ${pickCodeLabel(pick)}`}>
-        {pickCodeLabel(pick)}
-      </span>
     </div>
   );
 }

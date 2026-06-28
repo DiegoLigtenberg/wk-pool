@@ -26,7 +26,7 @@ def test_usa_paraguay_pick_and_probs_aligned() -> None:
 def test_large_favorite_has_strong_knockout_home_chance() -> None:
     pred = predict_match("Argentina", "Haiti", "knockout", "R16", None)
     assert pred["pick"] == "1"
-    assert pred["homeWinProbability"] >= 78
+    assert pred["homeWinProbability"] >= 75
     assert pred["drawProbability"] is not None
     assert pred["suggestedScore"]["home"] > pred["suggestedScore"]["away"]
 

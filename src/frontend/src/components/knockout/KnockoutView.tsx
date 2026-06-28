@@ -1,12 +1,10 @@
 import { Bracket } from "react-bracket-ui";
 import { useEffect, useMemo, useRef } from "react";
 import type { Match as BracketMatch } from "react-bracket-ui";
-import { formatKnockoutDateShort, roundLabelNl } from "../../lib/format";
+import { flattenKnockoutBracket, knockoutBracketRound, knockoutNextMatchId } from "../../lib/knockoutBracket";
 import { displayTeamName, hasKnownTeams } from "../../lib/teams";
 import type { Match } from "../../types";
-import { PredictedOutcome } from "../prediction/PredictedOutcome";
 import { TeamLabel } from "../cards/TeamLabel";
-import "../prediction/PredictedOutcome.css";
 import "./KnockoutView.css";
 
 type KnockoutViewProps = {
@@ -22,10 +20,10 @@ export function KnockoutView({ knockoutMatches }: KnockoutViewProps) {
   const finals = round(knockoutMatches, "Finals");
   const final = finals.find((match) => match.matchNumber === 104) ?? finals[finals.length - 1];
   const thirdPlace = finals.find((match) => match.matchNumber !== final?.matchNumber);
-  const bracketMatches = toBracketMatches(round16, quarter, semi, final);
+  const bracketMatches = toBracketMatches(round32, round16, quarter, semi, final);
   const bracketDates = useMemo(
-    () => [...round16, ...quarter, ...semi, ...(final ? [final] : [])].map(formatKnockoutDateLines),
-    [round16, quarter, semi, final],
+    () => flattenKnockoutBracket(round32, round16, quarter, semi, final).map(formatKnockoutDateLines),
+    [round32, round16, quarter, semi, final],
   );
   const bracketShellRef = useRef<HTMLDivElement>(null);
 
@@ -45,45 +43,23 @@ export function KnockoutView({ knockoutMatches }: KnockoutViewProps) {
         </div>
       </div>
       <p className="panel-subnote">
-        De eerste knock-outronde telt {round32.length} wedstrijden. Daarna loopt het schema hieronder van achtste finale tot finale.
+        Het schema loopt van zestiende finale tot finale. Later rondes vullen zich zodra teams en uitslagen bekend zijn.
       </p>
-      {round32.length ? (
-        <div className="knockout-r32-grid" aria-label="Zestiende finales">
-          {round32.map((match) => (
-            <article key={match.matchNumber} className="knockout-r32-card">
-              <div className="knockout-r32-card__teams">
-                <TeamLabel team={match.homeTeam} />
-                <span className="knockout-r32-card__meta">tegen</span>
-                <TeamLabel team={match.awayTeam} />
-                <span className="knockout-r32-card__meta">{formatKnockoutDateShort(match.kickoffAt)}</span>
-              </div>
-              <div className="knockout-r32-card__prediction">
-                {match.score ? (
-                  <strong className="knockout-r32-card__final-score">
-                    {match.score.home} - {match.score.away}
-                  </strong>
-                ) : (
-                  <PredictedOutcome match={match} variant="card" />
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      ) : null}
       <div className="knockout-bracket-shell" ref={bracketShellRef}>
         <Bracket
           className="wk-bracket"
           matches={bracketMatches}
           showRoundNames
           roundNames={{
-            1: "Achtste finale",
-            2: "Kwartfinale",
-            3: "Halve finale",
-            4: "Finale",
+            1: "Zestiende finale",
+            2: "Achtste finale",
+            3: "Kwartfinale",
+            4: "Halve finale",
+            5: "Finale",
           }}
           matchWidth={230}
           matchHeight={104}
-          gap={32}
+          gap={24}
           colors={{
             background: "#0f172a",
             primary: "#76a5eb",
@@ -119,34 +95,19 @@ export function KnockoutView({ knockoutMatches }: KnockoutViewProps) {
 }
 
 function toBracketMatches(
+  round32: Match[],
   round16: Match[],
   quarter: Match[],
   semi: Match[],
   final?: Match,
 ): BracketMatch[] {
-  const nextMatchIds = new Map<number, number | null>();
-
-  round16.forEach((match, index) => {
-    nextMatchIds.set(match.matchNumber, quarter[Math.floor(index / 2)]?.matchNumber ?? null);
-  });
-  quarter.forEach((match, index) => {
-    nextMatchIds.set(match.matchNumber, semi[Math.floor(index / 2)]?.matchNumber ?? null);
-  });
-  semi.forEach((match) => {
-    nextMatchIds.set(match.matchNumber, final?.matchNumber ?? null);
-  });
-
-  return [
-    ...round16.map((match) => toBracketMatch(match, 1, nextMatchIds.get(match.matchNumber))),
-    ...quarter.map((match) => toBracketMatch(match, 2, nextMatchIds.get(match.matchNumber))),
-    ...semi.map((match) => toBracketMatch(match, 3, nextMatchIds.get(match.matchNumber))),
-    ...(final ? [toBracketMatch(final, 4, null)] : []),
-  ];
+  return flattenKnockoutBracket(round32, round16, quarter, semi, final).map((match) =>
+    toBracketMatch(match, knockoutBracketRound(match), knockoutNextMatchId(match.matchNumber)),
+  );
 }
 
-function toBracketMatch(match: Match, roundNumber: number, nextMatchId: number | null | undefined): BracketMatch {
-  const homeScore = match.score?.home;
-  const awayScore = match.score?.away;
+function toBracketMatch(match: Match, roundNumber: number, nextMatchId: number | null): BracketMatch {
+  const scores = participantScores(match);
   const winner = predictedWinnerId(match);
 
   return {
@@ -158,14 +119,27 @@ function toBracketMatch(match: Match, roundNumber: number, nextMatchId: number |
     participant1: {
       id: `${match.matchNumber}-home`,
       name: displayTeamName(match.homeTeam),
-      score: homeScore,
+      score: scores.home,
     },
     participant2: {
       id: `${match.matchNumber}-away`,
       name: displayTeamName(match.awayTeam),
-      score: awayScore,
+      score: scores.away,
     },
   };
+}
+
+function participantScores(match: Match): { home?: number; away?: number } {
+  if (match.score) {
+    return { home: match.score.home, away: match.score.away };
+  }
+
+  const suggested = match.aiPrediction.suggestedScore;
+  if (suggested && hasKnownTeams(match)) {
+    return { home: suggested.home, away: suggested.away };
+  }
+
+  return {};
 }
 
 function predictedWinnerId(match: Match): string | null {
