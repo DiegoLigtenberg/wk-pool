@@ -1,0 +1,431 @@
+{
+  "summary": {
+    "group": {
+      "matches": 72,
+      "pick_accuracy_pct": 62.5,
+      "predicted_draws": 20,
+      "actual_draws": 20,
+      "draw_predictions_correct": 8,
+      "predicted_draw_but_winner": 12,
+      "predicted_winner_but_draw": 12,
+      "avg_goals_when_pick_wrong": 2.78,
+      "low_scoring_actual_draws_0_2_goals": 16,
+      "high_scoring_matches_5plus": 16
+    },
+    "r32": {
+      "matches": 16,
+      "draw_picks": 5,
+      "draw_pick_pct": 31.2,
+      "draw_matches": [
+        {
+          "match": "Zuid-Afrika – Canada",
+          "suggested": {
+            "home": 2,
+            "away": 2,
+            "reason": "Beide teams scoorden regelmatig in de poule; 2-2 na 90 min is plausibel."
+          }
+        },
+        {
+          "match": "Nederland – Marokko",
+          "suggested": {
+            "home": 2,
+            "away": 2,
+            "reason": "Beide teams scoorden regelmatig in de poule; 2-2 na 90 min is plausibel."
+          }
+        },
+        {
+          "match": "Ivoorkust – Noorwegen",
+          "suggested": {
+            "home": 2,
+            "away": 2,
+            "reason": "Beide teams scoorden regelmatig in de poule; 2-2 na 90 min is plausibel."
+          }
+        },
+        {
+          "match": "België – Senegal",
+          "suggested": {
+            "home": 2,
+            "away": 2,
+            "reason": "Beide teams scoorden regelmatig in de poule; 2-2 na 90 min is plausibel."
+          }
+        },
+        {
+          "match": "Australië – Egypte",
+          "suggested": {
+            "home": 1,
+            "away": 1,
+            "reason": "Evenwichtig duel met aanvallend vermogen; gelijk na 90 min (1-1)."
+          }
+        }
+      ]
+    },
+    "reflection": {
+      "draw_model_group": "Gelijk 20x voorspeld vs 20x echt; maar slechts 8x goed — 12x onterecht gelijk, 12x gelijk gemist.",
+      "r32_draw_rate": "5/16 R32 = 31.2% gelijk-pick (groepsfase echt ~27.8%)."
+    }
+  },
+  "wrong": [
+    {
+      "match": "Zuid-Korea – Tsjechië",
+      "score": "2-1",
+      "goals": 3,
+      "pick": "3",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Verenigde Staten – Paraguay",
+      "score": "4-1",
+      "goals": 5,
+      "pick": "3",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Australië – Turkije",
+      "score": "2-0",
+      "goals": 2,
+      "pick": "2",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Qatar – Zwitserland",
+      "score": "1-1",
+      "goals": 2,
+      "pick": "2",
+      "actual": "3",
+      "ok": false
+    },
+    {
+      "match": "Ivoorkust – Ecuador",
+      "score": "1-0",
+      "goals": 1,
+      "pick": "3",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Saoedi-Arabië – Uruguay",
+      "score": "1-1",
+      "goals": 2,
+      "pick": "2",
+      "actual": "3",
+      "ok": false
+    },
+    {
+      "match": "Spanje – Kaapverdië",
+      "score": "0-0",
+      "goals": 0,
+      "pick": "1",
+      "actual": "3",
+      "ok": false
+    },
+    {
+      "match": "Iran – Nieuw-Zeeland",
+      "score": "2-2",
+      "goals": 4,
+      "pick": "1",
+      "actual": "3",
+      "ok": false
+    },
+    {
+      "match": "België – Egypte",
+      "score": "1-1",
+      "goals": 2,
+      "pick": "2",
+      "actual": "3",
+      "ok": false
+    },
+    {
+      "match": "Canada – Qatar",
+      "score": "6-0",
+      "goals": 6,
+      "pick": "3",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Turkije – Paraguay",
+      "score": "0-1",
+      "goals": 1,
+      "pick": "3",
+      "actual": "2",
+      "ok": false
+    },
+    {
+      "match": "Ecuador – Curaçao",
+      "score": "0-0",
+      "goals": 0,
+      "pick": "1",
+      "actual": "3",
+      "ok": false
+    },
+    {
+      "match": "Nederland – Zweden",
+      "score": "5-1",
+      "goals": 6,
+      "pick": "3",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Uruguay – Kaapverdië",
+      "score": "2-2",
+      "goals": 4,
+      "pick": "1",
+      "actual": "3",
+      "ok": false
+    },
+    {
+      "match": "België – Iran",
+      "score": "0-0",
+      "goals": 0,
+      "pick": "1",
+      "actual": "3",
+      "ok": false
+    },
+    {
+      "match": "Noorwegen – Senegal",
+      "score": "3-2",
+      "goals": 5,
+      "pick": "2",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Engeland – Ghana",
+      "score": "0-0",
+      "goals": 0,
+      "pick": "1",
+      "actual": "3",
+      "ok": false
+    },
+    {
+      "match": "Marokko – Haïti",
+      "score": "4-2",
+      "goals": 6,
+      "pick": "3",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Zwitserland – Canada",
+      "score": "2-1",
+      "goals": 3,
+      "pick": "3",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Bosnië-Herzegovina – Qatar",
+      "score": "3-1",
+      "goals": 4,
+      "pick": "3",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Zuid-Afrika – Zuid-Korea",
+      "score": "1-0",
+      "goals": 1,
+      "pick": "3",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Ecuador – Duitsland",
+      "score": "2-1",
+      "goals": 3,
+      "pick": "2",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Turkije – Verenigde Staten",
+      "score": "3-2",
+      "goals": 5,
+      "pick": "3",
+      "actual": "1",
+      "ok": false
+    },
+    {
+      "match": "Kaapverdië – Saoedi-Arabië",
+      "score": "0-0",
+      "goals": 0,
+      "pick": "2",
+      "actual": "3",
+      "ok": false
+    },
+    {
+      "match": "Algerije – Oostenrijk",
+      "score": "3-3",
+      "goals": 6,
+      "pick": "2",
+      "actual": "3",
+      "ok": false
+    },
+    {
+      "match": "Colombia – Portugal",
+      "score": "0-0",
+      "goals": 0,
+      "pick": "2",
+      "actual": "3",
+      "ok": false
+    },
+    {
+      "match": "Congo – Oezbekistan",
+      "score": "3-1",
+      "goals": 4,
+      "pick": "3",
+      "actual": "1",
+      "ok": false
+    }
+  ],
+  "r32": [
+    {
+      "match": "Zuid-Afrika – Canada",
+      "pick": "3",
+      "score": {
+        "home": 2,
+        "away": 2,
+        "reason": "Beide teams scoorden regelmatig in de poule; 2-2 na 90 min is plausibel."
+      }
+    },
+    {
+      "match": "Duitsland – Paraguay",
+      "pick": "1",
+      "score": {
+        "home": 3,
+        "away": 0,
+        "reason": "Duidelijke favoriet (17 punten verschil in het model); 3-0 na 90 minuten."
+      }
+    },
+    {
+      "match": "Nederland – Marokko",
+      "pick": "3",
+      "score": {
+        "home": 2,
+        "away": 2,
+        "reason": "Beide teams scoorden regelmatig in de poule; 2-2 na 90 min is plausibel."
+      }
+    },
+    {
+      "match": "Brazilië – Japan",
+      "pick": "1",
+      "score": {
+        "home": 3,
+        "away": 1,
+        "reason": "Overtuigende winst voor thuis; 3-1 na 90 minuten."
+      }
+    },
+    {
+      "match": "Frankrijk – Zweden",
+      "pick": "1",
+      "score": {
+        "home": 3,
+        "away": 0,
+        "reason": "Duidelijke favoriet (26 punten verschil in het model); 3-0 na 90 minuten."
+      }
+    },
+    {
+      "match": "Ivoorkust – Noorwegen",
+      "pick": "3",
+      "score": {
+        "home": 2,
+        "away": 2,
+        "reason": "Beide teams scoorden regelmatig in de poule; 2-2 na 90 min is plausibel."
+      }
+    },
+    {
+      "match": "Mexico – Ecuador",
+      "pick": "1",
+      "score": {
+        "home": 3,
+        "away": 1,
+        "reason": "Overtuigende winst voor thuis; 3-1 na 90 minuten."
+      }
+    },
+    {
+      "match": "Engeland – Congo",
+      "pick": "1",
+      "score": {
+        "home": 3,
+        "away": 0,
+        "reason": "Duidelijke favoriet (26 punten verschil in het model); 3-0 na 90 minuten."
+      }
+    },
+    {
+      "match": "Verenigde Staten – Bosnië-Herzegovina",
+      "pick": "1",
+      "score": {
+        "home": 3,
+        "away": 0,
+        "reason": "Duidelijke favoriet (17 punten verschil in het model); 3-0 na 90 minuten."
+      }
+    },
+    {
+      "match": "België – Senegal",
+      "pick": "3",
+      "score": {
+        "home": 2,
+        "away": 2,
+        "reason": "Beide teams scoorden regelmatig in de poule; 2-2 na 90 min is plausibel."
+      }
+    },
+    {
+      "match": "Portugal – Kroatië",
+      "pick": "1",
+      "score": {
+        "home": 3,
+        "away": 1,
+        "reason": "Overtuigende winst voor thuis; 3-1 na 90 minuten."
+      }
+    },
+    {
+      "match": "Spanje – Oostenrijk",
+      "pick": "1",
+      "score": {
+        "home": 2,
+        "away": 0,
+        "reason": "Overtuigende winst voor thuis; 2-0 na 90 minuten."
+      }
+    },
+    {
+      "match": "Zwitserland – Algerije",
+      "pick": "1",
+      "score": {
+        "home": 3,
+        "away": 0,
+        "reason": "Duidelijke favoriet (16 punten verschil in het model); 3-0 na 90 minuten."
+      }
+    },
+    {
+      "match": "Argentinië – Kaapverdië",
+      "pick": "1",
+      "score": {
+        "home": 3,
+        "away": 0,
+        "reason": "Duidelijke favoriet (40 punten verschil in het model); 3-0 na 90 minuten."
+      }
+    },
+    {
+      "match": "Colombia – Ghana",
+      "pick": "1",
+      "score": {
+        "home": 2,
+        "away": 1,
+        "reason": "Krappe winst voor thuis; 2-1 na 90 minuten."
+      }
+    },
+    {
+      "match": "Australië – Egypte",
+      "pick": "3",
+      "score": {
+        "home": 1,
+        "away": 1,
+        "reason": "Evenwichtig duel met aanvallend vermogen; gelijk na 90 min (1-1)."
+      }
+    }
+  ]
+}

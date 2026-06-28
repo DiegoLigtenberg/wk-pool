@@ -104,7 +104,39 @@ def test_tight_knockout_can_pick_draw_after_90() -> None:
     assert pred["suggestedScore"]["home"] == pred["suggestedScore"]["away"]
 
 
-def test_knockout_draw_rule_matches_group_for_same_diff() -> None:
-    group_pred = predict_match("Netherlands", "Morocco", "group", "1", "F")
-    knockout_pred = predict_match("Netherlands", "Morocco", "knockout", "Round of 32", None)
-    assert group_pred["pick"] == knockout_pred["pick"]
+def test_netherlands_morocco_knockout_override() -> None:
+    pred = predict_match(
+        "Netherlands",
+        "Morocco",
+        "knockout",
+        "Round of 32",
+        None,
+        match_number=75,
+    )
+    assert pred["pick"] == "1"
+    assert pred["suggestedScore"] == {
+        "home": 3,
+        "away": 2,
+        "reason": "Pool-inschatting: Nederland wint na 90 minuten (3-2).",
+    }
+
+
+def test_knockout_draw_band_stricter_than_group() -> None:
+    from app.predictions import (
+        KNOCKOUT_DRAW_ABS_DIFF_MAX,
+        GROUP_DRAW_ABS_DIFF_MAX,
+        _pick_from_diff,
+    )
+
+    assert KNOCKOUT_DRAW_ABS_DIFF_MAX < GROUP_DRAW_ABS_DIFF_MAX
+    assert _pick_from_diff(5, can_draw=True, home_power=72, away_power=71) == "3"
+    assert (
+        _pick_from_diff(
+            5,
+            can_draw=True,
+            home_power=72,
+            away_power=71,
+            draw_abs_diff_max=KNOCKOUT_DRAW_ABS_DIFF_MAX,
+        )
+        == "1"
+    )

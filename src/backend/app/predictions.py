@@ -19,6 +19,7 @@ from app.pool_edge import (
 from app.group_form import GroupFormStats, live_form_tuple
 from app.score_prediction import suggest_match_score
 from app.prediction_narrative import build_prediction_insight
+from app.prediction_overrides import apply_match_overrides
 from app.teams import display_team_name, fifa_team_key
 
 _FIXTURE_HOOK_RE = re.compile(
@@ -342,7 +343,14 @@ def predict_match(
     }
     if suggested is not None:
         result["suggestedScore"] = suggested
-    return result
+
+    return apply_match_overrides(
+        match_number=match_number,
+        home_team=home_team,
+        away_team=away_team,
+        stage=stage,
+        result=result,
+    )
 
 
 def _team_summary(team: str, profile: TeamProfile) -> str:
@@ -362,7 +370,9 @@ def _sigmoid(x: float) -> float:
 _GROUP_HOME_LOGIT_K = 0.112
 _GROUP_HOME_LOGIT_B = math.log(0.36 / 0.64)
 
-# Knock-out: zelfde 90-min toto-regel als poule (via _pick_from_diff + _group_probabilities).
+# Knock-out: zelfde 90-min toto, maar smallere gelijk-band (alles-of-niets).
+KNOCKOUT_DRAW_ABS_DIFF_MAX = 3
+KNOCKOUT_DRAW_DIFF_CLEAR_MIN = 3
 
 # Groep: pick = wedstrijdscore-diff; gelijk in band; uitzondering duidelijke basisfavoriet.
 GROUP_DRAW_ABS_DIFF_MAX = 8
@@ -383,16 +393,41 @@ def _resolve_pick_and_probabilities(
     home_power: int,
     away_power: int,
 ) -> tuple[str, dict[str, int], bool]:
-    """Poule en knock-out: zelfde pick-regel en kansen — uitslag na 90 min (toto)."""
-    del stage  # zelfde regels voor group en knockout
+    """Poule vs knock-out: beide 90-min toto; KO kiest minder snel gelijk."""
+    if stage == "group":
+        pick = _pick_from_diff(
+            diff,
+            can_draw=True,
+            home_power=home_power,
+            away_power=away_power,
+        )
+        probabilities = _align_probabilities_to_pick(_group_probabilities(diff), pick)
+        return pick, probabilities, True
+
     pick = _pick_from_diff(
         diff,
         can_draw=True,
         home_power=home_power,
         away_power=away_power,
+        draw_abs_diff_max=KNOCKOUT_DRAW_ABS_DIFF_MAX,
+        draw_diff_clear_min=KNOCKOUT_DRAW_DIFF_CLEAR_MIN,
     )
-    probabilities = _align_probabilities_to_pick(_group_probabilities(diff), pick)
+    probabilities = _align_probabilities_to_pick(_knockout_after_90_probabilities(diff), pick)
     return pick, probabilities, True
+
+
+def _knockout_after_90_probabilities(diff: int) -> dict[str, int]:
+    """Driekans na 90 min — lagere gelijk-band dan in de poule."""
+    draw_pct = int(round(max(10, min(20, 18 - 2.2 * abs(diff)))))
+    p_draw = draw_pct / 100.0
+    p_home = _sigmoid(diff * _GROUP_HOME_LOGIT_K + _GROUP_HOME_LOGIT_B)
+    p_away = max(0.08, 1.0 - p_home - p_draw)
+    p_home = max(0.08, 1.0 - p_away - p_draw)
+    total = p_home + p_draw + p_away
+    home = int(round(100 * p_home / total))
+    draw = int(round(100 * p_draw / total))
+    away = 100 - home - draw
+    return {"home": home, "draw": draw, "away": away}
 
 
 def _group_probabilities(diff: int) -> dict[str, int]:
@@ -576,13 +611,15 @@ def _pick_from_diff(
     can_draw: bool,
     home_power: int = 0,
     away_power: int = 0,
+    draw_abs_diff_max: int = GROUP_DRAW_ABS_DIFF_MAX,
+    draw_diff_clear_min: int = GROUP_DRAW_DIFF_CLEAR_MIN,
 ) -> str:
     """Enige bron voor pick: wedstrijdscore-diff + basisfavoriet-uitzondering."""
-    if can_draw and abs(diff) <= GROUP_DRAW_ABS_DIFF_MAX:
+    if can_draw and abs(diff) <= draw_abs_diff_max:
         base_gap = abs(home_power - away_power)
         if (
             base_gap >= GROUP_DRAW_BASE_CLEAR_GAP
-            and abs(diff) >= GROUP_DRAW_DIFF_CLEAR_MIN
+            and abs(diff) >= draw_diff_clear_min
         ):
             return "1" if diff > 0 else "2"
         return "3"
