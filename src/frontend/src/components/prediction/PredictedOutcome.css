@@ -38,36 +38,19 @@
 
 .prediction-pool-adjustments {
   margin: 0 0 0.85rem;
-  padding: 0.65rem 0.75rem;
-  border-radius: 0.65rem;
-  background: rgba(15, 23, 42, 0.45);
-  border: 1px solid rgba(148, 163, 184, 0.16);
 }
 
 .prediction-pool-adjustments__title {
-  margin: 0 0 0.45rem;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  margin: 0 0 0.55rem;
   color: #94a3b8;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.prediction-pool-adjustments ul {
+.prediction-pool-adjustments .prediction-score-grid {
   margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 0.45rem;
-}
-
-.prediction-pool-adjustments li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.5rem;
-  align-items: start;
-  font-size: 0.78rem;
-  color: #cbd5e1;
 }
 
 /* Knock-out score in wedstrijdlijst (legacy scoreboard variant removed) */

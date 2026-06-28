@@ -47,7 +47,11 @@ export const PredictionPanel = forwardRef<HTMLElement, PredictionPanelProps>(fun
             <p className="prediction-lead-summary">{presentation.leadSummary}</p>
           ) : null}
           {insight?.poolAdjustments && insight.poolAdjustments.length > 0 ? (
-            <PoolAdjustments adjustments={insight.poolAdjustments} />
+            <PoolAdjustments
+              adjustments={insight.poolAdjustments}
+              homeTeam={match.homeTeam}
+              awayTeam={match.awayTeam}
+            />
           ) : null}
           <details className="prediction-details">
             <summary>Scores en research-details</summary>
@@ -147,22 +151,75 @@ function TeamScoreCard({ side }: { side: PredictionScoreSide }) {
   );
 }
 
-function PoolAdjustments({ adjustments }: { adjustments: PoolAdjustment[] }) {
+function PoolAdjustments({
+  adjustments,
+  homeTeam,
+  awayTeam,
+}: {
+  adjustments: PoolAdjustment[];
+  homeTeam: Match["homeTeam"];
+  awayTeam: Match["awayTeam"];
+}) {
+  const homeItems = adjustments.filter((entry) => entry.delta > 0);
+  const awayItems = adjustments.filter((entry) => entry.delta < 0);
+
   return (
     <div className="prediction-pool-adjustments">
       <h4 className="prediction-pool-adjustments__title">Poulevorm & bijsturing</h4>
-      <ul>
-        {adjustments.map((entry) => (
-          <li key={entry.id} className={entry.delta > 0 ? "is-plus" : entry.delta < 0 ? "is-minus" : ""}>
-            <span className="prediction-factor-delta">{formatSigned(entry.delta)}</span>
-            <span className="prediction-factor-body">
-              <strong>{entry.label}</strong>
-              <span>{entry.reason}</span>
-            </span>
-          </li>
-        ))}
-      </ul>
+      <div className="prediction-score-grid">
+        <PoolAdjustmentCard
+          team={homeTeam}
+          items={homeItems}
+          totalDelta={homeItems.reduce((sum, entry) => sum + entry.delta, 0)}
+        />
+        <PoolAdjustmentCard
+          team={awayTeam}
+          items={awayItems}
+          totalDelta={awayItems.reduce((sum, entry) => sum + Math.abs(entry.delta), 0)}
+        />
+      </div>
     </div>
+  );
+}
+
+function PoolAdjustmentCard({
+  team,
+  items,
+  totalDelta,
+}: {
+  team: Match["homeTeam"];
+  items: PoolAdjustment[];
+  totalDelta: number;
+}) {
+  const factors: PredictionFactor[] = items.map((entry) => ({
+    id: entry.id,
+    label: entry.label,
+    reason: entry.reason,
+    delta: Math.abs(entry.delta),
+    scope: "team",
+  }));
+
+  return (
+    <article className="prediction-team-card">
+      <header className="prediction-team-card__header">
+        <h3>{displayTeamName(team)}</h3>
+        <p className="prediction-team-card__score-line">
+          {totalDelta > 0 ? (
+            <>
+              Bijsturing op diff{" "}
+              <span className="prediction-team-card__ctx">{formatSigned(totalDelta)}</span>
+            </>
+          ) : (
+            "Geen poule-voordeel in dit duel"
+          )}
+        </p>
+      </header>
+      {factors.length === 0 ? (
+        <p className="prediction-team-card__empty">Geen poule-bijsturing voor dit team.</p>
+      ) : (
+        <FactorGroup title="Poule & momentum" factors={factors} />
+      )}
+    </article>
   );
 }
 
