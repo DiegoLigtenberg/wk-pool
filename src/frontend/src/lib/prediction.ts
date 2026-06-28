@@ -1,4 +1,5 @@
 import { type Match } from "../types";
+import { hasKnownTeams } from "./teams";
 
 export function formatSuggestedScore(match: Match): string | null {
   const suggested = match.aiPrediction.suggestedScore;
@@ -6,6 +7,10 @@ export function formatSuggestedScore(match: Match): string | null {
     return null;
   }
   return `${suggested.home} - ${suggested.away}`;
+}
+
+export function showsKnockoutScorePrediction(match: Match): boolean {
+  return match.stage === "knockout" && hasKnownTeams(match) && formatSuggestedScore(match) !== null;
 }
 
 export function pickCodeLabel(pick: Match["aiPrediction"]["pick"]): string {

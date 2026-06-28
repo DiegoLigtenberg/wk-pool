@@ -2,6 +2,7 @@ import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from "r
 import { PredictionPanel } from "./PredictionPanel";
 import { PredictedOutcome } from "../prediction/PredictedOutcome";
 import { formatDateShort, formatTime, phaseLabel } from "../../lib/format";
+import { showsKnockoutScorePrediction } from "../../lib/prediction";
 import { displayTeamName } from "../../lib/teams";
 import { phaseSelectOptions, STATUS_FILTER_OPTIONS, teamSelectOptions } from "../../lib/tournament";
 import type { Match, MatchPhaseFilter, MatchStatusFilter, TournamentView } from "../../types";
@@ -271,7 +272,7 @@ function FixtureRow({ match, isPredictionOpen, onTogglePrediction, onClosePredic
               <TeamLabel team={match.homeTeam} compact truncate={false} />
             </span>
           </span>
-          <span className={`result-stack${aiPick === "3" ? " result-stack--draw-tip" : ""}${!match.score ? " result-stack--predicted" : ""}`}>
+          <span className={`result-stack${aiPick === "3" ? " result-stack--draw-tip" : ""}`}>
             {aiPick === "3" ? (
               <AiBadge
                 ref={aiTriggerRef}
@@ -287,7 +288,6 @@ function FixtureRow({ match, isPredictionOpen, onTogglePrediction, onClosePredic
             <strong className={`result-pill${match.score ? "" : " result-upcoming"}`}>
               {match.score ? `${match.score.home} - ${match.score.away}` : "-"}
             </strong>
-            {!match.score ? <PredictedOutcome match={match} variant="inline" /> : null}
           </span>
           <span className={`team-pick ${awayOutcome}`}>
             <span className="team-with-ai team-with-ai--away">
@@ -319,6 +319,9 @@ function FixtureRow({ match, isPredictionOpen, onTogglePrediction, onClosePredic
         ) : null}
       </div>
       <div className="group-cell">
+        {showsKnockoutScorePrediction(match) && !match.score ? (
+          <PredictedOutcome match={match} variant="row" />
+        ) : null}
         <strong>{phaseLabel(match)}</strong>
       </div>
     </article>

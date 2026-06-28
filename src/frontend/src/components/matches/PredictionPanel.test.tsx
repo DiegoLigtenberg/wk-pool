@@ -54,10 +54,30 @@ describe("PredictionPanel", () => {
 
     expect(container.querySelector(".prediction-pick-reason")).toBeNull();
 
-    expect(container.querySelector(".prediction-suggested-score")).not.toBeNull();
-    expect(screen.getByText("2 - 0")).toBeInTheDocument();
-    expect(container.querySelector(".prediction-match-stats")).toBeNull();
-    expect(container.querySelector(".prediction-pick-steps")).toBeNull();
+    expect(container.querySelector(".prediction-suggested-score")).toBeNull();
     expect(screen.getByText("Scores en research-details")).toBeInTheDocument();
+  });
+
+  it("toont voorspelde uitslag alleen bij knock-out", () => {
+    const match = {
+      ...completedMatch,
+      stage: "knockout" as const,
+      group: null,
+      round: "Round of 32",
+      status: "upcoming" as const,
+      score: null,
+      aiPrediction: {
+        ...completedMatch.aiPrediction,
+        suggestedScore: { home: 2, away: 1, reason: "Krappe winst voor thuis; 2-1 na 90 minuten." },
+      },
+    };
+
+    const { container } = render(
+      <PredictionPanel id="prediction-ko" match={match} onClose={() => undefined} closeButtonRef={{ current: null }} />,
+    );
+
+    expect(container.querySelector(".prediction-suggested-score")).not.toBeNull();
+    expect(screen.getByText("2 - 1")).toBeInTheDocument();
+    expect(screen.getByText(/Toto/)).toBeInTheDocument();
   });
 });

@@ -23,6 +23,14 @@ export function App() {
 
   useEffect(() => {
     if (apiBaseUrl === null) {
+      const configured = import.meta.env.VITE_API_BASE_URL?.trim();
+      if (configured && isLocalApiBaseUrl(normalizeApiBaseUrl(configured)) && !isLocalBrowserHost()) {
+        setError(
+          "VITE_API_BASE_URL staat op localhost (127.0.0.1:8000) maar deze site draait op productie. " +
+            "Zet op Railway bij de frontend-service: VITE_API_BASE_URL=https://wk-pool-backend.up.railway.app en deploy opnieuw.",
+        );
+        return;
+      }
       setError("VITE_API_BASE_URL ontbreekt. Zet deze build variable naar de publieke backend-URL.");
       return;
     }
@@ -101,18 +109,36 @@ export function App() {
 }
 
 function resolveApiBaseUrl(): string | null {
-  // Local dev always uses the Vite proxy (same origin) → 127.0.0.1:8000.
-  // Ignores VITE_API_BASE_URL so a stale Railway URL in your shell cannot break local dev.
-  if (import.meta.env.DEV) {
+  // Dev server and local preview use same-origin `/api` (Vite proxy → :8000).
+  if (import.meta.env.DEV || isLocalBrowserHost()) {
     return "";
   }
 
   const configuredApiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-  if (configuredApiBaseUrl) {
-    return normalizeApiBaseUrl(configuredApiBaseUrl);
+  if (!configuredApiBaseUrl) {
+    return null;
   }
 
-  return null;
+  const normalized = normalizeApiBaseUrl(configuredApiBaseUrl);
+  if (isLocalApiBaseUrl(normalized)) {
+    return null;
+  }
+
+  return normalized;
+}
+
+function isLocalApiBaseUrl(value: string): boolean {
+  try {
+    const host = new URL(value).hostname;
+    return host === "127.0.0.1" || host === "localhost";
+  } catch {
+    return value.includes("127.0.0.1") || value.includes("localhost");
+  }
+}
+
+function isLocalBrowserHost(): boolean {
+  const host = window.location.hostname;
+  return host === "127.0.0.1" || host === "localhost";
 }
 
 function normalizeApiBaseUrl(value: string): string {
@@ -132,6 +158,9 @@ function errorHeadline(message: string): string {
   if (message.includes("VITE_API_BASE_URL")) {
     return "Frontend-configuratie ontbreekt.";
   }
+  if (message.includes("localhost") && message.includes("productie")) {
+    return "Verkeerde API-URL in productie-build.";
+  }
   return "Backend is niet bereikbaar.";
 }
 
@@ -140,7 +169,16 @@ function errorMessage(error: unknown): string {
     return "Backend reageerde niet op tijd.";
   }
   if (error instanceof TypeError) {
-    return "Kon geen verbinding maken met de backend (controleer of die draait en of poort 8000 vrij is).";
+    if (isLocalBrowserHost()) {
+      return (
+        "Kon geen verbinding maken met de backend op poort 8000. " +
+        "Start poetry run wk-pool-backend in src/backend en herlaad."
+      );
+    }
+    return (
+      "Kon geen verbinding maken met de backend. " +
+      "Controleer VITE_API_BASE_URL op Railway (moet de publieke backend-URL zijn, niet localhost)."
+    );
   }
   if (error instanceof Error) {
     return error.message;

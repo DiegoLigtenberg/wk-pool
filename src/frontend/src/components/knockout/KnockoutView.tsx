@@ -59,11 +59,11 @@ export function KnockoutView({ knockoutMatches }: KnockoutViewProps) {
               </div>
               <div className="knockout-r32-card__prediction">
                 {match.score ? (
-                  <strong className="predicted-outcome__score">
+                  <strong className="knockout-r32-card__final-score">
                     {match.score.home} - {match.score.away}
                   </strong>
                 ) : (
-                  <PredictedOutcome match={match} variant="compact" />
+                  <PredictedOutcome match={match} variant="card" />
                 )}
               </div>
             </article>

@@ -1,10 +1,8 @@
 import { renderScore } from "../../lib/format";
 import { groupMatches } from "../../lib/tournament";
 import type { Group, Match, PredictionStatus, Standing, TournamentView } from "../../types";
-import { PredictedOutcome } from "../prediction/PredictedOutcome";
 import { StatsChips } from "../cards/StatsChips";
 import { TeamLabel } from "../cards/TeamLabel";
-import "../prediction/PredictedOutcome.css";
 import "./GroupsView.css";
 
 type GroupsViewProps = {
@@ -110,9 +108,7 @@ function CompactMatch({ match }: { match: Match }) {
           <TeamLabel team={match.awayTeam} compact maxLength={11} />
         </span>
       </div>
-      <strong className="compact-score">
-        {match.score ? renderScore(match) : <PredictedOutcome match={match} variant="compact" />}
-      </strong>
+      <strong className="compact-score">{match.score ? renderScore(match) : "-"}</strong>
     </div>
   );
 }

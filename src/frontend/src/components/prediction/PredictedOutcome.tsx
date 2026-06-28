@@ -1,23 +1,24 @@
 import type { Match } from "../../types";
-import { formatSuggestedScore, pickCodeLabel, pickOutcomeLabel } from "../../lib/prediction";
-import { hasKnownTeams } from "../../lib/teams";
+import {
+  formatSuggestedScore,
+  pickCodeLabel,
+  pickOutcomeLabel,
+  showsKnockoutScorePrediction,
+} from "../../lib/prediction";
 import "./PredictedOutcome.css";
 
 type PredictedOutcomeProps = {
   match: Match;
-  variant?: "inline" | "panel" | "compact";
+  variant?: "panel" | "card" | "row";
 };
 
-export function PredictedOutcome({ match, variant = "inline" }: PredictedOutcomeProps) {
-  if (!hasKnownTeams(match)) {
+/** Score + toto voorspelling — alleen knock-out met bekende teams. */
+export function PredictedOutcome({ match, variant = "row" }: PredictedOutcomeProps) {
+  if (!showsKnockoutScorePrediction(match)) {
     return null;
   }
 
-  const score = formatSuggestedScore(match);
-  if (!score) {
-    return null;
-  }
-
+  const score = formatSuggestedScore(match)!;
   const pick = match.aiPrediction.pick;
   const reason = match.aiPrediction.suggestedScore?.reason;
 
@@ -37,20 +38,21 @@ export function PredictedOutcome({ match, variant = "inline" }: PredictedOutcome
     );
   }
 
-  if (variant === "compact") {
+  if (variant === "card") {
     return (
-      <span className="predicted-outcome predicted-outcome--compact" title={reason ?? undefined}>
-        <span className="predicted-outcome__score">{score}</span>
-        <span className="predicted-outcome__pick">{pickCodeLabel(pick)}</span>
-      </span>
+      <div className="knockout-prediction-card" title={reason ?? undefined}>
+        <strong className="knockout-prediction-card__score">{score}</strong>
+      </div>
     );
   }
 
   return (
-    <span className="predicted-outcome predicted-outcome--inline" title={reason ?? undefined}>
-      <span className="predicted-outcome__label">AI</span>
-      <span className="predicted-outcome__score">{score}</span>
-      <span className="predicted-outcome__pick">{pickCodeLabel(pick)}</span>
-    </span>
+    <div className="knockout-prediction-row" title={`AI-voorspelling (90 min): ${reason ?? score}`}>
+      <span className="knockout-prediction-row__label">Voorsp.</span>
+      <span className="knockout-prediction-row__score">{score}</span>
+      <span className="knockout-prediction-row__toto" aria-label={`Toto ${pickCodeLabel(pick)}`}>
+        {pickCodeLabel(pick)}
+      </span>
+    </div>
   );
 }

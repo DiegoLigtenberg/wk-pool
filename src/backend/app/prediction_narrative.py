@@ -225,6 +225,8 @@ def build_prediction_insight(
         home_group_opponents=_group_opponent_names_nl(home_team),
         away_group_opponents=_group_opponent_names_nl(away_team),
     )
+    if not lead_summary.strip() and pool_adjustments:
+        lead_summary = _lead_from_pool_adjustments(pool_adjustments)
 
     score_summary = _build_score_summary(
         home_name, away_name, home_eff, away_eff, diff=research_diff
@@ -859,6 +861,20 @@ def _build_lead_summary(
 
     # Geen papieren-sterkte als lead: verdict + score-uitleg dekken dat al.
     return ""
+
+
+def _lead_from_pool_adjustments(adjustments: list[dict[str, object]], *, limit: int = 2) -> str:
+    """Korte lead uit poulevorm / pool-bijsturing (vooral knock-out)."""
+    parts: list[str] = []
+    for entry in adjustments:
+        if not isinstance(entry, dict):
+            continue
+        reason = str(entry.get("reason", "")).strip()
+        if reason:
+            parts.append(reason)
+        if len(parts) >= limit:
+            break
+    return " ".join(parts)
 
 
 def _insight_payload(

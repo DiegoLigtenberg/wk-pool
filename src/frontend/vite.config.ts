@@ -37,6 +37,20 @@ const securityHeaders = {
 export default defineConfig(({ command, mode }) => {
   const isDevServer = command === "serve" && mode === "development";
 
+  if (command === "build" && process.env.RAILWAY_ENVIRONMENT) {
+    const apiBase = process.env.VITE_API_BASE_URL?.trim() ?? "";
+    if (!apiBase) {
+      throw new Error(
+        "VITE_API_BASE_URL is required on Railway (e.g. https://wk-pool-backend.up.railway.app).",
+      );
+    }
+    if (isLocalApiOrigin(apiBase)) {
+      throw new Error(
+        "VITE_API_BASE_URL must not point to localhost on Railway. Use the public backend URL.",
+      );
+    }
+  }
+
   return {
   plugins: [react()],
   // Strict CSP breaks Vite dev (React preamble, HMR inline styles/workers) → blank page.
@@ -52,6 +66,10 @@ export default defineConfig(({ command, mode }) => {
     host: "0.0.0.0",
     port: previewPort,
     strictPort: true,
+    proxy: {
+      "/api": "http://127.0.0.1:8000",
+      "/health": "http://127.0.0.1:8000",
+    },
     // Railway healthchecks use internal hostnames; a fixed allowlist returns 403 and fails deploy.
     allowedHosts: process.env.PORT ? true : previewAllowedHosts,
     headers: securityHeaders,
@@ -74,5 +92,14 @@ function cspOrigin(value: string | undefined): string | undefined {
     return new URL(trimmedValue).origin;
   } catch {
     return undefined;
+  }
+}
+
+function isLocalApiOrigin(value: string): boolean {
+  try {
+    const host = new URL(value).hostname;
+    return host === "127.0.0.1" || host === "localhost";
+  } catch {
+    return value.includes("127.0.0.1") || value.includes("localhost");
   }
 }

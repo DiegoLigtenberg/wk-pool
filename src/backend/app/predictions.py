@@ -321,24 +321,28 @@ def predict_match(
 
     home_gpg = home_form.goals_per_game if home_form else 0.0
     away_gpg = away_form.goals_per_game if away_form else 0.0
-    suggested = suggest_match_score(
-        pick=pick,
-        adjusted_diff=adjusted_diff,
-        stage=stage,
-        home_goals_per_game=home_gpg,
-        away_goals_per_game=away_gpg,
-    )
+    suggested = None
+    if stage == "knockout":
+        suggested = suggest_match_score(
+            pick=pick,
+            adjusted_diff=adjusted_diff,
+            stage=stage,
+            home_goals_per_game=home_gpg,
+            away_goals_per_game=away_gpg,
+        )
 
-    return {
+    result: dict[str, object] = {
         "pick": pick,
         "confidence": confidence,
         "explanation": str(insight["verdict"]),
         "insight": insight,
-        "suggestedScore": suggested,
         "homeWinProbability": probabilities["home"],
         "drawProbability": probabilities["draw"] if can_draw else None,
         "awayWinProbability": probabilities["away"],
     }
+    if suggested is not None:
+        result["suggestedScore"] = suggested
+    return result
 
 
 def _team_summary(team: str, profile: TeamProfile) -> str:

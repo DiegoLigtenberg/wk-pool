@@ -1,46 +1,123 @@
-.predicted-outcome {
+/* Knock-out: AI-voorspelling rechts (niet in score-midden) */
+.knockout-prediction-row {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(var(--accent-rgb), 0.12);
+  border: 1px solid rgba(var(--accent-rgb), 0.28);
   font-size: 0.72rem;
-  color: #94a3b8;
+  line-height: 1;
 }
 
-.predicted-outcome__label {
-  font-size: 0.62rem;
-  font-weight: 700;
+.knockout-prediction-row__label {
+  font-size: 0.58rem;
+  font-weight: 800;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(var(--accent-rgb), 0.9);
+  color: rgba(var(--accent-rgb), 0.95);
 }
 
-.predicted-outcome__score {
-  font-size: 0.82rem;
-  font-weight: 600;
+.knockout-prediction-row__score {
+  font-weight: 700;
   color: #e2e8f0;
 }
 
-.predicted-outcome__pick {
+.knockout-prediction-row__toto {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 1.1rem;
-  height: 1.1rem;
+  min-width: 1rem;
+  height: 1rem;
   border-radius: 999px;
-  background: rgba(var(--accent-rgb), 0.18);
+  background: rgba(var(--accent-rgb), 0.25);
+  color: #dbeafe;
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+.prediction-pool-adjustments {
+  margin: 0 0 0.85rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.65rem;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.prediction-pool-adjustments__title {
+  margin: 0 0 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.prediction-pool-adjustments ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.prediction-pool-adjustments li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem;
+  align-items: start;
+  font-size: 0.78rem;
+  color: #cbd5e1;
+}
+
+/* Knock-out score in wedstrijdlijst (legacy scoreboard variant removed) */
+.knockout-score-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+.knockout-score-pill__toto {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 999px;
+  background: rgba(var(--accent-rgb), 0.22);
   color: #dbeafe;
   font-size: 0.68rem;
   font-weight: 700;
+  line-height: 1;
 }
 
-.predicted-outcome--compact {
+.result-pill--knockout-predicted {
+  border-color: rgba(var(--accent-rgb), 0.35);
+  background: rgba(var(--accent-rgb), 0.1);
+  color: #e2e8f0;
+}
+
+/* Knock-out kaart (R32-grid) */
+.knockout-prediction-card {
+  display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.15rem;
+  gap: 0.2rem;
+  text-align: right;
 }
 
-.predicted-outcome--compact .predicted-outcome__score {
-  font-size: 0.9rem;
+.knockout-prediction-card__score {
+  font-size: 1.35rem;
+  line-height: 1.1;
+  color: #f8fafc;
+}
+
+.knockout-r32-card__final-score {
+  font-size: 1.35rem;
+  color: #f8fafc;
 }
 
 .prediction-suggested-score__meta {
@@ -60,13 +137,6 @@
   background: rgba(var(--accent-rgb), 0.2);
   color: #eff6ff;
   font-weight: 700;
-}
-
-.result-stack--predicted {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
 }
 
 .knockout-r32-grid {
@@ -100,7 +170,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.25rem;
+  justify-content: center;
+  min-width: 5.5rem;
 }
 
 @media (min-width: 720px) {

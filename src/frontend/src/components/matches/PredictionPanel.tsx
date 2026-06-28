@@ -1,5 +1,5 @@
 import { forwardRef, type RefObject } from "react";
-import type { Match, PredictionFactor, PredictionInsight, PredictionScoreSide } from "../../types";
+import type { Match, PredictionFactor, PredictionInsight, PredictionScoreSide, PoolAdjustment } from "../../types";
 import { displayTeamName } from "../../lib/teams";
 import { PredictedOutcome } from "../prediction/PredictedOutcome";
 
@@ -38,16 +38,16 @@ export const PredictionPanel = forwardRef<HTMLElement, PredictionPanelProps>(fun
       </div>
 
       <Probabilities match={match} highlightedPick={prediction.pick} />
-      <PredictedOutcome match={match} variant="panel" />
+      {match.stage === "knockout" ? <PredictedOutcome match={match} variant="panel" /> : null}
 
       {presentation ? (
         <>
           <p className="prediction-verdict prediction-verdict--lead">{presentation.verdict}</p>
-          {presentation.legacyHint ? (
-            <p className="prediction-legacy-hint">{presentation.legacyHint}</p>
-          ) : null}
           {presentation.leadSummary ? (
             <p className="prediction-lead-summary">{presentation.leadSummary}</p>
+          ) : null}
+          {insight?.poolAdjustments && insight.poolAdjustments.length > 0 ? (
+            <PoolAdjustments adjustments={insight.poolAdjustments} />
           ) : null}
           <details className="prediction-details">
             <summary>Scores en research-details</summary>
@@ -71,28 +71,21 @@ export const PredictionPanel = forwardRef<HTMLElement, PredictionPanelProps>(fun
 type Presentation = PredictionInsight & {
   intro?: string;
   leadSummary?: string;
-  legacyHint?: string;
 };
 
 function presentInsight(insight: PredictionInsight): Presentation {
   const modelStep = insight.steps?.find((s) => s.title === "Hoe dit werkt");
   const duelStep = insight.steps?.find((s) => s.title === "Belangrijk in dit duel");
   const leadSummary =
-    insight.leadSummary ?? duelStep?.body ?? insight.steps?.[1]?.body;
-
-  if (modelStep && leadSummary) {
-    return {
-      ...insight,
-      intro: modelStep.body,
-      leadSummary,
-    };
-  }
+    insight.leadSummary?.trim() ||
+    duelStep?.body?.trim() ||
+    insight.steps?.[1]?.body?.trim() ||
+    undefined;
 
   return {
     ...insight,
-    intro: insight.steps?.[0]?.body,
-    leadSummary: leadSummary ?? insight.narrative,
-    legacyHint: "Herstart de backend voor de nieuwste uitleg (poetry run wk-pool-backend).",
+    intro: modelStep?.body ?? insight.steps?.[0]?.body,
+    leadSummary,
   };
 }
 
@@ -151,6 +144,25 @@ function TeamScoreCard({ side }: { side: PredictionScoreSide }) {
         </>
       )}
     </article>
+  );
+}
+
+function PoolAdjustments({ adjustments }: { adjustments: PoolAdjustment[] }) {
+  return (
+    <div className="prediction-pool-adjustments">
+      <h4 className="prediction-pool-adjustments__title">Poulevorm & bijsturing</h4>
+      <ul>
+        {adjustments.map((entry) => (
+          <li key={entry.id} className={entry.delta > 0 ? "is-plus" : entry.delta < 0 ? "is-minus" : ""}>
+            <span className="prediction-factor-delta">{formatSigned(entry.delta)}</span>
+            <span className="prediction-factor-body">
+              <strong>{entry.label}</strong>
+              <span>{entry.reason}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

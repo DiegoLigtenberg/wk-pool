@@ -50,6 +50,11 @@ def test_scoring_trend_adjustment_from_goal_log() -> None:
     assert "home_scoring_trend" in kinds
 
 
+def test_group_match_has_no_suggested_score() -> None:
+    pred = predict_match("Mexico", "South Africa", "group", "1", "A")
+    assert "suggestedScore" not in pred
+
+
 def test_knockout_includes_suggested_score() -> None:
     pred = predict_match("Argentina", "France", "knockout", "Final", None)
     assert "suggestedScore" in pred
