@@ -319,7 +319,7 @@ function FixtureRow({ match, isPredictionOpen, onTogglePrediction, onClosePredic
         ) : null}
       </div>
       <div className="group-cell">
-        {showsKnockoutScorePrediction(match) && !match.score ? (
+        {showsKnockoutScorePrediction(match) ? (
           <PredictedOutcome match={match} variant="row" />
         ) : null}
         <strong>{phaseLabel(match)}</strong>
