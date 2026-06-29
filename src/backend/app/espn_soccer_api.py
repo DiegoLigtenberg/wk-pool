@@ -138,18 +138,26 @@ def tournament_dates_through(now: datetime) -> set[str]:
     return dates
 
 
-def match_espn_event(fixture: Fixture, events: list[dict[str, object]]) -> dict[str, object] | None:
+def match_espn_event(
+    fixture: Fixture,
+    events: list[dict[str, object]],
+    *,
+    home_team: str | None = None,
+    away_team: str | None = None,
+) -> dict[str, object] | None:
+    home = home_team or fixture.home_team
+    away = away_team or fixture.away_team
     kickoff_key = fixture.kickoff_at.strftime("%Y-%m-%dT%H:%M")
     for event in events:
         if not isinstance(event, dict):
             continue
-        if not teams_match(fixture.home_team, fixture.away_team, event):
+        if not teams_match(home, away, event):
             continue
         event_date = str(event.get("date", ""))
         if event_date.startswith(kickoff_key):
             return event
     for event in events:
-        if isinstance(event, dict) and teams_match(fixture.home_team, fixture.away_team, event):
+        if isinstance(event, dict) and teams_match(home, away, event):
             return event
     return None
 

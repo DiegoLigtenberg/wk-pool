@@ -16,20 +16,29 @@ def _fetch(url: str) -> dict:
         return json.load(response)
 
 
-def build_store(tournament: dict) -> dict[str, object]:
-    matches: dict[str, object] = {}
+def _iter_scored_matches(tournament: dict) -> list[dict]:
+    matches: list[dict] = []
     for group in tournament.get("groups", []):
         if not isinstance(group, dict):
             continue
         for match in group.get("matches", []):
-            if not isinstance(match, dict):
-                continue
-            score = match.get("score")
-            if not score or not isinstance(score, dict):
-                continue
-            matches[str(match["matchNumber"])] = {
-                "score": {"home": int(score["home"]), "away": int(score["away"])}
-            }
+            if isinstance(match, dict):
+                matches.append(match)
+    for match in tournament.get("knockoutMatches", []):
+        if isinstance(match, dict):
+            matches.append(match)
+    return matches
+
+
+def build_store(tournament: dict) -> dict[str, object]:
+    matches: dict[str, object] = {}
+    for match in _iter_scored_matches(tournament):
+        score = match.get("score")
+        if not score or not isinstance(score, dict):
+            continue
+        matches[str(match["matchNumber"])] = {
+            "score": {"home": int(score["home"]), "away": int(score["away"])}
+        }
 
     return {
         "version": 1,

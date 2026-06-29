@@ -29,6 +29,8 @@ from app.match_results_store import (
     save_results,
     upsert_match_result,
 )
+from app.knockout_bracket import KnockoutBracketState, build_knockout_bracket_state, resolve_knockout_teams
+from app.predictions import is_known_team
 from app.poll_schedule import MINUTES_AFTER_KICKOFF
 from app.tournament import Fixture, load_fixtures
 
@@ -48,6 +50,22 @@ def live_stats_source() -> str:
     return "espn"
 
 
+def sync_teams_for_fixture(
+    fixture: Fixture,
+    *,
+    bracket: KnockoutBracketState | None,
+) -> tuple[str, str] | None:
+    """CSV placeholders (2A, 1F) → echte teams zodra de poule klaar is."""
+    if fixture.group is not None:
+        return fixture.home_team, fixture.away_team
+    if bracket is None:
+        return None
+    home, away = resolve_knockout_teams(fixture, bracket)
+    if not is_known_team(home) or not is_known_team(away):
+        return None
+    return home, away
+
+
 def _ready_at(kickoff: datetime) -> datetime:
     return kickoff + timedelta(minutes=MINUTES_AFTER_KICKOFF)
 
@@ -59,12 +77,19 @@ def build_fixture_map(*, season: int, force: bool = False) -> dict[int, int]:
 
     api_fixtures = fetch_league_fixtures(season)
     mapping: dict[int, int] = {}
+    fixtures = load_fixtures()
+    store = load_results()
+    bracket = build_knockout_bracket_state(fixtures, store)
 
-    for fixture in load_fixtures():
+    for fixture in fixtures:
+        teams = sync_teams_for_fixture(fixture, bracket=bracket)
+        if teams is None:
+            continue
+        home_team, away_team = teams
         matched = match_api_fixture(
             kickoff_iso=fixture.kickoff_at.isoformat().replace("+00:00", "Z"),
-            home_team=fixture.home_team,
-            away_team=fixture.away_team,
+            home_team=home_team,
+            away_team=away_team,
             api_fixtures=api_fixtures,
         )
         if matched is None:
@@ -83,6 +108,33 @@ def build_fixture_map(*, season: int, force: bool = False) -> dict[int, int]:
     return existing
 
 
+def _pending_sync_targets(
+    now: datetime,
+    store: dict[str, object],
+    *,
+    require_fixture_map: bool,
+    fixture_map: dict[int, int],
+) -> list[tuple[Fixture, str, str]]:
+    fixtures = load_fixtures()
+    bracket = build_knockout_bracket_state(fixtures, store)
+    targets: list[tuple[Fixture, str, str]] = []
+
+    for fixture in fixtures:
+        if require_fixture_map and fixture.match_number not in fixture_map:
+            continue
+        teams = sync_teams_for_fixture(fixture, bracket=bracket)
+        if teams is None:
+            continue
+        if now < _ready_at(fixture.kickoff_at):
+            continue
+        if result_for_match(store, fixture.match_number) is not None:
+            continue
+        home_team, away_team = teams
+        targets.append((fixture, home_team, away_team))
+
+    return targets
+
+
 def _pending_fixtures(
     now: datetime,
     store: dict[str, object],
@@ -90,16 +142,9 @@ def _pending_fixtures(
     require_fixture_map: bool,
     fixture_map: dict[int, int],
 ) -> list[Fixture]:
-    pending: list[Fixture] = []
-    for fixture in load_fixtures():
-        if require_fixture_map and fixture.match_number not in fixture_map:
-            continue
-        if now < _ready_at(fixture.kickoff_at):
-            continue
-        if result_for_match(store, fixture.match_number) is not None:
-            continue
-        pending.append(fixture)
-    return pending
+    return [fixture for fixture, _, _ in _pending_sync_targets(
+        now, store, require_fixture_map=require_fixture_map, fixture_map=fixture_map
+    )]
 
 
 def _completed_match_count(store: dict[str, object]) -> int:
@@ -169,7 +214,7 @@ def sync_results(*, dry_run: bool = False, force_remap: bool = False) -> int:
 def _sync_results_espn(*, dry_run: bool = False) -> int:
     now = datetime.now(timezone.utc)
     store = load_results()
-    pending = _pending_fixtures(now, store, require_fixture_map=False, fixture_map={})
+    pending = _pending_sync_targets(now, store, require_fixture_map=False, fixture_map={})
 
     if not pending:
         print("No newly finished matches to sync.")
@@ -177,18 +222,24 @@ def _sync_results_espn(*, dry_run: bool = False) -> int:
             save_results(store)
         return 0
 
-    dates = scoreboard_dates_for_fixtures(pending)
-    print(f"Syncing {len(pending)} match(es) via ESPN: {[f.match_number for f in pending]}")
+    dates = scoreboard_dates_for_fixtures([fixture for fixture, _, _ in pending])
+    print(
+        f"Syncing {len(pending)} match(es) via ESPN: "
+        f"{[fixture.match_number for fixture, _, _ in pending]}"
+    )
     if dry_run:
         print(f"Would call ESPN scoreboard for {len(dates)} day(s)")
         return 0
 
     events = fetch_scoreboards_for_dates(dates)
     synced = 0
-    for fixture in pending:
-        event = match_espn_event(fixture, events)
+    for fixture, home_team, away_team in pending:
+        event = match_espn_event(fixture, events, home_team=home_team, away_team=away_team)
         if event is None:
-            print(f"  match {fixture.match_number}: no ESPN fixture for {fixture.home_team} vs {fixture.away_team}")
+            print(
+                f"  match {fixture.match_number}: no ESPN fixture for "
+                f"{home_team} vs {away_team}"
+            )
             continue
 
         parsed = parse_espn_result(event)
@@ -219,15 +270,13 @@ def _sync_results_api_football(*, dry_run: bool = False, force_remap: bool = Fal
     store = load_results()
     season = default_season()
     fixture_map = build_fixture_map(season=season, force=force_remap)
-    pending_numbers = [
-        fixture.match_number
-        for fixture in _pending_fixtures(
-            now,
-            store,
-            require_fixture_map=True,
-            fixture_map=fixture_map,
-        )
-    ]
+    pending_targets = _pending_sync_targets(
+        now,
+        store,
+        require_fixture_map=True,
+        fixture_map=fixture_map,
+    )
+    pending_numbers = [fixture.match_number for fixture, _, _ in pending_targets]
 
     if not fixture_map:
         print(f"No fixture map for season {season} (API plan may not include this season yet).")
