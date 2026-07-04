@@ -121,6 +121,40 @@ def test_netherlands_morocco_knockout_override() -> None:
     }
 
 
+def test_knockout_winner_score_capped_at_two_goal_margin() -> None:
+    heavy_fav = suggest_match_score(
+        pick="1",
+        adjusted_diff=20,
+        stage="knockout",
+        home_goals_per_game=2.5,
+        away_goals_per_game=0.5,
+    )
+    assert heavy_fav["home"] <= 2
+    assert heavy_fav["away"] <= 1
+    assert heavy_fav["home"] - heavy_fav["away"] <= 2
+
+    away_fav = suggest_match_score(
+        pick="2",
+        adjusted_diff=18,
+        stage="knockout",
+        home_goals_per_game=0.5,
+        away_goals_per_game=2.5,
+    )
+    assert away_fav["away"] <= 2
+    assert away_fav["home"] - away_fav["away"] >= -2
+
+
+def test_knockout_draw_prefers_one_one_over_two_two() -> None:
+    score = suggest_match_score(
+        pick="3",
+        adjusted_diff=1,
+        stage="knockout",
+        home_goals_per_game=2.0,
+        away_goals_per_game=2.0,
+    )
+    assert score == {"home": 1, "away": 1, "reason": score["reason"]}
+
+
 def test_knockout_draw_band_stricter_than_group() -> None:
     from app.predictions import (
         KNOCKOUT_DRAW_ABS_DIFF_MAX,

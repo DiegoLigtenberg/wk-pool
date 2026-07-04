@@ -213,6 +213,7 @@ def parse_espn_result(event: dict[str, object]) -> dict[str, object] | None:
         return None
 
     home_score = away_score = None
+    advancing_team: str | None = None
     competitors = competition.get("competitors")
     if not isinstance(competitors, list):
         return None
@@ -224,10 +225,13 @@ def parse_espn_result(event: dict[str, object]) -> dict[str, object] | None:
         if score_raw is None:
             return None
         score = int(score_raw)
-        if competitor.get("homeAway") == "home":
+        side = competitor.get("homeAway")
+        if side == "home":
             home_score = score
-        elif competitor.get("homeAway") == "away":
+        elif side == "away":
             away_score = score
+        if competitor.get("winner") is True and side in {"home", "away"}:
+            advancing_team = str(side)
 
     if home_score is None or away_score is None:
         return None
@@ -251,6 +255,7 @@ def parse_espn_result(event: dict[str, object]) -> dict[str, object] | None:
         "score": {"home": home_score, "away": away_score},
         "yellowCards": yellow_cards,
         "directRedCards": direct_red_cards,
+        **({"advancingTeam": advancing_team} if advancing_team else {}),
     }
 
 

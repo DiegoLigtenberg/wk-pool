@@ -36,9 +36,12 @@ def build_store(tournament: dict) -> dict[str, object]:
         score = match.get("score")
         if not score or not isinstance(score, dict):
             continue
-        matches[str(match["matchNumber"])] = {
+        entry: dict[str, object] = {
             "score": {"home": int(score["home"]), "away": int(score["away"])}
         }
+        if match.get("advancingTeam") in {"home", "away"}:
+            entry["advancingTeam"] = match["advancingTeam"]
+        matches[str(match["matchNumber"])] = entry
 
     return {
         "version": 1,

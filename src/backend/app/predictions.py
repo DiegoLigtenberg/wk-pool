@@ -17,6 +17,7 @@ from app.pool_edge import (
     live_form_from_group_played_yaml,
 )
 from app.group_form import GroupFormStats, live_form_tuple
+from app.knockout_form import KnockoutRoundStats, blended_goals_per_game
 from app.score_prediction import suggest_match_score
 from app.prediction_narrative import build_prediction_insight
 from app.prediction_overrides import apply_match_overrides
@@ -225,6 +226,7 @@ def predict_match(
     *,
     match_number: int | None = None,
     group_forms: tuple[GroupFormStats | None, GroupFormStats | None] | None = None,
+    knockout_forms: tuple[KnockoutRoundStats | None, KnockoutRoundStats | None] | None = None,
 ) -> dict[str, object]:
     if not is_known_team(home_team) or not is_known_team(away_team):
         return {
@@ -322,6 +324,16 @@ def predict_match(
 
     home_gpg = home_form.goals_per_game if home_form else 0.0
     away_gpg = away_form.goals_per_game if away_form else 0.0
+    if knockout_forms and round_name != "Round of 32":
+        home_ko, away_ko = knockout_forms
+        if home_ko:
+            home_gpg = blended_goals_per_game(
+                home_gpg, home_ko.goals_per_game, knockout_played=home_ko.played
+            )
+        if away_ko:
+            away_gpg = blended_goals_per_game(
+                away_gpg, away_ko.goals_per_game, knockout_played=away_ko.played
+            )
     suggested = None
     if stage == "knockout":
         suggested = suggest_match_score(

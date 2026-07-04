@@ -16,6 +16,15 @@ def suggest_match_score(
     combined_attack = home_goals_per_game + away_goals_per_game
 
     if pick == "3":
+        if stage == "knockout":
+            # KO: ~32% gelijk na 90 min; meestal 1-1 of 0-0 (historisch zeldzaam 2-2).
+            if combined_attack >= 2.0:
+                home, away = 1, 1
+                reason = "Evenwichtig knock-out duel; 1-1 na 90 min past bij voorzichtig spel."
+            else:
+                home, away = 0, 0
+                reason = "Krappe balans in knock-out; 0-0 na 90 min is plausibel."
+            return {"home": home, "away": away, "reason": reason}
         if combined_attack >= 3.2:
             home, away = 2, 2
             reason = "Beide teams scoorden regelmatig in de poule; 2-2 na 90 min is plausibel."
@@ -28,7 +37,15 @@ def suggest_match_score(
         return {"home": home, "away": away, "reason": reason}
 
     if pick == "1":
-        if diff >= 14:
+        if stage == "knockout":
+            # KO 90 min: gem. ~2,2 doelpunten; zelden 3+ voor één team (R32 2026: 4/16).
+            if diff >= 8:
+                home, away = 2, 0
+            elif diff >= 4:
+                home, away = 2, 1
+            else:
+                home, away = 1, 0
+        elif diff >= 14:
             home, away = 3, 0
         elif diff >= 10:
             home, away = 3, 1
@@ -41,7 +58,14 @@ def suggest_match_score(
         reason = _winner_score_reason(home, away, side="thuis", diff=diff, stage=stage)
         return {"home": home, "away": away, "reason": reason}
 
-    if diff >= 14:
+    if stage == "knockout":
+        if diff >= 8:
+            home, away = 0, 2
+        elif diff >= 4:
+            home, away = 1, 2
+        else:
+            home, away = 0, 1
+    elif diff >= 14:
         home, away = 0, 3
     elif diff >= 10:
         home, away = 1, 3

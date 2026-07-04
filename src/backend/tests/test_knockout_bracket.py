@@ -86,6 +86,39 @@ def test_tournament_view_r32_has_predictions_when_results_complete(monkeypatch) 
         assert "wacht" not in str(match["aiPrediction"].get("explanation", "")).lower()
 
 
+def test_r16_resolves_from_r32_winners_with_penalty_fallback() -> None:
+    fixtures = load_fixtures()
+    store = {
+        "version": 1,
+        "matches": {
+            "73": {"score": {"home": 0, "away": 1}},
+            "75": {"score": {"home": 1, "away": 1}, "advancingTeam": "home"},
+            "74": {"score": {"home": 3, "away": 0}},
+            "77": {"score": {"home": 2, "away": 0}},
+        },
+        "tournamentTotals": {"yellowCards": 0, "directRedCards": 0},
+    }
+    # Seed R32 teams from minimal group-complete store extended with R32 slots only.
+    full = _full_group_results()
+    bracket_seed = build_knockout_bracket_state(fixtures, full)
+    assert bracket_seed is not None
+
+    merged = dict(full["matches"])
+    merged.update(store["matches"])
+    merged_store = {**store, "matches": merged}
+    bracket = build_knockout_bracket_state(fixtures, merged_store)
+    assert bracket is not None
+
+    fx90 = next(fx for fx in fixtures if fx.match_number == 90)
+    fx89 = next(fx for fx in fixtures if fx.match_number == 89)
+    home90, away90 = resolve_knockout_teams(fx90, bracket)
+    home89, away89 = resolve_knockout_teams(fx89, bracket)
+    assert home90 == "Switzerland"
+    assert away90 == "Netherlands"
+    assert home89 == "Ecuador"
+    assert away89 == "France"
+
+
 def test_form_index_matches_standings_order() -> None:
     store = _full_group_results()
     index = build_group_form_index(load_fixtures(), store)
