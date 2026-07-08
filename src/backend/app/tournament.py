@@ -7,6 +7,13 @@ from app.match_results_store import load_results, result_for_match
 from app.knockout_bracket import build_knockout_bracket_state, resolve_knockout_teams
 from app.group_form import build_group_form_index
 from app.knockout_form import blended_goals_per_game, build_knockout_round_form_index
+
+_KO_ROUNDS_WITH_PRIOR_FORM = (
+    "Round of 16",
+    "Quarter Finals",
+    "Semi Finals",
+    "Finals",
+)
 from app.predictions import is_known_team, predict_match, team_insight
 from app.teams import display_team_name
 
@@ -38,23 +45,22 @@ def build_tournament_view(path: Path = CSV_PATH) -> dict[str, object]:
     results_store = load_results()
     bracket = build_knockout_bracket_state(fixtures, results_store)
     form_index = build_group_form_index(fixtures, results_store) if bracket else {}
-    ko_form_index = (
-        build_knockout_round_form_index(
-            fixtures,
-            results_store,
-            bracket.resolved_teams,
-            before_round="Round of 16",
-        )
-        if bracket
-        else {}
-    )
+    ko_form_by_round: dict[str, dict] = {}
+    if bracket:
+        for round_name in _KO_ROUNDS_WITH_PRIOR_FORM:
+            ko_form_by_round[round_name] = build_knockout_round_form_index(
+                fixtures,
+                results_store,
+                bracket.resolved_teams,
+                before_round=round_name,
+            )
     matches = [
         _match_view(
             fixture,
             results_store,
             bracket=bracket,
             form_index=form_index,
-            ko_form_index=ko_form_index,
+            ko_form_by_round=ko_form_by_round,
         )
         for fixture in fixtures
     ]
@@ -124,7 +130,7 @@ def _match_view(
     *,
     bracket=None,
     form_index: dict | None = None,
-    ko_form_index: dict | None = None,
+    ko_form_by_round: dict | None = None,
 ) -> dict[str, object]:
     is_group_match = fixture.group is not None
     stored = result_for_match(results_store or {}, fixture.match_number) if results_store else None
@@ -140,8 +146,9 @@ def _match_view(
         home_team, away_team = resolve_knockout_teams(fixture, bracket)
         if form_index:
             group_forms = (form_index.get(home_team), form_index.get(away_team))
-        if ko_form_index and fixture.round_number != "Round of 32":
-            knockout_forms = (ko_form_index.get(home_team), ko_form_index.get(away_team))
+        if ko_form_by_round and fixture.round_number != "Round of 32":
+            ko_index = ko_form_by_round.get(fixture.round_number, {})
+            knockout_forms = (ko_index.get(home_team), ko_index.get(away_team))
 
     ai_prediction = predict_match(
         home_team,

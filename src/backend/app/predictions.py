@@ -269,6 +269,10 @@ def predict_match(
         include_live_form=stage == "knockout",
         home_form=home_form,
         away_form=away_form,
+        home_ko=knockout_forms[0] if knockout_forms else None,
+        away_ko=knockout_forms[1] if knockout_forms else None,
+        base_diff=base_diff,
+        include_knockout_form=stage == "knockout" and round_name != "Round of 32",
     )
     adjusted_diff = apply_adjustments(base_diff, adjustments)
     pick, probabilities, can_draw = _resolve_pick_and_probabilities(

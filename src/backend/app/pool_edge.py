@@ -8,11 +8,13 @@ from typing import Literal
 from app.data.teams.team_loader import get_team_bundle
 from app.data.teams.tournament_context_loader import head_to_head_vs
 from app.data.teams.tournament_context_schema import MomentumLabel, PlayedMatch
+from app.data.teams.team_loader import get_team_bundle
 from app.group_form import GroupFormStats
+from app.knockout_form import KnockoutRoundStats
 from app.teams import display_team_name
 
 PickCode = Literal["1", "2", "3"]
-AdjustmentKind = Literal["live_form", "momentum", "standings", "h2h", "upset"]
+AdjustmentKind = Literal["live_form", "momentum", "standings", "h2h", "upset", "knockout_form"]
 
 _MOMENTUM_DELTA: dict[MomentumLabel, int] = {
     "rising": 2,
@@ -21,9 +23,20 @@ _MOMENTUM_DELTA: dict[MomentumLabel, int] = {
 }
 
 _POOL_DIFF_CAP = 6
+_POOL_DIFF_CAP_KNOCKOUT = 9
 # Poule vs papier: alleen grote verrassingen, lichte bijsturing (situatieafhankelijk).
 _GROUP_EXPECTATION_SURPRISE_MIN = 3
 _GROUP_EXPECTATION_DELTA = 1
+
+_KO_UPSET_POWER_GAP_MIN = 6
+_KO_UPSET_DELTA = 3
+_KO_WIN_DELTA = 1
+_KO_WIN_DELTA_MAX = 2
+_KO_ATTACK_GOALS_MIN = 5
+_KO_ATTACK_DELTA = 1
+_KO_FAVORITE_TRIM_MIN_DIFF = 12
+_KO_FAVORITE_TRIM_CAP = 7
+_KO_DEFENSIVE_DRAW_DELTA = 2
 
 
 def expected_group_points_from_power(power: int) -> int:
@@ -645,6 +658,191 @@ def group_expectation_adjustments(
     return out
 
 
+def _knockout_side_adjustments(
+    ko: KnockoutRoundStats | None,
+    *,
+    fifa: str,
+    is_home: bool,
+) -> list[PickAdjustment]:
+    """90-min KO-vorm vóór deze ronde; delta > 0 = voordeel thuis."""
+    if ko is None or ko.played == 0:
+        return []
+
+    team_nl = display_team_name(fifa)
+    sign = 1 if is_home else -1
+    out: list[PickAdjustment] = []
+
+    win_delta = min(_KO_WIN_DELTA_MAX, ko.wins * _KO_WIN_DELTA)
+    if win_delta:
+        side = "thuis" if is_home else "uit"
+        out.append(
+            PickAdjustment(
+                id=f"{'home' if is_home else 'away'}_ko_wins",
+                kind="knockout_form",
+                label=f"KO-winsten {side}",
+                delta=sign * win_delta,
+                reason=(
+                    f"{team_nl}: {ko.wins}× gewonnen na 90 min in knock-out "
+                    f"→ {'+' if sign > 0 else '−'}{win_delta}."
+                ),
+            )
+        )
+
+    if ko.upset_wins >= 1 and ko.max_upset_power_gap >= _KO_UPSET_POWER_GAP_MIN:
+        out.append(
+            PickAdjustment(
+                id=f"{'home' if is_home else 'away'}_ko_upset",
+                kind="knockout_form",
+                label=f"KO-stunt {team_nl}",
+                delta=sign * _KO_UPSET_DELTA,
+                reason=(
+                    f"{team_nl} versloeg sterkere tegenstander in knock-out "
+                    f"(papierverschil tot {ko.max_upset_power_gap}) → {'+' if sign > 0 else '−'}{_KO_UPSET_DELTA}."
+                ),
+            )
+        )
+
+    if ko.wins >= 1 and ko.goals_for >= _KO_ATTACK_GOALS_MIN:
+        out.append(
+            PickAdjustment(
+                id=f"{'home' if is_home else 'away'}_ko_attack",
+                kind="knockout_form",
+                label=f"KO-aanval {team_nl}",
+                delta=sign * _KO_ATTACK_DELTA,
+                reason=(
+                    f"{team_nl}: {ko.goals_for} goals in {ko.played} knock-outduel(s) "
+                    f"→ {'+' if sign > 0 else '−'}{_KO_ATTACK_DELTA}."
+                ),
+            )
+        )
+
+    return [a for a in out if a.delta != 0]
+
+
+def _knockout_favorite_trim(
+    home_ko: KnockoutRoundStats | None,
+    away_ko: KnockoutRoundStats | None,
+    *,
+    base_diff: int,
+) -> list[PickAdjustment]:
+    """Papierfavoriet temperen als underdog al een KO-stunt leverde (Noorwegen/Brazilië)."""
+    if abs(base_diff) < _KO_FAVORITE_TRIM_MIN_DIFF:
+        return []
+
+    if base_diff < 0 and home_ko and home_ko.upset_wins >= 1:
+        trim = min(_KO_FAVORITE_TRIM_CAP, abs(base_diff) // 2)
+        return [
+            PickAdjustment(
+                id="home_ko_favorite_trim",
+                kind="knockout_form",
+                label="KO-momentum thuis vs papier",
+                delta=trim,
+                reason=(
+                    f"Thuisploeg met knock-out-stunt; papierverschil {base_diff} "
+                    f"→ +{trim} richting thuis/gelijk na 90 min."
+                ),
+            )
+        ]
+
+    if base_diff > 0 and away_ko and away_ko.upset_wins >= 1:
+        trim = min(_KO_FAVORITE_TRIM_CAP, abs(base_diff) // 2)
+        return [
+            PickAdjustment(
+                id="away_ko_favorite_trim",
+                kind="knockout_form",
+                label="KO-momentum uit vs papier",
+                delta=-trim,
+                reason=(
+                    f"Uitploeg met knock-out-stunt; papierverschil {base_diff:+d} "
+                    f"→ −{trim} richting uit/gelijk na 90 min."
+                ),
+            )
+        ]
+
+    return []
+
+
+def _knockout_defensive_draw_nudge(
+    home_ko: KnockoutRoundStats | None,
+    away_ko: KnockoutRoundStats | None,
+    *,
+    base_diff: int,
+) -> list[PickAdjustment]:
+    """Beide teams defensief in KO, of underdog met 0-0-karakter vs favoriet."""
+
+    def _defensive(ko: KnockoutRoundStats | None) -> bool:
+        if ko is None or ko.played == 0:
+            return False
+        if ko.draws >= 1:
+            return True
+        return ko.goals_against == 0
+
+    home_def = _defensive(home_ko)
+    away_def = _defensive(away_ko)
+
+    if home_def and away_def and abs(base_diff) > 3:
+        delta = -_KO_DEFENSIVE_DRAW_DELTA if base_diff > 0 else _KO_DEFENSIVE_DRAW_DELTA
+        return [
+            PickAdjustment(
+                id="ko_defensive_draw_nudge",
+                kind="knockout_form",
+                label="KO-defensief duel",
+                delta=delta,
+                reason=(
+                    "Beide ploegen toonden defensieve knock-outvorm "
+                    f"→ {delta:+d} richting gelijk na 90 min."
+                ),
+            )
+        ]
+
+    if away_def and base_diff >= 8:
+        return [
+            PickAdjustment(
+                id="ko_defensive_underdog_away",
+                kind="knockout_form",
+                label="KO-defensie uit",
+                delta=-_KO_DEFENSIVE_DRAW_DELTA,
+                reason=(
+                    "Uitploeg hield knock-out strak (0-0 of weinig tegengoals); favoriet op papier "
+                    "→ −2 richting gelijk na 90 min."
+                ),
+            )
+        ]
+
+    if home_def and base_diff <= -8:
+        return [
+            PickAdjustment(
+                id="ko_defensive_underdog_home",
+                kind="knockout_form",
+                label="KO-defensie thuis",
+                delta=_KO_DEFENSIVE_DRAW_DELTA,
+                reason=(
+                    "Thuisploeg hield knock-out strak (0-0 of weinig tegengoals); favoriet op papier "
+                    "→ +2 richting gelijk na 90 min."
+                ),
+            )
+        ]
+
+    return []
+
+
+def knockout_momentum_adjustments(
+    home_ko: KnockoutRoundStats | None,
+    away_ko: KnockoutRoundStats | None,
+    *,
+    home_key: str,
+    away_key: str,
+    base_diff: int,
+) -> list[PickAdjustment]:
+    """Knock-out vóór deze ronde: winst, stunt, aanval en defensieve gelijk-neiging."""
+    out: list[PickAdjustment] = []
+    out.extend(_knockout_side_adjustments(home_ko, fifa=home_key, is_home=True))
+    out.extend(_knockout_side_adjustments(away_ko, fifa=away_key, is_home=False))
+    out.extend(_knockout_favorite_trim(home_ko, away_ko, base_diff=base_diff))
+    out.extend(_knockout_defensive_draw_nudge(home_ko, away_ko, base_diff=base_diff))
+    return out
+
+
 def collect_pick_adjustments(
     *,
     home_key: str,
@@ -657,6 +855,10 @@ def collect_pick_adjustments(
     include_live_form: bool = False,
     home_form: GroupFormStats | None = None,
     away_form: GroupFormStats | None = None,
+    home_ko: KnockoutRoundStats | None = None,
+    away_ko: KnockoutRoundStats | None = None,
+    base_diff: int = 0,
+    include_knockout_form: bool = False,
 ) -> list[PickAdjustment]:
     """Pool-stappen. `live_form` / `home_form` alleen bij knock-out na de groep."""
     adjustments: list[PickAdjustment] = []
@@ -703,16 +905,28 @@ def collect_pick_adjustments(
             )
         )
 
+    if include_knockout_form:
+        adjustments.extend(
+            knockout_momentum_adjustments(
+                home_ko,
+                away_ko,
+                home_key=home_key,
+                away_key=away_key,
+                base_diff=base_diff,
+            )
+        )
+
+    cap = _POOL_DIFF_CAP_KNOCKOUT if include_knockout_form else _POOL_DIFF_CAP
     total = sum(a.delta for a in adjustments)
-    if abs(total) > _POOL_DIFF_CAP:
-        scale = _POOL_DIFF_CAP / abs(total)
+    if abs(total) > cap:
+        scale = cap / abs(total)
         adjustments = [
             PickAdjustment(
                 id=a.id,
                 kind=a.kind,
                 label=a.label,
                 delta=round(a.delta * scale) or (1 if a.delta > 0 else -1),
-                reason=a.reason + f" (begrensd tot ±{_POOL_DIFF_CAP} totaal)",
+                reason=a.reason + f" (begrensd tot ±{cap} totaal)",
             )
             for a in adjustments
             if a.delta != 0
