@@ -60,7 +60,10 @@ def suggest_match_score(
 
     if stage == "knockout":
         if diff >= 8:
-            home, away = 0, 2
+            if home_goals_per_game >= 0.7:
+                home, away = 1, 2
+            else:
+                home, away = 0, 2
         elif diff >= 4:
             home, away = 1, 2
         else:

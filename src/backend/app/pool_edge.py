@@ -37,6 +37,9 @@ _KO_ATTACK_DELTA = 1
 _KO_FAVORITE_TRIM_MIN_DIFF = 12
 _KO_FAVORITE_TRIM_CAP = 7
 _KO_DEFENSIVE_DRAW_DELTA = 2
+_KO_CLINICAL_GA_MAX = 2
+_KO_CLINICAL_DELTA = 2
+_KO_EVEN_FIREPOWER_DELTA = 1
 
 
 def expected_group_points_from_power(power: int) -> int:
@@ -826,6 +829,57 @@ def _knockout_defensive_draw_nudge(
     return []
 
 
+def _knockout_clinical_home(
+    home_ko: KnockoutRoundStats | None,
+    *,
+    base_diff: int,
+) -> list[PickAdjustment]:
+    """Thuisploeg wint KO-rondes strak (Spanje 2-1 België); minder snel gelijk."""
+    if base_diff <= 0 or home_ko is None or home_ko.wins < 3:
+        return []
+    if home_ko.goals_against > _KO_CLINICAL_GA_MAX:
+        return []
+    return [
+        PickAdjustment(
+            id="home_ko_clinical",
+            kind="knockout_form",
+            label="KO-strak thuis",
+            delta=_KO_CLINICAL_DELTA,
+            reason=(
+                f"Thuisploeg won {home_ko.wins} knock-outduels met slechts "
+                f"{home_ko.goals_against} tegengoals → +{_KO_CLINICAL_DELTA}."
+            ),
+        )
+    ]
+
+
+def _knockout_even_firepower_home(
+    home_ko: KnockoutRoundStats | None,
+    away_ko: KnockoutRoundStats | None,
+    *,
+    base_diff: int,
+) -> list[PickAdjustment]:
+    """Beide ploegen in vorm in KO; lichte thuisbonus bij klein papierplus (QF Spanje–België)."""
+    if not (0 < base_diff <= 5):
+        return []
+    if home_ko is None or away_ko is None:
+        return []
+    if home_ko.wins < 2 or away_ko.wins < 2:
+        return []
+    return [
+        PickAdjustment(
+            id="ko_even_firepower_home",
+            kind="knockout_form",
+            label="Beide in KO-vorm",
+            delta=_KO_EVEN_FIREPOWER_DELTA,
+            reason=(
+                "Beide ploegen wonnen meerdere knock-outduels; klein thuisvoordeel "
+                f"→ +{_KO_EVEN_FIREPOWER_DELTA} richting thuis na 90 min."
+            ),
+        )
+    ]
+
+
 def knockout_momentum_adjustments(
     home_ko: KnockoutRoundStats | None,
     away_ko: KnockoutRoundStats | None,
@@ -840,6 +894,8 @@ def knockout_momentum_adjustments(
     out.extend(_knockout_side_adjustments(away_ko, fifa=away_key, is_home=False))
     out.extend(_knockout_favorite_trim(home_ko, away_ko, base_diff=base_diff))
     out.extend(_knockout_defensive_draw_nudge(home_ko, away_ko, base_diff=base_diff))
+    out.extend(_knockout_clinical_home(home_ko, base_diff=base_diff))
+    out.extend(_knockout_even_firepower_home(home_ko, away_ko, base_diff=base_diff))
     return out
 
 

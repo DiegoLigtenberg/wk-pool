@@ -114,3 +114,40 @@ def test_qf_argentina_switzerland_includes_defensive_ko_nudge() -> None:
     )
     ids = [str(a.get("id", "")) for a in pred["insight"].get("poolAdjustments", [])]
     assert "ko_defensive_underdog_away" in ids or int(pred["drawProbability"]) >= 12
+
+
+def test_spain_belgium_qf_retro_pick_winner_not_draw() -> None:
+    """QF les: Spanje thuis vs hete België — winnaar i.p.v. gelijk."""
+    fixtures = load_fixtures()
+    store = load_results()
+    bracket = build_knockout_bracket_state(fixtures, store)
+    form = build_group_form_index(fixtures, store)
+    ko = build_knockout_round_form_index(
+        fixtures, store, bracket.resolved_teams, before_round="Quarter Finals"
+    )
+    fx = next(f for f in fixtures if f.match_number == 98)
+    home, away = resolve_knockout_teams(fx, bracket)
+    pred = predict_match(
+        home,
+        away,
+        "knockout",
+        fx.round_number,
+        None,
+        match_number=98,
+        group_forms=(form.get(home), form.get(away)),
+        knockout_forms=(ko.get(home), ko.get(away)),
+    )
+    assert pred["pick"] == "1"
+
+
+def test_semi_finals_resolve_with_predictions() -> None:
+    from app.tournament import build_tournament_view
+
+    tournament = build_tournament_view()
+    sf = [m for m in tournament["knockoutMatches"] if m["round"] == "Semi Finals"]
+    assert len(sf) == 2
+    for match in sf:
+        assert "To be announced" not in match["homeTeam"]
+        assert match["aiPrediction"]["confidence"] > 0
+        assert match["aiPrediction"].get("suggestedScore") is not None
+    assert {m["matchNumber"] for m in sf} == {101, 102}

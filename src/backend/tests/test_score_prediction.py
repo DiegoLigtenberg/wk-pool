@@ -155,6 +155,17 @@ def test_knockout_draw_prefers_one_one_over_two_two() -> None:
     assert score == {"home": 1, "away": 1, "reason": score["reason"]}
 
 
+def test_knockout_away_winner_allows_home_goal_when_attackive() -> None:
+    score = suggest_match_score(
+        pick="2",
+        adjusted_diff=10,
+        stage="knockout",
+        home_goals_per_game=1.0,
+        away_goals_per_game=2.0,
+    )
+    assert score == {"home": 1, "away": 2, "reason": score["reason"]}
+
+
 def test_knockout_draw_band_stricter_than_group() -> None:
     from app.predictions import (
         KNOCKOUT_DRAW_ABS_DIFF_MAX,
