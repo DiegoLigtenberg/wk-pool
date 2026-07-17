@@ -121,6 +121,36 @@ def test_netherlands_morocco_knockout_override() -> None:
     }
 
 
+def test_third_place_france_england_override() -> None:
+    pred = predict_match(
+        "France",
+        "England",
+        "knockout",
+        "Finals",
+        None,
+        match_number=103,
+    )
+    assert pred["pick"] == "1"
+    assert pred["suggestedScore"]["home"] == 2
+    assert pred["suggestedScore"]["away"] == 1
+    assert "Frankrijk" in str(pred["explanation"])
+
+
+def test_final_spain_argentina_override() -> None:
+    pred = predict_match(
+        "Spain",
+        "Argentina",
+        "knockout",
+        "Finals",
+        None,
+        match_number=104,
+    )
+    assert pred["pick"] == "1"
+    assert pred["suggestedScore"]["home"] == 3
+    assert pred["suggestedScore"]["away"] == 2
+    assert "Spanje" in str(pred["explanation"])
+
+
 def test_knockout_winner_score_capped_at_two_goal_margin() -> None:
     heavy_fav = suggest_match_score(
         pick="1",

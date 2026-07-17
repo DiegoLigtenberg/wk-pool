@@ -64,6 +64,12 @@ KNOCKOUT_NEXT_MATCH: dict[int, int] = {
     102: 104,
 }
 
+# Verliezer van SF → troostfinale (match 103).
+KNOCKOUT_LOSER_NEXT_MATCH: dict[int, int] = {
+    101: 103,
+    102: 103,
+}
+
 
 @dataclass(frozen=True)
 class KnockoutBracketState:
@@ -222,6 +228,15 @@ def _feeders_for(match_number: int) -> tuple[int, int] | None:
     return feeders[0], feeders[1]
 
 
+def _loser_feeders_for(match_number: int) -> tuple[int, int] | None:
+    feeders = sorted(
+        match for match, parent in KNOCKOUT_LOSER_NEXT_MATCH.items() if parent == match_number
+    )
+    if len(feeders) != 2:
+        return None
+    return feeders[0], feeders[1]
+
+
 def _knockout_match_winner(
     match_number: int,
     home_team: str | None,
@@ -253,6 +268,22 @@ def _knockout_match_winner(
     return None
 
 
+def _knockout_match_loser(
+    match_number: int,
+    home_team: str | None,
+    away_team: str | None,
+    results_store: dict[str, object],
+) -> str | None:
+    winner = _knockout_match_winner(match_number, home_team, away_team, results_store)
+    if winner is None or not home_team or not away_team:
+        return None
+    if winner == home_team:
+        return away_team
+    if winner == away_team:
+        return home_team
+    return None
+
+
 def _propagate_knockout_winners(
     fixtures: list[Fixture],
     resolved: dict[int, tuple[str | None, str | None]],
@@ -267,28 +298,48 @@ def _propagate_knockout_winners(
             if home and away and is_known_team(home) and is_known_team(away):
                 continue
 
-            feeders = _feeders_for(fixture.match_number)
-            if feeders is None:
+            winner_feeders = _feeders_for(fixture.match_number)
+            if winner_feeders is not None:
+                winners: list[str] = []
+                for feed_number in winner_feeders:
+                    feed_home, feed_away = resolved.get(feed_number, (None, None))
+                    winner = _knockout_match_winner(
+                        feed_number,
+                        feed_home,
+                        feed_away,
+                        results_store,
+                    )
+                    if winner is None:
+                        winners = []
+                        break
+                    winners.append(winner)
+                if len(winners) == 2:
+                    resolved[fixture.match_number] = (winners[0], winners[1])
+                    changed = True
                 continue
 
-            winners: list[str] = []
-            for feed_number in feeders:
+            loser_feeders = _loser_feeders_for(fixture.match_number)
+            if loser_feeders is None:
+                continue
+
+            losers: list[str] = []
+            for feed_number in loser_feeders:
                 feed_home, feed_away = resolved.get(feed_number, (None, None))
-                winner = _knockout_match_winner(
+                loser = _knockout_match_loser(
                     feed_number,
                     feed_home,
                     feed_away,
                     results_store,
                 )
-                if winner is None:
-                    winners = []
+                if loser is None:
+                    losers = []
                     break
-                winners.append(winner)
+                losers.append(loser)
 
-            if len(winners) != 2:
+            if len(losers) != 2:
                 continue
 
-            resolved[fixture.match_number] = (winners[0], winners[1])
+            resolved[fixture.match_number] = (losers[0], losers[1])
             changed = True
 
         if not changed:

@@ -144,6 +144,12 @@
   color: #cbd5e1;
 }
 
+.third-place-prediction {
+  margin: 0.35rem 0 0;
+  color: rgba(148, 163, 184, 0.95);
+  font-size: 0.85rem;
+}
+
 .third-place-match {
   overflow: hidden;
   border: 1px solid rgba(226, 232, 240, 0.5);

@@ -151,3 +151,31 @@ def test_semi_finals_resolve_with_predictions() -> None:
         assert match["aiPrediction"]["confidence"] > 0
         assert match["aiPrediction"].get("suggestedScore") is not None
     assert {m["matchNumber"] for m in sf} == {101, 102}
+
+
+def test_finals_and_third_place_resolve_with_overrides() -> None:
+    from app.tournament import build_tournament_view
+
+    tournament = build_tournament_view()
+    finals = [m for m in tournament["knockoutMatches"] if m["round"] == "Finals"]
+    by_number = {m["matchNumber"]: m for m in finals}
+
+    third = by_number[103]
+    assert {"Frankrijk", "Engeland"} == {third["homeTeam"], third["awayTeam"]}
+    sug3 = third["aiPrediction"]["suggestedScore"]
+    assert {sug3["home"], sug3["away"]} == {2, 1}
+    assert max(sug3["home"], sug3["away"]) == 2
+    if third["homeTeam"] == "Frankrijk":
+        assert third["aiPrediction"]["pick"] == "1"
+        assert sug3["home"] == 2 and sug3["away"] == 1
+    else:
+        assert third["aiPrediction"]["pick"] == "2"
+        assert sug3["home"] == 1 and sug3["away"] == 2
+
+    final = by_number[104]
+    assert final["homeTeam"] == "Spanje"
+    assert final["awayTeam"] == "Argentinië"
+    assert final["aiPrediction"]["pick"] == "1"
+    assert final["aiPrediction"]["suggestedScore"]["home"] == 3
+    assert final["aiPrediction"]["suggestedScore"]["away"] == 2
+    assert "Spanje" in str(final["aiPrediction"]["explanation"])

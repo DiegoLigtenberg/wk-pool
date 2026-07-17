@@ -95,6 +95,9 @@ export function KnockoutView({ knockoutMatches }: KnockoutViewProps) {
           <div>
             <p className="eyebrow">Troostfinale</p>
             <strong>{formatKnockoutDate(thirdPlace)}</strong>
+            {showsKnockoutScorePrediction(thirdPlace) ? (
+              <p className="third-place-prediction">Voorsp. {formatSuggestedScore(thirdPlace)}</p>
+            ) : null}
           </div>
           <div className="third-place-match">
             <div className="third-place-team">
